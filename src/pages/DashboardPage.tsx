@@ -1,7 +1,8 @@
-import { useState } from 'react';
-import { LogOut, Menu, X, Bell, Users, Settings, BarChart3, AlertTriangle, MessageSquare, Brain, Video, Watch, Plus, Calendar } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { LogOut, Menu, X, Bell, Users, Settings, BarChart3, AlertTriangle, MessageSquare, Brain, Video, Watch, Plus, Calendar, TrendingUp, Heart } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { FileText } from "lucide-react";
+import { LineChart, Line, AreaChart, Area, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 
 // Sidebar Component
 function NIRVANASidebar({ activeTab, setActiveTab, isOpen, setIsOpen, handleLogout }: any) {
@@ -300,9 +301,11 @@ function NIRVANAHeader({ isDarkMode, setIsDarkMode, doctorName, companyName, sho
 function PatientSelector({ selectedPatient, setSelectedPatient, isDarkMode }: any) {
   const [searchTerm, setSearchTerm] = useState('');
   const patients = [
-    { id: 1, name: 'Ahmed', age: 45, status: 'healthy' },
-    { id: 2, name: 'Fatima', age: 52, status: 'warning' },
-    { id: 3, name: 'Mohammed', age: 38, status: 'healthy' },
+    { id: 1, name: 'Ahmed Hassan', age: 45, status: 'healthy', condition: 'Hypertension Management', lastCheck: '2 hours ago', healthScore: 82 },
+    { id: 2, name: 'Fatima Al-Dosari', age: 52, status: 'warning', condition: 'Diabetes Monitoring', lastCheck: '4 hours ago', healthScore: 68 },
+    { id: 3, name: 'Mohammed Al-Rashid', age: 38, status: 'healthy', condition: 'Fitness Tracking', lastCheck: '30 min ago', healthScore: 91 },
+    { id: 4, name: 'Sarah Johnson', age: 41, status: 'healthy', condition: 'Post-Surgery Recovery', lastCheck: '1 hour ago', healthScore: 75 },
+    { id: 5, name: 'Ali Al-Mansouri', age: 55, status: 'warning', condition: 'Cholesterol Management', lastCheck: '6 hours ago', healthScore: 65 },
   ];
 
   const filteredPatients = patients.filter(p =>
@@ -330,19 +333,19 @@ function PatientSelector({ selectedPatient, setSelectedPatient, isDarkMode }: an
           <button
             key={patient.id}
             onClick={() => setSelectedPatient(patient)}
-            className={`w-full p-3 rounded-lg border-2 transition-all text-left ${
+            className={`w-full p-4 rounded-lg border-2 transition-all text-left ${
               selectedPatient?.id === patient.id
                 ? 'border-cyan-600 bg-cyan-50 dark:bg-cyan-900'
                 : `border-slate-300 dark:border-slate-700 ${isDarkMode ? 'bg-slate-800 hover:bg-slate-700' : 'bg-slate-50 hover:bg-slate-100'}`
             }`}
           >
-            <div className="flex items-center justify-between">
-              <div>
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex-1">
                 <h4 className={`font-bold ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
                   {patient.name}
                 </h4>
                 <p className={`text-sm ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>
-                  Age: {patient.age}
+                  Age: {patient.age} • {patient.condition}
                 </p>
               </div>
               <span className={`text-xs font-semibold px-2 py-1 rounded-full ${
@@ -352,6 +355,13 @@ function PatientSelector({ selectedPatient, setSelectedPatient, isDarkMode }: an
               }`}>
                 {patient.status.toUpperCase()}
               </span>
+            </div>
+            <div className="flex items-center justify-between text-xs">
+              <span className={isDarkMode ? 'text-slate-400' : 'text-slate-600'}>Last: {patient.lastCheck}</span>
+              <div className="flex items-center gap-1">
+                <Heart className="w-3 h-3 text-red-600" />
+                <span className={`font-semibold ${isDarkMode ? 'text-cyan-400' : 'text-cyan-600'}`}>Score: {patient.healthScore}</span>
+              </div>
             </div>
           </button>
         ))}
@@ -373,12 +383,43 @@ function NoPatientMessage({ isDarkMode }: any) {
 
 // Content Sections
 function OverviewSection({ isDarkMode, selectedPatient, setSelectedPatient }: any) {
-  const stats = [
-    { label: 'Heart Rate', value: '72 BPM', color: 'from-cyan-500 to-blue-600' },
-    { label: 'Blood Pressure', value: '120/80', color: 'from-green-500 to-emerald-600' },
-    { label: 'Last Check', value: '2 min ago', color: 'from-purple-500 to-indigo-600' },
-    { label: 'Status', value: 'Healthy', color: 'from-pink-500 to-rose-600' },
-  ];
+  const getPatientStats = (patient: any) => {
+    const statsMap: any = {
+      1: [ // Ahmed
+        { label: 'Heart Rate', value: '72 BPM', color: 'from-cyan-500 to-blue-600', icon: '❤️' },
+        { label: 'Blood Pressure', value: '138/85', color: 'from-green-500 to-emerald-600', icon: '📊' },
+        { label: 'Oxygen Level', value: '97%', color: 'from-purple-500 to-indigo-600', icon: '🫁' },
+        { label: 'Status', value: 'Stable', color: 'from-pink-500 to-rose-600', icon: '✅' },
+      ],
+      2: [ // Fatima
+        { label: 'Heart Rate', value: '82 BPM', color: 'from-cyan-500 to-blue-600', icon: '❤️' },
+        { label: 'Blood Pressure', value: '148/92', color: 'from-orange-500 to-red-600', icon: '⚠️' },
+        { label: 'Glucose', value: '145 mg/dL', color: 'from-yellow-500 to-amber-600', icon: '🩸' },
+        { label: 'Status', value: 'Monitor', color: 'from-orange-500 to-red-600', icon: '📌' },
+      ],
+      3: [ // Mohammed
+        { label: 'Heart Rate', value: '68 BPM', color: 'from-cyan-500 to-blue-600', icon: '❤️' },
+        { label: 'Blood Pressure', value: '120/78', color: 'from-green-500 to-emerald-600', icon: '✅' },
+        { label: 'Calories Burned', value: '520 kcal', color: 'from-purple-500 to-indigo-600', icon: '🔥' },
+        { label: 'Steps', value: '8,234 steps', color: 'from-pink-500 to-rose-600', icon: '👟' },
+      ],
+      4: [ // Sarah
+        { label: 'Heart Rate', value: '76 BPM', color: 'from-cyan-500 to-blue-600', icon: '❤️' },
+        { label: 'Blood Pressure', value: '125/80', color: 'from-green-500 to-emerald-600', icon: '✅' },
+        { label: 'Recovery %', value: '85%', color: 'from-purple-500 to-indigo-600', icon: '💪' },
+        { label: 'Sleep Quality', value: 'Good (7.2h)', color: 'from-pink-500 to-rose-600', icon: '😴' },
+      ],
+      5: [ // Ali
+        { label: 'Heart Rate', value: '88 BPM', color: 'from-cyan-500 to-blue-600', icon: '❤️' },
+        { label: 'Blood Pressure', value: '142/88', color: 'from-orange-500 to-red-600', icon: '⚠️' },
+        { label: 'Cholesterol', value: '245 mg/dL', color: 'from-orange-500 to-red-600', icon: '🩸' },
+        { label: 'Status', value: 'Caution', color: 'from-orange-500 to-red-600', icon: '🚨' },
+      ],
+    };
+    return statsMap[patient?.id] || statsMap[1];
+  };
+
+  const stats = selectedPatient ? getPatientStats(selectedPatient) : [];
 
   return (
     <div>
@@ -388,12 +429,18 @@ function OverviewSection({ isDarkMode, selectedPatient, setSelectedPatient }: an
       {/* Only show content if patient is selected */}
       {selectedPatient ? (
         <>
-          <h2 className={`text-3xl font-bold mb-8 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
-            {selectedPatient.name}'s Health Overview
-          </h2>
+          <div className="mb-6">
+            <h2 className={`text-4xl font-bold mb-2 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
+              {selectedPatient.name}'s Health Overview
+            </h2>
+            <p className={`text-lg ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>
+              Health Score: <span className="font-bold text-cyan-600">{selectedPatient.healthScore}/100</span> • Condition: {selectedPatient.condition}
+            </p>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
             {stats.map((stat, i) => (
-              <div key={i} className={`rounded-xl p-6 text-white bg-gradient-to-br ${stat.color} shadow-lg`}>
+              <div key={i} className={`rounded-xl p-6 text-white bg-gradient-to-br ${stat.color} shadow-lg hover:shadow-xl transition-shadow`}>
+                <div className="text-3xl mb-2">{stat.icon}</div>
                 <p className="text-sm opacity-90">{stat.label}</p>
                 <p className="text-4xl font-bold mt-2">{stat.value}</p>
               </div>
@@ -412,26 +459,114 @@ function MonitoringSection({ isDarkMode, selectedPatient, setSelectedPatient }: 
     return <NoPatientMessage isDarkMode={isDarkMode} />;
   }
 
+  // Mock data for charts based on patient
+  const heartRateData = [
+    { time: '6:00 AM', rate: 68, avg: 72 },
+    { time: '8:00 AM', rate: 72, avg: 72 },
+    { time: '10:00 AM', rate: 75, avg: 72 },
+    { time: '12:00 PM', rate: 78, avg: 72 },
+    { time: '2:00 PM', rate: 82, avg: 72 },
+    { time: '4:00 PM', rate: 79, avg: 72 },
+    { time: '6:00 PM', rate: 76, avg: 72 },
+  ];
+
+  const bloodPressureData = [
+    { time: '6:00 AM', systolic: 118, diastolic: 75 },
+    { time: '8:00 AM', systolic: 120, diastolic: 78 },
+    { time: '10:00 AM', systolic: 125, diastolic: 80 },
+    { time: '12:00 PM', systolic: 128, diastolic: 82 },
+    { time: '2:00 PM', systolic: 132, diastolic: 85 },
+    { time: '4:00 PM', systolic: 130, diastolic: 83 },
+    { time: '6:00 PM', systolic: 126, diastolic: 81 },
+  ];
+
+  const oxygenData = [
+    { time: '6:00 AM', oxygen: 96 },
+    { time: '8:00 AM', oxygen: 97 },
+    { time: '10:00 AM', oxygen: 98 },
+    { time: '12:00 PM', oxygen: 97 },
+    { time: '2:00 PM', oxygen: 96 },
+    { time: '4:00 PM', oxygen: 97 },
+    { time: '6:00 PM', oxygen: 98 },
+  ];
+
   const healthData = [
-    { metric: 'Heart Rate', value: '72 BPM', status: 'normal', trend: '↓ -5 BPM' },
-    { metric: 'Blood Pressure', value: '120/80', status: 'normal', trend: '↑ +2 mmHg' },
-    { metric: 'Oxygen Level', value: '98%', status: 'normal', trend: 'stable' },
-    { metric: 'Sleep Duration', value: '7.5 hrs', status: 'good', trend: '↑ +1 hr' },
+    { metric: 'Heart Rate', current: '72 BPM', normal: '60-100 BPM', status: 'normal', trend: '↓ -5 BPM' },
+    { metric: 'Blood Pressure', current: '120/80', normal: '<120/<80', status: 'normal', trend: '→ stable' },
+    { metric: 'Oxygen Level', current: '98%', normal: '95-100%', status: 'normal', trend: '↑ +1%' },
+    { metric: 'Sleep Duration', current: '7.5 hrs', normal: '7-9 hrs', status: 'good', trend: '↑ +1 hr' },
   ];
 
   return (
     <div>
-      <h2 className={`text-3xl font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
-        Real-Time Health Monitoring - {selectedPatient.name}
+      <h2 className={`text-3xl font-bold mb-8 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
+        Real-Time Health Monitoring - <span className="text-cyan-600">{selectedPatient.name}</span>
       </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+      {/* Key Metrics Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
         {healthData.map((data, i) => (
           <div key={i} className={`rounded-xl p-6 border ${isDarkMode ? 'bg-slate-900 border-slate-700' : 'bg-white border-slate-200'}`}>
-            <h4 className={`font-semibold ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>{data.metric}</h4>
-            <p className={`text-4xl font-bold mt-2 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>{data.value}</p>
-            <p className={`text-sm mt-2 ${data.status === 'normal' ? 'text-green-600' : 'text-blue-600'}`}>{data.trend}</p>
+            <div className="flex items-start justify-between mb-3">
+              <h4 className={`font-semibold text-lg ${isDarkMode ? 'text-slate-200' : 'text-slate-700'}`}>{data.metric}</h4>
+              <span className={`text-xs font-bold px-2 py-1 rounded-full ${data.status === 'normal' ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800'}`}>
+                ✓ {data.status.toUpperCase()}
+              </span>
+            </div>
+            <p className={`text-3xl font-bold ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>{data.current}</p>
+            <p className={`text-sm mt-2 ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>Normal: {data.normal}</p>
+            <p className={`text-sm mt-1 font-semibold ${data.status === 'normal' ? 'text-green-600' : 'text-blue-600'}`}>{data.trend}</p>
           </div>
         ))}
+      </div>
+
+      {/* Charts */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+        {/* Heart Rate Chart */}
+        <div className={`rounded-xl p-6 border ${isDarkMode ? 'bg-slate-900 border-slate-700' : 'bg-white border-slate-200'}`}>
+          <h3 className={`text-lg font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>Heart Rate Trend (24h)</h3>
+          <ResponsiveContainer width="100%" height={250}>
+            <LineChart data={heartRateData}>
+              <CartesianGrid strokeDasharray="3 3" stroke={isDarkMode ? '#475569' : '#e2e8f0'} />
+              <XAxis dataKey="time" stroke={isDarkMode ? '#94a3b8' : '#64748b'} />
+              <YAxis stroke={isDarkMode ? '#94a3b8' : '#64748b'} />
+              <Tooltip contentStyle={{ backgroundColor: isDarkMode ? '#1e293b' : '#ffffff', border: `1px solid ${isDarkMode ? '#475569' : '#e2e8f0'}`, borderRadius: '8px' }} />
+              <Legend />
+              <Line type="monotone" dataKey="rate" stroke="#0891b2" strokeWidth={2} name="Actual" />
+              <Line type="monotone" dataKey="avg" stroke="#64748b" strokeWidth={1} strokeDasharray="5 5" name="Average" />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+
+        {/* Blood Pressure Chart */}
+        <div className={`rounded-xl p-6 border ${isDarkMode ? 'bg-slate-900 border-slate-700' : 'bg-white border-slate-200'}`}>
+          <h3 className={`text-lg font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>Blood Pressure Trend (24h)</h3>
+          <ResponsiveContainer width="100%" height={250}>
+            <AreaChart data={bloodPressureData}>
+              <CartesianGrid strokeDasharray="3 3" stroke={isDarkMode ? '#475569' : '#e2e8f0'} />
+              <XAxis dataKey="time" stroke={isDarkMode ? '#94a3b8' : '#64748b'} />
+              <YAxis stroke={isDarkMode ? '#94a3b8' : '#64748b'} />
+              <Tooltip contentStyle={{ backgroundColor: isDarkMode ? '#1e293b' : '#ffffff', border: `1px solid ${isDarkMode ? '#475569' : '#e2e8f0'}`, borderRadius: '8px' }} />
+              <Legend />
+              <Area type="monotone" dataKey="systolic" stackId="1" stroke="#ef4444" fill="#ef4444" fillOpacity={0.6} name="Systolic" />
+              <Area type="monotone" dataKey="diastolic" stackId="1" stroke="#3b82f6" fill="#3b82f6" fillOpacity={0.6} name="Diastolic" />
+            </AreaChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
+
+      {/* Oxygen Level */}
+      <div className={`rounded-xl p-6 border ${isDarkMode ? 'bg-slate-900 border-slate-700' : 'bg-white border-slate-200'}`}>
+        <h3 className={`text-lg font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>Oxygen Level (SpO2) Trend</h3>
+        <ResponsiveContainer width="100%" height={250}>
+          <BarChart data={oxygenData}>
+            <CartesianGrid strokeDasharray="3 3" stroke={isDarkMode ? '#475569' : '#e2e8f0'} />
+            <XAxis dataKey="time" stroke={isDarkMode ? '#94a3b8' : '#64748b'} />
+            <YAxis stroke={isDarkMode ? '#94a3b8' : '#64748b'} domain={[90, 100]} />
+            <Tooltip contentStyle={{ backgroundColor: isDarkMode ? '#1e293b' : '#ffffff', border: `1px solid ${isDarkMode ? '#475569' : '#e2e8f0'}`, borderRadius: '8px' }} />
+            <Bar dataKey="oxygen" fill="#10b981" radius={[8, 8, 0, 0]} />
+          </BarChart>
+        </ResponsiveContainer>
       </div>
     </div>
   );
@@ -442,23 +577,57 @@ function LogsSection({ isDarkMode, selectedPatient, setSelectedPatient }: any) {
     return <NoPatientMessage isDarkMode={isDarkMode} />;
   }
 
-  const logs = [
-    { id: 1, action: 'Data Added', details: 'Morning vitals recorded', time: '10:30 AM', doctor: 'Dr. Sarah' },
-    { id: 2, action: 'Alert Generated', details: 'Routine check-up alert', time: '10:15 AM', doctor: 'Dr. Ahmed' },
-    { id: 3, action: 'Recommendation Made', details: 'Increase daily water intake', time: '09:45 AM', doctor: 'Dr. Lisa' },
-  ];
+  const getLogs = (patientId: number) => {
+    const logsMap: any = {
+      1: [
+        { id: 1, action: 'Blood Pressure Check', details: 'BP: 138/85 mmHg - Within normal range', time: '10:30 AM', doctor: 'Dr. Sarah', icon: '📊' },
+        { id: 2, action: 'Medication Reminder', details: 'Antihypertensive medication dose taken', time: '08:00 AM', doctor: 'System', icon: '💊' },
+        { id: 3, action: 'Exercise Logged', details: '30 min walk - 2.5 km distance', time: '07:15 AM', doctor: 'Patient', icon: '🚶' },
+      ],
+      2: [
+        { id: 1, action: 'Glucose Monitoring', details: 'Fasting glucose: 145 mg/dL - Elevated', time: '08:00 AM', doctor: 'Dr. Ahmed', icon: '🩸' },
+        { id: 2, action: 'Nutritionist Consultation', details: 'Diet plan updated - Low carb focus', time: 'Yesterday 3:30 PM', doctor: 'Dr. Lisa', icon: '🥗' },
+        { id: 3, action: 'Alert Generated', details: 'Blood glucose trending high this week', time: 'Yesterday 2:15 PM', doctor: 'System', icon: '⚠️' },
+      ],
+      3: [
+        { id: 1, action: 'Workout Completed', details: 'CrossFit session - 8,234 steps logged', time: '06:45 PM', doctor: 'Patient', icon: '💪' },
+        { id: 2, action: 'Sleep Analysis', details: 'Sleep quality: Excellent (8.2 hours)', time: '07:00 AM', doctor: 'System', icon: '😴' },
+        { id: 3, action: 'Weekly Stats', details: 'Weekly average: 7,500+ steps/day', time: 'Yesterday', doctor: 'System', icon: '📈' },
+      ],
+      4: [
+        { id: 1, action: 'Post-Surgery Assessment', details: 'Wound healing normal, no complications', time: '11:00 AM', doctor: 'Dr. Sarah', icon: '✅' },
+        { id: 2, action: 'Pain Level Check', details: 'Pain score: 2/10 - Improving', time: '09:30 AM', doctor: 'Nurse', icon: '📋' },
+        { id: 3, action: 'Physical Therapy', details: 'Session 3 - Mobility exercises completed', time: 'Yesterday 2:00 PM', doctor: 'PT', icon: '🏥' },
+      ],
+      5: [
+        { id: 1, action: 'Lipid Panel', details: 'Total Cholesterol: 245 mg/dL (High)', time: '10:00 AM', doctor: 'Dr. Ahmed', icon: '🩸' },
+        { id: 2, action: 'Statin Prescription', details: 'New prescription for cholesterol management', time: '10:15 AM', doctor: 'Dr. Ahmed', icon: '💊' },
+        { id: 3, action: 'Dietary Consultation', details: 'Mediterranean diet recommended', time: '09:00 AM', doctor: 'Nutritionist', icon: '🥗' },
+      ],
+    };
+    return logsMap[patientId] || logsMap[1];
+  };
+
+  const logs = getLogs(selectedPatient.id);
 
   return (
     <div>
-      <h2 className={`text-3xl font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
-        Activity Logs - {selectedPatient.name}
+      <h2 className={`text-3xl font-bold mb-6 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
+        Activity Logs - <span className="text-cyan-600">{selectedPatient.name}</span>
       </h2>
-      <div className="space-y-3">
+      <div className="space-y-4">
         {logs.map((log) => (
-          <div key={log.id} className={`rounded-lg p-4 border-l-4 border-cyan-500 ${isDarkMode ? 'bg-slate-900 border-slate-700' : 'bg-slate-50 border-slate-200'}`}>
-            <h4 className={`font-bold ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>{log.action}</h4>
-            <p className={`text-sm ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>{log.details}</p>
-            <p className={`text-xs mt-1 ${isDarkMode ? 'text-slate-500' : 'text-slate-500'}`}>By: {log.doctor} | Time: {log.time}</p>
+          <div key={log.id} className={`rounded-lg p-5 border-l-4 border-cyan-500 ${isDarkMode ? 'bg-slate-900 border-slate-700' : 'bg-slate-50 border-slate-200'}`}>
+            <div className="flex items-start justify-between">
+              <div className="flex items-start gap-3 flex-1">
+                <span className="text-2xl">{log.icon}</span>
+                <div>
+                  <h4 className={`font-bold text-lg ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>{log.action}</h4>
+                  <p className={`text-sm mt-1 ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>{log.details}</p>
+                  <p className={`text-xs mt-2 ${isDarkMode ? 'text-slate-500' : 'text-slate-500'}`}>👤 {log.doctor} • ⏰ {log.time}</p>
+                </div>
+              </div>
+            </div>
           </div>
         ))}
       </div>
@@ -471,23 +640,49 @@ function AlertsSection({ isDarkMode, selectedPatient, setSelectedPatient }: any)
     return <NoPatientMessage isDarkMode={isDarkMode} />;
   }
 
-  const alerts = [
-    { id: 1, type: 'critical', message: 'Scheduled annual checkup due', timestamp: '10:15 AM', isAnomaly: false },
-    { id: 2, type: 'warning', message: 'Blood Pressure: 145/90 - ANOMALY DETECTED', timestamp: '09:50 AM', isAnomaly: true },
-    { id: 3, type: 'info', message: 'Daily reminder: Take medications', timestamp: '08:00 AM', isAnomaly: false },
-    { id: 4, type: 'warning', message: 'Sleep Duration: 4 hours (Low) - ANOMALY DETECTED', timestamp: '07:30 AM', isAnomaly: true },
-  ];
+  const getAlerts = (patientId: number) => {
+    const alertsMap: any = {
+      1: [ // Ahmed - Hypertension
+        { id: 1, type: 'info', message: 'Scheduled annual checkup due', timestamp: '10:15 AM', isAnomaly: false },
+        { id: 2, type: 'warning', message: 'Blood Pressure: 138/85 mmHg - Slightly elevated', timestamp: '09:50 AM', isAnomaly: true },
+        { id: 3, type: 'info', message: 'Medication refill reminder: 5 days left', timestamp: '08:00 AM', isAnomaly: false },
+      ],
+      2: [ // Fatima - Diabetes
+        { id: 1, type: 'critical', message: 'Blood Glucose: 145 mg/dL - ELEVATED', timestamp: '08:15 AM', isAnomaly: true },
+        { id: 2, type: 'warning', message: 'Fasting glucose trending high this week', timestamp: 'Yesterday 3:30 PM', isAnomaly: true },
+        { id: 3, type: 'info', message: 'HbA1c test due: Schedule with Dr. Ahmed', timestamp: 'Yesterday 2:00 PM', isAnomaly: false },
+      ],
+      3: [ // Mohammed - Fitness
+        { id: 1, type: 'info', message: 'Excellent weekly performance: 52,000+ steps', timestamp: '10:00 PM', isAnomaly: false },
+        { id: 2, type: 'info', message: 'New personal record: 12km in one session', timestamp: 'Yesterday 7:00 PM', isAnomaly: false },
+        { id: 3, type: 'warning', message: 'Heart rate spike detected during workout (156 BPM)', timestamp: 'Yesterday 6:45 PM', isAnomaly: true },
+      ],
+      4: [ // Sarah - Recovery
+        { id: 1, type: 'info', message: 'Post-operative day 15: Recovery on track', timestamp: '11:00 AM', isAnomaly: false },
+        { id: 2, type: 'warning', message: 'Mild swelling detected - Monitor daily', timestamp: '09:30 AM', isAnomaly: true },
+        { id: 3, type: 'info', message: 'Physical therapy session tomorrow at 2:00 PM', timestamp: 'Yesterday', isAnomaly: false },
+      ],
+      5: [ // Ali - Cholesterol
+        { id: 1, type: 'critical', message: 'Total Cholesterol: 245 mg/dL - HIGH', timestamp: '10:00 AM', isAnomaly: true },
+        { id: 2, type: 'critical', message: 'LDL Cholesterol: 165 mg/dL - VERY HIGH', timestamp: '10:00 AM', isAnomaly: true },
+        { id: 3, type: 'warning', message: 'BP elevated: 142/88 mmHg - ANOMALY DETECTED', timestamp: '09:50 AM', isAnomaly: true },
+      ],
+    };
+    return alertsMap[patientId] || alertsMap[1];
+  };
+
+  const alerts = getAlerts(selectedPatient.id);
 
   return (
     <div>
-      <h2 className={`text-3xl font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
-        Alerts & Anomalies - {selectedPatient.name}
+      <h2 className={`text-3xl font-bold mb-6 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
+        Alerts & Anomalies - <span className="text-cyan-600">{selectedPatient.name}</span>
       </h2>
       <div className="space-y-4">
         {alerts.map((alert) => (
           <div
             key={alert.id}
-            className={`rounded-xl p-4 border-l-4 flex items-start justify-between ${
+            className={`rounded-xl p-5 border-l-4 flex items-start justify-between ${
               alert.type === 'critical'
                 ? `border-red-500 ${isDarkMode ? 'bg-red-900 bg-opacity-30' : 'bg-red-50'}`
                 : alert.type === 'warning'
@@ -495,8 +690,8 @@ function AlertsSection({ isDarkMode, selectedPatient, setSelectedPatient }: any)
                 : `border-blue-500 ${isDarkMode ? 'bg-blue-900 bg-opacity-30' : 'bg-blue-50'}`
             }`}
           >
-            <div>
-              <p className={`font-semibold ${
+            <div className="flex-1">
+              <p className={`font-semibold text-lg ${
                 alert.type === 'critical'
                   ? isDarkMode ? 'text-red-400' : 'text-red-800'
                   : alert.type === 'warning'
@@ -506,12 +701,17 @@ function AlertsSection({ isDarkMode, selectedPatient, setSelectedPatient }: any)
                 {alert.message}
               </p>
               {alert.isAnomaly && (
-                <span className="text-xs font-bold px-2 py-1 rounded-full bg-orange-100 text-orange-800 mt-2 inline-block">
-                  🚨 ANOMALY DETECTED
-                </span>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  <span className="text-xs font-bold px-3 py-1 rounded-full bg-orange-100 text-orange-800">
+                    🚨 ANOMALY DETECTED
+                  </span>
+                  <span className="text-xs font-bold px-3 py-1 rounded-full bg-purple-100 text-purple-800">
+                    ⚡ ACTION RECOMMENDED
+                  </span>
+                </div>
               )}
             </div>
-            <span className={`text-xs whitespace-nowrap ml-4 ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>
+            <span className={`text-xs whitespace-nowrap ml-4 font-semibold ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>
               {alert.timestamp}
             </span>
           </div>

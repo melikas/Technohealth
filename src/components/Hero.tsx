@@ -2,8 +2,8 @@ import { Link } from 'react-router-dom';
 
 export default function Hero() {
   const metrics = [
-    { label: 'Support', value: '+100', description: 'Active users', highlight: true },
-    { label: 'Devices', value: '12', description: 'Connected platforms', highlight: false },
+    { label: 'Devices', value: '+100', description: 'Every Major Device Supported', highlight: true },
+    { label: '', value: 'End-to-End', description: 'From Raw Data to AI', highlight: false },
     { label: 'Developer Time', value: '+30%', description: 'Engagement lift saved', highlight: false }
   ];
 
