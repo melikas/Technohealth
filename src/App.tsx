@@ -13,6 +13,7 @@ import DocumentationPage from './pages/DocumentationPage';
 import CompliancePage from './pages/CompliancePage';
 import ContactPage from './pages/ContactPage';
 import CaseStudiesPage from './pages/CaseStudiesPage';
+import ScheduleDemoPage from './pages/ScheduleDemoPage';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="/about" element={<AboutPage />} />
         <Route path="/pricing" element={<PricingPage />} />
         <Route path="/demo" element={<DemoPage />} />
+        <Route path="/schedule-demo" element={<ScheduleDemoPage />} />
         <Route path="/get-started" element={<GetStartedPage />} />
         <Route path="/docs" element={<DocumentationPage />} />
         <Route path="/compliance" element={<CompliancePage />} />
