@@ -16,11 +16,11 @@ export default function IntegrationShowcase() {
 
         {/* Image Below */}
         <div className="flex justify-center mb-12">
-          <div className="w-full max-w-2xl h-96 bg-gradient-to-br from-cyan-500/20 to-blue-600/20 rounded-2xl overflow-hidden border border-cyan-400/30 shadow-2xl">
+          <div className="w-full h-full bg-gradient-to-br from-cyan-500/20 to-blue-600/20 rounded-2xl overflow-hidden border border-cyan-400/30 shadow-2xl">
             <img 
               src="/Images/devices.png" 
               alt="TechnoHealth Devices"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-300"
             />
           </div>
         </div>
