@@ -335,8 +335,8 @@ function PatientSelector({ selectedPatient, setSelectedPatient, isDarkMode }: an
             onClick={() => setSelectedPatient(patient)}
             className={`w-full p-4 rounded-lg border-2 transition-all text-left ${
               selectedPatient?.id === patient.id
-                ? 'border-cyan-600 bg-cyan-50 dark:bg-cyan-900'
-                : `border-slate-300 dark:border-slate-700 ${isDarkMode ? 'bg-slate-800 hover:bg-slate-700' : 'bg-slate-50 hover:bg-slate-100'}`
+                ? 'border-cyan-400 bg-slate-800/30 dark:bg-slate-800/30'
+                : `border-slate-400 dark:border-slate-600 ${isDarkMode ? 'bg-slate-800 hover:bg-slate-700' : 'bg-slate-50 hover:bg-slate-100'}`
             }`}
           >
             <div className="flex items-center justify-between mb-2">
@@ -1055,6 +1055,143 @@ function UserManagementSection({ isDarkMode }: any) {
   );
 }
 
+// Notifications Panel - Right Sidebar
+function NotificationPanel({ selectedPatient, isDarkMode }: any) {
+  const getNotifications = (patientId: number | null) => {
+    if (!patientId) {
+      return [];
+    }
+    
+    const notificationsMap: any = {
+      1: [ // Ahmed
+        { id: 1, type: 'alert', message: 'BP slightly elevated', time: '10m ago', icon: '📊' },
+        { id: 2, type: 'reminder', message: 'Medication due', time: '2h ago', icon: '💊' },
+        { id: 3, type: 'info', message: 'New test results', time: '5h ago', icon: '📋' },
+        { id: 4, type: 'alert', message: 'Exercise goal 80% done', time: '1d ago', icon: '🏃' },
+      ],
+      2: [ // Fatima
+        { id: 1, type: 'critical', message: 'Glucose level high', time: '30m ago', icon: '🚨' },
+        { id: 2, type: 'alert', message: 'HbA1c test scheduled', time: '1h ago', icon: '📅' },
+        { id: 3, type: 'reminder', message: 'Diet plan update', time: '3h ago', icon: '🥗' },
+        { id: 4, type: 'info', message: 'Consultation completed', time: '1d ago', icon: '👤' },
+      ],
+      3: [ // Mohammed
+        { id: 1, type: 'success', message: 'Weekly goal achieved', time: '45m ago', icon: '🏆' },
+        { id: 2, type: 'info', message: 'New personal record', time: '2h ago', icon: '⭐' },
+        { id: 3, type: 'reminder', message: 'Sync wearables', time: '4h ago', icon: '📱' },
+        { id: 4, type: 'alert', message: 'HR spike detected', time: '1d ago', icon: '❤️' },
+      ],
+      4: [ // Sarah
+        { id: 1, type: 'info', message: 'Recovery on track', time: '1h ago', icon: '✅' },
+        { id: 2, type: 'reminder', message: 'PT session tomorrow', time: '5h ago', icon: '🏥' },
+        { id: 3, type: 'alert', message: 'Mild swelling noted', time: '8h ago', icon: '⚠️' },
+        { id: 4, type: 'info', message: 'Wound healing normal', time: '1d ago', icon: '🩹' },
+      ],
+      5: [ // Ali
+        { id: 1, type: 'critical', message: 'Cholesterol very high', time: '15m ago', icon: '🚨' },
+        { id: 2, type: 'alert', message: 'BP elevated', time: '45m ago', icon: '📊' },
+        { id: 3, type: 'reminder', message: 'Statin prescribed', time: '2h ago', icon: '💊' },
+        { id: 4, type: 'info', message: 'Diet plan shared', time: '1d ago', icon: '📤' },
+      ],
+    };
+    return notificationsMap[patientId] || [];
+  };
+
+  const notifications = getNotifications(selectedPatient?.id);
+
+  const getNotificationStyle = (type: string) => {
+    switch (type) {
+      case 'critical':
+        return isDarkMode ? 'border-l-red-600 bg-red-900/20' : 'border-l-red-600 bg-red-50';
+      case 'alert':
+        return isDarkMode ? 'border-l-yellow-600 bg-yellow-900/20' : 'border-l-yellow-600 bg-yellow-50';
+      case 'success':
+        return isDarkMode ? 'border-l-green-600 bg-green-900/20' : 'border-l-green-600 bg-green-50';
+      default:
+        return isDarkMode ? 'border-l-cyan-600 bg-cyan-900/20' : 'border-l-cyan-600 bg-cyan-50';
+    }
+  };
+
+  const getTextStyle = (type: string) => {
+    switch (type) {
+      case 'critical':
+        return isDarkMode ? 'text-red-400' : 'text-red-700';
+      case 'alert':
+        return isDarkMode ? 'text-yellow-400' : 'text-yellow-700';
+      case 'success':
+        return isDarkMode ? 'text-green-400' : 'text-green-700';
+      default:
+        return isDarkMode ? 'text-cyan-400' : 'text-cyan-700';
+    }
+  };
+
+  return (
+    <div className={`w-80 border-l ${isDarkMode ? 'bg-slate-900 border-slate-700' : 'bg-white border-slate-200'} flex flex-col`}>
+      {/* Header */}
+      <div className={`px-6 py-4 border-b ${isDarkMode ? 'border-slate-700' : 'border-slate-200'}`}>
+        <h2 className={`text-lg font-bold ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
+          📢 Notifications
+        </h2>
+        {selectedPatient && (
+          <p className={`text-xs mt-1 ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>
+            {selectedPatient.name}
+          </p>
+        )}
+      </div>
+
+      {/* Notifications List */}
+      <div className="flex-1 overflow-y-auto px-4 py-4 space-y-3">
+        {selectedPatient ? (
+          notifications.length > 0 ? (
+            notifications.map((notification) => (
+              <div
+                key={notification.id}
+                className={`p-3 rounded-lg border-l-4 transition-all ${getNotificationStyle(notification.type)}`}
+              >
+                <div className="flex items-start gap-2">
+                  <span className="text-lg mt-0.5">{notification.icon}</span>
+                  <div className="flex-1">
+                    <p className={`text-sm font-semibold ${getTextStyle(notification.type)}`}>
+                      {notification.message}
+                    </p>
+                    <p className={`text-xs mt-1 ${isDarkMode ? 'text-slate-500' : 'text-slate-500'}`}>
+                      {notification.time}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))
+          ) : (
+            <div className={`text-center py-8 ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>
+              <p className="text-sm">✓ No notifications</p>
+            </div>
+          )
+        ) : (
+          <div className={`text-center py-12 ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>
+            <Bell className="w-8 h-8 mx-auto mb-2 opacity-50" />
+            <p className="text-xs">
+              Select a patient to view notifications
+            </p>
+          </div>
+        )}
+      </div>
+
+      {/* Footer */}
+      {selectedPatient && notifications.length > 0 && (
+        <div className={`px-4 py-3 border-t ${isDarkMode ? 'border-slate-700' : 'border-slate-200'}`}>
+          <button className={`w-full text-xs font-semibold py-2 rounded transition-colors ${
+            isDarkMode 
+              ? 'bg-slate-800 text-slate-300 hover:bg-slate-700' 
+              : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+          }`}>
+            Mark all as read
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+
 // Main Dashboard Component
 export default function DashboardPage() {
   const navigate = useNavigate();
@@ -1120,7 +1257,10 @@ export default function DashboardPage() {
             showSettings={showSettings}
             setShowSettings={setShowSettings}
           />
-          <div className="flex-1 overflow-auto p-6">{renderContent()}</div>
+          <div className="flex-1 flex overflow-hidden">
+            <div className="flex-1 overflow-auto p-6">{renderContent()}</div>
+            <NotificationPanel selectedPatient={selectedPatient} isDarkMode={isDarkMode} />
+          </div>
         </div>
       </div>
     </div>
