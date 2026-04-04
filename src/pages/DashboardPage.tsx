@@ -455,40 +455,75 @@ function OverviewSection({ isDarkMode, selectedPatient, setSelectedPatient }: an
 }
 
 function MonitoringSection({ isDarkMode, selectedPatient, setSelectedPatient }: any) {
+  const [timeline, setTimeline] = useState('daily');
+  const [customMetrics, setCustomMetrics] = useState([
+    { id: 1, name: 'Stress Level', formula: 'HR × 0.8 + Temp × 0.2', value: '42', unit: '%', color: 'from-red-500 to-red-600' },
+    { id: 2, name: 'Fitness Index', formula: 'Steps + (Calories / 100)', value: '115', unit: 'pts', color: 'from-green-500 to-green-600' },
+  ]);
+  const [showMetricForm, setShowMetricForm] = useState(false);
+  const [newMetric, setNewMetric] = useState({ name: '', formula: '', unit: '%' });
+
   if (!selectedPatient) {
     return <NoPatientMessage isDarkMode={isDarkMode} />;
   }
 
-  // Mock data for charts based on patient
-  const heartRateData = [
-    { time: '6:00 AM', rate: 68, avg: 72 },
-    { time: '8:00 AM', rate: 72, avg: 72 },
-    { time: '10:00 AM', rate: 75, avg: 72 },
-    { time: '12:00 PM', rate: 78, avg: 72 },
-    { time: '2:00 PM', rate: 82, avg: 72 },
-    { time: '4:00 PM', rate: 79, avg: 72 },
-    { time: '6:00 PM', rate: 76, avg: 72 },
-  ];
+  // Data for different timelines
+  const timelineData = {
+    daily: [
+      { time: '6:00 AM', rate: 68, avg: 72 },
+      { time: '8:00 AM', rate: 72, avg: 72 },
+      { time: '10:00 AM', rate: 75, avg: 72 },
+      { time: '12:00 PM', rate: 78, avg: 72 },
+      { time: '2:00 PM', rate: 82, avg: 72 },
+      { time: '4:00 PM', rate: 79, avg: 72 },
+      { time: '6:00 PM', rate: 76, avg: 72 },
+    ],
+    weekly: [
+      { time: 'Mon', rate: 70, avg: 72 },
+      { time: 'Tue', rate: 73, avg: 72 },
+      { time: 'Wed', rate: 75, avg: 72 },
+      { time: 'Thu', rate: 78, avg: 72 },
+      { time: 'Fri', rate: 76, avg: 72 },
+      { time: 'Sat', rate: 74, avg: 72 },
+      { time: 'Sun', rate: 71, avg: 72 },
+    ],
+    monthly: [
+      { time: 'Week 1', rate: 72, avg: 72 },
+      { time: 'Week 2', rate: 74, avg: 72 },
+      { time: 'Week 3', rate: 76, avg: 72 },
+      { time: 'Week 4', rate: 73, avg: 72 },
+    ],
+  };
 
-  const bloodPressureData = [
-    { time: '6:00 AM', systolic: 118, diastolic: 75 },
-    { time: '8:00 AM', systolic: 120, diastolic: 78 },
-    { time: '10:00 AM', systolic: 125, diastolic: 80 },
-    { time: '12:00 PM', systolic: 128, diastolic: 82 },
-    { time: '2:00 PM', systolic: 132, diastolic: 85 },
-    { time: '4:00 PM', systolic: 130, diastolic: 83 },
-    { time: '6:00 PM', systolic: 126, diastolic: 81 },
-  ];
+  const bloodPressureDataByTimeline = {
+    daily: [
+      { time: '6:00 AM', systolic: 118, diastolic: 75 },
+      { time: '8:00 AM', systolic: 120, diastolic: 78 },
+      { time: '10:00 AM', systolic: 125, diastolic: 80 },
+      { time: '12:00 PM', systolic: 128, diastolic: 82 },
+      { time: '2:00 PM', systolic: 132, diastolic: 85 },
+      { time: '4:00 PM', systolic: 130, diastolic: 83 },
+      { time: '6:00 PM', systolic: 126, diastolic: 81 },
+    ],
+    weekly: [
+      { time: 'Mon', systolic: 122, diastolic: 80 },
+      { time: 'Tue', systolic: 124, diastolic: 81 },
+      { time: 'Wed', systolic: 126, diastolic: 79 },
+      { time: 'Thu', systolic: 128, diastolic: 82 },
+      { time: 'Fri', systolic: 125, diastolic: 80 },
+      { time: 'Sat', systolic: 121, diastolic: 78 },
+      { time: 'Sun', systolic: 120, diastolic: 77 },
+    ],
+    monthly: [
+      { time: 'Week 1', systolic: 125, diastolic: 80 },
+      { time: 'Week 2', systolic: 127, diastolic: 81 },
+      { time: 'Week 3', systolic: 126, diastolic: 79 },
+      { time: 'Week 4', systolic: 124, diastolic: 78 },
+    ],
+  };
 
-  const oxygenData = [
-    { time: '6:00 AM', oxygen: 96 },
-    { time: '8:00 AM', oxygen: 97 },
-    { time: '10:00 AM', oxygen: 98 },
-    { time: '12:00 PM', oxygen: 97 },
-    { time: '2:00 PM', oxygen: 96 },
-    { time: '4:00 PM', oxygen: 97 },
-    { time: '6:00 PM', oxygen: 98 },
-  ];
+  const heartRateData = timelineData[timeline as keyof typeof timelineData];
+  const bloodPressureData = bloodPressureDataByTimeline[timeline as keyof typeof bloodPressureDataByTimeline];
 
   const healthData = [
     { metric: 'Heart Rate', current: '72 BPM', normal: '60-100 BPM', status: 'normal', trend: '↓ -5 BPM' },
@@ -497,11 +532,130 @@ function MonitoringSection({ isDarkMode, selectedPatient, setSelectedPatient }: 
     { metric: 'Sleep Duration', current: '7.5 hrs', normal: '7-9 hrs', status: 'good', trend: '↑ +1 hr' },
   ];
 
+  const handleAddMetric = () => {
+    if (newMetric.name && newMetric.formula) {
+      const colors = ['from-purple-500 to-purple-600', 'from-indigo-500 to-indigo-600', 'from-pink-500 to-pink-600'];
+      setCustomMetrics([...customMetrics, {
+        id: customMetrics.length + 1,
+        name: newMetric.name,
+        formula: newMetric.formula,
+        unit: newMetric.unit,
+        value: Math.floor(Math.random() * 100) + '',
+        color: colors[customMetrics.length % colors.length],
+      }]);
+      setNewMetric({ name: '', formula: '', unit: '%' });
+      setShowMetricForm(false);
+    }
+  };
+
+  const deleteMetric = (id: number) => {
+    setCustomMetrics(customMetrics.filter(m => m.id !== id));
+  };
+
   return (
     <div>
-      <h2 className={`text-3xl font-bold mb-8 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
-        Real-Time Health Monitoring - <span className="text-cyan-600">{selectedPatient.name}</span>
+      <h2 className={`text-3xl font-bold mb-6 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
+        Health Monitoring - <span className="text-cyan-600">{selectedPatient.name}</span>
       </h2>
+
+      {/* Timeline Selector */}
+      <div className="flex gap-3 mb-8">
+        {['daily', 'weekly', 'monthly'].map((t) => (
+          <button
+            key={t}
+            onClick={() => setTimeline(t)}
+            className={`px-6 py-2 rounded-lg font-semibold transition-all capitalize ${
+              timeline === t
+                ? isDarkMode ? 'bg-cyan-600 text-white' : 'bg-cyan-600 text-white'
+                : isDarkMode ? 'bg-slate-800 text-slate-300 hover:bg-slate-700' : 'bg-slate-200 text-slate-700 hover:bg-slate-300'
+            }`}
+          >
+            {t === 'daily' ? 'Daily' : t === 'weekly' ? 'Weekly' : 'Monthly'}
+          </button>
+        ))}
+      </div>
+
+      {/* Summary Metrics Bar */}
+      <div className={`rounded-xl p-4 border mb-8 ${isDarkMode ? 'bg-slate-900 border-slate-700' : 'bg-white border-slate-200'}`}>
+        <h3 className={`text-sm font-bold mb-4 ${isDarkMode ? 'text-slate-300' : 'text-slate-700'}`}>CUSTOM METRICS SUMMARY ({timeline.toUpperCase()})</h3>
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
+          {customMetrics.map((metric) => (
+            <div
+              key={metric.id}
+              className={`p-3 rounded-lg text-center bg-gradient-to-br ${metric.color} text-white cursor-pointer hover:shadow-lg transition-all`}
+              onClick={() => deleteMetric(metric.id)}
+              title="Click to delete"
+            >
+              <p className="text-xs opacity-90">{metric.name}</p>
+              <p className="text-lg font-bold mt-1">{metric.value}{metric.unit}</p>
+            </div>
+          ))}
+          <button
+            onClick={() => setShowMetricForm(!showMetricForm)}
+            className={`p-3 rounded-lg border-2 border-dashed transition-all ${
+              isDarkMode ? 'border-slate-600 hover:border-cyan-600 hover:bg-slate-800' : 'border-slate-300 hover:border-cyan-600 hover:bg-slate-50'
+            }`}
+          >
+            <span className={`text-lg font-bold ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>+</span>
+          </button>
+        </div>
+      </div>
+
+      {/* Add Custom Metric Form */}
+      {showMetricForm && (
+        <div className={`rounded-xl p-6 border mb-8 ${isDarkMode ? 'bg-slate-900 border-slate-700' : 'bg-white border-slate-200'}`}>
+          <h3 className={`text-lg font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>Create Custom Metric</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+            <div>
+              <label className={`block text-sm font-semibold mb-2 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>Metric Name</label>
+              <input
+                type="text"
+                value={newMetric.name}
+                onChange={(e) => setNewMetric({ ...newMetric, name: e.target.value })}
+                placeholder="e.g., Wellness Score"
+                className={`w-full px-3 py-2 rounded-lg border ${isDarkMode ? 'bg-slate-800 border-slate-700 text-white' : 'bg-white border-slate-300 text-slate-900'}`}
+              />
+            </div>
+            <div>
+              <label className={`block text-sm font-semibold mb-2 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>Formula</label>
+              <input
+                type="text"
+                value={newMetric.formula}
+                onChange={(e) => setNewMetric({ ...newMetric, formula: e.target.value })}
+                placeholder="e.g., HR + BP × 0.5"
+                className={`w-full px-3 py-2 rounded-lg border ${isDarkMode ? 'bg-slate-800 border-slate-700 text-white' : 'bg-white border-slate-300 text-slate-900'}`}
+              />
+            </div>
+            <div>
+              <label className={`block text-sm font-semibold mb-2 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>Unit</label>
+              <select
+                value={newMetric.unit}
+                onChange={(e) => setNewMetric({ ...newMetric, unit: e.target.value })}
+                className={`w-full px-3 py-2 rounded-lg border ${isDarkMode ? 'bg-slate-800 border-slate-700 text-white' : 'bg-white border-slate-300 text-slate-900'}`}
+              >
+                <option>%</option>
+                <option>pts</option>
+                <option>bpm</option>
+                <option>mg/dL</option>
+              </select>
+            </div>
+          </div>
+          <div className="flex gap-3">
+            <button
+              onClick={handleAddMetric}
+              className="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 font-semibold"
+            >
+              Create Metric
+            </button>
+            <button
+              onClick={() => setShowMetricForm(false)}
+              className={`px-6 py-2 rounded-lg font-semibold ${isDarkMode ? 'bg-slate-800 text-white hover:bg-slate-700' : 'bg-slate-200 text-slate-900 hover:bg-slate-300'}`}
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Key Metrics Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
@@ -524,7 +678,7 @@ function MonitoringSection({ isDarkMode, selectedPatient, setSelectedPatient }: 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
         {/* Heart Rate Chart */}
         <div className={`rounded-xl p-6 border ${isDarkMode ? 'bg-slate-900 border-slate-700' : 'bg-white border-slate-200'}`}>
-          <h3 className={`text-lg font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>Heart Rate Trend (24h)</h3>
+          <h3 className={`text-lg font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>Heart Rate Trend ({timeline === 'daily' ? '24h' : timeline === 'weekly' ? '7d' : '30d'})</h3>
           <ResponsiveContainer width="100%" height={250}>
             <LineChart data={heartRateData}>
               <CartesianGrid strokeDasharray="3 3" stroke={isDarkMode ? '#475569' : '#e2e8f0'} />
@@ -540,7 +694,7 @@ function MonitoringSection({ isDarkMode, selectedPatient, setSelectedPatient }: 
 
         {/* Blood Pressure Chart */}
         <div className={`rounded-xl p-6 border ${isDarkMode ? 'bg-slate-900 border-slate-700' : 'bg-white border-slate-200'}`}>
-          <h3 className={`text-lg font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>Blood Pressure Trend (24h)</h3>
+          <h3 className={`text-lg font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>Blood Pressure Trend ({timeline === 'daily' ? '24h' : timeline === 'weekly' ? '7d' : '30d'})</h3>
           <ResponsiveContainer width="100%" height={250}>
             <AreaChart data={bloodPressureData}>
               <CartesianGrid strokeDasharray="3 3" stroke={isDarkMode ? '#475569' : '#e2e8f0'} />
@@ -557,14 +711,14 @@ function MonitoringSection({ isDarkMode, selectedPatient, setSelectedPatient }: 
 
       {/* Oxygen Level */}
       <div className={`rounded-xl p-6 border ${isDarkMode ? 'bg-slate-900 border-slate-700' : 'bg-white border-slate-200'}`}>
-        <h3 className={`text-lg font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>Oxygen Level (SpO2) Trend</h3>
+        <h3 className={`text-lg font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>Oxygen Level (SpO2) Trend ({timeline === 'daily' ? '24h' : timeline === 'weekly' ? '7d' : '30d'})</h3>
         <ResponsiveContainer width="100%" height={250}>
-          <BarChart data={oxygenData}>
+          <BarChart data={heartRateData}>
             <CartesianGrid strokeDasharray="3 3" stroke={isDarkMode ? '#475569' : '#e2e8f0'} />
             <XAxis dataKey="time" stroke={isDarkMode ? '#94a3b8' : '#64748b'} />
             <YAxis stroke={isDarkMode ? '#94a3b8' : '#64748b'} domain={[90, 100]} />
             <Tooltip contentStyle={{ backgroundColor: isDarkMode ? '#1e293b' : '#ffffff', border: `1px solid ${isDarkMode ? '#475569' : '#e2e8f0'}`, borderRadius: '8px' }} />
-            <Bar dataKey="oxygen" fill="#10b981" radius={[8, 8, 0, 0]} />
+            <Bar dataKey="rate" fill="#10b981" radius={[8, 8, 0, 0]} name="SpO2 Level" />
           </BarChart>
         </ResponsiveContainer>
       </div>
