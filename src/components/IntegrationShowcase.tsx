@@ -1,57 +1,37 @@
 import { Link } from 'react-router-dom';
 
 export default function IntegrationShowcase() {
-  const integrations = [
-    'Apple Watch',
-    'Fitbit Inspire',
-    'Fitbit Charge 6',
-    'Fitbit Sense',
-    'Oura Ring',
-    'WHOOP Strap',
-    'Samsung Galaxy Watch',
-    'Google Fit',
-    'Empatica Embrace',
-    'Actiwatch',
-    'Polar Sports',
-    'Garmin',
-    'Withings',
-    'Dexcom',
-    'Samsung Health',
-  ];
-
   return (
     <section className="py-24 bg-white border-t border-slate-200">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
-            Works With Everything Your Patients Have
-          </h2>
-          <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-            Apple Watch, Fitbit, Oura, WHOOP, Empatica, and 15+ other devices. Add a new wearable in minutes.
-          </p>
-        </div>
-
-        {/* Integration Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 mb-12">
-          {integrations.map((platform, idx) => (
-            <div
-              key={idx}
-              className="bg-gradient-to-br from-slate-50 to-slate-100 border border-slate-200 rounded-xl p-6 flex items-center justify-center text-center hover:shadow-lg hover:border-cyan-300 transition-all group"
+        {/* Grid Layout */}
+        <div className="grid md:grid-cols-2 gap-12 items-center">
+          {/* Left Side - Text */}
+          <div>
+            <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
+              Works With Everything Your Patients Have
+            </h2>
+            <p className="text-xl text-slate-600 mb-8 leading-relaxed">
+              Explore TechnoHealth's available data sources, both API and SDK options, to find the best fit for your integration.
+            </p>
+            <Link
+              to="/data-sources"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-lg font-bold hover:shadow-lg hover:shadow-cyan-500/50 transition-all text-lg"
             >
-              <span className="font-semibold text-slate-900 group-hover:text-cyan-600 transition-colors">
-                {platform}
-              </span>
-            </div>
-          ))}
-        </div>
+              DATA SOURCES →
+            </Link>
+          </div>
 
-        <div className="text-center">
-          <Link
-            to="/platform"
-            className="inline-flex items-center gap-2 text-cyan-600 font-bold hover:text-cyan-700 transition-colors text-lg"
-          >
-            View All Integrations →
-          </Link>
+          {/* Right Side - Image */}
+          <div className="flex justify-center">
+            <div className="w-full h-96 bg-gradient-to-br from-cyan-500/20 to-blue-600/20 rounded-2xl overflow-hidden border border-cyan-400/30 shadow-2xl">
+              <img 
+                src="/Images/devices.png" 
+                alt="TechnoHealth Devices"
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </section>

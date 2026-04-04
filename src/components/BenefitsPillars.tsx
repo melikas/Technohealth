@@ -29,7 +29,7 @@ export default function BenefitsPillars() {
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
-            The Fastest Way to Unified Wearable Data
+            The Fastest Way to Unified Your Data
           </h2>
           <p className="text-xl text-slate-600 max-w-3xl mx-auto">
             Seven days from signing to production. Own your data pipeline.
