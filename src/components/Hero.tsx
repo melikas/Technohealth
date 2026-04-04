@@ -1,11 +1,10 @@
 import { Link } from 'react-router-dom';
 
 export default function Hero() {
-  const stats = [
-    { label: 'Connected Devices', description: '15+ wearable platforms', highlight: true },
-    { label: 'Setup Time', description: '7 days to live integration', highlight: false },
-    { label: 'Uptime', description: '99.9% data reliability', highlight: false },
-    { label: 'Compliance', description: 'HIPAA, HITRUST, SOC 2 ready', highlight: false }
+  const metrics = [
+    { label: 'Support', value: '+100', description: 'Active users', highlight: true },
+    { label: 'Devices', value: '12', description: 'Connected platforms', highlight: false },
+    { label: 'Developer Time', value: '+30%', description: 'Engagement lift saved', highlight: false }
   ];
 
   return (
@@ -15,50 +14,66 @@ export default function Hero() {
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
       
       <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div className="text-center mb-20">
-          <h1 className="text-6xl md:text-7xl font-bold mb-8 leading-tight">
-            Wearables Integration
-            <br />
-            <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
-            For your health tracking app 
-            </span>
-          </h1>
+        {/* Main Content */}
+        <div className="grid md:grid-cols-2 gap-12 items-center mb-20">
+          {/* Left Side - Text */}
+          <div>
+            <h1 className="text-6xl md:text-7xl font-bold mb-8 leading-tight">
+              Wearables Integration
+              <br />
+              <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+              For your health tracking app 
+              </span>
+            </h1>
 
-          <p className="text-xl md:text-2xl text-slate-300 mb-12 max-w-3xl mx-auto leading-relaxed">
-            Connect +100 wearables and health platforms with one integration. We build digital products that accelerate healthcare and empower people.
-          </p>
+            <p className="text-xl md:text-2xl text-slate-300 mb-12 max-w-2xl leading-relaxed">
+              Connect wearables and health platforms with one integration. We build digital products that accelerate healthcare services.
+            </p>
 
-          <div className="flex flex-col md:flex-row gap-4 justify-center mb-20">
-            <Link
-              to="/auth"
-              className="px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-lg font-bold hover:shadow-lg hover:shadow-cyan-500/50 transition-all text-lg"
-            >
-              Get Started
-            </Link>
-            <Link
-              to="/schedule-demo"
-              className="px-8 py-4 border-2 border-cyan-400/50 text-cyan-300 rounded-lg font-bold hover:bg-cyan-400/10 transition-all text-lg"
-            >
-              Schedule a demo
-            </Link>
+            <div className="flex flex-col md:flex-row gap-4 mb-12">
+              <Link
+                to="/auth"
+                className="px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-lg font-bold hover:shadow-lg hover:shadow-cyan-500/50 transition-all text-lg"
+              >
+                Get Started
+              </Link>
+              <Link
+                to="/schedule-demo"
+                className="px-8 py-4 border-2 border-cyan-400/50 text-cyan-300 rounded-lg font-bold hover:bg-cyan-400/10 transition-all text-lg"
+              >
+                Schedule a demo
+              </Link>
+            </div>
+          </div>
+
+          {/* Right Side - Image */}
+          <div className="flex justify-center">
+            <div className="w-full h-96 bg-gradient-to-br from-cyan-500/20 to-blue-600/20 rounded-2xl overflow-hidden border border-cyan-400/30 shadow-2xl">
+              <img 
+                src="/Images/hero-second.png" 
+                alt="Hero Illustration"
+                className="w-full h-full object-cover"
+              />
+            </div>
           </div>
         </div>
 
-        {/* Stats Grid */}
-        <div className="grid md:grid-cols-4 gap-6 mb-20">
-          {stats.map((stat, idx) => (
+        {/* Metrics Grid */}
+        <div className="grid md:grid-cols-3 gap-6 mb-20">
+          {metrics.map((metric, idx) => (
             <div
               key={idx}
               className={`rounded-xl border backdrop-blur-sm transition-all ${
-                stat.highlight
+                metric.highlight
                   ? 'bg-gradient-to-br from-cyan-500/20 to-blue-500/20 border-cyan-400/50'
                   : 'bg-slate-800/50 border-slate-700/50'
               } p-8 text-center group hover:border-cyan-400/80 hover:bg-slate-800/70`}
             >
-              <div className={`text-4xl md:text-5xl font-bold mb-3 ${stat.highlight ? 'text-cyan-300' : 'text-blue-300'}`}>
-                {stat.label}
+              <div className={`text-5xl md:text-6xl font-bold mb-2 ${metric.highlight ? 'text-cyan-300' : 'text-blue-300'}`}>
+                {metric.value}
               </div>
-              <div className="text-slate-300 text-sm font-semibold">{stat.description}</div>
+              <div className="text-slate-300 text-lg font-semibold mb-1">{metric.label}</div>
+              <div className="text-slate-400 text-sm">{metric.description}</div>
             </div>
           ))}
         </div>
