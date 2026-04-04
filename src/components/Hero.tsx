@@ -2,9 +2,30 @@ import { Link } from 'react-router-dom';
 
 export default function Hero() {
   const metrics = [
-    { label: 'Devices', value: '+100', description: 'Every Major Device Supported', highlight: true },
-    { label: '', value: 'End-to-End', description: 'From Raw Data to AI', highlight: false },
-    { label: 'Developer Time', value: '+30%', description: 'Engagement lift saved', highlight: false }
+    { 
+      number: '+100', 
+      label: 'Active Support Users',
+      description: 'Every Major Device Supported',
+      icon: '👥',
+      color: 'from-cyan-500 to-cyan-600',
+      bgColor: 'from-cyan-500/15 to-cyan-600/10'
+    },
+    { 
+      number: '12', 
+      label: 'Compatible Devices',
+      description: 'End-to-End Integration',
+      icon: '📱',
+      color: 'from-blue-400 to-blue-500',
+      bgColor: 'from-blue-500/15 to-blue-600/10'
+    },
+    { 
+      number: '+30%', 
+      label: 'Efficiency Boost',
+      description: 'Developer Time Saved',
+      icon: '⚡',
+      color: 'from-purple-400 to-purple-500',
+      bgColor: 'from-purple-500/15 to-purple-600/10'
+    }
   ];
 
   return (
@@ -63,17 +84,28 @@ export default function Hero() {
           {metrics.map((metric, idx) => (
             <div
               key={idx}
-              className={`rounded-xl border backdrop-blur-sm transition-all ${
-                metric.highlight
-                  ? 'bg-gradient-to-br from-cyan-500/20 to-blue-500/20 border-cyan-400/50'
-                  : 'bg-slate-800/50 border-slate-700/50'
-              } p-8 text-center group hover:border-cyan-400/80 hover:bg-slate-800/70`}
+              className={`rounded-2xl border backdrop-blur-md bg-gradient-to-br ${metric.bgColor} border-white/10 p-8`}
             >
-              <div className={`text-5xl md:text-6xl font-bold mb-2 ${metric.highlight ? 'text-cyan-300' : 'text-blue-300'}`}>
-                {metric.value}
+              {/* Icon */}
+              <div className="text-5xl mb-4">{metric.icon}</div>
+
+              {/* Number */}
+              <div className={`text-6xl font-bold mb-3 bg-gradient-to-r ${metric.color} bg-clip-text text-transparent`}>
+                {metric.number}
               </div>
-              <div className="text-slate-300 text-lg font-semibold mb-1">{metric.label}</div>
-              <div className="text-slate-400 text-sm">{metric.description}</div>
+
+              {/* Main Label */}
+              <h3 className="text-xl font-bold text-white mb-2">
+                {metric.label}
+              </h3>
+
+              {/* Description */}
+              <p className="text-slate-300 text-sm leading-relaxed">
+                {metric.description}
+              </p>
+
+              {/* Accent Line */}
+              <div className={`border-t border-gradient-to-r ${metric.color} mt-4 pt-4`}></div>
             </div>
           ))}
         </div>
