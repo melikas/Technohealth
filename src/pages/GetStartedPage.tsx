@@ -200,7 +200,7 @@ export default function GetStartedPage() {
               <div>
                 <p className="text-sm font-semibold text-slate-600 uppercase tracking-wider">Address</p>
                 <p className="text-lg font-bold text-slate-900">
-                  San Francisco, CA<br />
+                  Montreal, CA<br />
                   United States
                 </p>
               </div>
