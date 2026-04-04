@@ -461,7 +461,15 @@ function MonitoringSection({ isDarkMode, selectedPatient, setSelectedPatient }: 
     { id: 2, name: 'Fitness Index', formula: 'Steps + (Calories / 100)', value: '115', unit: 'pts', color: 'from-green-500 to-green-600' },
   ]);
   const [showMetricForm, setShowMetricForm] = useState(false);
-  const [newMetric, setNewMetric] = useState({ name: '', formula: '', unit: '%' });
+  const [newMetric, setNewMetric] = useState({ 
+    name: '', 
+    formula: '', 
+    unit: '%',
+    parameters: [],
+    displayType: 'card',
+    color: 'from-purple-500 to-purple-600',
+    showTrend: true,
+  });
 
   if (!selectedPatient) {
     return <NoPatientMessage isDarkMode={isDarkMode} />;
@@ -534,16 +542,23 @@ function MonitoringSection({ isDarkMode, selectedPatient, setSelectedPatient }: 
 
   const handleAddMetric = () => {
     if (newMetric.name && newMetric.formula) {
-      const colors = ['from-purple-500 to-purple-600', 'from-indigo-500 to-indigo-600', 'from-pink-500 to-pink-600'];
       setCustomMetrics([...customMetrics, {
         id: customMetrics.length + 1,
         name: newMetric.name,
         formula: newMetric.formula,
         unit: newMetric.unit,
         value: Math.floor(Math.random() * 100) + '',
-        color: colors[customMetrics.length % colors.length],
+        color: newMetric.color,
       }]);
-      setNewMetric({ name: '', formula: '', unit: '%' });
+      setNewMetric({ 
+        name: '', 
+        formula: '', 
+        unit: '%',
+        parameters: [],
+        displayType: 'card',
+        color: 'from-purple-500 to-purple-600',
+        showTrend: true,
+      });
       setShowMetricForm(false);
     }
   };
@@ -552,6 +567,18 @@ function MonitoringSection({ isDarkMode, selectedPatient, setSelectedPatient }: 
     setCustomMetrics(customMetrics.filter(m => m.id !== id));
   };
 
+  const availableParameters = [
+    { id: 'hr', label: 'Heart Rate (BPM)', category: 'Cardiovascular' },
+    { id: 'bp_sys', label: 'Blood Pressure Systolic', category: 'Cardiovascular' },
+    { id: 'bp_dia', label: 'Blood Pressure Diastolic', category: 'Cardiovascular' },
+    { id: 'spo2', label: 'Oxygen Level (%)', category: 'Respiratory' },
+    { id: 'temp', label: 'Body Temperature (°C)', category: 'Vital' },
+    { id: 'sleep', label: 'Sleep Duration (hrs)', category: 'Lifestyle' },
+    { id: 'steps', label: 'Daily Steps', category: 'Activity' },
+    { id: 'calories', label: 'Calories Burned', category: 'Activity' },
+    { id: 'stress', label: 'Stress Level', category: 'Mental' },
+  ];
+
   return (
     <div>
       <h2 className={`text-3xl font-bold mb-8 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
@@ -559,20 +586,20 @@ function MonitoringSection({ isDarkMode, selectedPatient, setSelectedPatient }: 
       </h2>
 
       {/* Summary Metrics Bar */}
-      <div className={`rounded-xl p-4 border mb-8 ${isDarkMode ? 'bg-slate-900 border-slate-700' : 'bg-white border-slate-200'}`}>
-        {/* Header with Timeline Selector */}
+      <div className={`rounded-xl p-6 border mb-8 ${isDarkMode ? 'bg-slate-900 border-slate-700' : 'bg-white border-slate-200'}`}>
+        {/* Header with inline Timeline Selector */}
         <div className="flex items-center justify-between mb-6 flex-wrap gap-4">
-          <h3 className={`text-sm font-bold ${isDarkMode ? 'text-slate-300' : 'text-slate-700'}`}>CUSTOM METRICS</h3>
+          <h3 className={`text-lg font-bold ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>Custom Metrics</h3>
           
-          {/* Timeline Selector Bar */}
-          <div className={`flex gap-1 p-1 rounded-lg ${isDarkMode ? 'bg-slate-800' : 'bg-slate-100'}`}>
+          {/* Segmented Timeline Selector */}
+          <div className={`inline-flex rounded-full p-1 ${isDarkMode ? 'bg-slate-800' : 'bg-slate-100'}`}>
             {['daily', 'weekly', 'monthly'].map((t) => (
               <button
                 key={t}
                 onClick={() => setTimeline(t)}
-                className={`px-3 py-1 rounded-md font-medium text-xs transition-all capitalize ${
+                className={`px-4 py-2 rounded-full font-semibold text-sm transition-all ${
                   timeline === t
-                    ? isDarkMode ? 'bg-cyan-600 text-white shadow-sm' : 'bg-cyan-600 text-white shadow-sm'
+                    ? isDarkMode ? 'bg-cyan-600 text-white shadow-md' : 'bg-cyan-500 text-white shadow-md'
                     : isDarkMode ? 'text-slate-400 hover:text-slate-200' : 'text-slate-600 hover:text-slate-900'
                 }`}
               >
@@ -583,81 +610,186 @@ function MonitoringSection({ isDarkMode, selectedPatient, setSelectedPatient }: 
         </div>
 
         {/* Metrics Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
-          {customMetrics.map((metric) => (
-            <div
-              key={metric.id}
-              className={`p-3 rounded-lg text-center bg-gradient-to-br ${metric.color} text-white cursor-pointer hover:shadow-lg transition-all`}
-              onClick={() => deleteMetric(metric.id)}
-              title="Click to delete"
-            >
-              <p className="text-xs opacity-90">{metric.name}</p>
-              <p className="text-lg font-bold mt-1">{metric.value}{metric.unit}</p>
-            </div>
-          ))}
-          <button
-            onClick={() => setShowMetricForm(!showMetricForm)}
-            className={`p-3 rounded-lg border-2 border-dashed transition-all ${
-              isDarkMode ? 'border-slate-600 hover:border-cyan-600 hover:bg-slate-800' : 'border-slate-300 hover:border-cyan-600 hover:bg-slate-50'
-            }`}
-          >
-            <span className={`text-lg font-bold ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>+</span>
-          </button>
-        </div>
+        {customMetrics.length > 0 ? (
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3 mb-6">
+            {customMetrics.map((metric) => (
+              <div
+                key={metric.id}
+                className={`p-4 rounded-lg text-center bg-gradient-to-br ${metric.color} text-white cursor-pointer hover:shadow-lg transition-all`}
+                onClick={() => deleteMetric(metric.id)}
+                title="Click to delete"
+              >
+                <p className="text-xs opacity-90 font-medium">{metric.name}</p>
+                <p className="text-xl font-bold mt-2">{metric.value}{metric.unit}</p>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className={`text-center py-8 ${isDarkMode ? 'text-slate-400' : 'text-slate-500'}`}>
+            <p className="text-sm">No custom metrics yet. Create your first one!</p>
+          </div>
+        )}
+
+        {/* Create New Custom Metric Button */}
+        <button
+          onClick={() => setShowMetricForm(!showMetricForm)}
+          className={`w-full py-3 rounded-lg font-semibold transition-all border-2 ${
+            showMetricForm
+              ? isDarkMode ? 'bg-cyan-600 text-white border-cyan-600' : 'bg-cyan-500 text-white border-cyan-500'
+              : isDarkMode ? 'border-dashed border-slate-600 text-slate-300 hover:border-cyan-600 hover:text-cyan-400 hover:bg-slate-800/50' : 'border-dashed border-slate-300 text-slate-600 hover:border-cyan-500 hover:text-cyan-600 hover:bg-cyan-50'
+          }`}
+        >
+          {showMetricForm ? '✕ Close Form' : '+ Create New Custom Metric'}
+        </button>
       </div>
 
-      {/* Add Custom Metric Form */}
+      {/* Create Custom Metric Form */}
       {showMetricForm && (
         <div className={`rounded-xl p-6 border mb-8 ${isDarkMode ? 'bg-slate-900 border-slate-700' : 'bg-white border-slate-200'}`}>
-          <h3 className={`text-lg font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>Create Custom Metric</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-            <div>
-              <label className={`block text-sm font-semibold mb-2 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>Metric Name</label>
-              <input
-                type="text"
-                value={newMetric.name}
-                onChange={(e) => setNewMetric({ ...newMetric, name: e.target.value })}
-                placeholder="e.g., Wellness Score"
-                className={`w-full px-3 py-2 rounded-lg border ${isDarkMode ? 'bg-slate-800 border-slate-700 text-white' : 'bg-white border-slate-300 text-slate-900'}`}
-              />
+          <h3 className={`text-2xl font-bold mb-6 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
+            Define Your Custom Metric
+          </h3>
+
+          <div className="space-y-6">
+            {/* Basic Information */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div>
+                <label className={`block text-sm font-semibold mb-2 ${isDarkMode ? 'text-slate-200' : 'text-slate-900'}`}>
+                  Metric Name
+                </label>
+                <input
+                  type="text"
+                  value={newMetric.name}
+                  onChange={(e) => setNewMetric({ ...newMetric, name: e.target.value })}
+                  placeholder="e.g., Wellness Score"
+                  className={`w-full px-4 py-2 rounded-lg border ${isDarkMode ? 'bg-slate-800 border-slate-600 text-white focus:border-cyan-600' : 'bg-white border-slate-300 text-slate-900 focus:border-cyan-500'} focus:outline-none focus:ring-1`}
+                />
+              </div>
+              <div>
+                <label className={`block text-sm font-semibold mb-2 ${isDarkMode ? 'text-slate-200' : 'text-slate-900'}`}>
+                  Unit
+                </label>
+                <input
+                  type="text"
+                  value={newMetric.unit}
+                  onChange={(e) => setNewMetric({ ...newMetric, unit: e.target.value })}
+                  placeholder="e.g., %, pts, bpm"
+                  className={`w-full px-4 py-2 rounded-lg border ${isDarkMode ? 'bg-slate-800 border-slate-600 text-white focus:border-cyan-600' : 'bg-white border-slate-300 text-slate-900 focus:border-cyan-500'} focus:outline-none focus:ring-1`}
+                />
+              </div>
+              <div>
+                <label className={`block text-sm font-semibold mb-2 ${isDarkMode ? 'text-slate-200' : 'text-slate-900'}`}>
+                  Display Type
+                </label>
+                <select
+                  value={newMetric.displayType}
+                  onChange={(e) => setNewMetric({ ...newMetric, displayType: e.target.value })}
+                  className={`w-full px-4 py-2 rounded-lg border ${isDarkMode ? 'bg-slate-800 border-slate-600 text-white focus:border-cyan-600' : 'bg-white border-slate-300 text-slate-900 focus:border-cyan-500'} focus:outline-none focus:ring-1`}
+                >
+                  <option value="card">Card</option>
+                  <option value="chart">Chart</option>
+                  <option value="gauge">Gauge</option>
+                  <option value="trend">Trend Line</option>
+                </select>
+              </div>
             </div>
+
+            {/* Parameters Selection */}
             <div>
-              <label className={`block text-sm font-semibold mb-2 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>Formula</label>
-              <input
-                type="text"
+              <label className={`block text-sm font-semibold mb-3 ${isDarkMode ? 'text-slate-200' : 'text-slate-900'}`}>
+                Select Parameters (what data to use)
+              </label>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+                {availableParameters.map((param) => (
+                  <div key={param.id} className="flex items-center">
+                    <input
+                      type="checkbox"
+                      id={param.id}
+                      checked={newMetric.parameters.includes(param.id)}
+                      onChange={(e) => {
+                        if (e.target.checked) {
+                          setNewMetric({ ...newMetric, parameters: [...newMetric.parameters, param.id] });
+                        } else {
+                          setNewMetric({ ...newMetric, parameters: newMetric.parameters.filter(p => p !== param.id) });
+                        }
+                      }}
+                      className="w-4 h-4 rounded"
+                    />
+                    <label htmlFor={param.id} className={`ml-2 text-sm cursor-pointer ${isDarkMode ? 'text-slate-300' : 'text-slate-700'}`}>
+                      {param.label}
+                    </label>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Formula */}
+            <div>
+              <label className={`block text-sm font-semibold mb-2 ${isDarkMode ? 'text-slate-200' : 'text-slate-900'}`}>
+                Formula (how parameters relate)
+              </label>
+              <div className={`p-3 rounded-lg mb-2 ${isDarkMode ? 'bg-slate-800 border border-slate-700' : 'bg-slate-50 border border-slate-200'}`}>
+                <p className={`text-xs ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>
+                  Example: HR × 0.8 + Temp × 0.2 (multiply Heart Rate by 0.8, add Temperature × 0.2)
+                </p>
+              </div>
+              <textarea
                 value={newMetric.formula}
                 onChange={(e) => setNewMetric({ ...newMetric, formula: e.target.value })}
-                placeholder="e.g., HR + BP × 0.5"
-                className={`w-full px-3 py-2 rounded-lg border ${isDarkMode ? 'bg-slate-800 border-slate-700 text-white' : 'bg-white border-slate-300 text-slate-900'}`}
+                placeholder="Enter your formula here (use parameter names or abbreviations)"
+                rows={3}
+                className={`w-full px-4 py-3 rounded-lg border font-mono text-sm ${isDarkMode ? 'bg-slate-800 border-slate-600 text-white focus:border-cyan-600' : 'bg-white border-slate-300 text-slate-900 focus:border-cyan-500'} focus:outline-none focus:ring-1`}
               />
             </div>
-            <div>
-              <label className={`block text-sm font-semibold mb-2 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>Unit</label>
-              <select
-                value={newMetric.unit}
-                onChange={(e) => setNewMetric({ ...newMetric, unit: e.target.value })}
-                className={`w-full px-3 py-2 rounded-lg border ${isDarkMode ? 'bg-slate-800 border-slate-700 text-white' : 'bg-white border-slate-300 text-slate-900'}`}
-              >
-                <option>%</option>
-                <option>pts</option>
-                <option>bpm</option>
-                <option>mg/dL</option>
-              </select>
+
+            {/* Options */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="flex items-center">
+                <input
+                  type="checkbox"
+                  id="showTrend"
+                  checked={newMetric.showTrend}
+                  onChange={(e) => setNewMetric({ ...newMetric, showTrend: e.target.checked })}
+                  className="w-4 h-4 rounded"
+                />
+                <label htmlFor="showTrend" className={`ml-2 text-sm font-medium cursor-pointer ${isDarkMode ? 'text-slate-200' : 'text-slate-900'}`}>
+                  Show Trend (↑ up, ↓ down, → stable)
+                </label>
+              </div>
+              <div>
+                <label className={`block text-sm font-semibold mb-2 ${isDarkMode ? 'text-slate-200' : 'text-slate-900'}`}>
+                  Color Theme
+                </label>
+                <select
+                  value={newMetric.color}
+                  onChange={(e) => setNewMetric({ ...newMetric, color: e.target.value })}
+                  className={`w-full px-4 py-2 rounded-lg border ${isDarkMode ? 'bg-slate-800 border-slate-600 text-white' : 'bg-white border-slate-300 text-slate-900'}`}
+                >
+                  <option value="from-purple-500 to-purple-600">Purple</option>
+                  <option value="from-blue-500 to-blue-600">Blue</option>
+                  <option value="from-red-500 to-red-600">Red</option>
+                  <option value="from-green-500 to-green-600">Green</option>
+                  <option value="from-indigo-500 to-indigo-600">Indigo</option>
+                  <option value="from-pink-500 to-pink-600">Pink</option>
+                </select>
+              </div>
             </div>
-          </div>
-          <div className="flex gap-3">
-            <button
-              onClick={handleAddMetric}
-              className="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 font-semibold"
-            >
-              Create Metric
-            </button>
-            <button
-              onClick={() => setShowMetricForm(false)}
-              className={`px-6 py-2 rounded-lg font-semibold ${isDarkMode ? 'bg-slate-800 text-white hover:bg-slate-700' : 'bg-slate-200 text-slate-900 hover:bg-slate-300'}`}
-            >
-              Cancel
-            </button>
+
+            {/* Action Buttons */}
+            <div className="flex gap-3 pt-4">
+              <button
+                onClick={handleAddMetric}
+                className="px-6 py-3 bg-cyan-600 text-white rounded-lg hover:bg-cyan-700 font-semibold transition-all"
+              >
+                ✓ Create Metric
+              </button>
+              <button
+                onClick={() => setShowMetricForm(false)}
+                className={`px-6 py-3 rounded-lg font-semibold transition-all ${isDarkMode ? 'bg-slate-800 text-slate-200 hover:bg-slate-700' : 'bg-slate-200 text-slate-900 hover:bg-slate-300'}`}
+              >
+                Cancel
+              </button>
+            </div>
           </div>
         </div>
       )}
