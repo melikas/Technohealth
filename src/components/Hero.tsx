@@ -36,7 +36,7 @@ export default function Hero() {
               Get Started
             </Link>
             <Link
-              to="/demo"
+              to="/schedule-demo"
               className="px-8 py-4 border-2 border-cyan-400/50 text-cyan-300 rounded-lg font-bold hover:bg-cyan-400/10 transition-all text-lg"
             >
               Schedule a demo

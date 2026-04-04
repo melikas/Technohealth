@@ -13,8 +13,8 @@ export default function CTA() {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-          <Link to="/demo" className="px-8 py-4 bg-white text-blue-600 rounded-lg font-bold hover:bg-blue-50 transition-all hover:shadow-xl flex items-center justify-center space-x-2">
-            <span>Try Live Demo</span>
+          <Link to="/schedule-demo" className="px-8 py-4 bg-white text-blue-600 rounded-lg font-bold hover:bg-blue-50 transition-all hover:shadow-xl flex items-center justify-center space-x-2">
+            <span>Schedule Demo</span>
             <ArrowRight className="w-5 h-5" />
           </Link>
           <Link to="/get-started" className="px-8 py-4 bg-blue-700 text-white rounded-lg font-bold border-2 border-white/30 hover:bg-blue-800 transition-all flex items-center justify-center space-x-2">
