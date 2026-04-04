@@ -77,10 +77,11 @@ export default function ScheduleDemoPage() {
           {/* Right Side - Image */}
           <div className="flex justify-center">
             <div className="w-full h-96 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-3xl flex items-center justify-center shadow-2xl overflow-hidden">
-              <div className="text-center">
-                <div className="text-6xl mb-4">📞</div>
-                <p className="text-white text-xl font-semibold">Call-Answering Support</p>
-              </div>
+              <img 
+                src="/Images/Call-Answering.jpeg" 
+                alt="Call-Answering Support"
+                className="w-full h-full object-cover"
+              />
             </div>
           </div>
         </div>
@@ -98,8 +99,12 @@ export default function ScheduleDemoPage() {
               {/* Profile Card */}
               <div className="bg-white rounded-2xl p-8 shadow-lg border border-slate-200">
                 <div className="mb-6">
-                  <div className="w-32 h-32 mx-auto bg-gradient-to-br from-slate-300 to-slate-400 rounded-full flex items-center justify-center text-5xl mb-4">
-                    👤
+                  <div className="w-32 h-32 mx-auto bg-slate-200 rounded-full flex items-center justify-center overflow-hidden mb-4">
+                    <img 
+                      src="/Images/Me.png" 
+                      alt="Melika Seyedi"
+                      className="w-full h-full object-cover grayscale"
+                    />
                   </div>
                   <p className="text-center text-sm text-slate-500 font-semibold">Me</p>
                 </div>
