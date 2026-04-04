@@ -554,30 +554,35 @@ function MonitoringSection({ isDarkMode, selectedPatient, setSelectedPatient }: 
 
   return (
     <div>
-      <h2 className={`text-3xl font-bold mb-6 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
+      <h2 className={`text-3xl font-bold mb-8 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
         Health Monitoring - <span className="text-cyan-600">{selectedPatient.name}</span>
       </h2>
 
-      {/* Timeline Selector */}
-      <div className="flex gap-3 mb-8">
-        {['daily', 'weekly', 'monthly'].map((t) => (
-          <button
-            key={t}
-            onClick={() => setTimeline(t)}
-            className={`px-6 py-2 rounded-lg font-semibold transition-all capitalize ${
-              timeline === t
-                ? isDarkMode ? 'bg-cyan-600 text-white' : 'bg-cyan-600 text-white'
-                : isDarkMode ? 'bg-slate-800 text-slate-300 hover:bg-slate-700' : 'bg-slate-200 text-slate-700 hover:bg-slate-300'
-            }`}
-          >
-            {t === 'daily' ? 'Daily' : t === 'weekly' ? 'Weekly' : 'Monthly'}
-          </button>
-        ))}
-      </div>
-
       {/* Summary Metrics Bar */}
       <div className={`rounded-xl p-4 border mb-8 ${isDarkMode ? 'bg-slate-900 border-slate-700' : 'bg-white border-slate-200'}`}>
-        <h3 className={`text-sm font-bold mb-4 ${isDarkMode ? 'text-slate-300' : 'text-slate-700'}`}>CUSTOM METRICS SUMMARY ({timeline.toUpperCase()})</h3>
+        {/* Header with Timeline Selector */}
+        <div className="flex items-center justify-between mb-6 flex-wrap gap-4">
+          <h3 className={`text-sm font-bold ${isDarkMode ? 'text-slate-300' : 'text-slate-700'}`}>CUSTOM METRICS</h3>
+          
+          {/* Timeline Selector Bar */}
+          <div className={`flex gap-1 p-1 rounded-lg ${isDarkMode ? 'bg-slate-800' : 'bg-slate-100'}`}>
+            {['daily', 'weekly', 'monthly'].map((t) => (
+              <button
+                key={t}
+                onClick={() => setTimeline(t)}
+                className={`px-3 py-1 rounded-md font-medium text-xs transition-all capitalize ${
+                  timeline === t
+                    ? isDarkMode ? 'bg-cyan-600 text-white shadow-sm' : 'bg-cyan-600 text-white shadow-sm'
+                    : isDarkMode ? 'text-slate-400 hover:text-slate-200' : 'text-slate-600 hover:text-slate-900'
+                }`}
+              >
+                {t === 'daily' ? 'Daily' : t === 'weekly' ? 'Weekly' : 'Monthly'}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Metrics Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
           {customMetrics.map((metric) => (
             <div
