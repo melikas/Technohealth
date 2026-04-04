@@ -16,7 +16,7 @@ export default function IntegrationShowcase() {
 
         {/* Image Below */}
         <div className="flex justify-center mb-12">
-          <div className="w-full h-full bg-gradient-to-br from-cyan-500/20 to-blue-600/20 rounded-2xl overflow-hidden border border-cyan-400/30 shadow-2xl">
+          <div className="w-full h-full bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-lg hover:shadow-xl transition-shadow">
             <img 
               src="/Images/devices.png" 
               alt="TechnoHealth Devices"
