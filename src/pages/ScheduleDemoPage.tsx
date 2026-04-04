@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { Mail, Phone, MapPin, CheckCircle } from 'lucide-react';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 export default function ScheduleDemoPage() {
   const [formData, setFormData] = useState({
@@ -48,10 +50,11 @@ export default function ScheduleDemoPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
-      {/* Hero Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid md:grid-cols-2 gap-12 items-center mb-20">
+    <div className="min-h-screen bg-white">
+      <Header />
+      <div className="bg-gradient-to-b from-slate-50 to-white py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-2 gap-12 items-center mb-20">
           {/* Left Side - Text */}
           <div className="space-y-6">
             <h1 className="text-5xl font-bold text-slate-900 leading-tight">
@@ -273,6 +276,7 @@ export default function ScheduleDemoPage() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
