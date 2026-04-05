@@ -4,17 +4,15 @@ export default function Hero() {
   const metrics = [
     { 
       number: '+100', 
-      label: 'Active Support Users',
-      description: 'Every Major Device Supported',
-      icon: '👥',
+      label: 'Data Resources',
+      description: 'Integrated Data Platforms',
       color: 'from-cyan-500 to-cyan-600',
       bgColor: 'from-cyan-500/15 to-cyan-600/10'
     },
     { 
-      number: '12', 
-      label: 'Compatible Devices',
-      description: 'End-to-End Integration',
-      icon: '📱',
+      number: 'AI', 
+      label: 'Advanced ML Models',
+      description: 'Predictive Health Analytics',
       color: 'from-blue-400 to-blue-500',
       bgColor: 'from-blue-500/15 to-blue-600/10'
     },
@@ -22,7 +20,6 @@ export default function Hero() {
       number: '+30%', 
       label: 'Efficiency Boost',
       description: 'Developer Time Saved',
-      icon: '⚡',
       color: 'from-purple-400 to-purple-500',
       bgColor: 'from-purple-500/15 to-purple-600/10'
     }
@@ -86,9 +83,6 @@ export default function Hero() {
               key={idx}
               className={`rounded-2xl border backdrop-blur-md bg-gradient-to-br ${metric.bgColor} border-white/10 p-8`}
             >
-              {/* Icon */}
-              <div className="text-5xl mb-4">{metric.icon}</div>
-
               {/* Number */}
               <div className={`text-6xl font-bold mb-3 bg-gradient-to-r ${metric.color} bg-clip-text text-transparent`}>
                 {metric.number}
