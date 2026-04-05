@@ -1,6 +1,30 @@
-import { Activity, TrendingUp, AlertCircle, Download, Users, Calendar } from 'lucide-react';
+import { useState } from 'react';
+import { Activity, TrendingUp, AlertCircle, Download, Users, Calendar, ChevronDown } from 'lucide-react';
 
 export default function Dashboard() {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [selectedWindow, setSelectedWindow] = useState('30d');
+
+  const timeWindows = [
+    { value: '1s', label: '1 ثانیه' },
+    { value: '1m', label: '1 دقیقه' },
+    { value: '5m', label: '5 دقیقه' },
+    { value: '10m', label: '10 دقیقه' },
+    { value: '1h', label: '1 ساعت' },
+    { value: '6h', label: '6 ساعت' },
+    { value: '1d', label: 'روزانه' },
+    { value: '3d', label: '3 روز' },
+    { value: '4d', label: '4 روز' },
+    { value: '7d', label: 'هفته' },
+    { value: '30d', label: 'ماه' },
+    { value: '90d', label: '3 ماه' },
+    { value: '365d', label: 'سالانه' },
+  ];
+
+  const getWindowLabel = (value) => {
+    return timeWindows.find(w => w.value === value)?.label || 'روزانه';
+  };
+
   return (
     <section className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-6">
@@ -20,10 +44,43 @@ export default function Dashboard() {
               <span className="text-xl font-semibold text-white">Patient Dashboard</span>
             </div>
             <div className="flex items-center space-x-3">
-              <button className="px-4 py-2 bg-slate-800 border border-slate-700 text-slate-300 rounded-lg hover:bg-slate-700 transition-colors flex items-center space-x-2">
-                <Calendar className="w-4 h-4" />
-                <span className="text-sm">Last 30 days</span>
-              </button>
+              <div className="relative">
+                <button 
+                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                  className="px-4 py-2 bg-slate-800 border border-slate-700 text-slate-300 rounded-lg hover:bg-slate-700 transition-colors flex items-center space-x-2 group"
+                >
+                  <Calendar className="w-4 h-4" />
+                  <span className="text-sm">{getWindowLabel(selectedWindow)}</span>
+                  <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''}`} />
+                </button>
+                
+                {isDropdownOpen && (
+                  <div className="absolute top-full mt-2 left-0 bg-slate-900 border border-slate-700 rounded-lg shadow-xl z-50 min-w-max">
+                    {timeWindows.map((window) => (
+                      <button
+                        key={window.value}
+                        onClick={() => {
+                          setSelectedWindow(window.value);
+                          setIsDropdownOpen(false);
+                        }}
+                        className={`block w-full text-left px-4 py-2.5 text-sm transition-colors ${
+                          selectedWindow === window.value
+                            ? 'bg-cyan-600 text-white'
+                            : 'text-slate-300 hover:bg-slate-800'
+                        } first:rounded-t-lg last:rounded-b-lg`}
+                      >
+                        {window.label}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+              {isDropdownOpen && (
+                <div 
+                  className="fixed inset-0 z-40"
+                  onClick={() => setIsDropdownOpen(false)}
+                />
+              )}
               <button className="px-4 py-2 bg-cyan-600 text-white rounded-lg hover:bg-cyan-700 transition-colors flex items-center space-x-2">
                 <Download className="w-4 h-4" />
                 <span className="text-sm">Export</span>

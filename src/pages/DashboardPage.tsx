@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
-import { LogOut, Menu, X, Bell, Users, Settings, BarChart3, AlertTriangle, MessageSquare, Brain, Video, Watch, Plus, Calendar, TrendingUp, Heart } from 'lucide-react';
+import { LogOut, Menu, X, Bell, Users, Settings, BarChart3, AlertTriangle, MessageSquare, Brain, Video, Watch, Plus, Calendar, TrendingUp, Heart, ChevronDown } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { FileText } from "lucide-react";
 import { LineChart, Line, AreaChart, Area, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
+import DeviceSelector from '../components/DeviceSelector';
+import MLModels from '../components/HuggingFaceML';
 
 // Sidebar Component
 function NIRVANASidebar({ activeTab, setActiveTab, isOpen, setIsOpen, handleLogout }: any) {
@@ -456,6 +458,8 @@ function OverviewSection({ isDarkMode, selectedPatient, setSelectedPatient }: an
 
 function MonitoringSection({ isDarkMode, selectedPatient, setSelectedPatient }: any) {
   const [timeline, setTimeline] = useState('daily');
+  const [isTimelineDropdownOpen, setIsTimelineDropdownOpen] = useState(false);
+  const [selectedDevices, setSelectedDevices] = useState<string[]>(['apple-watch']);
   const [customMetrics, setCustomMetrics] = useState([
     { id: 1, name: 'Stress Level', formula: 'HR × 0.8 + Temp × 0.2', value: '42', unit: '%', color: 'from-red-500 to-red-600' },
     { id: 2, name: 'Fitness Index', formula: 'Steps + (Calories / 100)', value: '115', unit: 'pts', color: 'from-green-500 to-green-600' },
@@ -585,28 +589,65 @@ function MonitoringSection({ isDarkMode, selectedPatient, setSelectedPatient }: 
         Health Monitoring - <span className="text-cyan-600">{selectedPatient.name}</span>
       </h2>
 
+      {/* Device Selector */}
+      <DeviceSelector 
+        selectedDevices={selectedDevices}
+        onDeviceSelect={setSelectedDevices}
+        isDarkMode={isDarkMode}
+      />
+
       {/* Summary Metrics Bar */}
       <div className={`rounded-xl p-6 border mb-8 ${isDarkMode ? 'bg-slate-900 border-slate-700' : 'bg-white border-slate-200'}`}>
         {/* Header with inline Timeline Selector */}
         <div className="flex items-center justify-between mb-6 flex-wrap gap-4">
           <h3 className={`text-lg font-bold ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>Custom Metrics</h3>
           
-          {/* Segmented Timeline Selector */}
-          <div className={`inline-flex rounded-full p-1 ${isDarkMode ? 'bg-slate-800' : 'bg-slate-100'}`}>
-            {['daily', 'weekly', 'monthly'].map((t) => (
-              <button
-                key={t}
-                onClick={() => setTimeline(t)}
-                className={`px-4 py-2 rounded-full font-semibold text-sm transition-all ${
-                  timeline === t
-                    ? isDarkMode ? 'bg-cyan-600 text-white shadow-md' : 'bg-cyan-500 text-white shadow-md'
-                    : isDarkMode ? 'text-slate-400 hover:text-slate-200' : 'text-slate-600 hover:text-slate-900'
-                }`}
-              >
-                {t === 'daily' ? 'Daily' : t === 'weekly' ? 'Weekly' : 'Monthly'}
-              </button>
-            ))}
+          {/* Timeline Dropdown Selector */}
+          <div className="relative">
+            <button 
+              onClick={() => setIsTimelineDropdownOpen(!isTimelineDropdownOpen)}
+              className={`px-4 py-2 rounded-lg font-semibold text-sm transition-all flex items-center space-x-2 border ${
+                isDarkMode 
+                  ? 'bg-slate-800 border-slate-700 text-slate-300 hover:bg-slate-700' 
+                  : 'bg-slate-100 border-slate-300 text-slate-600 hover:bg-slate-200'
+              }`}
+            >
+              <Calendar className="w-4 h-4" />
+              <span>{timeline === 'daily' ? 'Daily' : timeline === 'weekly' ? 'Weekly' : 'Monthly'}</span>
+              <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isTimelineDropdownOpen ? 'rotate-180' : ''}`} />
+            </button>
+            
+            {isTimelineDropdownOpen && (
+              <div className={`absolute top-full mt-2 left-0 rounded-lg shadow-xl z-50 min-w-max border ${
+                isDarkMode
+                  ? 'bg-slate-900 border-slate-700'
+                  : 'bg-white border-slate-300'
+              }`}>
+                {['daily', 'weekly', 'monthly'].map((t) => (
+                  <button
+                    key={t}
+                    onClick={() => {
+                      setTimeline(t);
+                      setIsTimelineDropdownOpen(false);
+                    }}
+                    className={`block w-full text-left px-4 py-2.5 text-sm transition-colors first:rounded-t-lg last:rounded-b-lg ${
+                      timeline === t
+                        ? isDarkMode ? 'bg-cyan-600 text-white' : 'bg-cyan-500 text-white'
+                        : isDarkMode ? 'text-slate-300 hover:bg-slate-800' : 'text-slate-600 hover:bg-slate-100'
+                    }`}
+                  >
+                    {t === 'daily' ? 'Daily' : t === 'weekly' ? 'Weekly' : 'Monthly'}
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
+          {isTimelineDropdownOpen && (
+            <div 
+              className="fixed inset-0 z-40"
+              onClick={() => setIsTimelineDropdownOpen(false)}
+            />
+          )}
         </div>
 
         {/* Metrics Grid */}
@@ -1173,39 +1214,12 @@ function MessagingSection({ isDarkMode, selectedPatient, setSelectedPatient }: a
   );
 }
 
-function MLModelsSection({ isDarkMode }: any) {
-  const models = [
-    { id: 1, name: 'Heart Rate Anomaly Detection', accuracy: '94%', status: 'active', description: 'Detects irregular heart patterns' },
-    { id: 2, name: 'Blood Pressure Prediction', accuracy: '89%', status: 'active', description: 'Predicts BP trends' },
-    { id: 3, name: 'Sleep Quality Assessment', accuracy: '91%', status: 'inactive', description: 'Analyzes sleep patterns' },
-    { id: 4, name: 'Custom Health Score', accuracy: '87%', status: 'active', description: 'Your custom model' },
-  ];
+function MLModelsSection({ isDarkMode, selectedPatient }: any) {
+  if (!selectedPatient) {
+    return <NoPatientMessage isDarkMode={isDarkMode} />;
+  }
 
-  return (
-    <div>
-      <h2 className={`text-3xl font-bold mb-8 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>ML Models & Tools</h2>
-      <div className="space-y-4 mb-8">
-        {models.map((model) => (
-          <div key={model.id} className={`rounded-xl p-6 border ${isDarkMode ? 'bg-slate-900 border-slate-700' : 'bg-white border-slate-200'}`}>
-            <div className="flex items-start justify-between">
-              <div className="flex-1">
-                <h3 className={`font-bold text-lg ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>{model.name}</h3>
-                <p className={`text-sm ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>{model.description}</p>
-                <div className="flex items-center gap-4 mt-3">
-                  <span className={`text-sm font-semibold ${isDarkMode ? 'text-cyan-400' : 'text-cyan-600'}`}>Accuracy: {model.accuracy}</span>
-                  <span className={`text-xs font-semibold px-2 py-1 rounded ${model.status === 'active' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'}`}>
-                    {model.status.toUpperCase()}
-                  </span>
-                </div>
-              </div>
-              <button className="px-4 py-2 bg-cyan-600 text-white rounded-lg hover:bg-cyan-700">Apply</button>
-            </div>
-          </div>
-        ))}
-      </div>
-      <button className="w-full px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 font-semibold">+ Integrate Custom Model</button>
-    </div>
-  );
+  return <MLModels selectedPatient={selectedPatient} isDarkMode={isDarkMode} />;
 }
 
 function WearablesSection({ isDarkMode }: any) {
@@ -1561,7 +1575,7 @@ export default function DashboardPage() {
       case 'messages':
         return <MessagingSection isDarkMode={isDarkMode} selectedPatient={selectedPatient} setSelectedPatient={setSelectedPatient} />;
       case 'models':
-        return <MLModelsSection isDarkMode={isDarkMode} />;
+        return <MLModelsSection isDarkMode={isDarkMode} selectedPatient={selectedPatient} />;
       case 'wearables':
         return <WearablesSection isDarkMode={isDarkMode} />;
       case 'users':
