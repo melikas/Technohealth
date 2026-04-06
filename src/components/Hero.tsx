@@ -36,15 +36,15 @@ export default function Hero() {
         <div className="grid md:grid-cols-2 gap-12 items-center mb-20">
           {/* Left Side - Text */}
           <div>
-            <h1 className="text-6xl md:text-7xl font-bold mb-8 leading-tight">
-              Wearables Integration
-              <br />
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">
+              <div className="mb-4">Wearables Integration</div>
+              <div className="mb-4">For your</div>
               <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
-              For your health tracking app 
+              Health Tracking App 
               </span>
             </h1>
 
-            <p className="text-xl md:text-2xl text-slate-300 mb-12 max-w-2xl leading-relaxed">
+            <p className="text-lg md:text-xl text-slate-300 mb-10 max-w-2xl leading-relaxed">
               Connect wearables and health platforms with one integration. We build digital products that accelerate healthcare services.
             </p>
 
