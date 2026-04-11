@@ -1589,16 +1589,17 @@ export default function DashboardPage() {
       />
       <div className={`min-h-screen flex ${isDarkMode ? 'bg-slate-950' : 'bg-slate-50'}`}>
         <NIRVANASidebar 
-        activeTab={activeTab} 
-        setActiveTab={setActiveTab} 
-        isOpen={sidebarOpen} 
-        setIsOpen={setSidebarOpen}
-        handleLogout={handleLogout}
-      />
-      <div className="flex-1 md:ml-56 flex flex-col overflow-hidden pt-16">
-        <div className="flex-1 flex overflow-hidden">
-          <div className="flex-1 overflow-auto p-6">{renderContent()}</div>
-          <NotificationPanel selectedPatient={selectedPatient} isDarkMode={isDarkMode} />
+          activeTab={activeTab} 
+          setActiveTab={setActiveTab} 
+          isOpen={sidebarOpen} 
+          setIsOpen={setSidebarOpen}
+          handleLogout={handleLogout}
+        />
+        <div className="flex-1 md:ml-56 flex flex-col overflow-hidden pt-16">
+          <div className="flex-1 flex overflow-hidden">
+            <div className="flex-1 overflow-auto p-6">{renderContent()}</div>
+            <NotificationPanel selectedPatient={selectedPatient} isDarkMode={isDarkMode} />
+          </div>
         </div>
       </div>
     </>
