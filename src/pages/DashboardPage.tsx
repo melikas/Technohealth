@@ -37,7 +37,7 @@ function NIRVANASidebar({ activeTab, setActiveTab, isOpen, setIsOpen, handleLogo
           <img src="/Images/Icon3.png" alt="NIRVANA" className="h-8 w-auto" />
         </Link>
 
-        <nav className="space-y-1 flex-1 overflow-y-auto md:overflow-hidden">
+        <nav className="space-y-1 overflow-y-auto flex-shrink-0 mb-4">
             {menuItems.map((item, index) => (
               <div key={item.id}>
                 {item.id === 'users' && (
