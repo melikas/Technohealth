@@ -31,14 +31,14 @@ function NIRVANASidebar({ activeTab, setActiveTab, isOpen, setIsOpen, handleLogo
       <div
         className={`${
           isOpen ? 'translate-x-0' : '-translate-x-full'
-        } md:translate-x-0 fixed w-64 h-screen bg-gradient-to-b from-slate-900 to-slate-800 text-white p-6 transition-transform duration-300 z-40 flex flex-col overflow-y-auto`}
+        } md:translate-x-0 fixed md:relative w-56 h-screen bg-gradient-to-b from-slate-900 to-slate-800 text-white p-4 transition-transform duration-300 z-40 flex flex-col overflow-y-auto`}
       >
         <div className="flex-1">
-          <Link to="/" className="flex items-center space-x-3 cursor-pointer hover:opacity-80 transition-opacity mb-8 mt-12 md:mt-0">
+          <Link to="/" className="flex items-center space-x-3 cursor-pointer hover:opacity-80 transition-opacity mb-6 mt-12 md:mt-0">
             <img src="/Images/Icon3.png" alt="NIRVANA" className="h-8 w-auto" />
           </Link>
 
-          <nav className="space-y-2">
+          <nav className="space-y-1">
             {menuItems.map((item, index) => (
               <div key={item.id}>
                 {item.id === 'users' && (
@@ -49,7 +49,7 @@ function NIRVANASidebar({ activeTab, setActiveTab, isOpen, setIsOpen, handleLogo
                     setActiveTab(item.id);
                     setIsOpen(false);
                   }}
-                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${
+                  className={`w-full flex items-center gap-2 px-3 py-2 rounded-lg transition-all text-sm ${
                     activeTab === item.id
                       ? 'bg-cyan-600 text-white'
                       : 'text-slate-300 hover:bg-slate-700'
@@ -70,9 +70,9 @@ function NIRVANASidebar({ activeTab, setActiveTab, isOpen, setIsOpen, handleLogo
         {/* Logout Button at Bottom */}
         <button
           onClick={handleLogout}
-          className="w-full flex items-center justify-center gap-2 px-4 py-3 mt-auto bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-semibold"
+          className="w-full flex items-center justify-center gap-2 px-3 py-2 mt-auto bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-semibold text-sm"
         >
-          <LogOut className="w-4 h-4" />
+          <LogOut className="w-3 h-3" />
           Logout
         </button>
       </div>
