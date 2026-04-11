@@ -7,16 +7,41 @@ import DeviceSelector from '../components/DeviceSelector';
 import MLModels from '../components/HuggingFaceML';
 
 // Sidebar Component
-function NIRVANASidebar({ activeTab, setActiveTab, isOpen, setIsOpen, handleLogout }: any) {
+function NIRVANASidebar({ activeTab, setActiveTab, isOpen, setIsOpen, handleLogout, currentLanguage = 'en' }: any) {
+  const translations: { [key: string]: { [key: string]: string } } = {
+    en: {
+      overview: 'Overview',
+      monitoring: 'Health Monitoring',
+      logs: 'Logs & Activity',
+      alerts: 'Alerts & Anomalies',
+      messages: 'Messages',
+      models: 'ML Models',
+      wearables: 'Connected Devices',
+      users: 'Access Management',
+      logout: 'Logout',
+    },
+    fr: {
+      overview: 'Aperçu',
+      monitoring: 'Surveillance de la Santé',
+      logs: 'Journaux et Activité',
+      alerts: 'Alertes et Anomalies',
+      messages: 'Messages',
+      models: 'Modèles ML',
+      wearables: 'Appareils Connectés',
+      users: 'Gestion des Accès',
+      logout: 'Déconnexion',
+    },
+  };
+
   const menuItems = [
-    { id: 'overview', label: 'Overview', icon: BarChart3 },
-    { id: 'monitoring', label: 'Health Monitoring', icon: Bell },
-    { id: 'logs', label: 'Logs & Activity', icon: FileText },
-    { id: 'alerts', label: 'Alerts & Anomalies', icon: AlertTriangle },
-    { id: 'messages', label: 'Messages', icon: MessageSquare },
-    { id: 'models', label: 'ML Models', icon: Brain },
-    { id: 'wearables', label: 'Connected Devices', icon: Watch },
-    { id: 'users', label: 'Access Management', icon: Users },
+    { id: 'overview', label: translations[currentLanguage].overview, icon: BarChart3 },
+    { id: 'monitoring', label: translations[currentLanguage].monitoring, icon: Bell },
+    { id: 'logs', label: translations[currentLanguage].logs, icon: FileText },
+    { id: 'alerts', label: translations[currentLanguage].alerts, icon: AlertTriangle },
+    { id: 'messages', label: translations[currentLanguage].messages, icon: MessageSquare },
+    { id: 'models', label: translations[currentLanguage].models, icon: Brain },
+    { id: 'wearables', label: translations[currentLanguage].wearables, icon: Watch },
+    { id: 'users', label: translations[currentLanguage].users, icon: Users },
   ];
 
   return (
@@ -71,7 +96,7 @@ function NIRVANASidebar({ activeTab, setActiveTab, isOpen, setIsOpen, handleLogo
           className="w-full flex items-center justify-center gap-2 px-3 py-2 mt-auto bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-semibold text-sm flex-shrink-0"
         >
           <LogOut className="w-3 h-3" />
-          Logout
+          {translations[currentLanguage].logout}
         </button>
       </div>
 
@@ -232,13 +257,20 @@ function AccountSettingsPanel({ isDarkMode }: any) {
 }
 
 // Header Component
-function NIRVANAHeader({ isDarkMode, setIsDarkMode, doctorName, companyName, showSettings, setShowSettings }: any) {
+function NIRVANAHeader({ isDarkMode, setIsDarkMode, doctorName, companyName, showSettings, setShowSettings, currentLanguage, setCurrentLanguage }: any) {
+  const [showLanguageMenu, setShowLanguageMenu] = useState(false);
   const [showCompanySettings, setShowCompanySettings] = useState(false);
   const [centerName, setCenterName] = useState(companyName);
 
   const handleSaveCompany = () => {
     localStorage.setItem('companyName', centerName);
     setShowCompanySettings(false);
+  };
+
+  const handleLanguageChange = (lang: 'en' | 'fr') => {
+    setCurrentLanguage(lang);
+    localStorage.setItem('language', lang);
+    setShowLanguageMenu(false);
   };
 
   return (
@@ -266,15 +298,44 @@ function NIRVANAHeader({ isDarkMode, setIsDarkMode, doctorName, companyName, sho
             <Settings className="w-4 h-4" />
           </button>
 
-          {/* Language */}
-          <button
-            className={`p-1.5 rounded-lg transition-colors ${
-              isDarkMode ? 'bg-slate-800 text-slate-300 hover:bg-slate-700' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-            }`}
-            title="Language"
-          >
-            🌐
-          </button>
+          {/* Language Dropdown */}
+          <div className="relative">
+            <button
+              onClick={() => setShowLanguageMenu(!showLanguageMenu)}
+              className={`p-1.5 rounded-lg transition-colors ${
+                showLanguageMenu
+                  ? isDarkMode ? 'bg-cyan-600 text-white' : 'bg-cyan-100 text-cyan-600'
+                  : isDarkMode ? 'bg-slate-800 text-slate-300 hover:bg-slate-700' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+              }`}
+              title="Language"
+            >
+              🌐
+            </button>
+            {showLanguageMenu && (
+              <div className={`absolute right-0 mt-2 w-40 rounded-lg shadow-lg border ${isDarkMode ? 'bg-slate-800 border-slate-700' : 'bg-white border-slate-200'}`}>
+                <button
+                  onClick={() => handleLanguageChange('en')}
+                  className={`w-full text-left px-4 py-2 rounded-t-lg transition-colors ${
+                    currentLanguage === 'en'
+                      ? isDarkMode ? 'bg-cyan-600 text-white' : 'bg-cyan-100 text-cyan-600'
+                      : isDarkMode ? 'hover:bg-slate-700' : 'hover:bg-slate-100'
+                  } ${isDarkMode ? 'text-white' : 'text-slate-900'}`}
+                >
+                  English
+                </button>
+                <button
+                  onClick={() => handleLanguageChange('fr')}
+                  className={`w-full text-left px-4 py-2 rounded-b-lg transition-colors ${
+                    currentLanguage === 'fr'
+                      ? isDarkMode ? 'bg-cyan-600 text-white' : 'bg-cyan-100 text-cyan-600'
+                      : isDarkMode ? 'hover:bg-slate-700' : 'hover:bg-slate-100'
+                  } ${isDarkMode ? 'text-white' : 'text-slate-900'}`}
+                >
+                  Français
+                </button>
+              </div>
+            )}
+          </div>
 
           {/* Dark/Light Mode */}
           <button
@@ -1539,6 +1600,9 @@ export default function DashboardPage() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [selectedPatient, setSelectedPatient] = useState(null);
   const [showSettings, setShowSettings] = useState(false);
+  const [currentLanguage, setCurrentLanguage] = useState<'en' | 'fr'>(() => {
+    return (localStorage.getItem('language') as 'en' | 'fr') || 'en';
+  });
   
   const doctorName = localStorage.getItem('userEmail') || 'Doctor';
   const companyName = localStorage.getItem('companyName') || 'NIRVANA Longevity Center';
@@ -1586,6 +1650,8 @@ export default function DashboardPage() {
         companyName={companyName}
         showSettings={showSettings}
         setShowSettings={setShowSettings}
+        currentLanguage={currentLanguage}
+        setCurrentLanguage={setCurrentLanguage}
       />
       <div className={`min-h-screen flex ${isDarkMode ? 'bg-slate-950' : 'bg-slate-50'}`}>
         <NIRVANASidebar 
@@ -1594,6 +1660,7 @@ export default function DashboardPage() {
           isOpen={sidebarOpen} 
           setIsOpen={setSidebarOpen}
           handleLogout={handleLogout}
+          currentLanguage={currentLanguage}
         />
         <div className="flex-1 md:ml-56 flex flex-col overflow-hidden pt-16">
           <div className="flex-1 flex overflow-hidden">
