@@ -68,7 +68,7 @@ export default function Hero() {
           <div className="flex justify-center">
             <div className="w-full h-96 bg-gradient-to-br from-cyan-500/20 to-blue-600/20 rounded-2xl overflow-hidden border border-cyan-400/30 shadow-2xl relative">
               <img 
-                src="/Images/hero-second.png" 
+                src="/Images/Hero-Second.png" 
                 alt="Hero Illustration"
                 className="w-full h-full object-cover opacity-80 transition-opacity duration-300 hover:opacity-95"
                 style={{ mixBlendMode: 'screen' }}

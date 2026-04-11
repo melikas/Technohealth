@@ -103,9 +103,8 @@ export default function AuthPage() {
         {/* Left Side - Form */}
         <div className="flex flex-col justify-center">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2 mb-8">
-            <img src="/Images/Icon.png" alt="TechnoHealth" className="w-10 h-10" />
-            <span className="text-xl font-bold text-slate-900">TechnoHealth</span>
+          <Link to="/" className="flex items-center space-x-3 cursor-pointer hover:opacity-80 transition-opacity mb-8">
+            <img src="/Images/Icon4.png" alt="TechnoHealth" className="h-10 w-auto" />
           </Link>
 
           {/* Form Content */}

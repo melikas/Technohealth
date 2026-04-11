@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { LogOut, Menu, X, Bell, Users, Settings, BarChart3, AlertTriangle, MessageSquare, Brain, Video, Watch, Plus, Calendar, TrendingUp, Heart, ChevronDown } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { FileText } from "lucide-react";
 import { LineChart, Line, AreaChart, Area, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import DeviceSelector from '../components/DeviceSelector';
@@ -31,18 +31,12 @@ function NIRVANASidebar({ activeTab, setActiveTab, isOpen, setIsOpen, handleLogo
       <div
         className={`${
           isOpen ? 'translate-x-0' : '-translate-x-full'
-        } md:translate-x-0 fixed md:relative w-64 h-screen bg-gradient-to-b from-slate-900 to-slate-800 text-white p-6 transition-transform duration-300 z-40 flex flex-col`}
+        } md:translate-x-0 fixed md:relative w-64 max-h-screen bg-gradient-to-b from-slate-900 to-slate-800 text-white p-6 transition-transform duration-300 z-40 flex flex-col overflow-y-auto`}
       >
         <div className="flex-1">
-          <div className="flex items-center gap-3 mb-8 mt-12 md:mt-0">
-            <div className="w-10 h-10 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-lg flex items-center justify-center text-white font-bold">
-              N
-            </div>
-            <div>
-              <h1 className="font-bold text-lg">NIRVANA</h1>
-              <p className="text-xs text-slate-400">Longevity Center</p>
-            </div>
-          </div>
+          <Link to="/" className="flex items-center space-x-3 cursor-pointer hover:opacity-80 transition-opacity mb-8 mt-12 md:mt-0">
+            <img src="/Images/Icon3.png" alt="NIRVANA" className="h-10 w-auto" />
+          </Link>
 
           <nav className="space-y-2">
             {menuItems.map((item, index) => (
@@ -73,10 +67,10 @@ function NIRVANASidebar({ activeTab, setActiveTab, isOpen, setIsOpen, handleLogo
           </nav>
         </div>
 
-        {/* Footer with Logout */}
+        {/* Logout Button at Bottom */}
         <button
           onClick={handleLogout}
-          className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-semibold"
+          className="w-full flex items-center justify-center gap-2 px-4 py-3 mt-auto bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-semibold"
         >
           <LogOut className="w-4 h-4" />
           Logout
@@ -251,12 +245,12 @@ function NIRVANAHeader({ isDarkMode, setIsDarkMode, doctorName, companyName, sho
 
   return (
     <header className={`border-b ${isDarkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
-      <div className="flex items-center justify-between px-6 py-4">
+      <div className="flex items-center justify-between px-6 py-2">
         <div>
-          <div className={`text-lg font-bold ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
+          <div className={`text-base font-bold ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
             NIRVANA Health Hub
           </div>
-          <div className={`text-sm ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>
+          <div className={`text-xs ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>
             Dr. {doctorName} - {companyName}
           </div>
         </div>
@@ -264,19 +258,19 @@ function NIRVANAHeader({ isDarkMode, setIsDarkMode, doctorName, companyName, sho
           {/* Settings Button (unified for account settings) */}
           <button
             onClick={() => setShowSettings(!showSettings)}
-            className={`p-2 rounded-lg transition-colors ${
+            className={`p-1.5 rounded-lg transition-colors ${
               showSettings
                 ? isDarkMode ? 'bg-cyan-600 text-white' : 'bg-cyan-100 text-cyan-600'
                 : isDarkMode ? 'bg-slate-800 text-slate-300 hover:bg-slate-700' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
             }`}
             title="Account Settings"
           >
-            <Settings className="w-5 h-5" />
+            <Settings className="w-4 h-4" />
           </button>
 
           {/* Language */}
           <button
-            className={`p-2 rounded-lg transition-colors ${
+            className={`p-1.5 rounded-lg transition-colors ${
               isDarkMode ? 'bg-slate-800 text-slate-300 hover:bg-slate-700' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
             }`}
             title="Language"
@@ -287,7 +281,7 @@ function NIRVANAHeader({ isDarkMode, setIsDarkMode, doctorName, companyName, sho
           {/* Dark/Light Mode */}
           <button
             onClick={() => setIsDarkMode(!isDarkMode)}
-            className={`p-2 rounded-lg transition-colors ${
+            className={`p-1.5 rounded-lg transition-colors ${
               isDarkMode ? 'bg-slate-800 text-yellow-400 hover:bg-slate-700' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
             }`}
           >
@@ -1586,8 +1580,8 @@ export default function DashboardPage() {
   };
 
   return (
-    <div className={`min-h-screen ${isDarkMode ? 'bg-slate-950' : 'bg-slate-50'}`}>
-      <div className="flex h-screen">
+    <div className={`min-h-screen flex flex-col ${isDarkMode ? 'bg-slate-950' : 'bg-slate-50'}`}>
+      <div className="flex flex-1 overflow-hidden">
         <NIRVANASidebar 
           activeTab={activeTab} 
           setActiveTab={setActiveTab} 
