@@ -31,7 +31,7 @@ function NIRVANASidebar({ activeTab, setActiveTab, isOpen, setIsOpen, handleLogo
       <div
         className={`${
           isOpen ? 'translate-x-0' : '-translate-x-full'
-        } md:translate-x-0 fixed md:relative w-56 h-screen md:h-auto md:flex-shrink-0 bg-gradient-to-b from-slate-900 to-slate-800 text-white p-4 transition-transform duration-300 z-40 flex flex-col overflow-hidden`}
+        } md:translate-x-0 fixed w-56 h-screen bg-gradient-to-b from-slate-900 to-slate-800 text-white p-4 transition-transform duration-300 z-40 flex flex-col overflow-hidden`}
       >
         <Link to="/" className="flex items-center space-x-3 cursor-pointer hover:opacity-80 transition-opacity mb-6 mt-12 md:mt-0 flex-shrink-0">
           <img src="/Images/Icon3.png" alt="NIRVANA" className="h-8 w-auto" />
@@ -242,7 +242,7 @@ function NIRVANAHeader({ isDarkMode, setIsDarkMode, doctorName, companyName, sho
   };
 
   return (
-    <header className={`border-b ${isDarkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
+    <header className={`sticky top-0 z-20 border-b ${isDarkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
       <div className="flex items-center justify-between px-6 py-2">
         <div>
           <div className={`text-base font-bold ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
@@ -1586,7 +1586,7 @@ export default function DashboardPage() {
         setIsOpen={setSidebarOpen}
         handleLogout={handleLogout}
       />
-      <div className="flex-1 flex flex-col overflow-hidden">
+      <div className="flex-1 md:ml-56 flex flex-col overflow-hidden">
         <NIRVANAHeader 
           isDarkMode={isDarkMode} 
           setIsDarkMode={setIsDarkMode} 
