@@ -1579,16 +1579,15 @@ export default function DashboardPage() {
 
   return (
     <div className={`min-h-screen flex flex-col ${isDarkMode ? 'bg-slate-950' : 'bg-slate-50'}`}>
-      <div className="flex flex-1 overflow-hidden">
-        <NIRVANASidebar 
-          activeTab={activeTab} 
-          setActiveTab={setActiveTab} 
-          isOpen={sidebarOpen} 
-          setIsOpen={setSidebarOpen}
-          handleLogout={handleLogout}
-        />
-        <div className="flex-1 flex flex-col overflow-hidden">
-          <NIRVANAHeader 
+      <NIRVANASidebar 
+        activeTab={activeTab} 
+        setActiveTab={setActiveTab} 
+        isOpen={sidebarOpen} 
+        setIsOpen={setSidebarOpen}
+        handleLogout={handleLogout}
+      />
+      <div className="fixed left-56 right-0 top-0 bottom-0 md:static flex flex-col overflow-hidden">
+        <NIRVANAHeader 
             isDarkMode={isDarkMode} 
             setIsDarkMode={setIsDarkMode} 
             doctorName={doctorName}
