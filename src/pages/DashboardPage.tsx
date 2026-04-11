@@ -1600,7 +1600,6 @@ export default function DashboardPage() {
             <NotificationPanel selectedPatient={selectedPatient} isDarkMode={isDarkMode} />
           </div>
         </div>
-      </div>
     </div>
   );
 }
