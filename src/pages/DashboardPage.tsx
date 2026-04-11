@@ -31,7 +31,7 @@ function NIRVANASidebar({ activeTab, setActiveTab, isOpen, setIsOpen, handleLogo
       <div
         className={`${
           isOpen ? 'translate-x-0' : '-translate-x-full'
-        } md:translate-x-0 fixed md:relative w-56 h-screen md:h-auto bg-gradient-to-b from-slate-900 to-slate-800 text-white p-4 transition-transform duration-300 z-40 flex flex-col overflow-hidden`}
+        } md:translate-x-0 fixed md:relative w-56 h-screen md:h-auto md:flex-shrink-0 bg-gradient-to-b from-slate-900 to-slate-800 text-white p-4 transition-transform duration-300 z-40 flex flex-col overflow-hidden`}
       >
         <Link to="/" className="flex items-center space-x-3 cursor-pointer hover:opacity-80 transition-opacity mb-6 mt-12 md:mt-0 flex-shrink-0">
           <img src="/Images/Icon3.png" alt="NIRVANA" className="h-8 w-auto" />
@@ -1578,7 +1578,7 @@ export default function DashboardPage() {
   };
 
   return (
-    <div className={`min-h-screen flex flex-col ${isDarkMode ? 'bg-slate-950' : 'bg-slate-50'}`}>
+    <div className={`min-h-screen flex ${isDarkMode ? 'bg-slate-950' : 'bg-slate-50'}`}>
       <NIRVANASidebar 
         activeTab={activeTab} 
         setActiveTab={setActiveTab} 
@@ -1586,20 +1586,20 @@ export default function DashboardPage() {
         setIsOpen={setSidebarOpen}
         handleLogout={handleLogout}
       />
-      <div className="fixed left-56 right-0 top-0 bottom-0 md:static flex flex-col overflow-hidden">
+      <div className="flex-1 flex flex-col overflow-hidden">
         <NIRVANAHeader 
-            isDarkMode={isDarkMode} 
-            setIsDarkMode={setIsDarkMode} 
-            doctorName={doctorName}
-            companyName={companyName}
-            showSettings={showSettings}
-            setShowSettings={setShowSettings}
-          />
-          <div className="flex-1 flex overflow-hidden">
-            <div className="flex-1 overflow-auto p-6">{renderContent()}</div>
-            <NotificationPanel selectedPatient={selectedPatient} isDarkMode={isDarkMode} />
-          </div>
+          isDarkMode={isDarkMode} 
+          setIsDarkMode={setIsDarkMode} 
+          doctorName={doctorName}
+          companyName={companyName}
+          showSettings={showSettings}
+          setShowSettings={setShowSettings}
+        />
+        <div className="flex-1 flex overflow-hidden">
+          <div className="flex-1 overflow-auto p-6">{renderContent()}</div>
+          <NotificationPanel selectedPatient={selectedPatient} isDarkMode={isDarkMode} />
         </div>
+      </div>
     </div>
   );
 }
