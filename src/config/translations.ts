@@ -17,6 +17,9 @@ export const translations = {
     language: 'Language',
     // Other
     doctor: 'Dr.',
+    selectPatient: 'Select a patient',
+    noPatientSelected: 'No patient selected',
+    searchPatients: 'Search patients...',
   },
   fr: {
     // Header
@@ -36,6 +39,9 @@ export const translations = {
     language: 'Langue',
     // Other
     doctor: 'Dr.',
+    selectPatient: 'Sélectionnez un patient',
+    noPatientSelected: 'Aucun patient sélectionné',
+    searchPatients: 'Rechercher des patients...',
   },
 };
 
