@@ -31,13 +31,13 @@ function NIRVANASidebar({ activeTab, setActiveTab, isOpen, setIsOpen, handleLogo
       <div
         className={`${
           isOpen ? 'translate-x-0' : '-translate-x-full'
-        } md:translate-x-0 fixed md:relative w-56 h-screen md:h-auto bg-gradient-to-b from-slate-900 to-slate-800 text-white p-4 transition-transform duration-300 z-40 flex flex-col overflow-y-auto`}
+        } md:translate-x-0 fixed md:relative w-56 h-screen md:h-auto bg-gradient-to-b from-slate-900 to-slate-800 text-white p-4 transition-transform duration-300 z-40 flex flex-col overflow-hidden`}
       >
         <Link to="/" className="flex items-center space-x-3 cursor-pointer hover:opacity-80 transition-opacity mb-6 mt-12 md:mt-0 flex-shrink-0">
           <img src="/Images/Icon3.png" alt="NIRVANA" className="h-8 w-auto" />
         </Link>
 
-        <nav className="space-y-1 overflow-y-auto flex-shrink-0 mb-4">
+        <nav className="space-y-1 flex-1 overflow-y-auto mb-4">
             {menuItems.map((item, index) => (
               <div key={item.id}>
                 {item.id === 'users' && (
