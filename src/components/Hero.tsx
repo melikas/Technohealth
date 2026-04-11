@@ -66,18 +66,14 @@ export default function Hero() {
 
           {/* Right Side - Image */}
           <div className="flex justify-center">
-            <div className="w-full h-96 bg-gradient-to-br from-cyan-500/20 to-blue-600/20 rounded-2xl overflow-hidden border border-cyan-400/30 shadow-2xl relative">
-              <img 
-                src="/Images/hero-second.png" 
-                alt="Hero Illustration"
-                className="w-full h-full object-cover opacity-80 transition-opacity duration-300 hover:opacity-95"
-                style={{ mixBlendMode: 'screen' }}
-              />
-              {/* Blend overlay */}
-              <div 
-                className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-blue-600/5 pointer-events-none"
-                style={{ mixBlendMode: 'multiply' }}
-              ></div>
+            <div className="w-full h-96 bg-gradient-to-br from-cyan-500/20 to-blue-600/20 rounded-2xl overflow-hidden border border-cyan-400/30 shadow-2xl relative flex items-center justify-center">
+              {/* Placeholder with gradient background */}
+              <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/30 via-blue-500/20 to-purple-500/30"></div>
+              <div className="relative z-10 text-center">
+                <div className="text-6xl mb-4">🏥</div>
+                <p className="text-white font-semibold text-lg">Healthcare Integration</p>
+                <p className="text-slate-300 text-sm mt-2">Wearables & Health Monitoring</p>
+              </div>
             </div>
           </div>
         </div>
