@@ -5,43 +5,19 @@ import { FileText } from "lucide-react";
 import { LineChart, Line, AreaChart, Area, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import DeviceSelector from '../components/DeviceSelector';
 import MLModels from '../components/HuggingFaceML';
+import { translations } from '../config/translations';
 
 // Sidebar Component
 function NIRVANASidebar({ activeTab, setActiveTab, isOpen, setIsOpen, handleLogout, currentLanguage = 'en' }: any) {
-  const translations: { [key: string]: { [key: string]: string } } = {
-    en: {
-      overview: 'Overview',
-      monitoring: 'Health Monitoring',
-      logs: 'Logs & Activity',
-      alerts: 'Alerts & Anomalies',
-      messages: 'Messages',
-      models: 'ML Models',
-      wearables: 'Connected Devices',
-      users: 'Access Management',
-      logout: 'Logout',
-    },
-    fr: {
-      overview: 'Aperçu',
-      monitoring: 'Surveillance de la Santé',
-      logs: 'Journaux et Activité',
-      alerts: 'Alertes et Anomalies',
-      messages: 'Messages',
-      models: 'Modèles ML',
-      wearables: 'Appareils Connectés',
-      users: 'Gestion des Accès',
-      logout: 'Déconnexion',
-    },
-  };
-
   const menuItems = [
-    { id: 'overview', label: translations[currentLanguage].overview, icon: BarChart3 },
-    { id: 'monitoring', label: translations[currentLanguage].monitoring, icon: Bell },
-    { id: 'logs', label: translations[currentLanguage].logs, icon: FileText },
-    { id: 'alerts', label: translations[currentLanguage].alerts, icon: AlertTriangle },
-    { id: 'messages', label: translations[currentLanguage].messages, icon: MessageSquare },
-    { id: 'models', label: translations[currentLanguage].models, icon: Brain },
-    { id: 'wearables', label: translations[currentLanguage].wearables, icon: Watch },
-    { id: 'users', label: translations[currentLanguage].users, icon: Users },
+    { id: 'overview', labelKey: 'overview', icon: BarChart3 },
+    { id: 'monitoring', labelKey: 'healthMonitoring', icon: Bell },
+    { id: 'logs', labelKey: 'logsActivity', icon: FileText },
+    { id: 'alerts', labelKey: 'alertsAnomalies', icon: AlertTriangle },
+    { id: 'messages', labelKey: 'messages', icon: MessageSquare },
+    { id: 'models', labelKey: 'mlModels', icon: Brain },
+    { id: 'wearables', labelKey: 'connectedDevices', icon: Watch },
+    { id: 'users', labelKey: 'accessManagement', icon: Users },
   ];
 
   return (
@@ -84,7 +60,7 @@ function NIRVANASidebar({ activeTab, setActiveTab, isOpen, setIsOpen, handleLogo
                   ) : (
                     <item.icon className="w-5 h-5" />
                   )}
-                  <span className="font-medium">{item.label}</span>
+                  <span className="font-medium">{translations[currentLanguage][item.labelKey as keyof typeof translations['en']]}</span>
                 </button>
               </div>
             ))}
@@ -96,7 +72,7 @@ function NIRVANASidebar({ activeTab, setActiveTab, isOpen, setIsOpen, handleLogo
           className="w-full flex items-center justify-center gap-2 px-3 py-2 mt-auto bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-semibold text-sm flex-shrink-0"
         >
           <LogOut className="w-3 h-3" />
-          {translations[currentLanguage].logout}
+          {translations[currentLanguage]['logout' as keyof typeof translations['en']]}
         </button>
       </div>
 
@@ -278,10 +254,10 @@ function NIRVANAHeader({ isDarkMode, setIsDarkMode, doctorName, companyName, sho
       <div className="flex items-center justify-between px-6 py-2">
         <div>
           <div className={`text-base font-bold ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
-            NIRVANA Health Hub
+            {translations[currentLanguage]['healthHub' as keyof typeof translations['en']]}
           </div>
           <div className={`text-xs ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>
-            Dr. {doctorName} - {companyName}
+            {translations[currentLanguage]['doctor' as keyof typeof translations['en']]} {doctorName} - {companyName}
           </div>
         </div>
         <div className="flex items-center gap-4">
