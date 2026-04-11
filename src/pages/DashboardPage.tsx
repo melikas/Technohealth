@@ -31,11 +31,11 @@ function NIRVANASidebar({ activeTab, setActiveTab, isOpen, setIsOpen, handleLogo
       <div
         className={`${
           isOpen ? 'translate-x-0' : '-translate-x-full'
-        } md:translate-x-0 fixed md:relative w-64 max-h-screen bg-gradient-to-b from-slate-900 to-slate-800 text-white p-6 transition-transform duration-300 z-40 flex flex-col overflow-y-auto`}
+        } md:translate-x-0 fixed w-64 h-screen bg-gradient-to-b from-slate-900 to-slate-800 text-white p-6 transition-transform duration-300 z-40 flex flex-col overflow-y-auto`}
       >
         <div className="flex-1">
           <Link to="/" className="flex items-center space-x-3 cursor-pointer hover:opacity-80 transition-opacity mb-8 mt-12 md:mt-0">
-            <img src="/Images/Icon3.png" alt="NIRVANA" className="h-10 w-auto" />
+            <img src="/Images/Icon3.png" alt="NIRVANA" className="h-8 w-auto" />
           </Link>
 
           <nav className="space-y-2">
