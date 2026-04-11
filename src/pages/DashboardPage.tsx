@@ -242,7 +242,7 @@ function NIRVANAHeader({ isDarkMode, setIsDarkMode, doctorName, companyName, sho
   };
 
   return (
-    <header className={`sticky top-0 z-20 border-b ${isDarkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
+    <header className={`fixed left-0 right-0 top-0 z-20 border-b md:left-56 ${isDarkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
       <div className="flex items-center justify-between px-6 py-2">
         <div>
           <div className={`text-base font-bold ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
@@ -1578,28 +1578,29 @@ export default function DashboardPage() {
   };
 
   return (
-    <div className={`min-h-screen flex ${isDarkMode ? 'bg-slate-950' : 'bg-slate-50'}`}>
-      <NIRVANASidebar 
+    <>
+      <NIRVANAHeader 
+        isDarkMode={isDarkMode} 
+        setIsDarkMode={setIsDarkMode} 
+        doctorName={doctorName}
+        companyName={companyName}
+        showSettings={showSettings}
+        setShowSettings={setShowSettings}
+      />
+      <div className={`min-h-screen flex ${isDarkMode ? 'bg-slate-950' : 'bg-slate-50'}`}>
+        <NIRVANASidebar 
         activeTab={activeTab} 
         setActiveTab={setActiveTab} 
         isOpen={sidebarOpen} 
         setIsOpen={setSidebarOpen}
         handleLogout={handleLogout}
       />
-      <div className="flex-1 md:ml-56 flex flex-col overflow-hidden">
-        <NIRVANAHeader 
-          isDarkMode={isDarkMode} 
-          setIsDarkMode={setIsDarkMode} 
-          doctorName={doctorName}
-          companyName={companyName}
-          showSettings={showSettings}
-          setShowSettings={setShowSettings}
-        />
+      <div className="flex-1 md:ml-56 flex flex-col overflow-hidden pt-16">
         <div className="flex-1 flex overflow-hidden">
           <div className="flex-1 overflow-auto p-6">{renderContent()}</div>
           <NotificationPanel selectedPatient={selectedPatient} isDarkMode={isDarkMode} />
         </div>
       </div>
-    </div>
+    </>
   );
 }
