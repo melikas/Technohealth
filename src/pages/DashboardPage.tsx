@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
-import { LogOut, Menu, X, Bell, Users, Settings, BarChart3, AlertTriangle, MessageSquare, Brain, Video, Watch, Plus, Calendar, TrendingUp, Heart, ChevronDown } from 'lucide-react';
+import { LogOut, Menu, X, Bell, Users, BarChart3, AlertTriangle, MessageSquare, Brain, Video, Watch, Plus, Calendar, TrendingUp, Heart, ChevronDown } from 'lucide-react';
 import { useNavigate, Link } from 'react-router-dom';
 import { FileText } from "lucide-react";
 import { LineChart, Line, AreaChart, Area, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
-import DeviceSelector from '../components/DeviceSelector';
 import MLModels from '../components/HuggingFaceML';
 import { translations } from '../config/translations';
 
@@ -15,8 +14,8 @@ function NIRVANASidebar({ activeTab, setActiveTab, isOpen, setIsOpen, handleLogo
     { id: 'logs', labelKey: 'logsActivity', icon: FileText },
     { id: 'alerts', labelKey: 'alertsAnomalies', icon: AlertTriangle },
     { id: 'messages', labelKey: 'messages', icon: MessageSquare },
-    { id: 'models', labelKey: 'mlModels', icon: Brain },
     { id: 'wearables', labelKey: 'connectedDevices', icon: Watch },
+    { id: 'models', labelKey: 'mlModels', icon: Brain },
     { id: 'users', labelKey: 'accessManagement', icon: Users },
   ];
 
@@ -41,7 +40,7 @@ function NIRVANASidebar({ activeTab, setActiveTab, isOpen, setIsOpen, handleLogo
         <nav className="space-y-1 flex-1 overflow-y-auto min-h-0 mb-4">
             {menuItems.map((item, index) => (
               <div key={item.id}>
-                {item.id === 'users' && (
+                {item.id === 'models' && (
                   <div className="my-3 border-t border-slate-700"></div>
                 )}
                 <button
@@ -87,7 +86,7 @@ function NIRVANASidebar({ activeTab, setActiveTab, isOpen, setIsOpen, handleLogo
 }
 
 // Account Settings Panel
-function AccountSettingsPanel({ isDarkMode }: any) {
+function AccountSettingsPanel({ isDarkMode, setShowSettings }: any) {
   const [formData, setFormData] = useState({
     companyName: localStorage.getItem('companyName') || 'NIRVANA Longevity Center',
     lineOfBusiness: 'Healthcare',
@@ -112,13 +111,22 @@ function AccountSettingsPanel({ isDarkMode }: any) {
 
   return (
     <div className={`rounded-xl border p-6 ${isDarkMode ? 'bg-slate-900 border-slate-700' : 'bg-white border-slate-200'}`}>
-      <div className="mb-6">
-        <h2 className={`text-2xl font-bold ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
-          Account Settings
-        </h2>
-        <p className={`text-sm ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>
-          Edit your profile
-        </p>
+      <div className="mb-6 flex items-center justify-between">
+        <div>
+          <h2 className={`text-2xl font-bold ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
+            Account Settings
+          </h2>
+          <p className={`text-sm ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>
+            Edit your profile
+          </p>
+        </div>
+        <button
+          onClick={() => setShowSettings(false)}
+          className={`p-2 rounded-lg transition-colors ${isDarkMode ? 'bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-slate-200' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}`}
+          title="Close Settings"
+        >
+          <X className="w-6 h-6" />
+        </button>
       </div>
 
       <div className="space-y-5">
@@ -264,28 +272,28 @@ function NIRVANAHeader({ isDarkMode, setIsDarkMode, doctorName, companyName, sho
           {/* Settings Button (unified for account settings) */}
           <button
             onClick={() => setShowSettings(!showSettings)}
-            className={`p-1.5 rounded-lg transition-colors ${
+            className={`p-1.5 rounded-lg transition-colors flex items-center justify-center ${
               showSettings
                 ? isDarkMode ? 'bg-cyan-600 text-white' : 'bg-cyan-100 text-cyan-600'
                 : isDarkMode ? 'bg-slate-800 text-slate-300 hover:bg-slate-700' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
             }`}
             title="Account Settings"
           >
-            <Settings className="w-4 h-4" />
+            <span className="text-xl">⚙️</span>
           </button>
 
           {/* Language Dropdown */}
           <div className="relative">
             <button
               onClick={() => setShowLanguageMenu(!showLanguageMenu)}
-              className={`p-1.5 rounded-lg transition-colors ${
+              className={`p-1.5 rounded-lg transition-colors flex items-center justify-center ${
                 showLanguageMenu
                   ? isDarkMode ? 'bg-cyan-600 text-white' : 'bg-cyan-100 text-cyan-600'
                   : isDarkMode ? 'bg-slate-800 text-slate-300 hover:bg-slate-700' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
               }`}
               title="Language"
             >
-              🌐
+              <span className="text-xl">🌐</span>
             </button>
             {showLanguageMenu && (
               <div className={`absolute right-0 mt-2 w-40 rounded-lg shadow-lg border ${isDarkMode ? 'bg-slate-800 border-slate-700' : 'bg-white border-slate-200'}`}>
@@ -316,11 +324,12 @@ function NIRVANAHeader({ isDarkMode, setIsDarkMode, doctorName, companyName, sho
           {/* Dark/Light Mode */}
           <button
             onClick={() => setIsDarkMode(!isDarkMode)}
-            className={`p-1.5 rounded-lg transition-colors ${
-              isDarkMode ? 'bg-slate-800 text-yellow-400 hover:bg-slate-700' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+            className={`p-1.5 rounded-lg transition-colors flex items-center justify-center ${
+              isDarkMode ? 'bg-slate-800 text-slate-300 hover:bg-slate-700' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
             }`}
+            title="Toggle Dark Mode"
           >
-            {isDarkMode ? '☀️' : '🌙'}
+            <span className="text-xl">{isDarkMode ? '☀️' : '🌙'}</span>
           </button>
         </div>
       </div>
@@ -331,42 +340,227 @@ function NIRVANAHeader({ isDarkMode, setIsDarkMode, doctorName, companyName, sho
 // Patient Selector Component
 function PatientSelector({ selectedPatient, setSelectedPatient, isDarkMode }: any) {
   const [searchTerm, setSearchTerm] = useState('');
+  const [sortBy, setSortBy] = useState('name'); // 'name', 'registration', 'doctor'
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  
   const patients = [
-    { id: 1, name: 'Ahmed Hassan', age: 45, status: 'healthy', condition: 'Hypertension Management', lastCheck: '2 hours ago', healthScore: 82 },
-    { id: 2, name: 'Fatima Al-Dosari', age: 52, status: 'warning', condition: 'Diabetes Monitoring', lastCheck: '4 hours ago', healthScore: 68 },
-    { id: 3, name: 'Mohammed Al-Rashid', age: 38, status: 'healthy', condition: 'Fitness Tracking', lastCheck: '30 min ago', healthScore: 91 },
-    { id: 4, name: 'Sarah Johnson', age: 41, status: 'healthy', condition: 'Post-Surgery Recovery', lastCheck: '1 hour ago', healthScore: 75 },
-    { id: 5, name: 'Ali Al-Mansouri', age: 55, status: 'warning', condition: 'Cholesterol Management', lastCheck: '6 hours ago', healthScore: 65 },
+    { 
+      id: 1, 
+      name: 'Ahmed Hassan', 
+      age: 45, 
+      status: 'healthy', 
+      condition: 'Hypertension Management', 
+      lastUpdate: '2024-04-12 14:30',
+      lastCheck: '2 hours ago', 
+      healthScore: 82,
+      doctor: 'Dr. Farah',
+      registeredDate: '2023-06-15',
+      connectedDevices: ['Apple Watch', 'Blood Pressure Monitor'],
+      dataSources: ['Wearable', 'Manual Entry', 'API Integration']
+    },
+    { 
+      id: 2, 
+      name: 'Fatima Al-Dosari', 
+      age: 52, 
+      status: 'warning', 
+      condition: 'Diabetes Monitoring', 
+      lastUpdate: '2024-04-12 10:15',
+      lastCheck: '4 hours ago', 
+      healthScore: 68,
+      doctor: 'Dr. Mohammad',
+      registeredDate: '2023-08-22',
+      connectedDevices: ['Continuous Glucose Monitor', 'Smartwatch'],
+      dataSources: ['Medical Device', 'Wearable', 'Lab Results']
+    },
+    { 
+      id: 3, 
+      name: 'Mohammed Al-Rashid', 
+      age: 38, 
+      status: 'healthy', 
+      condition: 'Fitness Tracking', 
+      lastUpdate: '2024-04-12 15:45',
+      lastCheck: '30 min ago', 
+      healthScore: 91,
+      doctor: 'Dr. Amina',
+      registeredDate: '2023-01-10',
+      connectedDevices: ['Fitbit', 'iPhone Health App'],
+      dataSources: ['Wearable', 'Mobile App']
+    },
+    { 
+      id: 4, 
+      name: 'Sarah Johnson', 
+      age: 41, 
+      status: 'healthy', 
+      condition: 'Post-Surgery Recovery', 
+      lastUpdate: '2024-04-12 13:20',
+      lastCheck: '1 hour ago', 
+      healthScore: 75,
+      doctor: 'Dr. Farah',
+      registeredDate: '2024-03-01',
+      connectedDevices: ['Apple Watch', 'Oura Ring'],
+      dataSources: ['Wearable', 'Manual Entry']
+    },
+    { 
+      id: 5, 
+      name: 'Ali Al-Mansouri', 
+      age: 55, 
+      status: 'warning', 
+      condition: 'Cholesterol Management', 
+      lastUpdate: '2024-04-12 09:00',
+      lastCheck: '6 hours ago', 
+      healthScore: 65,
+      doctor: 'Dr. Mohammad',
+      registeredDate: '2023-11-05',
+      connectedDevices: ['Blood Pressure Monitor', 'Fitness Tracker'],
+      dataSources: ['Medical Device', 'Lab Results', 'Patient Input']
+    },
   ];
 
-  const filteredPatients = patients.filter(p =>
+  // Sort patients based on selected sort option
+  const getSortedPatients = () => {
+    let sorted = [...patients];
+    switch(sortBy) {
+      case 'name':
+        sorted.sort((a, b) => a.name.localeCompare(b.name));
+        break;
+      case 'registration':
+        sorted.sort((a, b) => new Date(b.registeredDate).getTime() - new Date(a.registeredDate).getTime());
+        break;
+      case 'doctor':
+        sorted.sort((a, b) => a.doctor.localeCompare(b.doctor));
+        break;
+      default:
+        break;
+    }
+    return sorted;
+  };
+
+  const sortedPatients = getSortedPatients();
+
+  // Filter patients based on search term
+  const filteredPatients = sortedPatients.filter(p =>
     p.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  // Get suggestions for autocomplete
+  const suggestions = searchTerm.trim() ? 
+    patients.filter(p => 
+      p.name.toLowerCase().includes(searchTerm.toLowerCase()) && 
+      p.name.toLowerCase() !== searchTerm.toLowerCase()
+    ).slice(0, 4) : [];
 
   return (
     <div className={`rounded-xl p-6 border mb-8 ${isDarkMode ? 'bg-slate-900 border-slate-700' : 'bg-white border-slate-200'}`}>
       <h3 className={`font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
         Select Patient/User
       </h3>
+
+      {/* Categorization/Filter Section */}
+      <div className="mb-6">
+        <label className={`block text-sm font-semibold mb-3 ${isDarkMode ? 'text-slate-300' : 'text-slate-700'}`}>
+          Organize Patients By:
+        </label>
+        <div className="flex gap-2 flex-wrap">
+          <button
+            onClick={() => setSortBy('name')}
+            className={`px-4 py-2 rounded-lg font-semibold transition-all ${
+              sortBy === 'name'
+                ? isDarkMode 
+                  ? 'bg-cyan-600 text-white' 
+                  : 'bg-cyan-500 text-white'
+                : isDarkMode
+                  ? 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                  : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+            }`}
+          >
+            🔤 A-Z
+          </button>
+          <button
+            onClick={() => setSortBy('registration')}
+            className={`px-4 py-2 rounded-lg font-semibold transition-all ${
+              sortBy === 'registration'
+                ? isDarkMode 
+                  ? 'bg-cyan-600 text-white' 
+                  : 'bg-cyan-500 text-white'
+                : isDarkMode
+                  ? 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                  : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+            }`}
+          >
+            📅 Reg. Date
+          </button>
+          <button
+            onClick={() => setSortBy('doctor')}
+            className={`px-4 py-2 rounded-lg font-semibold transition-all ${
+              sortBy === 'doctor'
+                ? isDarkMode 
+                  ? 'bg-cyan-600 text-white' 
+                  : 'bg-cyan-500 text-white'
+                : isDarkMode
+                  ? 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                  : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+            }`}
+          >
+            👨‍⚕️ Doctor
+          </button>
+        </div>
+      </div>
       
-      {/* Search Input */}
-      <input
-        type="text"
-        placeholder="Search patient..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        className={`w-full px-4 py-2 rounded-lg border mb-4 ${isDarkMode ? 'bg-slate-800 border-slate-700 text-white' : 'bg-white border-slate-300 text-slate-900'}`}
-      />
+      {/* Search Input with Autocomplete */}
+      <div className="relative mb-4">
+        <div className="relative">
+          <input
+            type="text"
+            placeholder="Search patient name..."
+            value={searchTerm}
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+              setShowSuggestions(true);
+            }}
+            onFocus={() => setShowSuggestions(true)}
+            onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
+            className={`w-full px-4 py-2 pr-10 rounded-lg border mb-2 ${isDarkMode ? 'bg-slate-800 border-slate-700 text-white focus:border-cyan-600' : 'bg-white border-slate-300 text-slate-900 focus:border-cyan-500'} focus:outline-none focus:ring-1`}
+          />
+          {searchTerm && (
+            <button
+              onClick={() => setSearchTerm('')}
+              className={`absolute right-3 top-2 ${isDarkMode ? 'text-slate-400 hover:text-slate-200' : 'text-slate-400 hover:text-slate-600'}`}
+            >
+              ✕
+            </button>
+          )}
+        </div>
+
+        {/* Autocomplete Suggestions */}
+        {showSuggestions && suggestions.length > 0 && (
+          <div className={`absolute top-10 left-0 right-0 border rounded-lg shadow-lg z-10 ${isDarkMode ? 'bg-slate-800 border-slate-700' : 'bg-white border-slate-200'}`}>
+            {suggestions.map((patient) => (
+              <button
+                key={patient.id}
+                onClick={() => {
+                  setSearchTerm('');
+                  setShowSuggestions(false);
+                  setSelectedPatient(patient);
+                }}
+                className={`w-full text-left px-4 py-2 border-b hover:bg-cyan-600 hover:text-white transition-colors ${isDarkMode ? 'bg-slate-800 border-slate-700' : 'bg-white border-slate-100'}`}
+              >
+                <div className="font-semibold">{patient.name}</div>
+                <div className={`text-xs ${isDarkMode ? 'text-slate-400' : 'text-slate-500'}`}>{patient.condition}</div>
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
 
       {/* Patient List */}
-      <div className="space-y-2">
+      <div className="space-y-2 max-h-96 overflow-y-auto">
         {filteredPatients.map((patient) => (
           <button
             key={patient.id}
             onClick={() => setSelectedPatient(patient)}
             className={`w-full p-4 rounded-lg border-2 transition-all text-left ${
               selectedPatient?.id === patient.id
-                ? 'border-slate-900 bg-slate-400/40 dark:border-slate-400 dark:bg-slate-700/50'
+                ? 'border-cyan-600 bg-cyan-50 dark:border-cyan-500 dark:bg-slate-700/50'
                 : `border-slate-300 dark:border-slate-600 ${isDarkMode ? 'bg-slate-800 hover:bg-slate-700' : 'bg-slate-50 hover:bg-slate-100'}`
             }`}
           >
@@ -376,7 +570,7 @@ function PatientSelector({ selectedPatient, setSelectedPatient, isDarkMode }: an
                   {patient.name}
                 </h4>
                 <p className={`text-sm ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>
-                  Age: {patient.age} • {patient.condition}
+                  Age: {patient.age} • {patient.doctor}
                 </p>
               </div>
               <span className={`text-xs font-semibold px-2 py-1 rounded-full ${
@@ -387,11 +581,53 @@ function PatientSelector({ selectedPatient, setSelectedPatient, isDarkMode }: an
                 {patient.status.toUpperCase()}
               </span>
             </div>
-            <div className="flex items-center justify-between text-xs">
-              <span className={isDarkMode ? 'text-slate-400' : 'text-slate-600'}>Last: {patient.lastCheck}</span>
+
+            {/* Last Update */}
+            <div className={`text-xs mb-2 ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>
+              Last Update: {patient.lastUpdate}
+            </div>
+
+            {/* Health Score and Data Sources */}
+            <div className="flex items-center justify-between mb-2 text-xs">
               <div className="flex items-center gap-1">
                 <Heart className="w-3 h-3 text-red-600" />
-                <span className={`font-semibold ${isDarkMode ? 'text-cyan-400' : 'text-cyan-600'}`}>Score: {patient.healthScore}</span>
+                <span className={`font-semibold ${isDarkMode ? 'text-cyan-400' : 'text-cyan-600'}`}>
+                  Health Score: {patient.healthScore}
+                </span>
+              </div>
+            </div>
+
+            {/* Sources of Data */}
+            <div className="mb-2">
+              <p className={`text-xs font-semibold mb-1 ${isDarkMode ? 'text-slate-300' : 'text-slate-700'}`}>
+                Sources of Data:
+              </p>
+              <div className="flex flex-wrap gap-1">
+                {patient.dataSources.map((source, idx) => (
+                  <span 
+                    key={idx}
+                    className={`text-xs px-2 py-1 rounded ${isDarkMode ? 'bg-slate-700 text-slate-200' : 'bg-slate-200 text-slate-800'}`}
+                  >
+                    {source}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Connected Devices */}
+            <div>
+              <p className={`text-xs font-semibold mb-1 ${isDarkMode ? 'text-slate-300' : 'text-slate-700'}`}>
+                Connected Devices:
+              </p>
+              <div className="flex flex-wrap gap-1">
+                {patient.connectedDevices.map((device, idx) => (
+                  <span 
+                    key={idx}
+                    className={`text-xs px-2 py-1 rounded ${isDarkMode ? 'bg-blue-900 text-blue-200' : 'bg-blue-100 text-blue-800'}`}
+                  >
+                    📱 {device}
+                  </span>
+                ))}
               </div>
             </div>
           </button>
@@ -486,6 +722,8 @@ function OverviewSection({ isDarkMode, selectedPatient, setSelectedPatient }: an
 }
 
 function MonitoringSection({ isDarkMode, selectedPatient, setSelectedPatient }: any) {
+  const [activeTab, setActiveTab] = useState('data');
+  const [dataTab, setDataTab] = useState('data-devices');
   const [timeline, setTimeline] = useState('daily');
   const [isTimelineDropdownOpen, setIsTimelineDropdownOpen] = useState(false);
   const [selectedDevices, setSelectedDevices] = useState<string[]>(['apple-watch']);
@@ -612,18 +850,223 @@ function MonitoringSection({ isDarkMode, selectedPatient, setSelectedPatient }: 
     { id: 'stress', label: 'Stress Level', category: 'Mental' },
   ];
 
+  // Patient devices mapping
+  const patientDevices: Record<number, any[]> = {
+    1: [ // Ahmed
+      { id: 1, name: 'Apple Watch Series 8', type: 'Smartwatch', status: 'connected', battery: '85%', lastSync: '2 min ago', dataPoints: ['Heart Rate', 'Blood Pressure', 'Sleep', 'Steps', 'Calories'] },
+      { id: 2, name: 'iPhone Health App', type: 'Mobile Phone', status: 'connected', battery: '72%', lastSync: '1 min ago', dataPoints: ['Steps', 'Distance', 'Sleep', 'Workout Data'] },
+    ],
+    2: [ // Fatima
+      { id: 3, name: 'Continuous Glucose Monitor', type: 'Medical Device', status: 'connected', battery: '93%', lastSync: '5 min ago', dataPoints: ['Glucose Level', 'Trend', 'Alerts'] },
+      { id: 4, name: 'Samsung Galaxy Watch 5', type: 'Smartwatch', status: 'connected', battery: '65%', lastSync: '3 min ago', dataPoints: ['Heart Rate', 'SpO2', 'ECG', 'Sleep', 'Steps'] },
+    ],
+    3: [ // Mohammed
+      { id: 5, name: 'Fitbit Charge 5', type: 'Fitness Tracker', status: 'connected', battery: '78%', lastSync: '2 min ago', dataPoints: ['Heart Rate Variability', 'Steps', 'Distance', 'Calories', 'Active Minutes'] },
+    ],
+    4: [ // Sarah
+      { id: 6, name: 'Oura Ring Gen 3', type: 'Health Ring', status: 'connected', battery: '88%', lastSync: '1 min ago', dataPoints: ['Sleep Quality', 'Heart Rate Variability', 'Body Temperature', 'Activity'] },
+    ],
+    5: [ // Ali
+      { id: 7, name: 'Omron Blood Pressure Monitor', type: 'Medical Device', status: 'connected', battery: '92%', lastSync: '10 min ago', dataPoints: ['Systolic BP', 'Diastolic BP', 'Heart Rate', 'Irregularity Detection'] },
+    ],
+  };
+
+  // Survey data mapping
+  const patientSurveys: Record<number, any[]> = {
+    1: [ // Ahmed
+      { id: 1, title: 'Symptom Assessment', date: '2 days ago', status: 'completed', score: '8/10' },
+      { id: 2, title: 'Lifestyle Check-in', date: '1 week ago', status: 'completed', score: '7/10' },
+      { id: 3, title: 'Medication Adherence', date: 'pending', status: 'pending', score: '-' },
+    ],
+    2: [ // Fatima
+      { id: 1, title: 'Glucose Management', date: 'today', status: 'completed', score: '9/10' },
+      { id: 2, title: 'Dietary Habits', date: '3 days ago', status: 'completed', score: '6/10' },
+    ],
+    3: [ // Mohammed
+      { id: 1, title: 'Fitness Goals', date: 'today', status: 'completed', score: '9/10' },
+      { id: 2, title: 'Recovery Assessment', date: '5 days ago', status: 'completed', score: '8/10' },
+    ],
+    4: [ // Sarah
+      { id: 1, title: 'Sleep Quality', date: 'yesterday', status: 'completed', score: '8/10' },
+      { id: 2, title: 'Mental Health Check', date: '1 week ago', status: 'completed', score: '7/10' },
+    ],
+    5: [ // Ali
+      { id: 1, title: 'BP Management', date: '2 days ago', status: 'completed', score: '7/10' },
+      { id: 2, title: 'Risk Factors', date: '2 weeks ago', status: 'completed', score: '6/10' },
+    ],
+  };
+
+  // Clinical assessments data mapping
+  const patientAssessments: Record<number, any[]> = {
+    1: [ // Ahmed
+      { id: 1, type: 'Cardiovascular', date: '1 week ago', result: 'Normal', notes: 'HR stable, No murmurs', specialist: 'Dr. Sarah' },
+      { id: 2, type: 'Metabolic', date: '2 weeks ago', result: 'Good', notes: 'Glucose 95, Lipids stable', specialist: 'Dr. Ahmed' },
+    ],
+    2: [ // Fatima
+      { id: 1, type: 'Endocrine', date: '3 days ago', result: 'Monitor', notes: 'HbA1c 7.2%, needs review', specialist: 'Dr. Fatih' },
+      { id: 2, type: 'Renal Function', date: '1 week ago', result: 'Normal', notes: 'Creatinine OK', specialist: 'Lab' },
+    ],
+    3: [ // Mohammed
+      { id: 1, type: 'Musculoskeletal', date: '5 days ago', result: 'Good', notes: 'Flexibility excellent', specialist: 'PT' },
+      { id: 2, type: 'Sports Medicine', date: 'scheduled', result: 'Pending', notes: 'Injury prevention', specialist: 'Dr. Mike' },
+    ],
+    4: [ // Sarah
+      { id: 1, type: 'General Wellness', date: '1 week ago', result: 'Excellent', notes: 'All vitals normal, fitness level high', specialist: 'Dr. Johnson' },
+    ],
+    5: [ // Ali
+      { id: 1, type: 'Cardiovascular', date: '1 week ago', result: 'Monitor', notes: 'BP avg 145/92, needs control', specialist: 'Cardio' },
+      { id: 2, type: 'Lipid Panel', date: '2 weeks ago', result: 'High', notes: 'Cholesterol 245, statin needed', specialist: 'Lab' },
+    ],
+  };
+
+  const devices = selectedPatient ? patientDevices[selectedPatient.id] || [] : [];
+
   return (
     <div>
-      <h2 className={`text-3xl font-bold mb-8 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
+      <h2 className={`text-3xl font-bold mb-6 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
         Health Monitoring - <span className="text-cyan-600">{selectedPatient.name}</span>
       </h2>
 
-      {/* Device Selector */}
-      <DeviceSelector 
-        selectedDevices={selectedDevices}
-        onDeviceSelect={setSelectedDevices}
-        isDarkMode={isDarkMode}
-      />
+      {/* Tab Switcher */}
+      <div className="flex gap-2 mb-8 border-b" style={{ borderColor: isDarkMode ? '#475569' : '#e2e8f0' }}>
+        <button
+          onClick={() => setActiveTab('data')}
+          className={`px-6 py-3 font-semibold text-sm transition-all border-b-2 ${
+            activeTab === 'data'
+              ? `${isDarkMode ? 'border-cyan-600 text-cyan-600' : 'border-cyan-500 text-cyan-600'}`
+              : `border-transparent ${isDarkMode ? 'text-slate-400 hover:text-slate-300' : 'text-slate-600 hover:text-slate-900'}`
+          }`}
+        >
+          📊 Data Dashboard
+        </button>
+        <button
+          onClick={() => setActiveTab('models')}
+          className={`px-6 py-3 font-semibold text-sm transition-all border-b-2 ${
+            activeTab === 'models'
+              ? `${isDarkMode ? 'border-cyan-600 text-cyan-600' : 'border-cyan-500 text-cyan-600'}`
+              : `border-transparent ${isDarkMode ? 'text-slate-400 hover:text-slate-300' : 'text-slate-600 hover:text-slate-900'}`
+          }`}
+        >
+          🤖 ML Models Output
+        </button>
+      </div>
+
+      {/* Data Dashboard Tab */}
+      {activeTab === 'data' && (
+        <div>
+          {/* Quick Data Tabs */}
+          <div className="flex gap-2 mb-6 border-b" style={{ borderColor: isDarkMode ? '#475569' : '#e2e8f0' }}>
+            <button
+              onClick={() => setDataTab('data-devices')}
+              className={`px-4 py-2 font-semibold text-sm transition-all border-b-2 ${
+                dataTab === 'data-devices'
+                  ? `${isDarkMode ? 'border-cyan-600 text-cyan-600' : 'border-cyan-500 text-cyan-600'}`
+                  : `border-transparent ${isDarkMode ? 'text-slate-400 hover:text-slate-300' : 'text-slate-600 hover:text-slate-900'}`
+              }`}
+            >
+              Connected Devices
+            </button>
+            <button
+              onClick={() => setDataTab('data-surveys')}
+              className={`px-4 py-2 font-semibold text-sm transition-all border-b-2 ${
+                dataTab === 'data-surveys'
+                  ? `${isDarkMode ? 'border-cyan-600 text-cyan-600' : 'border-cyan-500 text-cyan-600'}`
+                  : `border-transparent ${isDarkMode ? 'text-slate-400 hover:text-slate-300' : 'text-slate-600 hover:text-slate-900'}`
+              }`}
+            >
+              Surveys
+            </button>
+            <button
+              onClick={() => setDataTab('data-assessments')}
+              className={`px-4 py-2 font-semibold text-sm transition-all border-b-2 ${
+                dataTab === 'data-assessments'
+                  ? `${isDarkMode ? 'border-cyan-600 text-cyan-600' : 'border-cyan-500 text-cyan-600'}`
+                  : `border-transparent ${isDarkMode ? 'text-slate-400 hover:text-slate-300' : 'text-slate-600 hover:text-slate-900'}`
+              }`}
+            >
+              Clinical Assessments
+            </button>
+          </div>
+
+          {/* Data Devices Tab */}
+          {dataTab === 'data-devices' && (
+            <div className="space-y-4 mb-8">
+              {devices.map((device) => (
+                <div key={device.id} className={`rounded-xl p-4 border ${isDarkMode ? 'bg-slate-900 border-slate-700' : 'bg-white border-slate-200'}`}>
+                  <div className="flex items-start justify-between mb-3">
+                    <div className="flex-1">
+                      <h3 className={`font-bold ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>{device.name}</h3>
+                      <p className={`text-sm ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>{device.type}</p>
+                    </div>
+                    <span className={`px-2 py-1 text-xs font-semibold rounded-full ${device.status === 'connected' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+                      ● {device.status.toUpperCase()}
+                    </span>
+                  </div>
+                  <div className="space-y-1 text-sm">
+                    <p className={isDarkMode ? 'text-slate-400' : 'text-slate-600'}>🔋 {device.battery} • ⏱️ {device.lastSync}</p>
+                    <div className="flex flex-wrap gap-1 mt-2">
+                      {device.dataPoints.map((point: string, idx: number) => (
+                        <span key={idx} className={`text-xs px-2 py-1 rounded ${isDarkMode ? 'bg-slate-700 text-slate-300' : 'bg-slate-100 text-slate-700'}`}>
+                          {point}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Data Surveys Tab */}
+          {dataTab === 'data-surveys' && (
+            <div className="space-y-3 mb-8">
+              {patientSurveys[selectedPatient?.id]?.map((survey) => (
+                <div key={survey.id} className={`rounded-lg p-4 border ${isDarkMode ? 'bg-slate-900 border-slate-700' : 'bg-white border-slate-200'}`}>
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1">
+                      <h4 className={`font-semibold ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>{survey.title}</h4>
+                      <p className={`text-xs ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>{survey.date}</p>
+                    </div>
+                    <span className={`px-2 py-1 text-xs font-bold rounded-full ${
+                      survey.status === 'completed' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'
+                    }`}>
+                      {survey.status === 'completed' ? '✓' : '⏳'}
+                    </span>
+                  </div>
+                  {survey.status === 'completed' && (
+                    <p className={`text-xs mt-2 text-cyan-600 font-semibold`}>{survey.score}</p>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Data Assessments Tab */}
+          {dataTab === 'data-assessments' && (
+            <div className="space-y-3 mb-8">
+              {patientAssessments[selectedPatient?.id]?.map((assessment) => (
+                <div key={assessment.id} className={`rounded-lg p-4 border ${isDarkMode ? 'bg-slate-900 border-slate-700' : 'bg-white border-slate-200'}`}>
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1">
+                      <h4 className={`font-semibold text-sm ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>{assessment.type}</h4>
+                      <p className={`text-xs ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>{assessment.date} • {assessment.specialist}</p>
+                      <p className={`text-xs mt-1 ${isDarkMode ? 'text-slate-300' : 'text-slate-700'}`}>{assessment.notes}</p>
+                    </div>
+                    <span className={`px-2 py-1 text-xs font-bold rounded-full whitespace-nowrap ml-2 ${
+                      assessment.result === 'Normal' || assessment.result === 'Good' || assessment.result === 'Excellent'
+                        ? 'bg-green-100 text-green-800'
+                        : assessment.result === 'Monitor' || assessment.result === 'High'
+                        ? 'bg-yellow-100 text-yellow-800'
+                        : 'bg-gray-100 text-gray-800'
+                    }`}>
+                      {assessment.result}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
 
       {/* Summary Metrics Bar */}
       <div className={`rounded-xl p-6 border mb-8 ${isDarkMode ? 'bg-slate-900 border-slate-700' : 'bg-white border-slate-200'}`}>
@@ -929,6 +1372,197 @@ function MonitoringSection({ isDarkMode, selectedPatient, setSelectedPatient }: 
           </BarChart>
         </ResponsiveContainer>
       </div>
+        </div>
+      )}
+
+      {/* ML Models Output Tab */}
+      {activeTab === 'models' && (
+        <div>
+          {/* ML Models Overview */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            {/* SSL - Sensor LM Model */}
+            <div className={`rounded-xl p-6 border ${isDarkMode ? 'bg-slate-900 border-slate-700' : 'bg-white border-slate-200'}`}>
+              <div className="flex items-center justify-between mb-4">
+                <h3 className={`text-lg font-bold ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>SSL - Sensor Learning Module</h3>
+                <span className="text-2xl">🤖</span>
+              </div>
+              <p className={`text-sm mb-4 ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>Self-Supervised Learning model analyzing sensor data patterns</p>
+              <div className={`rounded-lg p-4 mb-4 ${isDarkMode ? 'bg-slate-800' : 'bg-slate-50'}`}>
+                <p className={`text-xs font-semibold mb-2 ${isDarkMode ? 'text-slate-300' : 'text-slate-700'}`}>Overall Confidence</p>
+                <div className={`w-full h-2 rounded-full ${isDarkMode ? 'bg-slate-700' : 'bg-slate-200'}`}>
+                  <div className="w-4/5 h-full rounded-full bg-gradient-to-r from-cyan-500 to-cyan-600"></div>
+                </div>
+                <p className={`text-sm font-bold mt-2 text-cyan-600`}>82% Confidence</p>
+              </div>
+              <p className={`text-sm ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>Last updated: 2 hours ago</p>
+            </div>
+
+            {/* Anomaly Detection Model */}
+            <div className={`rounded-xl p-6 border ${isDarkMode ? 'bg-slate-900 border-slate-700' : 'bg-white border-slate-200'}`}>
+              <div className="flex items-center justify-between mb-4">
+                <h3 className={`text-lg font-bold ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>Anomaly Detector</h3>
+                <span className="text-2xl">⚠️</span>
+              </div>
+              <p className={`text-sm mb-4 ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>Detects unusual health patterns and outliers</p>
+              <div className={`rounded-lg p-4 mb-4 ${isDarkMode ? 'bg-slate-800' : 'bg-slate-50'}`}>
+                <p className={`text-xs font-semibold mb-2 ${isDarkMode ? 'text-slate-300' : 'text-slate-700'}`}>Anomaly Detection Score</p>
+                <div className={`w-full h-2 rounded-full ${isDarkMode ? 'bg-slate-700' : 'bg-slate-200'}`}>
+                  <div className="w-1/4 h-full rounded-full bg-gradient-to-r from-green-500 to-green-600"></div>
+                </div>
+                <p className={`text-sm font-bold mt-2 text-green-600`}>18% Anomaly Risk</p>
+              </div>
+              <p className={`text-sm ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>Status: Normal</p>
+            </div>
+
+            {/* Health Risk Predictor */}
+            <div className={`rounded-xl p-6 border ${isDarkMode ? 'bg-slate-900 border-slate-700' : 'bg-white border-slate-200'}`}>
+              <div className="flex items-center justify-between mb-4">
+                <h3 className={`text-lg font-bold ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>Risk Predictor</h3>
+                <span className="text-2xl">📈</span>
+              </div>
+              <p className={`text-sm mb-4 ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>Predicts future health risks based on patterns</p>
+              <div className={`rounded-lg p-4 mb-4 ${isDarkMode ? 'bg-slate-800' : 'bg-slate-50'}`}>
+                <p className={`text-xs font-semibold mb-2 ${isDarkMode ? 'text-slate-300' : 'text-slate-700'}`}>30-Day Risk Assessment</p>
+                <div className={`w-full h-2 rounded-full ${isDarkMode ? 'bg-slate-700' : 'bg-slate-200'}`}>
+                  <div className="w-1/3 h-full rounded-full bg-gradient-to-r from-amber-500 to-amber-600"></div>
+                </div>
+                <p className={`text-sm font-bold mt-2 text-amber-600`}>32% Health Risk</p>
+              </div>
+              <p className={`text-sm ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>Recommendation: Monitor closely</p>
+            </div>
+          </div>
+
+          {/* Detailed Predictions */}
+          <div className={`rounded-xl p-6 border mb-8 ${isDarkMode ? 'bg-slate-900 border-slate-700' : 'bg-white border-slate-200'}`}>
+            <h3 className={`text-xl font-bold mb-6 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>Model Predictions & Probabilities</h3>
+            
+            <div className="space-y-4">
+              {/* Prediction 1 */}
+              <div className={`rounded-lg p-4 ${isDarkMode ? 'bg-slate-800 border border-slate-700' : 'bg-slate-50 border border-slate-200'}`}>
+                <div className="flex items-start justify-between mb-3">
+                  <div>
+                    <p className={`font-semibold ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>Heart Rate Elevation Risk</p>
+                    <p className={`text-sm ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>Based on SSL model analysis of 48h pattern</p>
+                  </div>
+                  <span className={`px-3 py-1 rounded-full text-sm font-bold ${isDarkMode ? 'bg-green-900 text-green-200' : 'bg-green-100 text-green-800'}`}>LOW</span>
+                </div>
+                <div className={`w-full h-2 rounded-full ${isDarkMode ? 'bg-slate-700' : 'bg-slate-300'}`}>
+                  <div className="w-1/4 h-full rounded-full bg-green-500"></div>
+                </div>
+                <p className={`text-sm mt-2 font-bold ${isDarkMode ? 'text-green-400' : 'text-green-600'}`}>23% Probability</p>
+              </div>
+
+              {/* Prediction 2 */}
+              <div className={`rounded-lg p-4 ${isDarkMode ? 'bg-slate-800 border border-slate-700' : 'bg-slate-50 border border-slate-200'}`}>
+                <div className="flex items-start justify-between mb-3">
+                  <div>
+                    <p className={`font-semibold ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>Sleep Quality Decline</p>
+                    <p className={`text-sm ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>Anomaly detector flagged unusual sleep patterns</p>
+                  </div>
+                  <span className={`px-3 py-1 rounded-full text-sm font-bold ${isDarkMode ? 'bg-yellow-900 text-yellow-200' : 'bg-yellow-100 text-yellow-800'}`}>MODERATE</span>
+                </div>
+                <div className={`w-full h-2 rounded-full ${isDarkMode ? 'bg-slate-700' : 'bg-slate-300'}`}>
+                  <div className="w-2/5 h-full rounded-full bg-yellow-500"></div>
+                </div>
+                <p className={`text-sm mt-2 font-bold ${isDarkMode ? 'text-yellow-400' : 'text-yellow-600'}`}>41% Probability</p>
+              </div>
+
+              {/* Prediction 3 */}
+              <div className={`rounded-lg p-4 ${isDarkMode ? 'bg-slate-800 border border-slate-700' : 'bg-slate-50 border border-slate-200'}`}>
+                <div className="flex items-start justify-between mb-3">
+                  <div>
+                    <p className={`font-semibold ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>Stress Level Increase</p>
+                    <p className={`text-sm ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>Risk predictor indicates potential stress buildup</p>
+                  </div>
+                  <span className={`px-3 py-1 rounded-full text-sm font-bold ${isDarkMode ? 'bg-blue-900 text-blue-200' : 'bg-blue-100 text-blue-800'}`}>LOW</span>
+                </div>
+                <div className={`w-full h-2 rounded-full ${isDarkMode ? 'bg-slate-700' : 'bg-slate-300'}`}>
+                  <div className="w-1/3 h-full rounded-full bg-blue-500"></div>
+                </div>
+                <p className={`text-sm mt-2 font-bold ${isDarkMode ? 'text-blue-400' : 'text-blue-600'}`}>34% Probability</p>
+              </div>
+
+              {/* Prediction 4 */}
+              <div className={`rounded-lg p-4 ${isDarkMode ? 'bg-slate-800 border border-slate-700' : 'bg-slate-50 border border-slate-200'}`}>
+                <div className="flex items-start justify-between mb-3">
+                  <div>
+                    <p className={`font-semibold ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>Blood Pressure Stability</p>
+                    <p className={`text-sm ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>Model predicts continued stable BP readings</p>
+                  </div>
+                  <span className={`px-3 py-1 rounded-full text-sm font-bold ${isDarkMode ? 'bg-green-900 text-green-200' : 'bg-green-100 text-green-800'}`}>HIGH</span>
+                </div>
+                <div className={`w-full h-2 rounded-full ${isDarkMode ? 'bg-slate-700' : 'bg-slate-300'}`}>
+                  <div className="w-4/5 h-full rounded-full bg-green-500"></div>
+                </div>
+                <p className={`text-sm mt-2 font-bold ${isDarkMode ? 'text-green-400' : 'text-green-600'}`}>78% Probability</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Model Captions & Explanations */}
+          <div className={`rounded-xl p-6 border ${isDarkMode ? 'bg-slate-900 border-slate-700' : 'bg-white border-slate-200'}`}>
+            <h3 className={`text-xl font-bold mb-6 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>Model Insights & Captions</h3>
+            
+            <div className="space-y-4">
+              {/* Insight 1 */}
+              <div className={`rounded-lg p-4 ${isDarkMode ? 'bg-cyan-900/30 border border-cyan-700/50' : 'bg-cyan-50 border border-cyan-200'}`}>
+                <p className={`text-sm font-semibold mb-2 ${isDarkMode ? 'text-cyan-400' : 'text-cyan-700'}`}>📌 SSL Model Caption</p>
+                <p className={`text-sm ${isDarkMode ? 'text-slate-300' : 'text-slate-700'}`}>
+                  The sensor data shows consistent patterns across multiple device readings. Heart rate variability is within expected ranges for the patient's activity level. Temperature fluctuations align with environmental changes rather than internal conditions.
+                </p>
+              </div>
+
+              {/* Insight 2 */}
+              <div className={`rounded-lg p-4 ${isDarkMode ? 'bg-orange-900/30 border border-orange-700/50' : 'bg-orange-50 border border-orange-200'}`}>
+                <p className={`text-sm font-semibold mb-2 ${isDarkMode ? 'text-orange-400' : 'text-orange-700'}`}>⚠️ Anomaly Detector Caption</p>
+                <p className={`text-sm ${isDarkMode ? 'text-slate-300' : 'text-slate-700'}`}>
+                  Minor deviation detected in SpO2 levels during peak activity hours, but within normal clinical thresholds. Recommend continued monitoring to establish patient baseline. No immediate intervention required.
+                </p>
+              </div>
+
+              {/* Insight 3 */}
+              <div className={`rounded-lg p-4 ${isDarkMode ? 'bg-purple-900/30 border border-purple-700/50' : 'bg-purple-50 border border-purple-200'}`}>
+                <p className={`text-sm font-semibold mb-2 ${isDarkMode ? 'text-purple-400' : 'text-purple-700'}`}>📈 Risk Predictor Caption</p>
+                <p className={`text-sm ${isDarkMode ? 'text-slate-300' : 'text-slate-700'}`}>
+                  Based on current trends, the model predicts 32% probability of health-related challenges in the next 30 days. Primary risk factors include the observed sleep pattern variations and slight stress indicators. Consider lifestyle adjustments and regular check-ins.
+                </p>
+              </div>
+
+              {/* Insight 4 */}
+              <div className={`rounded-lg p-4 ${isDarkMode ? 'bg-green-900/30 border border-green-700/50' : 'bg-green-50 border border-green-200'}`}>
+                <p className={`text-sm font-semibold mb-2 ${isDarkMode ? 'text-green-400' : 'text-green-700'}`}>✅ Overall Assessment</p>
+                <p className={`text-sm ${isDarkMode ? 'text-slate-300' : 'text-slate-700'}`}>
+                  Patient health status is generally stable. All major vital signs are within normal ranges. The ML models indicate good cardiovascular health with consistent exercise patterns. Continue current health regimen with focus on sleep quality improvement.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Model Performance Metrics */}
+          <div className={`rounded-xl p-6 border ${isDarkMode ? 'bg-slate-900 border-slate-700' : 'bg-white border-slate-200'}`}>
+            <h3 className={`text-lg font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>Model Performance</h3>
+            
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+              <div>
+                <p className={`text-sm ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>Accuracy</p>
+                <p className={`text-2xl font-bold text-cyan-600`}>94%</p>
+              </div>
+              <div>
+                <p className={`text-sm ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>Precision</p>
+                <p className={`text-2xl font-bold text-green-600`}>91%</p>
+              </div>
+              <div>
+                <p className={`text-sm ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>Recall</p>
+                <p className={`text-2xl font-bold text-blue-600`}>88%</p>
+              </div>
+              <div>
+                <p className={`text-sm ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>F1-Score</p>
+                <p className={`text-2xl font-bold text-purple-600`}>89%</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -997,62 +1631,93 @@ function LogsSection({ isDarkMode, selectedPatient, setSelectedPatient }: any) {
 }
 
 function AlertsSection({ isDarkMode, selectedPatient, setSelectedPatient }: any) {
+  const [alertsTab, setAlertsTab] = useState('devices');
+  
   if (!selectedPatient) {
     return <NoPatientMessage isDarkMode={isDarkMode} />;
   }
 
-  const getAlerts = (patientId: number) => {
-    const alertsMap: any = {
-      1: [ // Ahmed - Hypertension
-        { id: 1, type: 'info', message: 'Scheduled annual checkup due', timestamp: '10:15 AM', isAnomaly: false },
-        { id: 2, type: 'warning', message: 'Blood Pressure: 138/85 mmHg - Slightly elevated', timestamp: '09:50 AM', isAnomaly: true },
-        { id: 3, type: 'info', message: 'Medication refill reminder: 5 days left', timestamp: '08:00 AM', isAnomaly: false },
+  // Device & Data Alerts
+  const getDeviceAlerts = (patientId: number) => {
+    const deviceAlertsMap: any = {
+      1: [ // Ahmed
+        { id: 1, type: 'warning', message: 'Apple Watch: Disconnected for 2 hours', timestamp: '02:15 PM', category: 'Device Offline' },
+        { id: 2, type: 'critical', message: 'Missing: Blood Pressure data for last 3 days', timestamp: '10:30 AM', category: 'Data Gap' },
+        { id: 3, type: 'info', message: 'iPhone sync: Pending data upload', timestamp: '09:00 AM', category: 'Sync Pending' },
       ],
-      2: [ // Fatima - Diabetes
-        { id: 1, type: 'critical', message: 'Blood Glucose: 145 mg/dL - ELEVATED', timestamp: '08:15 AM', isAnomaly: true },
-        { id: 2, type: 'warning', message: 'Fasting glucose trending high this week', timestamp: 'Yesterday 3:30 PM', isAnomaly: true },
-        { id: 3, type: 'info', message: 'HbA1c test due: Schedule with Dr. Ahmed', timestamp: 'Yesterday 2:00 PM', isAnomaly: false },
+      2: [ // Fatima
+        { id: 1, type: 'critical', message: 'Glucose Monitor: Battery low (8%)', timestamp: '11:45 AM', category: 'Device Alert' },
+        { id: 2, type: 'warning', message: 'Missing: Glucose readings since yesterday', timestamp: '08:00 AM', category: 'Data Gap' },
+        { id: 3, type: 'warning', message: 'Patient has not entered meal data in 2 days', timestamp: 'Yesterday 3:00 PM', category: 'User Input Needed' },
       ],
-      3: [ // Mohammed - Fitness
-        { id: 1, type: 'info', message: 'Excellent weekly performance: 52,000+ steps', timestamp: '10:00 PM', isAnomaly: false },
-        { id: 2, type: 'info', message: 'New personal record: 12km in one session', timestamp: 'Yesterday 7:00 PM', isAnomaly: false },
-        { id: 3, type: 'warning', message: 'Heart rate spike detected during workout (156 BPM)', timestamp: 'Yesterday 6:45 PM', isAnomaly: true },
+      3: [ // Mohammed
+        { id: 1, type: 'info', message: 'Fitbit: Sync completed successfully', timestamp: '10:00 PM', category: 'Device Status' },
+        { id: 2, type: 'info', message: 'All devices connected and data current', timestamp: 'Today 8:00 AM', category: 'Device Status' },
       ],
-      4: [ // Sarah - Recovery
-        { id: 1, type: 'info', message: 'Post-operative day 15: Recovery on track', timestamp: '11:00 AM', isAnomaly: false },
-        { id: 2, type: 'warning', message: 'Mild swelling detected - Monitor daily', timestamp: '09:30 AM', isAnomaly: true },
-        { id: 3, type: 'info', message: 'Physical therapy session tomorrow at 2:00 PM', timestamp: 'Yesterday', isAnomaly: false },
+      4: [ // Sarah
+        { id: 1, type: 'warning', message: 'Oura Ring: Low connectivity - reconnecting', timestamp: '09:30 AM', category: 'Device Issue' },
+        { id: 2, type: 'info', message: 'Patient needs to verify device connection', timestamp: 'Yesterday 4:00 PM', category: 'Action Required' },
       ],
-      5: [ // Ali - Cholesterol
-        { id: 1, type: 'critical', message: 'Total Cholesterol: 245 mg/dL - HIGH', timestamp: '10:00 AM', isAnomaly: true },
-        { id: 2, type: 'critical', message: 'LDL Cholesterol: 165 mg/dL - VERY HIGH', timestamp: '10:00 AM', isAnomaly: true },
-        { id: 3, type: 'warning', message: 'BP elevated: 142/88 mmHg - ANOMALY DETECTED', timestamp: '09:50 AM', isAnomaly: true },
+      5: [ // Ali
+        { id: 1, type: 'critical', message: 'BP Monitor: Disconnected since 2 days ago', timestamp: '10:00 AM', category: 'Device Offline' },
+        { id: 2, type: 'critical', message: 'Missing: Blood Pressure readings (critical for patient)', timestamp: '09:00 AM', category: 'Data Gap' },
+        { id: 3, type: 'warning', message: 'Patient has skipped medication log entries', timestamp: 'Yesterday', category: 'User Input Needed' },
       ],
     };
-    return alertsMap[patientId] || alertsMap[1];
+    return deviceAlertsMap[patientId] || deviceAlertsMap[1];
   };
 
-  const alerts = getAlerts(selectedPatient.id);
+  // Health Alerts
+  const getHealthAlerts = (patientId: number) => {
+    const healthAlertsMap: any = {
+      1: [ // Ahmed
+        { id: 1, type: 'warning', message: 'Blood Pressure: 138/85 mmHg - Slightly elevated', timestamp: '10:15 AM', severity: 'Moderate' },
+        { id: 2, type: 'info', message: 'Heart Rate: Normal range (72 BPM)', timestamp: '10:10 AM', severity: 'Low' },
+        { id: 3, type: 'info', message: 'Scheduled annual checkup due next week', timestamp: '08:00 AM', severity: 'Low' },
+      ],
+      2: [ // Fatima
+        { id: 1, type: 'critical', message: 'Blood Glucose: 145 mg/dL - ELEVATED', timestamp: '08:15 AM', severity: 'High' },
+        { id: 2, type: 'warning', message: 'Fasting glucose trending high this week', timestamp: 'Yesterday 3:30 PM', severity: 'Moderate' },
+        { id: 3, type: 'info', message: 'HbA1c test due: Schedule with specialist', timestamp: 'Yesterday 2:00 PM', severity: 'Low' },
+      ],
+      3: [ // Mohammed
+        { id: 1, type: 'info', message: 'Excellent weekly performance: 52,000+ steps', timestamp: '10:00 PM', severity: 'Low' },
+        { id: 2, type: 'warning', message: 'Heart rate spike during workout (156 BPM) - Monitor', timestamp: 'Yesterday 6:45 PM', severity: 'Moderate' },
+        { id: 3, type: 'info', message: 'Recovery metrics: Excellent (7.2h sleep)', timestamp: 'Yesterday', severity: 'Low' },
+      ],
+      4: [ // Sarah
+        { id: 1, type: 'info', message: 'Post-operative day 15: Recovery on track', timestamp: '11:00 AM', severity: 'Low' },
+        { id: 2, type: 'warning', message: 'Mild swelling detected - Continue monitoring', timestamp: '09:30 AM', severity: 'Moderate' },
+        { id: 3, type: 'info', message: 'Pain level: Improving, medication schedule optimal', timestamp: 'Yesterday', severity: 'Low' },
+      ],
+      5: [ // Ali
+        { id: 1, type: 'critical', message: 'Total Cholesterol: 245 mg/dL - HIGH', timestamp: '10:00 AM', severity: 'High' },
+        { id: 2, type: 'critical', message: 'LDL Cholesterol: 165 mg/dL - VERY HIGH', timestamp: '10:00 AM', severity: 'High' },
+        { id: 3, type: 'warning', message: 'BP elevated: 142/88 mmHg - Needs intervention', timestamp: '09:50 AM', severity: 'Moderate' },
+      ],
+    };
+    return healthAlertsMap[patientId] || healthAlertsMap[1];
+  };
 
-  return (
-    <div>
-      <h2 className={`text-3xl font-bold mb-6 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
-        Alerts & Anomalies - <span className="text-cyan-600">{selectedPatient.name}</span>
-      </h2>
-      <div className="space-y-4">
-        {alerts.map((alert) => (
-          <div
-            key={alert.id}
-            className={`rounded-xl p-5 border-l-4 flex items-start justify-between ${
-              alert.type === 'critical'
-                ? `border-red-500 ${isDarkMode ? 'bg-red-900 bg-opacity-30' : 'bg-red-50'}`
-                : alert.type === 'warning'
-                ? `border-yellow-500 ${isDarkMode ? 'bg-yellow-900 bg-opacity-30' : 'bg-yellow-50'}`
-                : `border-blue-500 ${isDarkMode ? 'bg-blue-900 bg-opacity-30' : 'bg-blue-50'}`
-            }`}
-          >
-            <div className="flex-1">
-              <p className={`font-semibold text-lg ${
+  const deviceAlerts = getDeviceAlerts(selectedPatient.id);
+  const healthAlerts = getHealthAlerts(selectedPatient.id);
+
+  const renderAlerts = (alerts: any[]) => (
+    <div className="space-y-4">
+      {alerts.map((alert) => (
+        <div
+          key={alert.id}
+          className={`rounded-xl p-5 border-l-4 flex items-start justify-between ${
+            alert.type === 'critical'
+              ? `border-red-500 ${isDarkMode ? 'bg-red-900 bg-opacity-30' : 'bg-red-50'}`
+              : alert.type === 'warning'
+              ? `border-yellow-500 ${isDarkMode ? 'bg-yellow-900 bg-opacity-30' : 'bg-yellow-50'}`
+              : `border-blue-500 ${isDarkMode ? 'bg-blue-900 bg-opacity-30' : 'bg-blue-50'}`
+          }`}
+        >
+          <div className="flex-1">
+            <div className="flex items-center gap-3 mb-2">
+              <p className={`font-semibold ${
                 alert.type === 'critical'
                   ? isDarkMode ? 'text-red-400' : 'text-red-800'
                   : alert.type === 'warning'
@@ -1061,23 +1726,83 @@ function AlertsSection({ isDarkMode, selectedPatient, setSelectedPatient }: any)
               }`}>
                 {alert.message}
               </p>
-              {alert.isAnomaly && (
-                <div className="mt-3 flex flex-wrap gap-2">
-                  <span className="text-xs font-bold px-3 py-1 rounded-full bg-orange-100 text-orange-800">
-                    🚨 ANOMALY DETECTED
-                  </span>
-                  <span className="text-xs font-bold px-3 py-1 rounded-full bg-purple-100 text-purple-800">
-                    ⚡ ACTION RECOMMENDED
-                  </span>
-                </div>
+              {alert.category && (
+                <span className={`text-xs font-semibold px-2 py-1 rounded-full whitespace-nowrap ${
+                  alert.type === 'critical' ? 'bg-red-100 text-red-800' :
+                  alert.type === 'warning' ? 'bg-yellow-100 text-yellow-800' : 'bg-blue-100 text-blue-800'
+                }`}>
+                  {alert.category}
+                </span>
+              )}
+              {alert.severity && (
+                <span className={`text-xs font-semibold px-2 py-1 rounded-full whitespace-nowrap ${
+                  alert.severity === 'High' ? 'bg-red-100 text-red-800' :
+                  alert.severity === 'Moderate' ? 'bg-yellow-100 text-yellow-800' : 'bg-green-100 text-green-800'
+                }`}>
+                  {alert.severity}
+                </span>
               )}
             </div>
-            <span className={`text-xs whitespace-nowrap ml-4 font-semibold ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>
-              {alert.timestamp}
-            </span>
           </div>
-        ))}
+          <span className={`text-xs whitespace-nowrap ml-4 font-semibold ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>
+            {alert.timestamp}
+          </span>
+        </div>
+      ))}
+    </div>
+  );
+
+  return (
+    <div>
+      <h2 className={`text-3xl font-bold mb-6 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
+        Alerts - <span className="text-cyan-600">{selectedPatient.name}</span>
+      </h2>
+
+      {/* Alert Tabs */}
+      <div className="flex gap-2 mb-6 border-b" style={{ borderColor: isDarkMode ? '#475569' : '#e2e8f0' }}>
+        <button
+          onClick={() => setAlertsTab('devices')}
+          className={`px-6 py-3 font-semibold text-sm transition-all border-b-2 ${
+            alertsTab === 'devices'
+              ? `${isDarkMode ? 'border-cyan-600 text-cyan-600' : 'border-cyan-500 text-cyan-600'}`
+              : `border-transparent ${isDarkMode ? 'text-slate-400 hover:text-slate-300' : 'text-slate-600 hover:text-slate-900'}`
+          }`}
+        >
+          Device & Data Alerts
+        </button>
+        <button
+          onClick={() => setAlertsTab('health')}
+          className={`px-6 py-3 font-semibold text-sm transition-all border-b-2 ${
+            alertsTab === 'health'
+              ? `${isDarkMode ? 'border-cyan-600 text-cyan-600' : 'border-cyan-500 text-cyan-600'}`
+              : `border-transparent ${isDarkMode ? 'text-slate-400 hover:text-slate-300' : 'text-slate-600 hover:text-slate-900'}`
+          }`}
+        >
+          Health Alerts
+        </button>
       </div>
+
+      {/* Device & Data Alerts Tab */}
+      {alertsTab === 'devices' && (
+        <div>
+          {deviceAlerts.length > 0 ? renderAlerts(deviceAlerts) : (
+            <div className={`text-center py-12 ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>
+              <p className="text-sm">✓ All devices connected and data is current</p>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Health Alerts Tab */}
+      {alertsTab === 'health' && (
+        <div>
+          {healthAlerts.length > 0 ? renderAlerts(healthAlerts) : (
+            <div className={`text-center py-12 ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>
+              <p className="text-sm">✓ No health alerts at this time</p>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }
@@ -1251,109 +1976,381 @@ function MLModelsSection({ isDarkMode, selectedPatient }: any) {
   return <MLModels selectedPatient={selectedPatient} isDarkMode={isDarkMode} />;
 }
 
-function WearablesSection({ isDarkMode }: any) {
-  const [devices, setDevices] = useState([
-    { id: 1, name: 'Apple Watch Series 8', type: 'Smartwatch', status: 'connected', battery: '85%', lastSync: '2 min ago' },
-    { id: 2, name: 'Fitbit Charge 5', type: 'Fitness Tracker', status: 'connected', battery: '72%', lastSync: '5 min ago' },
-    { id: 3, name: 'Oura Ring', type: 'Health Ring', status: 'connected', battery: '65%', lastSync: '10 min ago' },
-  ]);
+function WearablesSection({ isDarkMode, selectedPatient, setSelectedPatient }: any) {
+  const [activeTab, setActiveTab] = useState('devices');
+  const [expandedDevice, setExpandedDevice] = useState<number | null>(null);
+  
+  // Survey data mapping
+  const patientSurveys: Record<number, any[]> = {
+    1: [ // Ahmed
+      { id: 1, title: 'Symptom Assessment', date: '2 days ago', status: 'completed', score: '8/10', topics: ['Fatigue', 'Sleep Quality', 'Exercise Impact'] },
+      { id: 2, title: 'Lifestyle Check-in', date: '1 week ago', status: 'completed', score: '7/10', topics: ['Diet', 'Activity Level', 'Stress'] },
+      { id: 3, title: 'Medication Adherence', date: 'pending', status: 'pending', score: '-', topics: ['Dosage', 'Side Effects', 'Schedule'] },
+    ],
+    2: [ // Fatima
+      { id: 1, title: 'Glucose Mgmt Survey', date: 'today', status: 'completed', score: '9/10', topics: ['Blood Sugar Control', 'Diet Compliance', 'HbA1c Goals'] },
+      { id: 2, title: 'Dietary Habits', date: '3 days ago', status: 'completed', score: '6/10', topics: ['Carb Intake', 'Meal Timing', 'Water'] },
+    ],
+    3: [ // Mohammed
+      { id: 1, title: 'Fitness Goals', date: 'today', status: 'completed', score: '9/10', topics: ['Exercise Type', 'Frequency', 'Recovery'] },
+      { id: 2, title: 'Recovery Assessment', date: '5 days ago', status: 'completed', score: '8/10', topics: ['Rest', 'Soreness', 'Energy Levels'] },
+    ],
+    4: [ // Sarah
+      { id: 1, title: 'Sleep Quality', date: 'yesterday', status: 'completed', score: '8/10', topics: ['Hours', 'Quality', 'Consistency'] },
+      { id: 2, title: 'Mental Health Check', date: '1 week ago', status: 'completed', score: '7/10', topics: ['Mood', 'Anxiety', 'Stress'] },
+      { id: 3, title: 'Monthly Health Review', date: 'pending', status: 'pending', score: '-', topics: ['Overall Well-being', 'Goals', 'Concerns'] },
+    ],
+    5: [ // Ali
+      { id: 1, title: 'BP Management', date: '2 days ago', status: 'completed', score: '7/10', topics: ['BP Readings', 'Medication', 'Lifestyle'] },
+      { id: 2, title: 'Risk Factors', date: '2 weeks ago', status: 'completed', score: '6/10', topics: ['Cholesterol', 'Weight', 'Sodium'] },
+    ],
+  };
+
+  // Clinical assessments data mapping
+  const patientAssessments: Record<number, any[]> = {
+    1: [ // Ahmed
+      { id: 1, type: 'Cardiovascular', date: '1 week ago', result: 'Normal', notes: 'HR stable, No murmurs', specialist: 'Dr. Sarah' },
+      { id: 2, type: 'Metabolic', date: '2 weeks ago', result: 'Good', notes: 'Glucose 95, Lipids stable', specialist: 'Dr. Ahmed' },
+      { id: 3, type: 'Sleep Study', date: 'scheduled', result: 'Pending', notes: 'AHI assessment', specialist: 'Sleep Lab' },
+    ],
+    2: [ // Fatima
+      { id: 1, type: 'Endocrine', date: '3 days ago', result: 'Monitor', notes: 'HbA1c 7.2%, needs review', specialist: 'Dr. Fatih' },
+      { id: 2, type: 'Renal Function', date: '1 week ago', result: 'Normal', notes: 'Creatinine OK', specialist: 'Lab' },
+      { id: 3, type: 'Eye Exam', date: '2 months ago', result: 'No issues', notes: 'Retinopathy screening clear', specialist: 'Optometry' },
+    ],
+    3: [ // Mohammed
+      { id: 1, type: 'Musculoskeletal', date: '5 days ago', result: 'Good', notes: 'Flexibility excellent', specialist: 'PT' },
+      { id: 2, type: 'Sports Medicine', date: 'scheduled', result: 'Pending', notes: 'Injury prevention', specialist: 'Dr. Mike' },
+    ],
+    4: [ // Sarah
+      { id: 1, type: 'General Wellness', date: '1 week ago', result: 'Excellent', notes: 'All vitals normal, fitness level high', specialist: 'Dr. Johnson' },
+      { id: 2, type: 'Mental Health', date: '2 weeks ago', result: 'Good', notes: 'Mood stable, no concerns', specialist: 'Psych' },
+    ],
+    5: [ // Ali
+      { id: 1, type: 'Cardiovascular', date: '1 week ago', result: 'Monitor', notes: 'BP avg 145/92, needs control', specialist: 'Cardio' },
+      { id: 2, type: 'Lipid Panel', date: '2 weeks ago', result: 'High', notes: 'Cholesterol 245, statin needed', specialist: 'Lab' },
+      { id: 3, type: 'ECG', date: '1 week ago', result: 'Normal', notes: 'No arrhythmia', specialist: 'Cardio' },
+    ],
+  };
+  
+  // Patient devices mapping
+  const patientDevices: Record<number, any[]> = {
+    1: [ // Ahmed Hassan
+      { 
+        id: 1, 
+        name: 'Apple Watch Series 8', 
+        type: 'Smartwatch', 
+        status: 'connected', 
+        battery: '85%', 
+        lastSync: '2 min ago',
+        dataPoints: ['Heart Rate', 'Blood Pressure', 'Sleep', 'Steps', 'Calories'],
+        frequency: 'Real-time'
+      },
+      { 
+        id: 2, 
+        name: 'iPhone Health App', 
+        type: 'Mobile Phone', 
+        status: 'connected', 
+        battery: '72%', 
+        lastSync: '1 min ago',
+        dataPoints: ['Steps', 'Distance', 'Flights Climbed', 'Sleep', 'Workout Data'],
+        frequency: 'Real-time'
+      },
+    ],
+    2: [ // Fatima Al-Dosari
+      { 
+        id: 3, 
+        name: 'Continuous Glucose Monitor', 
+        type: 'Medical Device', 
+        status: 'connected', 
+        battery: '93%', 
+        lastSync: '5 min ago',
+        dataPoints: ['Glucose Level', 'Trend', 'Alerts'],
+        frequency: 'Every 5 minutes'
+      },
+      { 
+        id: 4, 
+        name: 'Samsung Galaxy Watch 5', 
+        type: 'Smartwatch', 
+        status: 'connected', 
+        battery: '65%', 
+        lastSync: '3 min ago',
+        dataPoints: ['Heart Rate', 'SpO2', 'ECG', 'Sleep', 'Steps'],
+        frequency: 'Real-time'
+      },
+    ],
+    3: [ // Mohammed Al-Rashid
+      { 
+        id: 5, 
+        name: 'Fitbit Charge 5', 
+        type: 'Fitness Tracker', 
+        status: 'connected', 
+        battery: '78%', 
+        lastSync: '2 min ago',
+        dataPoints: ['Heart Rate Variability', 'Steps', 'Distance', 'Calories', 'Active Minutes'],
+        frequency: 'Real-time'
+      },
+    ],
+    4: [ // Sarah Johnson
+      { 
+        id: 6, 
+        name: 'Oura Ring Gen 3', 
+        type: 'Health Ring', 
+        status: 'connected', 
+        battery: '88%', 
+        lastSync: '1 min ago',
+        dataPoints: ['Sleep Quality', 'Heart Rate Variability', 'Body Temperature', 'Activity'],
+        frequency: 'Real-time'
+      },
+    ],
+    5: [ // Ali Al-Mansouri
+      { 
+        id: 7, 
+        name: 'Omron Blood Pressure Monitor', 
+        type: 'Medical Device', 
+        status: 'connected', 
+        battery: '92%', 
+        lastSync: '10 min ago',
+        dataPoints: ['Systolic BP', 'Diastolic BP', 'Heart Rate', 'Irregularity Detection'],
+        frequency: 'Manual'
+      },
+    ],
+  };
+
+  const devices = selectedPatient ? patientDevices[selectedPatient.id] || [] : [];
+
   const [showAddModal, setShowAddModal] = useState(false);
 
   const removeDevice = (id: number) => {
-    setDevices(devices.filter(d => d.id !== id));
+    // In real app, would update state properly
   };
+
+  if (!selectedPatient) {
+    return <NoPatientMessage isDarkMode={isDarkMode} />;
+  }
 
   return (
     <div>
-      <h2 className={`text-3xl font-bold mb-8 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>Connected Wearables & Devices</h2>
-      
-      <div className="space-y-4 mb-8">
-        {devices.map((device) => (
-          <div key={device.id} className={`rounded-xl p-6 border ${isDarkMode ? 'bg-slate-900 border-slate-700' : 'bg-white border-slate-200'}`}>
-            <div className="flex items-start justify-between">
-              <div className="flex-1">
-                <div className="flex items-center gap-3 mb-2">
-                  <Watch className="w-6 h-6 text-cyan-600" />
-                  <div>
-                    <h3 className={`font-bold text-lg ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>{device.name}</h3>
-                    <p className={`text-sm ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>{device.type}</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-4 mt-3 flex-wrap">
-                  <span className={`text-xs font-semibold px-3 py-1 rounded-full ${device.status === 'connected' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
-                    ● {device.status.toUpperCase()}
-                  </span>
-                  <span className={`text-sm ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>🔋 Battery: {device.battery}</span>
-                  <span className={`text-sm ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>⏱️ Last Sync: {device.lastSync}</span>
-                </div>
-              </div>
-              <button 
-                onClick={() => removeDevice(device.id)}
-                className="px-3 py-1 text-sm bg-red-600 text-white rounded hover:bg-red-700"
-              >
-                Disconnect
-              </button>
-            </div>
-          </div>
-        ))}
+      <h2 className={`text-3xl font-bold mb-2 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
+        Connected Devices - <span className="text-cyan-600">{selectedPatient.name}</span>
+      </h2>
+      <p className={`text-sm mb-6 ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>
+        View devices, surveys, and clinical data
+      </p>
+
+      {/* Tab Switcher */}
+      <div className="flex gap-2 mb-8 border-b" style={{ borderColor: isDarkMode ? '#475569' : '#e2e8f0' }}>
+        <button
+          onClick={() => setActiveTab('devices')}
+          className={`px-6 py-3 font-semibold text-sm transition-all border-b-2 ${
+            activeTab === 'devices'
+              ? `${isDarkMode ? 'border-cyan-600 text-cyan-600' : 'border-cyan-500 text-cyan-600'}`
+              : `border-transparent ${isDarkMode ? 'text-slate-400 hover:text-slate-300' : 'text-slate-600 hover:text-slate-900'}`
+          }`}
+        >
+          Connected Devices
+        </button>
+        <button
+          onClick={() => setActiveTab('surveys')}
+          className={`px-6 py-3 font-semibold text-sm transition-all border-b-2 ${
+            activeTab === 'surveys'
+              ? `${isDarkMode ? 'border-cyan-600 text-cyan-600' : 'border-cyan-500 text-cyan-600'}`
+              : `border-transparent ${isDarkMode ? 'text-slate-400 hover:text-slate-300' : 'text-slate-600 hover:text-slate-900'}`
+          }`}
+        >
+          Surveys
+        </button>
+        <button
+          onClick={() => setActiveTab('assessments')}
+          className={`px-6 py-3 font-semibold text-sm transition-all border-b-2 ${
+            activeTab === 'assessments'
+              ? `${isDarkMode ? 'border-cyan-600 text-cyan-600' : 'border-cyan-500 text-cyan-600'}`
+              : `border-transparent ${isDarkMode ? 'text-slate-400 hover:text-slate-300' : 'text-slate-600 hover:text-slate-900'}`
+          }`}
+        >
+          Clinical Assessments
+        </button>
       </div>
 
-      <button 
-        onClick={() => setShowAddModal(true)}
-        className="w-full px-6 py-3 bg-cyan-600 text-white rounded-lg hover:bg-cyan-700 font-semibold flex items-center justify-center gap-2"
-      >
-        <Plus className="w-5 h-5" />
-        Add New Wearable
-      </button>
+      {/* Connected Devices Tab */}
+      {activeTab === 'devices' && (
+        <div>
+          <div className="space-y-4 mb-8">
+            {devices.map((device) => (
+              <div key={device.id} className={`rounded-xl border transition-all ${isDarkMode ? 'bg-slate-900 border-slate-700' : 'bg-white border-slate-200'}`}>
+                {/* Device Header */}
+                <button
+                  onClick={() => setExpandedDevice(expandedDevice === device.id ? null : device.id)}
+                  className="w-full p-6 text-left hover:bg-opacity-80 transition-all"
+                >
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-3 mb-2">
+                        <Watch className="w-6 h-6 text-cyan-600" />
+                        <div>
+                          <h3 className={`font-bold text-lg ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>{device.name}</h3>
+                          <p className={`text-sm ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>{device.type}</p>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-4 mt-3 flex-wrap">
+                        <span className={`text-xs font-semibold px-3 py-1 rounded-full ${device.status === 'connected' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+                          ● {device.status.toUpperCase()}
+                        </span>
+                        <span className={`text-sm ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>🔋 {device.battery}</span>
+                        <span className={`text-sm ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>⏱️ {device.lastSync}</span>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <ChevronDown 
+                        className={`w-5 h-5 transition-transform ${expandedDevice === device.id ? 'rotate-180' : ''} ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}
+                      />
+                    </div>
+                  </div>
+                </button>
 
-      {/* Add Device Modal */}
-      {showAddModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className={`rounded-xl p-6 w-96 ${isDarkMode ? 'bg-slate-800' : 'bg-white'}`}>
-            <div className="flex items-center justify-between mb-4">
-              <h3 className={`text-lg font-bold ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>Add Wearable Device</h3>
-              <button onClick={() => setShowAddModal(false)} className={`p-1 rounded hover:${isDarkMode ? 'bg-slate-700' : 'bg-slate-100'}`}>
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-            <div className="space-y-4">
-              <div>
-                <label className={`block text-sm font-semibold mb-2 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>Device Name</label>
-                <input
-                  type="text"
-                  placeholder="e.g., Apple Watch Series 8"
-                  className={`w-full px-3 py-2 rounded-lg border ${isDarkMode ? 'bg-slate-700 border-slate-600 text-white' : 'bg-white border-slate-300 text-slate-900'}`}
-                />
+                {/* Expanded Details */}
+                {expandedDevice === device.id && (
+                  <div className={`border-t px-6 py-4 ${isDarkMode ? 'border-slate-700 bg-slate-800/50' : 'border-slate-200 bg-slate-50'}`}>
+                    <div className="grid md:grid-cols-2 gap-6">
+                      {/* Data Types */}
+                      <div>
+                        <h4 className={`font-semibold text-sm mb-3 ${isDarkMode ? 'text-slate-300' : 'text-slate-900'}`}>
+                          📊 Data Metrics
+                        </h4>
+                        <div className="space-y-2">
+                          {device.dataPoints.map((point: string, idx: number) => (
+                            <div key={idx} className="flex items-center gap-2">
+                              <div className="w-2 h-2 rounded-full bg-cyan-600"></div>
+                              <span className={`text-sm ${isDarkMode ? 'text-slate-400' : 'text-slate-700'}`}>{point}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Device Details */}
+                      <div>
+                        <h4 className={`font-semibold text-sm mb-3 ${isDarkMode ? 'text-slate-300' : 'text-slate-900'}`}>
+                          ⚙️ Settings
+                        </h4>
+                        <div className="space-y-2 text-sm">
+                          <div className="flex justify-between">
+                            <span className={isDarkMode ? 'text-slate-400' : 'text-slate-600'}>Type:</span>
+                            <span className={isDarkMode ? 'text-slate-200' : 'text-slate-900'}>{device.type}</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span className={isDarkMode ? 'text-slate-400' : 'text-slate-600'}>Frequency:</span>
+                            <span className={isDarkMode ? 'text-slate-200' : 'text-slate-900'}>{device.frequency}</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span className={isDarkMode ? 'text-slate-400' : 'text-slate-600'}>Battery:</span>
+                            <span className={isDarkMode ? 'text-slate-200' : 'text-slate-900'}>{device.battery}</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span className={isDarkMode ? 'text-slate-400' : 'text-slate-600'}>Status:</span>
+                            <span className="font-semibold text-green-600">● Active</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Action Buttons */}
+                    <div className="flex gap-3 mt-4 pt-4 border-t" style={{borderTopColor: isDarkMode ? '#475569' : '#e2e8f0'}}>
+                      <button className={`flex-1 px-4 py-2 rounded-lg font-semibold transition-colors ${isDarkMode ? 'bg-cyan-600 text-white hover:bg-cyan-700' : 'bg-cyan-600 text-white hover:bg-cyan-700'}`}>
+                        View Data
+                      </button>
+                      <button 
+                        onClick={() => removeDevice(device.id)}
+                        className="px-4 py-2 text-sm bg-red-600 text-white rounded-lg hover:bg-red-700 font-semibold"
+                      >
+                        Remove
+                      </button>
+                    </div>
+                  </div>
+                )}
               </div>
-              <div>
-                <label className={`block text-sm font-semibold mb-2 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>Device Type</label>
-                <select className={`w-full px-3 py-2 rounded-lg border ${isDarkMode ? 'bg-slate-700 border-slate-600 text-white' : 'bg-white border-slate-300 text-slate-900'}`}>
-                  <option>Smartwatch</option>
-                  <option>Fitness Tracker</option>
-                  <option>Health Ring</option>
-                  <option>Blood Pressure Monitor</option>
-                  <option>Glucose Monitor</option>
-                  <option>Sleep Tracker</option>
-                </select>
-              </div>
-              <div className="flex gap-3 pt-4">
-                <button 
-                  onClick={() => {
-                    setShowAddModal(false);
-                  }}
-                  className="flex-1 px-4 py-2 bg-cyan-600 text-white rounded-lg hover:bg-cyan-700 font-semibold"
-                >
-                  Connect Device
-                </button>
-                <button 
-                  onClick={() => setShowAddModal(false)}
-                  className={`flex-1 px-4 py-2 rounded-lg font-semibold ${isDarkMode ? 'bg-slate-700 text-white hover:bg-slate-600' : 'bg-slate-200 text-slate-900 hover:bg-slate-300'}`}
-                >
-                  Cancel
-                </button>
-              </div>
-            </div>
+            ))}
           </div>
+
+          <button 
+            onClick={() => setShowAddModal(true)}
+            className="w-full px-6 py-3 bg-cyan-600 text-white rounded-lg hover:bg-cyan-700 font-semibold flex items-center justify-center gap-2"
+          >
+            <Plus className="w-5 h-5" />
+            Add Device
+          </button>
+        </div>
+      )}
+
+      {/* Surveys Tab */}
+      {activeTab === 'surveys' && (
+        <div className="space-y-4">
+          {patientSurveys[selectedPatient?.id]?.length > 0 ? (
+            patientSurveys[selectedPatient?.id].map((survey) => (
+              <div key={survey.id} className={`rounded-xl p-6 border ${isDarkMode ? 'bg-slate-900 border-slate-700' : 'bg-white border-slate-200'}`}>
+                <div className="flex items-start justify-between mb-3">
+                  <div className="flex-1">
+                    <h3 className={`font-bold text-lg ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>{survey.title}</h3>
+                    <p className={`text-sm mt-1 ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>{survey.date}</p>
+                  </div>
+                  <span className={`px-3 py-1 rounded-full text-sm font-bold ${
+                    survey.status === 'completed' 
+                      ? 'bg-green-100 text-green-800'
+                      : 'bg-yellow-100 text-yellow-800'
+                  }`}>
+                    {survey.status === 'completed' ? '✓ Done' : '⏳ Pending'}
+                  </span>
+                </div>
+                {survey.status === 'completed' && (
+                  <div className="mb-3">
+                    <p className={`text-sm font-semibold text-cyan-600`}>Score: {survey.score}</p>
+                  </div>
+                )}
+                <div className="flex flex-wrap gap-2">
+                  {survey.topics.map((topic: string, idx: number) => (
+                    <span key={idx} className={`text-xs px-3 py-1 rounded-full ${isDarkMode ? 'bg-slate-700 text-slate-300' : 'bg-slate-100 text-slate-700'}`}>
+                      {topic}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))
+          ) : (
+            <div className={`rounded-xl p-12 text-center ${isDarkMode ? 'bg-slate-900 border border-slate-700' : 'bg-slate-50 border border-slate-200'}`}>
+              <p className={`text-lg ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>No surveys yet</p>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Clinical Assessments Tab */}
+      {activeTab === 'assessments' && (
+        <div className="space-y-4">
+          {patientAssessments[selectedPatient?.id]?.length > 0 ? (
+            patientAssessments[selectedPatient?.id].map((assessment) => (
+              <div key={assessment.id} className={`rounded-xl p-6 border ${isDarkMode ? 'bg-slate-900 border-slate-700' : 'bg-white border-slate-200'}`}>
+                <div className="flex items-start justify-between mb-3">
+                  <div className="flex-1">
+                    <h3 className={`font-bold text-lg ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>{assessment.type}</h3>
+                    <p className={`text-sm mt-1 ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>{assessment.date} • {assessment.specialist}</p>
+                  </div>
+                  <span className={`px-3 py-1 rounded-full text-sm font-bold ${
+                    assessment.result === 'Normal' || assessment.result === 'Good' || assessment.result === 'Excellent'
+                      ? 'bg-green-100 text-green-800'
+                      : assessment.result === 'Monitor' || assessment.result === 'High'
+                      ? 'bg-yellow-100 text-yellow-800'
+                      : 'bg-gray-100 text-gray-800'
+                  }`}>
+                    {assessment.result}
+                  </span>
+                </div>
+                <p className={`text-sm ${isDarkMode ? 'text-slate-300' : 'text-slate-700'}`}>{assessment.notes}</p>
+              </div>
+            ))
+          ) : (
+            <div className={`rounded-xl p-12 text-center ${isDarkMode ? 'bg-slate-900 border border-slate-700' : 'bg-slate-50 border border-slate-200'}`}>
+              <p className={`text-lg ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>No assessments yet</p>
+            </div>
+          )}
         </div>
       )}
     </div>
@@ -1592,7 +2589,7 @@ export default function DashboardPage() {
   const renderContent = () => {
     // If settings is open, show account settings panel
     if (showSettings) {
-      return <AccountSettingsPanel isDarkMode={isDarkMode} />;
+      return <AccountSettingsPanel isDarkMode={isDarkMode} setShowSettings={setShowSettings} />;
     }
 
     switch (activeTab) {
@@ -1609,12 +2606,18 @@ export default function DashboardPage() {
       case 'models':
         return <MLModelsSection isDarkMode={isDarkMode} selectedPatient={selectedPatient} />;
       case 'wearables':
-        return <WearablesSection isDarkMode={isDarkMode} />;
+        return <WearablesSection isDarkMode={isDarkMode} selectedPatient={selectedPatient} setSelectedPatient={setSelectedPatient} />;
       case 'users':
         return <UserManagementSection isDarkMode={isDarkMode} />;
       default:
         return <OverviewSection isDarkMode={isDarkMode} selectedPatient={selectedPatient} setSelectedPatient={setSelectedPatient} />;
     }
+  };
+
+  // Wrapper function to close settings when navigating to a different tab
+  const handleTabChange = (tabId: string) => {
+    setShowSettings(false);
+    setActiveTab(tabId);
   };
 
   return (
@@ -1632,7 +2635,7 @@ export default function DashboardPage() {
       <div className={`min-h-screen flex ${isDarkMode ? 'bg-slate-950' : 'bg-slate-50'}`}>
         <NIRVANASidebar 
           activeTab={activeTab} 
-          setActiveTab={setActiveTab} 
+          setActiveTab={handleTabChange}
           isOpen={sidebarOpen} 
           setIsOpen={setSidebarOpen}
           handleLogout={handleLogout}

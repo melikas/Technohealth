@@ -64,18 +64,113 @@ export default function ServicesPage() {
     <div className="min-h-screen bg-white">
       <Header />
 
-      {/* Hero */}
-      <section className="bg-gradient-to-br from-blue-900 to-slate-900 text-white py-20 mt-16">
+      {/* Hero Banner with Image */}
+      <section className="mt-16">
+        <div className="relative h-96 bg-gradient-to-br from-blue-900 to-slate-900 overflow-hidden">
+          {/* Background Image */}
+          <div className="absolute inset-0">
+            <img 
+              src="/Images/Services-Hero.png" 
+              alt="Services Hero" 
+              className="w-full h-full object-cover"
+              onError={(e) => {
+                (e.target as HTMLImageElement).style.display = 'none';
+              }}
+            />
+          </div>
+          
+          {/* Hero Content */}
+          <div className="relative h-full flex items-center">
+            <div className="max-w-7xl mx-auto px-6 w-full">
+              <h1 className="text-6xl font-bold text-white mb-6">Our Healthcare Solutions</h1>
+              <p className="text-xl text-slate-200 max-w-2xl">
+                Complete wearable integration platform with device connectivity, data normalization, health metrics, and AI-ready pipelines
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Services Overview - Image Left, Description Right */}
+      <section className="py-20">
         <div className="max-w-7xl mx-auto px-6">
-          <h1 className="text-5xl font-bold mb-6">Our healthcare web solutions</h1>
-          <p className="text-xl text-slate-300 max-w-3xl">
-            We cover full wearable app development, including device connectivity, data normalization, health metrics, and AI-ready pipelines. Open Wearables is our foundation, but each project is tailored using the platform or custom integrations as needed.
-          </p>
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            {/* Left: Image */}
+            <div className="relative">
+              <div className="rounded-2xl overflow-hidden h-96">
+                <img 
+                  src="/Images/Services.png" 
+                  alt="Services Overview" 
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23E0F2FE" width="400" height="300"/%3E%3Ctext x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="24" fill="%231E40AF"%3EServices Overview%3C/text%3E%3C/svg%3E';
+                  }}
+                />
+              </div>
+            </div>
+
+            {/* Right: Description */}
+            <div>
+              <h2 className="text-4xl font-bold text-slate-900 mb-6">Complete Healthcare Platform</h2>
+              <p className="text-lg text-slate-700 mb-6 leading-relaxed">
+                We cover full wearable app development, including device connectivity, data normalization, health metrics, and AI-ready pipelines. Our platform is built on industry-leading standards but is tailored to your specific needs.
+              </p>
+              
+              <div className="space-y-4 mb-8">
+                <div className="flex gap-4">
+                  <div className="flex-shrink-0">
+                    <div className="w-6 h-6 rounded-full bg-cyan-600 text-white flex items-center justify-center text-sm font-bold">✓</div>
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-slate-900 mb-1">15+ Device Platforms</h3>
+                    <p className="text-slate-600 text-sm">Unified integration with Apple Watch, Fitbit, Oura, and more</p>
+                  </div>
+                </div>
+
+                <div className="flex gap-4">
+                  <div className="flex-shrink-0">
+                    <div className="w-6 h-6 rounded-full bg-cyan-600 text-white flex items-center justify-center text-sm font-bold">✓</div>
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-slate-900 mb-1">Clinician-Friendly Dashboards</h3>
+                    <p className="text-slate-600 text-sm">Interpretable metrics and insights for healthcare professionals</p>
+                  </div>
+                </div>
+
+                <div className="flex gap-4">
+                  <div className="flex-shrink-0">
+                    <div className="w-6 h-6 rounded-full bg-cyan-600 text-white flex items-center justify-center text-sm font-bold">✓</div>
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-slate-900 mb-1">Real-Time Monitoring</h3>
+                    <p className="text-slate-600 text-sm">Automated analysis and instant alerts for critical health events</p>
+                  </div>
+                </div>
+
+                <div className="flex gap-4">
+                  <div className="flex-shrink-0">
+                    <div className="w-6 h-6 rounded-full bg-cyan-600 text-white flex items-center justify-center text-sm font-bold">✓</div>
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-slate-900 mb-1">AI-Driven Insights</h3>
+                    <p className="text-slate-600 text-sm">Machine learning models for predictive health analytics</p>
+                  </div>
+                </div>
+              </div>
+
+              <Link 
+                to="/get-started"
+                className="inline-block px-8 py-3 bg-cyan-600 text-white font-semibold rounded-lg hover:bg-cyan-700 transition-colors"
+              >
+                Get Started Today
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Services Section */}
-      <section className="py-24">
+      <section className="py-24 bg-slate-50">
         <div className="max-w-7xl mx-auto px-6">
           <div className="mb-20">
             <h2 className="text-4xl font-bold text-slate-900 mb-4">Solution Layers </h2>

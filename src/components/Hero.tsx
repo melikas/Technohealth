@@ -12,7 +12,7 @@ export default function Hero() {
     { 
       number: 'AI', 
       label: 'Advanced ML Models',
-      description: 'Predictive Health Analytics',
+      description: 'Predicting Health, Powering Care',
       color: 'from-blue-400 to-blue-500',
       bgColor: 'from-blue-500/15 to-blue-600/10'
     },

@@ -18,7 +18,7 @@ export default function IntegrationShowcase() {
         <div className="flex justify-center mb-12">
           <div className="w-full h-full bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-lg hover:shadow-xl transition-shadow">
             <img 
-              src="/Images/devices.png" 
+              src="/Images/DEVICES.png" 
               alt="TechnoHealth Devices"
               className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-300"
             />
