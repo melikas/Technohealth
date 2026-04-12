@@ -8,84 +8,84 @@ export default function SolutionsPage() {
       icon: AlertCircle,
       title: 'Remote Patient Monitoring',
       category: 'Healthcare',
-      description: 'Monitor chronic disease patients at home. Heart failure, diabetes, hypertension—catch deterioration before hospitalization.',
+      description: 'Monitor chronic disease patients in real-time from anywhere. Get instant alerts for critical health changes and catch deterioration early.',
       useCases: [
         'Heart failure exacerbation detection',
-        'Diabetes management with glucose + activity',
+        'Diabetes management with glucose tracking',
         'Post-operative recovery monitoring',
-        'Elderly fall risk assessment'
+        'Hypertension control tracking'
       ],
       outcome: 'Reduce 30-day readmissions by 15-25%'
     },
     {
       icon: LineChart,
-      title: 'Digital Health Interventions',
-      category: 'Wellness',
-      description: 'Power personalized health coaching. Use wearable data to drive behavior change and engagement with digital therapeutics.',
+      title: 'Patient Health Scoring',
+      category: 'Healthcare',
+      description: 'Automatically calculate health scores based on ML models analyzing patient vital signs and behavior. Identify high-risk patients instantly.',
       useCases: [
-        'Weight loss coaching programs',
-        'Sleep quality improvement',
-        'Stress management interventions',
-        'Fitness progression tracking'
+        'Risk stratification for interventions',
+        'Trend analysis over time',
+        'Population health insights',
+        'Personalized alerts and recommendations'
       ],
-      outcome: 'Improve engagement by 40% with real-time feedback'
+      outcome: 'Enhance clinical decision-making with predictive analytics'
     },
     {
       icon: Users,
-      title: 'Clinical Research & Trials',
-      category: 'Research',
-      description: 'Enroll thousands of research subjects and capture continuous objective biometric data throughout trial duration.',
+      title: 'Multi-Patient Clinic Management',
+      category: 'Healthcare',
+      description: 'Manage dozens or thousands of patients from unified dashboard. Track all connected devices, surveys, and clinical assessments in one place.',
       useCases: [
-        'Drug efficacy measurement',
-        'Endpoint validation',
-        'Long-term adherence tracking',
-        'Distributed trial participation'
+        'Patient adherence monitoring',
+        'Device connectivity status',
+        'Survey completion tracking',
+        'Automated patient segmentation'
       ],
-      outcome: 'Expand trial participation by 70% with remote monitoring'
+      outcome: 'Reduce administrative burden by 40%'
     },
     {
       icon: Building2,
-      title: 'Corporate Wellness Programs',
+      title: 'Hospital Health Systems',
       category: 'Enterprise',
-      description: 'Aggregate employee health metrics for population-level insights while protecting individual privacy.',
+      description: 'Integrate patient monitoring across multiple locations. Support multi-doctor, multi-department workflows with centralized data management.',
       useCases: [
-        'Activity level trending',
-        'Sleep pattern analysis',
-        'Stress indicator monitoring',
-        'Return-to-work assessments'
+        'Multi-location patient sync',
+        'Department-specific dashboards',
+        'EHR/EMR integration',
+        'Real-time collaboration tools'
       ],
-      outcome: 'Reduce healthcare costs by 10-15% over 2 years'
+      outcome: 'Improve care coordination and reduce errors'
     },
     {
       icon: Microscope,
-      title: 'Precision Medicine',
+      title: 'Clinical Research & Trials',
       category: 'Research',
-      description: 'Correlate continuous biometric data with genomic and clinical data for personalized medicine insights.',
+      description: 'Simplify clinical trial enrollment and monitoring. Collect continuous biometric data from research subjects with automated compliance tracking.',
       useCases: [
-        'Genotype-phenotype correlation',
-        'Medication response prediction',
-        'Adverse event detection',
-        'Treatment stratification'
+        'Real-time data collection',
+        'Automated endpoint validation',
+        'Subject adherence monitoring',
+        'Safety event detection'
       ],
-      outcome: 'Enable responder/non-responder prediction before treatment'
+      outcome: 'Reduce trial costs and improve data quality'
     },
     {
       icon: Package,
-      title: 'Medical Device Integration',
+      title: 'Wearable Device Integration',
       category: 'Healthcare',
-      description: 'Combine consumer wearables with clinical-grade devices for comprehensive patient monitoring.',
+      description: 'Connect 15+ device platforms including Apple Watch, Fitbit, Oura Ring, CGMs, blood pressure monitors, and more in one dashboard.',
       useCases: [
-        'ECG devices + smartwatches',
-        'CGM integration + fitness bands',
-        'Sleep lab data + home wearables',
-        'Cardiac patches + mobile apps'
+        'Multi-device patient ecosystem',
+        'Unified data normalization',
+        'Automatic sync and updates',
+        'Device battery & connectivity alerts'
       ],
-      outcome: 'Unified data across consumer and clinical devices'
+      outcome: 'Support all patient device preferences'
     }
   ];
 
   const categoryColors = {
-    'Healthcare': 'bg-red-100 text-red-700 border-red-200',
+    'Healthcare': 'bg-cyan-100 text-cyan-700 border-cyan-200',
     'Wellness': 'bg-green-100 text-green-700 border-green-200',
     'Research': 'bg-purple-100 text-purple-700 border-purple-200',
     'Enterprise': 'bg-blue-100 text-blue-700 border-blue-200'

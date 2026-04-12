@@ -6,55 +6,60 @@ import { Link } from 'react-router-dom';
 export default function PricingPage() {
   const plans = [
     {
-      name: 'Core',
-      price: 399,
+      name: 'Clinic',
+      price: 299,
       period: '/month',
-      description: 'For small teams and startups',
-      users: '750 users',
+      description: 'For small clinics and practices',
+      users: 'Up to 100 patients',
       features: [
-        'Unified wearable API',
-        'Basic dashboards',
-        '400+ device support',
-        'REST API access',
+        'Multi-patient dashboard',
+        'Real-time health monitoring',
+        'Connected devices (15+ platforms)',
+        'Automated alerts & anomaly detection',
+        'Basic health scoring',
+        'Patient surveys & assessments',
+        'HIPAA-compliant encryption',
         'Email support',
-        'Data harmonization',
-        'HIPAA-compliant',
       ],
-      cta: 'Start Core',
+      cta: 'Start Clinic',
       highlight: false
     },
     {
-      name: 'Business',
-      price: 1999,
+      name: 'Medical Center',
+      price: 1499,
       period: '/month',
-      description: 'For production environments',
-      users: '15,000 users',
+      description: 'For medical centers and hospitals',
+      users: 'Up to 2,000 patients',
       features: [
-        'All Core features',
-        'Advanced SLA',
-        'Webhooks & real-time updates',
-        'Health scoring algorithms',
-        'Multi-account management',
+        'All Clinic features',
+        'Advanced ML models (risk prediction)',
+        'Clinical data integration (EHR/EMR)',
+        'Multi-doctor / multi-department access',
+        'Real-time webhooks & API access',
+        'Custom health metrics builder',
+        'Activity logs & audit trails',
         'Priority support',
-        'API rate limits: 10K/sec',
+        'Advanced SLA (99.95% uptime)',
       ],
-      cta: 'Go Pro',
+      cta: 'Start Center',
       highlight: true
     },
     {
       name: 'Enterprise',
       price: null,
       period: 'Custom pricing',
-      description: 'For large-scale deployments',
-      users: 'Unlimited users',
+      description: 'For large health systems',
+      users: 'Unlimited patients',
       features: [
-        'All Business features',
-        'Dedicated engineer',
-        'On-premises deployment option',
-        'FHIR data export',
-        'Custom integrations',
+        'All Medical Center features',
+        'Multi-location management',
+        'Dedicated account manager',
+        'Custom ML model training',
+        'White-label deployment option',
+        'FHIR & HL7 integration',
+        'On-premises deployment',
         '24/7 premium support',
-        'SLA: 99.99% uptime',
+        'SLA: 99.99% uptime guarantee',
       ],
       cta: 'Contact Sales',
       highlight: false
@@ -68,9 +73,9 @@ export default function PricingPage() {
       {/* Hero */}
       <section className="bg-gradient-to-r from-blue-900 to-slate-900 text-white py-20 mt-16">
         <div className="max-w-7xl mx-auto px-6">
-          <h1 className="text-5xl font-bold mb-4">Flexible Pricing Plans</h1>
+          <h1 className="text-5xl font-bold mb-4">Flexible Pricing, for All Healthcare Providers</h1>
           <p className="text-xl text-slate-300 max-w-3xl">
-            Pay for only what you need. All plans include HIPAA-compliant support.
+            Affordable patient monitoring platform for clinics, medical centers, and health systems. HIPAA-compliant with real-time health insights.
           </p>
         </div>
       </section>
@@ -153,43 +158,49 @@ export default function PricingPage() {
                 <thead className="bg-slate-50 border-b border-slate-200">
                   <tr>
                     <th className="text-left px-6 py-4 font-semibold text-slate-900">Feature</th>
-                    <th className="text-center px-6 py-4 font-semibold text-slate-900">Core</th>
-                    <th className="text-center px-6 py-4 font-semibold text-slate-900">Business</th>
+                    <th className="text-center px-6 py-4 font-semibold text-slate-900">Clinic</th>
+                    <th className="text-center px-6 py-4 font-semibold text-slate-900">Medical Center</th>
                     <th className="text-center px-6 py-4 font-semibold text-slate-900">Enterprise</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-200">
                   <tr>
-                    <td className="px-6 py-4 text-slate-900 font-medium">Max Users</td>
-                    <td className="text-center px-6 py-4 text-slate-600">750</td>
-                    <td className="text-center px-6 py-4 text-slate-600">15,000</td>
+                    <td className="px-6 py-4 text-slate-900 font-medium">Max Patients</td>
+                    <td className="text-center px-6 py-4 text-slate-600">100</td>
+                    <td className="text-center px-6 py-4 text-slate-600">2,000</td>
                     <td className="text-center px-6 py-4 text-slate-600">Unlimited</td>
                   </tr>
                   <tr className="bg-slate-50">
-                    <td className="px-6 py-4 text-slate-900 font-medium">Wearable Devices</td>
-                    <td className="text-center px-6 py-4 text-slate-600">400+</td>
-                    <td className="text-center px-6 py-4 text-slate-600">400+</td>
-                    <td className="text-center px-6 py-4 text-slate-600">400+</td>
+                    <td className="px-6 py-4 text-slate-900 font-medium">Connected Devices</td>
+                    <td className="text-center px-6 py-4 text-slate-600">15+ platforms</td>
+                    <td className="text-center px-6 py-4 text-slate-600">15+ platforms</td>
+                    <td className="text-center px-6 py-4 text-slate-600">15+ platforms</td>
                   </tr>
                   <tr>
-                    <td className="px-6 py-4 text-slate-900 font-medium">Real-time Webhooks</td>
+                    <td className="px-6 py-4 text-slate-900 font-medium">Real-time Alerts</td>
+                    <td className="text-center px-6 py-4"><Check className="w-5 h-5 text-green-600 mx-auto" /></td>
+                    <td className="text-center px-6 py-4"><Check className="w-5 h-5 text-green-600 mx-auto" /></td>
+                    <td className="text-center px-6 py-4"><Check className="w-5 h-5 text-green-600 mx-auto" /></td>
+                  </tr>
+                  <tr className="bg-slate-50">
+                    <td className="px-6 py-4 text-slate-900 font-medium">ML Health Prediction</td>
+                    <td className="text-center px-6 py-4"><span className="text-slate-400">—</span></td>
+                    <td className="text-center px-6 py-4"><Check className="w-5 h-5 text-green-600 mx-auto" /></td>
+                    <td className="text-center px-6 py-4"><Check className="w-5 h-5 text-green-600 mx-auto" /></td>
+                  </tr>
+                  <tr>
+                    <td className="px-6 py-4 text-slate-900 font-medium">EHR/EMR Integration</td>
                     <td className="text-center px-6 py-4"><span className="text-slate-400">—</span></td>
                     <td className="text-center px-6 py-4"><Check className="w-5 h-5 text-green-600 mx-auto" /></td>
                     <td className="text-center px-6 py-4"><Check className="w-5 h-5 text-green-600 mx-auto" /></td>
                   </tr>
                   <tr className="bg-slate-50">
-                    <td className="px-6 py-4 text-slate-900 font-medium">Health Scoring</td>
+                    <td className="px-6 py-4 text-slate-900 font-medium">Multi-Location Support</td>
                     <td className="text-center px-6 py-4"><span className="text-slate-400">—</span></td>
-                    <td className="text-center px-6 py-4"><Check className="w-5 h-5 text-green-600 mx-auto" /></td>
+                    <td className="text-center px-6 py-4"><span className="text-slate-400">—</span></td>
                     <td className="text-center px-6 py-4"><Check className="w-5 h-5 text-green-600 mx-auto" /></td>
                   </tr>
                   <tr>
-                    <td className="px-6 py-4 text-slate-900 font-medium">FHIR Export</td>
-                    <td className="text-center px-6 py-4"><span className="text-slate-400">—</span></td>
-                    <td className="text-center px-6 py-4"><span className="text-slate-400">—</span></td>
-                    <td className="text-center px-6 py-4"><Check className="w-5 h-5 text-green-600 mx-auto" /></td>
-                  </tr>
-                  <tr className="bg-slate-50">
                     <td className="px-6 py-4 text-slate-900 font-medium">Support</td>
                     <td className="text-center px-6 py-4 text-slate-600">Email</td>
                     <td className="text-center px-6 py-4 text-slate-600">Priority</td>
@@ -213,12 +224,16 @@ export default function PricingPage() {
             </h2>
             <div className="space-y-6">
               <div>
-                <h4 className="font-semibold text-slate-900 mb-2">Can I upgrade or downgrade anytime?</h4>
-                <p className="text-slate-600">Yes. Changes take effect at the start of your next billing cycle. No long-term contracts required.</p>
+                <h4 className="font-semibold text-slate-900 mb-2">Can I change plans anytime?</h4>
+                <p className="text-slate-600">Yes. Upgrade or downgrade at any time. Changes take effect at the start of your next billing cycle.</p>
               </div>
               <div>
                 <h4 className="font-semibold text-slate-900 mb-2">Is there a free trial?</h4>
-                <p className="text-slate-600">Yes. Start with our Core plan free for 14 days. No credit card required.</p>
+                <p className="text-slate-600">Yes. Start with our Clinic plan free for 14 days. Full access to all features, no credit card required.</p>
+              </div>
+              <div>
+                <h4 className="font-semibold text-slate-900 mb-2">Does pricing scale with patient count?</h4>
+                <p className="text-slate-600">Our plans include patient limits. For Medical Center plan, you can add additional patients at $2/patient/month. Enterprise customers have unlimited patients.</p>
               </div>
               <div>
                 <h4 className="font-semibold text-slate-900 mb-2">What's included in "HIPAA-compliant support"?</h4>
@@ -228,15 +243,15 @@ export default function PricingPage() {
           </div>
 
           {/* CTA */}
-          <div className="mt-24 bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl p-12 text-center text-white">
-            <h2 className="text-3xl font-bold mb-4">Ready to get started?</h2>
-            <p className="text-lg text-blue-100 mb-8">Choose a plan and start integrating wearable data today.</p>
+          <div className="mt-24 bg-gradient-to-r from-cyan-600 to-blue-700 rounded-2xl p-12 text-center text-white">
+            <h2 className="text-3xl font-bold mb-4">Ready to monitor your patients better?</h2>
+            <p className="text-lg text-blue-100 mb-8">Start your free trial today and see how Technohealth MVP can improve patient outcomes.</p>
             <div className="flex gap-4 justify-center flex-wrap">
-              <Link to="/get-started" className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition">
+              <Link to="/get-started" className="bg-white text-cyan-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition">
                 Start Free Trial
               </Link>
               <Link to="/contact" className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition">
-                Talk to Sales
+                Schedule Demo
               </Link>
             </div>
           </div>

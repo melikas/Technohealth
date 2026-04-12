@@ -1,37 +1,35 @@
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { LineChart, Building2, Microscope, Package, AlertCircle, Users } from 'lucide-react';
+import { LineChart, Building2, AlertCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export default function ServicesPage() {
   const solutions = [
     {
       icon: AlertCircle,
-      title: 'Remote Patient Monitoring',
+      title: 'Real-Time Patient Monitoring',
       category: 'Healthcare',
-      description: 'Monitor chronic disease patients at home. Catch deterioration before hospitalization.',
-      outcome: 'Reduce 30-day readmissions by 15-25%'
+      description: 'Track vital signs and health metrics from multiple connected devices. Instant alerts for critical changes.',
+      outcome: 'Detect health issues 24-48 hours earlier'
     },
-    
-
+    {
+      icon: LineChart,
+      title: 'Predictive Health Analytics',
+      category: 'Healthcare',
+      description: 'ML-powered risk prediction models identify patients at risk of hospitalization, complications, or adverse events.',
+      outcome: 'Improve clinical outcomes by 35%'
+    },
     {
       icon: Building2,
-      title: 'Corporate Wellness Programs',
+      title: 'Multi-Location Health Systems',
       category: 'Enterprise',
-      description: 'Aggregate employee health metrics for population-level insights while protecting privacy.',
-      outcome: 'Reduce healthcare costs by 10-15% over 2 years'
-    },
-    {
-      icon: Microscope,
-      title: 'Precision Medicine',
-      category: 'Research',
-      description: 'Correlate continuous biometric data with genomic data for personalized medicine insights.',
-      outcome: 'Enable responder/non-responder prediction before treatment'
+      description: 'Centralized patient management across multiple clinics and hospitals with location-specific dashboards.',
+      outcome: 'Streamline operations and improve coordination'
     }
   ];
 
   const categoryColors: Record<string, string> = {
-    'Healthcare': 'bg-red-100 text-red-700 border-red-200',
+    'Healthcare': 'bg-cyan-100 text-cyan-700 border-cyan-200',
     'Wellness': 'bg-green-100 text-green-700 border-green-200',
     'Research': 'bg-purple-100 text-purple-700 border-purple-200',
     'Enterprise': 'bg-blue-100 text-blue-700 border-blue-200'
@@ -40,23 +38,23 @@ export default function ServicesPage() {
   const process = [
     {
       step: '1',
-      title: 'Discovery',
-      description: 'Map your goals, patient population, and device needs.'
+      title: 'Patient Selection',
+      description: 'Identify and enroll patients. Set up device integration preferences and health goals.'
     },
     {
       step: '2',
-      title: 'Architecture',
-      description: 'Design data model, sync strategy, and deployment timeline.'
+      title: 'Device Setup',
+      description: 'Connect patient wearables and medical devices. Configure data collection and sync frequency.'
     },
     {
       step: '3',
-      title: 'Build & Test',
-      description: 'SDK integration, data normalization, performance optimization.'
+      title: 'Monitoring & Analysis',
+      description: 'Track health metrics in real-time. ML models analyze patterns and predict risks.'
     },
     {
       step: '4',
-      title: 'Launch',
-      description: 'Production deployment with monitoring and ongoing support.'
+      title: 'Intervention',
+      description: 'Automated alerts trigger interventions. Share insights with patients and care team.'
     }
   ];
 
@@ -82,9 +80,9 @@ export default function ServicesPage() {
           {/* Hero Content */}
           <div className="relative h-full flex items-center">
             <div className="max-w-7xl mx-auto px-6 w-full">
-              <h1 className="text-6xl font-bold text-white mb-6">Our Healthcare Solutions</h1>
+              <h1 className="text-6xl font-bold text-white mb-6">Technohealth MVP Platform Services</h1>
               <p className="text-xl text-slate-200 max-w-2xl">
-                Complete wearable integration platform with device connectivity, data normalization, health metrics, and AI-ready pipelines
+                Comprehensive patient monitoring dashboard with real-time alerts, ML predictive models, multi-device integration, and clinical data management
               </p>
             </div>
           </div>
@@ -111,9 +109,9 @@ export default function ServicesPage() {
 
             {/* Right: Description */}
             <div>
-              <h2 className="text-4xl font-bold text-slate-900 mb-6">Complete Healthcare Platform</h2>
+              <h2 className="text-4xl font-bold text-slate-900 mb-6">Doctor-Centric Patient Monitoring</h2>
               <p className="text-lg text-slate-700 mb-6 leading-relaxed">
-                We cover full wearable app development, including device connectivity, data normalization, health metrics, and AI-ready pipelines. Our platform is built on industry-leading standards but is tailored to your specific needs.
+                Technohealth MVP provides an intuitive, comprehensive platform for doctors and clinics to monitor patients in real-time. From device integration to predictive analytics, everything is designed for clinical workflow efficiency.
               </p>
               
               <div className="space-y-4 mb-8">
@@ -122,8 +120,8 @@ export default function ServicesPage() {
                     <div className="w-6 h-6 rounded-full bg-cyan-600 text-white flex items-center justify-center text-sm font-bold">✓</div>
                   </div>
                   <div>
-                    <h3 className="font-bold text-slate-900 mb-1">15+ Device Platforms</h3>
-                    <p className="text-slate-600 text-sm">Unified integration with Apple Watch, Fitbit, Oura, and more</p>
+                    <h3 className="font-bold text-slate-900 mb-1">Multi-Device Integration</h3>
+                    <p className="text-slate-600 text-sm">Apple Watch, Fitbit, Oura, CGMs, Blood Pressure monitors, and 10+ more</p>
                   </div>
                 </div>
 
@@ -132,8 +130,8 @@ export default function ServicesPage() {
                     <div className="w-6 h-6 rounded-full bg-cyan-600 text-white flex items-center justify-center text-sm font-bold">✓</div>
                   </div>
                   <div>
-                    <h3 className="font-bold text-slate-900 mb-1">Clinician-Friendly Dashboards</h3>
-                    <p className="text-slate-600 text-sm">Interpretable metrics and insights for healthcare professionals</p>
+                    <h3 className="font-bold text-slate-900 mb-1">Real-Time Health Alerts</h3>
+                    <p className="text-slate-600 text-sm">Automated anomaly detection with customizable alerts and clinical severity indicators</p>
                   </div>
                 </div>
 
@@ -142,8 +140,8 @@ export default function ServicesPage() {
                     <div className="w-6 h-6 rounded-full bg-cyan-600 text-white flex items-center justify-center text-sm font-bold">✓</div>
                   </div>
                   <div>
-                    <h3 className="font-bold text-slate-900 mb-1">Real-Time Monitoring</h3>
-                    <p className="text-slate-600 text-sm">Automated analysis and instant alerts for critical health events</p>
+                    <h3 className="font-bold text-slate-900 mb-1">ML Predictive Models</h3>
+                    <p className="text-slate-600 text-sm">Risk prediction, anomaly detection, and health scoring with explainable AI</p>
                   </div>
                 </div>
 
@@ -152,8 +150,18 @@ export default function ServicesPage() {
                     <div className="w-6 h-6 rounded-full bg-cyan-600 text-white flex items-center justify-center text-sm font-bold">✓</div>
                   </div>
                   <div>
-                    <h3 className="font-bold text-slate-900 mb-1">AI-Driven Insights</h3>
-                    <p className="text-slate-600 text-sm">Machine learning models for predictive health analytics</p>
+                    <h3 className="font-bold text-slate-900 mb-1">Patient Surveys & Assessments</h3>
+                    <p className="text-slate-600 text-sm">Automated clinical questionnaires and symptom tracking</p>
+                  </div>
+                </div>
+
+                <div className="flex gap-4">
+                  <div className="flex-shrink-0">
+                    <div className="w-6 h-6 rounded-full bg-cyan-600 text-white flex items-center justify-center text-sm font-bold">✓</div>
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-slate-900 mb-1">HIPAA Compliant Security</h3>
+                    <p className="text-slate-600 text-sm">Enterprise-grade encryption and audit trails for regulatory compliance</p>
                   </div>
                 </div>
               </div>
@@ -173,13 +181,13 @@ export default function ServicesPage() {
       <section className="py-24 bg-slate-50">
         <div className="max-w-7xl mx-auto px-6">
           <div className="mb-20">
-            <h2 className="text-4xl font-bold text-slate-900 mb-4">Solution Layers </h2>
-            <p className="text-xl text-slate-600">The Complete Healthcare Intelligence Plathform</p>
+            <h2 className="text-4xl font-bold text-slate-900 mb-4">Implementation Process</h2>
+            <p className="text-xl text-slate-600">From enrollment to clinical insights in 4 simple steps</p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-gradient-to-br from-red-50 to-orange-50 border border-red-200 rounded-xl p-8">
-              <div className="w-12 h-12 bg-red-600 text-white rounded-lg flex items-center justify-center mb-6 text-xl font-bold">1</div>
+          <div className="grid md:grid-cols-4 gap-8">
+            <div className="bg-gradient-to-br from-cyan-50 to-blue-50 border border-cyan-200 rounded-xl p-8">
+              <div className="w-12 h-12 bg-cyan-600 text-white rounded-lg flex items-center justify-center mb-6 text-xl font-bold">1</div>
               <h3 className="text-2xl font-bold text-slate-900 mb-3">Data Fragmentation</h3>
               <p className="text-slate-700 mb-6">Apple Watch, Fitbit, Oura—different APIs, different formats, different update cycles. We normalize everything into one clean data model.</p>
               <ul className="space-y-2 text-sm text-slate-700">
