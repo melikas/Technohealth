@@ -111,7 +111,7 @@ export default function ServicesPage() {
             <div>
               <h2 className="text-4xl font-bold text-slate-900 mb-6">Doctor-Centric Patient Monitoring</h2>
               <p className="text-lg text-slate-700 mb-6 leading-relaxed">
-                Technohealth MVP provides an intuitive, comprehensive platform for doctors and clinics to monitor patients in real-time. From device integration to predictive analytics, everything is designed for clinical workflow efficiency.
+                From device integration to predictive analytics, everything is designed for clinical workflow efficiency.
               </p>
               
               <div className="space-y-4 mb-8">
