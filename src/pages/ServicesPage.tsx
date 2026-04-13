@@ -80,7 +80,7 @@ export default function ServicesPage() {
           {/* Hero Content */}
           <div className="relative h-full flex items-center">
             <div className="max-w-7xl mx-auto px-6 w-full">
-              <h1 className="text-6xl font-bold text-white mb-6">Technohealth MVP Platform Services</h1>
+              <h1 className="text-6xl font-bold text-white mb-6">Our Solutions</h1>
               <p className="text-xl text-slate-200 max-w-2xl">
                 Comprehensive patient monitoring dashboard with real-time alerts, ML predictive models, multi-device integration, and clinical data management
               </p>
