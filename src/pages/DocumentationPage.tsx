@@ -1,305 +1,376 @@
+import { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { Copy, Check, ChevronRight } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { Link } from 'react-router-dom';
-import { Copy, Check } from 'lucide-react';
-import { useState } from 'react';
+
+type SectionId = 'introduction' | 'api' | 'sdk-react';
+
+const NAV: { id: SectionId; label: string }[] = [
+  { id: 'introduction', label: 'Introduction' },
+  { id: 'api', label: 'API Documentation' },
+  { id: 'sdk-react', label: 'SDK Documentation for React' },
+];
+
+function CodeBlock({
+  code,
+  id,
+  copiedId,
+  onCopy,
+}: {
+  code: string;
+  id: string;
+  copiedId: string | null;
+  onCopy: (code: string, id: string) => void;
+}) {
+  return (
+    <div className="relative group rounded-xl overflow-hidden border border-[#e6e6e6] bg-[#0f172a]">
+      <button
+        type="button"
+        onClick={() => onCopy(code, id)}
+        className="absolute top-3 right-3 p-1.5 rounded-md bg-white/10 text-white/80 hover:bg-white/20 border-0 cursor-pointer"
+        aria-label="Copy code"
+      >
+        {copiedId === id ? (
+          <Check className="w-4 h-4 text-green-400" strokeWidth={2} />
+        ) : (
+          <Copy className="w-4 h-4" strokeWidth={1.75} />
+        )}
+      </button>
+      <pre className="p-4 pr-12 overflow-x-auto text-[13px] leading-relaxed text-slate-100">
+        <code>{code}</code>
+      </pre>
+    </div>
+  );
+}
 
 export default function DocumentationPage() {
-  const [copiedCode, setCopiedCode] = useState<string | null>(null);
+  const location = useLocation();
+  const [active, setActive] = useState<SectionId>('introduction');
+  const [copiedId, setCopiedId] = useState<string | null>(null);
+
+  useEffect(() => {
+    document.title = 'Documentation | TechnoHealth';
+    return () => {
+      document.title = 'TechnoHealth — Wearable health data infrastructure';
+    };
+  }, []);
+
+  useEffect(() => {
+    const hash = location.hash.replace('#', '') as SectionId;
+    if (NAV.some((n) => n.id === hash)) {
+      setActive(hash);
+      document.getElementById(hash)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [location.hash]);
 
   const copyToClipboard = (code: string, id: string) => {
     navigator.clipboard.writeText(code);
-    setCopiedCode(id);
-    setTimeout(() => setCopiedCode(null), 2000);
+    setCopiedId(id);
+    setTimeout(() => setCopiedId(null), 2000);
   };
 
-  const codeExamples = [
-    {
-      id: 'curl',
-      language: 'curl',
-      label: 'cURL',
-      code: `curl -X GET "https://api.technohealth.com/v1/users/42/health-data" \\
-  -H "Authorization: Bearer <TOKEN>" \\
-  -H "Accept: application/json"`,
-      response: `{
-  "heart_rate": 72,
-  "steps": 10234,
-  "sleep_duration": 420,
-  "activity_level": "moderate"
-}`
-    },
-    {
-      id: 'python',
-      language: 'python',
-      label: 'Python SDK',
-      code: `from technohealth import TechnoClient
-
-client = TechnoClient(api_key="YOUR_API_KEY")
-data = client.get_health_data(
-    user_id=42, 
-    start_date="2026-04-01",
-    end_date="2026-04-07"
-)
-print(data['steps'], data['heart_rate'])`,
-      response: `10234 72`
-    },
-    {
-      id: 'javascript',
-      language: 'javascript',
-      label: 'JavaScript/Node.js',
-      code: `const TechnoClient = require('technohealth');
-
-const client = new TechnoClient({
-  apiKey: 'YOUR_API_KEY'
-});
-
-const data = await client.getHealthData({
-  userId: 42,
-  startDate: '2026-04-01',
-  endDate: '2026-04-07'
-});
-
-console.log(data.steps, data.heart_rate);`,
-      response: `10234 72`
-    }
-  ];
+  const goTo = (id: SectionId) => {
+    setActive(id);
+    window.history.replaceState(null, '', `#${id}`);
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
 
   return (
     <div className="min-h-screen bg-white">
       <Header />
-      
-      {/* Hero */}
-      <section className="bg-gradient-to-r from-blue-900 to-slate-900 text-white py-20 mt-16">
-        <div className="max-w-7xl mx-auto px-6">
-          <h1 className="text-5xl font-bold mb-4">Documentation</h1>
-          <p className="text-xl text-slate-300">
-            Guides and references for developers.
+
+      <div className="pt-16 border-b border-[#eee]" style={{ backgroundColor: 'var(--color-surface-alt)' }}>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10 md:py-12">
+          <p className="text-sm font-medium text-[#1A73E8] mb-2">Documentation</p>
+          <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight text-[#111] mb-3">
+            TechnoHealth Docs
+          </h1>
+          <p className="text-[16px] text-[#666] max-w-2xl">
+            Connect wearable health data to your product. Start with the introduction, then use the
+            API or the React SDK.
           </p>
         </div>
-      </section>
+      </div>
 
-      {/* Main Content */}
-      <section className="py-24 px-6">
-        <div className="max-w-7xl mx-auto grid md:grid-cols-4 gap-12">
-          {/* Sidebar */}
-          <aside className="md:col-span-1">
-            <div className="bg-slate-50 rounded-lg p-6 sticky top-24">
-              <h3 className="font-bold text-slate-900 mb-4">Sections</h3>
-              <nav className="space-y-3">
-                {[
-                  { label: 'Quickstart Guide', href: '#quickstart' },
-                  { label: 'API Reference', href: '#api-reference' },
-                  { label: 'SDK Guides', href: '#sdk-guides' },
-                  { label: 'Tutorials', href: '#tutorials' },
-                  { label: 'FAQ', href: '#faq' },
-                ].map((item) => (
-                  <a
-                    key={item.href}
-                    href={item.href}
-                    className="text-blue-600 hover:text-blue-700 font-medium text-sm block"
-                  >
-                    {item.label}
-                  </a>
-                ))}
-              </nav>
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10 md:py-14">
+        <div className="grid lg:grid-cols-[240px_1fr] gap-10 lg:gap-14">
+          {/* Sidebar — Spike/Mintlify-style */}
+          <aside className="lg:sticky lg:top-24 lg:self-start">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.1em] text-[#999] mb-3 px-3">
+              Docs
+            </p>
+            <nav className="space-y-0.5">
+              {NAV.map((item) => (
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() => goTo(item.id)}
+                  className={`w-full text-left px-3 py-2 rounded-lg text-sm border-0 cursor-pointer transition-colors ${
+                    active === item.id
+                      ? 'bg-[#e8f0fe] text-[#1A73E8] font-medium'
+                      : 'bg-transparent text-[#444] hover:bg-[#f5f5f5]'
+                  }`}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </nav>
+
+            <div className="mt-8 px-3">
+              <Link
+                to="/schedule-demo"
+                className="inline-flex items-center gap-1 text-sm text-[#1A73E8] no-underline hover:underline"
+              >
+                Book a demo
+                <ChevronRight className="w-4 h-4" strokeWidth={2} />
+              </Link>
             </div>
           </aside>
 
           {/* Content */}
-          <div className="md:col-span-3 space-y-16">
-            {/* Quickstart */}
-            <section id="quickstart">
-              <h2 className="text-3xl font-bold text-slate-900 mb-6">Quickstart Guide</h2>
-              <div className="space-y-4">
-                <p className="text-slate-600">
-                  Get up and running with TechnoHealth in three steps:
-                </p>
-                <ol className="space-y-4">
-                  <li>
-                    <h4 className="font-semibold text-slate-900 mb-2">1. Create Account</h4>
-                    <p className="text-slate-600">Sign up for a free developer account at <Link to="/get-started" className="text-blue-600 hover:underline">Get Started</Link>. You'll receive your API key via email.</p>
-                  </li>
-                  <li>
-                    <h4 className="font-semibold text-slate-900 mb-2">2. Connect a Device</h4>
-                    <p className="text-slate-600">Use our dashboard to link a wearable device (Apple Watch, Fitbit, Garmin, Oura Ring, etc.) through OAuth. The device will start syncing data automatically.</p>
-                  </li>
-                  <li>
-                    <h4 className="font-semibold text-slate-900 mb-2">3. Fetch Data</h4>
-                    <p className="text-slate-600">Use your API key to fetch health data from the device. See examples below.</p>
-                  </li>
-                </ol>
-              </div>
-            </section>
-
-            {/* API Reference */}
-            <section id="api-reference">
-              <h2 className="text-3xl font-bold text-slate-900 mb-6">API Reference</h2>
-              
-              <div className="space-y-8">
-                {/* Authentication */}
-                <div className="border-l-4 border-blue-600 pl-6">
-                  <h3 className="text-xl font-bold text-slate-900 mb-4">Authentication</h3>
-                  <p className="text-slate-600 mb-4">
-                    All API requests require a Bearer token in the Authorization header:
-                  </p>
-                  <div className="bg-slate-900 text-slate-50 rounded-lg p-4 mb-4">
-                    <code className="text-sm">Authorization: Bearer YOUR_API_KEY</code>
-                  </div>
-                </div>
-
-                {/* Base URL */}
-                <div className="border-l-4 border-blue-600 pl-6">
-                  <h3 className="text-xl font-bold text-slate-900 mb-4">Base URL</h3>
-                  <div className="bg-slate-900 text-slate-50 rounded-lg p-4">
-                    <code className="text-sm">https://api.technohealth.com/v1</code>
-                  </div>
-                </div>
-
-                {/* Endpoints */}
-                <div className="border-l-4 border-blue-600 pl-6">
-                  <h3 className="text-xl font-bold text-slate-900 mb-4">Core Endpoints</h3>
-                  <div className="space-y-4">
-                    <div className="bg-slate-50 p-4 rounded-lg">
-                      <p className="font-mono text-blue-600 font-semibold mb-2">GET /users/{'{id}'}/devices</p>
-                      <p className="text-slate-600 text-sm">List all connected devices for a user</p>
-                    </div>
-                    <div className="bg-slate-50 p-4 rounded-lg">
-                      <p className="font-mono text-blue-600 font-semibold mb-2">GET /users/{'{id}'}/health-data</p>
-                      <p className="text-slate-600 text-sm">Fetch health data for a user (accepts date range filters)</p>
-                    </div>
-                    <div className="bg-slate-50 p-4 rounded-lg">
-                      <p className="font-mono text-blue-600 font-semibold mb-2">POST /webhooks</p>
-                      <p className="text-slate-600 text-sm">Register a webhook endpoint for real-time data updates</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            {/* SDK Guides */}
-            <section id="sdk-guides">
-              <h2 className="text-3xl font-bold text-slate-900 mb-6">SDK Guides</h2>
-              <p className="text-slate-600 mb-8">
-                TechnoHealth provides official SDKs for popular languages. Choose your language and see usage examples:
+          <div className="min-w-0 space-y-16 md:space-y-20">
+            {/* INTRODUCTION */}
+            <section id="introduction" className="scroll-mt-28">
+              <h2 className="text-2xl sm:text-3xl font-semibold text-[#111] mb-4 tracking-tight">
+                Introduction
+              </h2>
+              <p className="text-[16px] text-[#555] leading-relaxed mb-6">
+                TechnoHealth is one infrastructure for wearable health data. Connect devices, normalize
+                the messy parts, and read clean metrics in your app — without building every vendor
+                integration yourself.
               </p>
 
-              <div className="space-y-8">
-                {codeExamples.map((example) => (
-                  <div key={example.id} className="border border-slate-200 rounded-lg overflow-hidden">
-                    <div className="bg-slate-50 px-6 py-4 flex items-center justify-between border-b border-slate-200">
-                      <h4 className="font-semibold text-slate-900">{example.label}</h4>
-                      <button
-                        onClick={() => copyToClipboard(example.code, example.id)}
-                        className="flex items-center gap-2 text-sm text-slate-600 hover:text-slate-900"
-                      >
-                        {copiedCode === example.id ? (
-                          <>
-                            <Check className="w-4 h-4" />
-                            Copied
-                          </>
-                        ) : (
-                          <>
-                            <Copy className="w-4 h-4" />
-                            Copy
-                          </>
-                        )}
-                      </button>
-                    </div>
-                    <div className="bg-slate-900 text-slate-50 p-6 overflow-x-auto">
-                      <pre className="text-sm font-mono whitespace-pre-wrap break-words">{example.code}</pre>
-                    </div>
-                    <div className="px-6 py-4 bg-slate-50 border-t border-slate-200">
-                      <p className="text-sm text-slate-600 mb-2 font-semibold">Response:</p>
-                      <pre className="text-sm font-mono text-slate-700 whitespace-pre-wrap">{example.response}</pre>
-                    </div>
-                  </div>
-                ))}
+              <div className="rounded-xl border border-[#e6e6e6] bg-[#fafafa] p-5 mb-8">
+                <h3 className="text-base font-semibold text-[#111] mb-2">What you get</h3>
+                <ul className="space-y-2 text-sm text-[#555]">
+                  <li>• One API for many wearables and health platforms</li>
+                  <li>• Normalized metrics (heart rate, sleep, activity, and more)</li>
+                  <li>• A React SDK when you want to move faster in the browser</li>
+                </ul>
+              </div>
+
+              <h3 className="text-lg font-semibold text-[#111] mb-3">API or React SDK?</h3>
+              <div className="grid sm:grid-cols-2 gap-4 mb-6">
+                <button
+                  type="button"
+                  onClick={() => goTo('api')}
+                  className="text-left p-4 rounded-xl border border-[#e6e6e6] hover:border-[#1A73E8] bg-white cursor-pointer transition-colors"
+                >
+                  <p className="font-semibold text-[#111] mb-1">API Documentation</p>
+                  <p className="text-sm text-[#666]">
+                    Best for backends and full control over auth, sync, and storage.
+                  </p>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => goTo('sdk-react')}
+                  className="text-left p-4 rounded-xl border border-[#e6e6e6] hover:border-[#1A73E8] bg-white cursor-pointer transition-colors"
+                >
+                  <p className="font-semibold text-[#111] mb-1">SDK Documentation for React</p>
+                  <p className="text-sm text-[#666]">
+                    Best for product UIs — connect devices and fetch data from React.
+                  </p>
+                </button>
+              </div>
+
+              <p className="text-sm text-[#666]">
+                Browse supported providers on the{' '}
+                <Link to="/data-sources" className="text-[#1A73E8] hover:underline">
+                  Data Sources
+                </Link>{' '}
+                page.
+              </p>
+            </section>
+
+            {/* API DOCUMENTATION */}
+            <section id="api" className="scroll-mt-28">
+              <h2 className="text-2xl sm:text-3xl font-semibold text-[#111] mb-4 tracking-tight">
+                API Documentation
+              </h2>
+              <p className="text-[16px] text-[#555] leading-relaxed mb-8">
+                Use the REST API from your server to authenticate users, connect providers, and query
+                health data.
+              </p>
+
+              <h3 className="text-lg font-semibold text-[#111] mb-2">Base URL</h3>
+              <CodeBlock
+                id="base-url"
+                code="https://api.technohealth.com/v1"
+                copiedId={copiedId}
+                onCopy={copyToClipboard}
+              />
+
+              <h3 className="text-lg font-semibold text-[#111] mt-8 mb-2">Authentication</h3>
+              <p className="text-sm text-[#555] mb-3">
+                Send your API key as a Bearer token on every request:
+              </p>
+              <CodeBlock
+                id="auth-header"
+                code={`Authorization: Bearer YOUR_API_KEY\nAccept: application/json`}
+                copiedId={copiedId}
+                onCopy={copyToClipboard}
+              />
+
+              <h3 className="text-lg font-semibold text-[#111] mt-8 mb-2">Fetch health data</h3>
+              <p className="text-sm text-[#555] mb-3">
+                Example: get normalized metrics for a user over a date range.
+              </p>
+              <CodeBlock
+                id="curl-health"
+                code={`curl -X GET "https://api.technohealth.com/v1/users/42/health-data?from=2026-04-01&to=2026-04-07" \\
+  -H "Authorization: Bearer YOUR_API_KEY" \\
+  -H "Accept: application/json"`}
+                copiedId={copiedId}
+                onCopy={copyToClipboard}
+              />
+
+              <p className="text-sm text-[#555] mt-4 mb-3">Example response:</p>
+              <CodeBlock
+                id="api-response"
+                code={`{
+  "user_id": "42",
+  "from": "2026-04-01",
+  "to": "2026-04-07",
+  "metrics": {
+    "heart_rate_avg": 72,
+    "steps": 10234,
+    "sleep_minutes": 420,
+    "activity_level": "moderate"
+  }
+}`}
+                copiedId={copiedId}
+                onCopy={copyToClipboard}
+              />
+
+              <h3 className="text-lg font-semibold text-[#111] mt-8 mb-2">Common endpoints</h3>
+              <div className="overflow-x-auto rounded-xl border border-[#e6e6e6]">
+                <table className="w-full text-sm text-left">
+                  <thead className="bg-[#fafafa] text-[#555]">
+                    <tr>
+                      <th className="px-4 py-3 font-medium">Method</th>
+                      <th className="px-4 py-3 font-medium">Path</th>
+                      <th className="px-4 py-3 font-medium">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody className="text-[#333]">
+                    {[
+                      ['GET', '/users/{id}/health-data', 'Normalized health metrics'],
+                      ['GET', '/users/{id}/devices', 'Connected devices for a user'],
+                      ['POST', '/users/{id}/devices/connect', 'Start a provider connection'],
+                      ['GET', '/providers', 'List available data sources'],
+                    ].map(([method, path, desc]) => (
+                      <tr key={path} className="border-t border-[#eee]">
+                        <td className="px-4 py-3 font-mono text-[#1A73E8]">{method}</td>
+                        <td className="px-4 py-3 font-mono text-[13px]">{path}</td>
+                        <td className="px-4 py-3 text-[#555]">{desc}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             </section>
 
-            {/* Tutorials */}
-            <section id="tutorials">
-              <h2 className="text-3xl font-bold text-slate-900 mb-6">Tutorials</h2>
-              <div className="grid gap-6">
-                {[
-                  {
-                    title: 'Building a Health Dashboard',
-                    desc: 'Step-by-step guide to create a real-time health dashboard'
-                  },
-                  {
-                    title: 'Integrating with EHR Systems',
-                    desc: 'Connect TechnoHealth to Epic, Cerner, or other EMR platforms'
-                  },
-                  {
-                    title: 'Setting Up Webhooks',
-                    desc: 'Receive real-time health data updates via webhooks'
-                  },
-                  {
-                    title: 'HIPAA Compliance Checklist',
-                    desc: 'Implementation guide for HIPAA-compliant applications'
-                  },
-                ].map((tutorial, idx) => (
-                  <div key={idx} className="border border-slate-200 rounded-lg p-6 hover:shadow-md transition">
-                    <h4 className="font-semibold text-slate-900 mb-2">{tutorial.title}</h4>
-                    <p className="text-slate-600 mb-4">{tutorial.desc}</p>
-                    <a href="#" className="text-blue-600 hover:text-blue-700 font-medium text-sm">
-                      Read Tutorial →
-                    </a>
-                  </div>
-                ))}
-              </div>
-            </section>
+            {/* SDK DOCUMENTATION FOR REACT */}
+            <section id="sdk-react" className="scroll-mt-28">
+              <h2 className="text-2xl sm:text-3xl font-semibold text-[#111] mb-4 tracking-tight">
+                SDK Documentation for React
+              </h2>
+              <p className="text-[16px] text-[#555] leading-relaxed mb-8">
+                The React SDK helps you connect devices and read TechnoHealth data inside your React
+                app with less boilerplate.
+              </p>
 
-            {/* FAQ */}
-            <section id="faq">
-              <h2 className="text-3xl font-bold text-slate-900 mb-6">Frequently Asked Questions</h2>
-              <div className="space-y-6">
-                {[
-                  {
-                    q: 'What devices does TechnoHealth support?',
-                    a: 'TechnoHealth supports 400+ devices including Apple Watch, Fitbit, Garmin, Oura Ring, Whoop, Samsung Galaxy Watch, and many more. See our complete device list here.'
-                  },
-                  {
-                    q: 'How often is data synced?',
-                    a: 'Data syncs in real-time for most devices. Once connected, health metrics are synchronized every 5-15 minutes depending on the device and network connectivity.'
-                  },
-                  {
-                    q: 'Is my data encrypted?',
-                    a: 'Yes. All data is encrypted in transit (TLS 1.3) and at rest (AES-256). We also maintain audit logs of all data access.'
-                  },
-                  {
-                    q: 'Can I export data in FHIR format?',
-                    a: 'Yes, but only on Business and Enterprise plans. FHIR export is available via the API endpoint /v1/users/{id}/fhir-export'
-                  },
-                  {
-                    q: 'What is your uptime SLA?',
-                    a: 'Core: 99.9%, Business: 99.95%, Enterprise: 99.99%'
-                  },
-                ].map((item, idx) => (
-                  <div key={idx}>
-                    <h4 className="font-semibold text-slate-900 mb-2">{item.q}</h4>
-                    <p className="text-slate-600">{item.a}</p>
-                  </div>
-                ))}
-              </div>
-            </section>
+              <h3 className="text-lg font-semibold text-[#111] mb-2">Install</h3>
+              <CodeBlock
+                id="npm-install"
+                code="npm install @technohealth/react"
+                copiedId={copiedId}
+                onCopy={copyToClipboard}
+              />
 
-            {/* Support CTA */}
-            <section className="bg-gradient-to-r from-blue-50 to-slate-50 rounded-xl p-12 border border-blue-200">
-              <h3 className="text-2xl font-bold text-slate-900 mb-4">Still have questions?</h3>
-              <p className="text-slate-600 mb-6">Our support team is here to help. Reach out anytime.</p>
-              <div className="flex gap-4 flex-wrap">
-                <a href="mailto:support@technohealth.com" className="text-blue-600 font-semibold hover:text-blue-700">
-                  Email Support
-                </a>
-                <Link to="/contact" className="bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-700">
-                  Contact Us
-                </Link>
+              <h3 className="text-lg font-semibold text-[#111] mt-8 mb-2">Wrap your app</h3>
+              <p className="text-sm text-[#555] mb-3">
+                Provide your API key once with <code className="text-[13px] bg-[#f1f3f4] px-1.5 py-0.5 rounded">TechnoHealthProvider</code>:
+              </p>
+              <CodeBlock
+                id="provider"
+                code={`import { TechnoHealthProvider } from '@technohealth/react';
+
+export function App() {
+  return (
+    <TechnoHealthProvider apiKey={import.meta.env.VITE_TECHNOHEALTH_KEY}>
+      <YourApp />
+    </TechnoHealthProvider>
+  );
+}`}
+                copiedId={copiedId}
+                onCopy={copyToClipboard}
+              />
+
+              <h3 className="text-lg font-semibold text-[#111] mt-8 mb-2">Fetch health data</h3>
+              <CodeBlock
+                id="react-hook"
+                code={`import { useHealthData } from '@technohealth/react';
+
+export function DailySummary({ userId }: { userId: string }) {
+  const { data, loading, error } = useHealthData({
+    userId,
+    from: '2026-04-01',
+    to: '2026-04-07',
+  });
+
+  if (loading) return <p>Loading…</p>;
+  if (error) return <p>Something went wrong.</p>;
+
+  return (
+    <div>
+      <p>Steps: {data?.metrics.steps}</p>
+      <p>Avg heart rate: {data?.metrics.heart_rate_avg}</p>
+    </div>
+  );
+}`}
+                copiedId={copiedId}
+                onCopy={copyToClipboard}
+              />
+
+              <h3 className="text-lg font-semibold text-[#111] mt-8 mb-2">Connect a device</h3>
+              <p className="text-sm text-[#555] mb-3">
+                Start a provider connection from the UI (user completes consent in a secure flow):
+              </p>
+              <CodeBlock
+                id="connect-device"
+                code={`import { useConnectDevice } from '@technohealth/react';
+
+export function ConnectFitbit({ userId }: { userId: string }) {
+  const { connect, status } = useConnectDevice();
+
+  return (
+    <button
+      onClick={() => connect({ userId, provider: 'fitbit' })}
+      disabled={status === 'pending'}
+    >
+      {status === 'pending' ? 'Connecting…' : 'Connect Fitbit'}
+    </button>
+  );
+}`}
+                copiedId={copiedId}
+                onCopy={copyToClipboard}
+              />
+
+              <div className="mt-8 rounded-xl border border-[#e8f0fe] bg-[#f8fbff] p-5">
+                <p className="text-sm text-[#555]">
+                  Need help wiring this into your product?{' '}
+                  <Link to="/schedule-demo" className="text-[#1A73E8] font-medium hover:underline">
+                    Book a demo with Support Team
+                  </Link>
+                  .
+                </p>
               </div>
             </section>
           </div>
         </div>
-      </section>
+      </div>
 
       <Footer />
     </div>
