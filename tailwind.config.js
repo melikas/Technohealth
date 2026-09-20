@@ -4,11 +4,13 @@ export default {
   theme: {
     extend: {
       colors: {
-        google: {
-          blue: '#4285F4',
-          red: '#EA4335',
-          yellow: '#FBBC05',
-          green: '#34A853',
+        brand: {
+          deep: '#0D47A1',
+          dark: '#1557B0',
+          DEFAULT: '#1A73E8',
+          mid: '#4285F4',
+          light: '#5B9BFF',
+          soft: '#8AB4F8',
         },
         g: {
           primary: '#1A73E8',

@@ -7,19 +7,19 @@ export default function Hero() {
       number: '+100',
       label: 'Data Resources',
       description: 'Integrated data platforms',
-      accent: 'var(--color-google-blue)',
+      accent: 'var(--color-brand-blue-deep)',
     },
     {
       number: 'AI',
       label: 'Advanced ML Models',
       description: 'Predicting health, powering care',
-      accent: 'var(--color-google-green)',
+      accent: 'var(--color-brand-blue)',
     },
     {
       number: '+30%',
       label: 'Efficiency Boost',
       description: 'Developer time saved',
-      accent: 'var(--color-google-yellow)',
+      accent: 'var(--color-brand-blue-light)',
     },
   ];
 
@@ -32,31 +32,18 @@ export default function Hero() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
         <div className="flex flex-col items-center text-center mb-14">
-          <h1 className="text-4xl sm:text-5xl md:text-[56px] font-normal tracking-tight leading-tight mb-2">
-            <span style={{ color: 'var(--color-google-blue)' }}>T</span>
-            <span style={{ color: 'var(--color-google-red)' }}>e</span>
-            <span style={{ color: 'var(--color-google-yellow)' }}>c</span>
-            <span style={{ color: 'var(--color-google-blue)' }}>h</span>
-            <span style={{ color: 'var(--color-google-green)' }}>n</span>
-            <span style={{ color: 'var(--color-google-red)' }}>o</span>
-            <span style={{ color: 'var(--color-text-secondary)' }}>Health</span>
+          <h1 className="g-wordmark text-4xl sm:text-5xl md:text-[56px] font-medium tracking-tight leading-tight mb-2">
+            TechnoHealth
           </h1>
 
           <p
-            className="text-xl md:text-2xl font-normal mt-4 max-w-2xl leading-snug"
-            style={{ color: 'var(--color-text)' }}
-          >
-            Wearables integration for your health tracking app
-          </p>
-
-          <p
-            className="text-base md:text-lg mt-4 max-w-xl leading-relaxed"
+            className="text-base md:text-lg mt-5 max-w-2xl leading-relaxed"
             style={{ color: 'var(--color-text-secondary)' }}
           >
-            Connect wearables and health platforms with one integration. We build digital products that accelerate healthcare services.
+            One infrastructure for wearable health data — connect any device, standardize the
+            complexity, and build trusted health products faster.
           </p>
 
-          {/* Google-style search affordance */}
           <div className="g-search mt-10 max-w-[584px] w-full cursor-default">
             <Search className="w-5 h-5 shrink-0" style={{ color: 'var(--color-text-tertiary)' }} strokeWidth={1.75} />
             <span
@@ -65,7 +52,7 @@ export default function Hero() {
             >
               Search devices, APIs, docs…
             </span>
-            <Mic className="w-5 h-5 shrink-0" style={{ color: 'var(--color-google-blue)' }} strokeWidth={1.75} />
+            <Mic className="w-5 h-5 shrink-0" style={{ color: 'var(--color-brand-blue)' }} strokeWidth={1.75} />
           </div>
 
           <div className="flex flex-col sm:flex-row gap-3 mt-8">
@@ -141,7 +128,7 @@ export default function Hero() {
                 className="inline-flex items-center gap-2 text-sm"
                 style={{ color: 'var(--color-text-secondary)' }}
               >
-                <Check className="w-4 h-4" style={{ color: 'var(--color-google-green)' }} strokeWidth={2.5} />
+                <Check className="w-4 h-4" style={{ color: 'var(--color-brand-blue)' }} strokeWidth={2.5} />
                 {item}
               </span>
             ))}

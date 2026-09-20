@@ -6,25 +6,25 @@ export default function BenefitsPillars() {
       icon: Zap,
       title: 'Days, Not Months',
       description: 'Go from zero to live data integration in 7 days. No custom development required.',
-      color: 'var(--color-google-yellow)',
+      color: 'var(--color-brand-blue-light)',
     },
     {
       icon: CheckCircle,
       title: 'One API for All',
       description: 'Stop building separate integrations for each device. Add Apple, Fitbit, Oura from your dashboard.',
-      color: 'var(--color-google-blue)',
+      color: 'var(--color-brand-blue)',
     },
     {
       icon: Database,
       title: 'Your Infrastructure',
       description: 'Deploy on your servers. Own your data. No recurring per-user fees or vendor lock-in.',
-      color: 'var(--color-google-green)',
+      color: 'var(--color-brand-blue-mid)',
     },
     {
       icon: Shield,
       title: 'Enterprise Ready',
       description: 'HIPAA compliant, SOC 2 audited, role-based access control. Built for regulated industries.',
-      color: 'var(--color-google-red)',
+      color: 'var(--color-brand-blue-deep)',
     },
   ];
 
@@ -97,7 +97,7 @@ export default function BenefitsPillars() {
                   className="w-10 h-10 rounded-full flex items-center justify-center"
                   style={{ backgroundColor: 'var(--color-surface-success)' }}
                 >
-                  <Check className="w-5 h-5" style={{ color: 'var(--color-google-green)' }} strokeWidth={2.5} />
+                  <Check className="w-5 h-5" style={{ color: 'var(--color-success)' }} strokeWidth={2.5} />
                 </div>
                 <span className="text-sm font-medium" style={{ color: 'var(--color-text)' }}>
                   {item}

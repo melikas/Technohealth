@@ -54,7 +54,7 @@ export default function Footer() {
           <div>
             <div className="flex items-center gap-2 mb-3">
               <img src="/Images/Icon.png" alt="TechnoHealth" className="w-7 h-7" />
-              <span className="text-lg font-normal" style={{ color: 'var(--color-text)' }}>
+              <span className="g-wordmark text-lg font-medium">
                 TechnoHealth
               </span>
             </div>

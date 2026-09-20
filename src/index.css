@@ -4,11 +4,21 @@
 
 /* Google design tokens — all colors in #RRGGBB */
 :root {
-  /* Brand (Google logo colors) */
-  --color-google-blue: #4285F4;
-  --color-google-red: #EA4335;
-  --color-google-yellow: #FBBC05;
-  --color-google-green: #34A853;
+  /* Brand blues (spectrum — not Google multicolor) */
+  --color-brand-blue-deep: #0D47A1;
+  --color-brand-blue-dark: #1557B0;
+  --color-brand-blue: #1A73E8;
+  --color-brand-blue-mid: #4285F4;
+  --color-brand-blue-light: #5B9BFF;
+  --color-brand-blue-soft: #8AB4F8;
+  --gradient-brand-wordmark: linear-gradient(
+    100deg,
+    #0D47A1 0%,
+    #1557B0 28%,
+    #1A73E8 55%,
+    #4285F4 78%,
+    #5B9BFF 100%
+  );
 
   /* Actions / links */
   --color-primary: #1A73E8;
@@ -24,6 +34,7 @@
   --color-surface-chip: #F1F3F4;
   --color-surface-success: #E6F4EA;
   --color-surface-info: #E8F0FE;
+  --color-success: #1E8E3E;
 
   /* Text */
   --color-text: #202124;
@@ -174,10 +185,11 @@
     color: var(--color-text-secondary);
   }
 
-  .g-icon-wrap {
-    @apply flex items-center justify-center w-12 h-12;
-    background-color: var(--color-surface-chip);
-    border-radius: 50%;
-    color: var(--color-primary);
+  .g-wordmark {
+    background-image: var(--gradient-brand-wordmark);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
   }
 }

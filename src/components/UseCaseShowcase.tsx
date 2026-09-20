@@ -109,7 +109,7 @@ export default function UseCaseShowcase() {
               <div className="flex items-center gap-2">
                 <span
                   className="w-2 h-2 rounded-full"
-                  style={{ backgroundColor: 'var(--color-google-green)' }}
+                  style={{ backgroundColor: 'var(--color-success)' }}
                 />
                 <span className="text-sm font-medium" style={{ color: 'var(--color-text)' }}>
                   {showcase.stat}
