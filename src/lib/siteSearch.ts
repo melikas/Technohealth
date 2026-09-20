@@ -71,13 +71,6 @@ const PAGE_RESULTS: SiteSearchResult[] = [
     keywords: ['mcp', 'agent', 'tool', 'upcoming'],
   },
   {
-    id: 'pricing',
-    label: 'Pricing',
-    description: 'Plans and licensing options',
-    to: '/pricing',
-    keywords: ['pricing', 'price', 'plan', 'cost'],
-  },
-  {
     id: 'demo',
     label: 'Book a demo',
     description: 'Talk with the TechnoHealth support team',

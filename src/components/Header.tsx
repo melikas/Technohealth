@@ -31,7 +31,6 @@ export default function Header() {
 
   const navLinks = [
     { label: 'Services', hasDropdown: true },
-    { label: 'Pricing', path: '/pricing' },
     { label: 'Docs', path: '/docs' },
     { label: 'About', path: '/about' },
     { label: 'Contact', path: '/contact' },

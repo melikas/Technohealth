@@ -19,21 +19,21 @@ export default function Footer() {
       ],
     },
     {
-      title: 'Pricing',
-      links: [
-        { label: 'Pricing Plans', to: '/pricing' },
-        { label: 'ROI Calculator', href: '#' },
-        { label: 'Volume Licensing', href: '#' },
-        { label: 'Book a demo', to: '/schedule-demo' },
-      ],
-    },
-    {
       title: 'Company',
       links: [
         { label: 'About Us', to: '/about' },
         { label: 'Services', to: '/services' },
         { label: 'Case Studies', to: '/case-studies' },
         { label: 'Compliance', to: '/compliance' },
+      ],
+    },
+    {
+      title: 'Product',
+      links: [
+        { label: 'Data Sources', to: '/data-sources' },
+        { label: 'Solutions', to: '/solutions' },
+        { label: 'Book a demo', to: '/schedule-demo' },
+        { label: 'Get Started', to: '/get-started' },
       ],
     },
     {

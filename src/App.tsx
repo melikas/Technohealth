@@ -4,7 +4,6 @@ import HomePage from './pages/HomePage';
 import SolutionsPage from './pages/SolutionsPage';
 import ProcessPage from './pages/ProcessPage';
 import AboutPage from './pages/AboutPage';
-import PricingPage from './pages/PricingPage';
 import DemoPage from './pages/DemoPage';
 import GetStartedPage from './pages/GetStartedPage';
 import AuthPage from './pages/AuthPage';
@@ -40,7 +39,6 @@ function App() {
         <Route path="/solutions" element={<SolutionsPage />} />
         <Route path="/implementation" element={<ProcessPage />} />
         <Route path="/about" element={<AboutPage />} />
-        <Route path="/pricing" element={<PricingPage />} />
         <Route path="/demo" element={<DemoPage />} />
         <Route path="/schedule-demo" element={<ScheduleDemoPage />} />
         <Route path="/book-a-demo" element={<ScheduleDemoPage />} />
