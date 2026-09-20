@@ -185,17 +185,40 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="flex justify-center mb-16">
+        <div className="grid lg:grid-cols-3 gap-8 lg:gap-10 items-center mb-16">
           <div
-            className="w-full max-w-3xl overflow-hidden rounded-gcard border"
+            className="lg:col-span-2 overflow-hidden rounded-gcard border"
             style={{ borderColor: 'var(--color-border)', boxShadow: 'var(--shadow-card)' }}
           >
             <img
-              src="/Images/hero-second.png"
-              alt="TechnoHealth"
-              className="w-full h-auto object-cover max-h-80 md:max-h-96"
+              src="/Images/Picture2.png"
+              alt="TechnoHealth data flow from wearables to API dashboard"
+              className="w-full h-auto object-contain bg-[#0a0a0a]"
             />
           </div>
+
+          <ul className="space-y-8 lg:pl-2">
+            {[
+              { title: t.heroPoint1Title, desc: t.heroPoint1Desc },
+              { title: t.heroPoint2Title, desc: t.heroPoint2Desc },
+              { title: t.heroPoint3Title, desc: t.heroPoint3Desc },
+            ].map((point) => (
+              <li key={point.title} className="flex gap-3 text-left">
+                <span
+                  className="mt-2 w-2 h-2 rounded-full shrink-0"
+                  style={{ backgroundColor: 'var(--color-brand-blue)' }}
+                />
+                <div>
+                  <p className="text-lg font-medium" style={{ color: 'var(--color-text)' }}>
+                    {point.title}
+                  </p>
+                  <p className="text-sm mt-1 leading-relaxed" style={{ color: 'var(--color-text-secondary)' }}>
+                    {point.desc}
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
 
         <div className="grid md:grid-cols-3 gap-4">

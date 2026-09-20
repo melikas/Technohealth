@@ -25,6 +25,12 @@ const siteCopy = {
     metricMlDesc: 'Predicting health, powering care',
     metricEfficiency: 'Efficiency Boost',
     metricEfficiencyDesc: 'Developer time saved',
+    heroPoint1Title: 'One API',
+    heroPoint1Desc: 'to launch health data from any provider.',
+    heroPoint2Title: 'Real-time updates',
+    heroPoint2Desc: 'on daily routines.',
+    heroPoint3Title: 'Easy to implement',
+    heroPoint3Desc: 'and research.',
 
     benefitsTitle: 'Get wearable data into your product faster',
     benefitsSub:
@@ -150,6 +156,12 @@ const siteCopy = {
     metricMlDesc: 'Prédire la santé, soutenir les soins',
     metricEfficiency: 'Gain d’efficacité',
     metricEfficiencyDesc: 'Temps de développement économisé',
+    heroPoint1Title: 'Une API',
+    heroPoint1Desc: 'pour lancer les données de santé de n’importe quel fournisseur.',
+    heroPoint2Title: 'Mises à jour en temps réel',
+    heroPoint2Desc: 'sur les routines quotidiennes.',
+    heroPoint3Title: 'Facile à implémenter',
+    heroPoint3Desc: 'et à utiliser en recherche.',
 
     benefitsTitle: 'Intégrez les données wearables plus vite',
     benefitsSub:
