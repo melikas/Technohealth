@@ -1,7 +1,14 @@
-import { Github, Linkedin, Twitter } from 'lucide-react';
+import { Github, Linkedin, Twitter, Shield } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 type FooterLink = { label: string; to: string } | { label: string; href: string };
+
+const COMPLIANCE_BADGES = [
+  'HIPAA Compliant',
+  'HITRUST Certified',
+  'SOC 2 Type II',
+  'Self hosted',
+];
 
 export default function Footer() {
   const linkStyle = {
@@ -113,6 +120,36 @@ export default function Footer() {
               </ul>
             </div>
           ))}
+        </div>
+
+        <div className="border-t pt-8 pb-6" style={{ borderColor: 'var(--color-border)' }}>
+          <p
+            className="text-xs font-medium uppercase tracking-wider mb-4"
+            style={{ color: 'var(--color-text-tertiary)' }}
+          >
+            Compliant with
+          </p>
+          <div className="flex flex-wrap items-center gap-3 sm:gap-4">
+            {COMPLIANCE_BADGES.map((badge) => (
+              <Link
+                key={badge}
+                to="/compliance"
+                className="inline-flex items-center gap-2 px-3 py-2 rounded-full border text-xs sm:text-sm no-underline transition-colors hover:opacity-90"
+                style={{
+                  color: 'var(--color-text-secondary)',
+                  borderColor: 'var(--color-border)',
+                  backgroundColor: 'var(--color-surface)',
+                }}
+              >
+                <Shield
+                  className="w-3.5 h-3.5 shrink-0"
+                  style={{ color: 'var(--color-brand-blue)' }}
+                  strokeWidth={2}
+                />
+                {badge}
+              </Link>
+            ))}
+          </div>
         </div>
 
         <div className="border-t pt-4 pb-2" style={{ borderColor: 'var(--color-border)' }}>

@@ -1,6 +1,6 @@
 import { FormEvent, useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Search, Mic, Check } from 'lucide-react';
+import { Search, Mic } from 'lucide-react';
 import { resolveSearchDestination, searchSite, type SiteSearchResult } from '../lib/siteSearch';
 
 export default function Hero() {
@@ -30,8 +30,6 @@ export default function Hero() {
       accent: 'var(--color-brand-blue-light)',
     },
   ];
-
-  const trustItems = ['HIPAA Compliant', 'HITRUST Certified', 'SOC 2 Type II', 'Self hosted'];
 
   const results = useMemo(() => searchSite(query), [query]);
 
@@ -197,7 +195,7 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-4 mb-12">
+        <div className="grid md:grid-cols-3 gap-4">
           {metrics.map((metric) => (
             <div
               key={metric.label}
@@ -218,33 +216,6 @@ export default function Hero() {
               </p>
             </div>
           ))}
-        </div>
-
-        <div
-          className="rounded-gcard border px-6 py-5 text-center"
-          style={{
-            backgroundColor: 'var(--color-surface-alt)',
-            borderColor: 'var(--color-border)',
-          }}
-        >
-          <p
-            className="text-xs font-medium uppercase tracking-wider mb-4"
-            style={{ color: 'var(--color-text-tertiary)' }}
-          >
-            Enterprise-grade security
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
-            {trustItems.map((item) => (
-              <span
-                key={item}
-                className="inline-flex items-center gap-2 text-sm"
-                style={{ color: 'var(--color-text-secondary)' }}
-              >
-                <Check className="w-4 h-4" style={{ color: 'var(--color-brand-blue)' }} strokeWidth={2.5} />
-                {item}
-              </span>
-            ))}
-          </div>
         </div>
       </div>
     </section>
