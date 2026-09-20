@@ -1,4 +1,4 @@
-import { Zap, CheckCircle, Database, Shield, Check } from 'lucide-react';
+import { Zap, CheckCircle, Database, Shield } from 'lucide-react';
 
 export default function BenefitsPillars() {
   const benefits = [
@@ -26,13 +26,6 @@ export default function BenefitsPillars() {
       description: 'HIPAA compliant, SOC 2 audited, and built with role based access for regulated teams.',
       color: 'var(--color-brand-blue-deep)',
     },
-  ];
-
-  const enterprise = [
-    'HIPAA Compliant',
-    'SOC 2 Type II Audited',
-    '99.9% Uptime SLA',
-    'Data Governance',
   ];
 
   return (
@@ -75,36 +68,6 @@ export default function BenefitsPillars() {
               </div>
             );
           })}
-        </div>
-
-        <div
-          className="mt-12 rounded-gcard border p-6 md:p-8"
-          style={{
-            backgroundColor: 'var(--color-surface)',
-            borderColor: 'var(--color-border)',
-          }}
-        >
-          <p
-            className="text-center text-xs font-medium uppercase tracking-wider mb-8"
-            style={{ color: 'var(--color-text-tertiary)' }}
-          >
-            Built for enterprise
-          </p>
-          <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-6">
-            {enterprise.map((item) => (
-              <div key={item} className="flex flex-col items-center text-center gap-3">
-                <div
-                  className="w-10 h-10 rounded-full flex items-center justify-center"
-                  style={{ backgroundColor: 'var(--color-surface-success)' }}
-                >
-                  <Check className="w-5 h-5" style={{ color: 'var(--color-success)' }} strokeWidth={2.5} />
-                </div>
-                <span className="text-sm font-medium" style={{ color: 'var(--color-text)' }}>
-                  {item}
-                </span>
-              </div>
-            ))}
-          </div>
         </div>
       </div>
     </section>

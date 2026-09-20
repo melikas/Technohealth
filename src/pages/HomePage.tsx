@@ -1,6 +1,5 @@
 import Header from '../components/Header';
 import Hero from '../components/Hero';
-import IntegrationShowcase from '../components/IntegrationShowcase';
 import BenefitsPillars from '../components/BenefitsPillars';
 import UseCaseShowcase from '../components/UseCaseShowcase';
 import FAQ from '../components/FAQ';
@@ -12,7 +11,6 @@ export default function HomePage() {
     <div className="min-h-screen" style={{ backgroundColor: 'var(--color-surface)' }}>
       <Header />
       <Hero />
-      <IntegrationShowcase />
       <BenefitsPillars />
       <UseCaseShowcase />
       <FAQ />
