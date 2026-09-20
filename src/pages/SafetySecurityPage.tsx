@@ -1,225 +1,104 @@
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { Link } from 'react-router-dom';
-import { Shield, CheckCircle, Server, Lock } from 'lucide-react';
 
 export default function SafetySecurityPage() {
-  const pillars = [
-    { label: 'Law 25', desc: 'Quebec privacy law' },
-    { label: 'PIPEDA', desc: 'Canada federal privacy' },
-    { label: 'HIPAA ready', desc: 'US customer workflows' },
-    { label: 'Self hosted', desc: 'Your infrastructure' },
-  ];
-
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen" style={{ backgroundColor: 'var(--color-surface)' }}>
       <Header />
 
-      <section className="bg-gradient-to-r from-blue-900 to-slate-900 text-white py-20 mt-16">
-        <div className="max-w-7xl mx-auto px-6">
-          <h1 className="text-5xl font-bold mb-4">Safety and Security</h1>
-          <p className="text-xl text-slate-300 max-w-3xl">
-            How TechnoHealth protects health data for a Quebec based company serving customers in Canada and beyond.
+      <section
+        className="pt-28 pb-10 md:pt-32 md:pb-12 px-4"
+        style={{ backgroundColor: 'var(--color-surface-alt)' }}
+      >
+        <div className="max-w-3xl mx-auto text-center">
+          <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight text-[#111] mb-3">
+            Safety and Security
+          </h1>
+          <p className="text-[16px] text-[#666] max-w-xl mx-auto">
+            What you need to know before putting wearable health data on TechnoHealth.
           </p>
         </div>
       </section>
 
-      <section className="py-24 px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="mb-16 rounded-xl p-10 md:p-12 border border-slate-200 bg-slate-50">
-            <h2 className="text-3xl font-bold text-slate-900 mb-4">Built for regulated health data</h2>
-            <p className="text-slate-600 mb-8 max-w-3xl">
-              TechnoHealth is based in Montreal, Quebec. For us, the baseline is Quebec Law 25 and Canadian
-              federal privacy rules. When customers handle US protected health information, we also support HIPAA
-              style controls and Business Associate Agreements.
+      <section className="py-12 md:py-16 px-4">
+        <div className="max-w-3xl mx-auto space-y-12 text-[15px] leading-relaxed text-[#444]">
+          <div>
+            <h2 className="text-xl font-semibold text-[#111] mb-3">We are based in Montreal</h2>
+            <p>
+              TechnoHealth is a Quebec company. That means Quebec privacy law is our starting point, not an
+              afterthought. If you sell across Canada or work with US healthcare teams, we cover those cases too.
             </p>
-            <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-6">
-              {pillars.map((item) => (
-                <div key={item.label} className="text-center">
-                  <Shield className="w-8 h-8 text-blue-600 mx-auto mb-2" />
-                  <p className="font-semibold text-slate-900">{item.label}</p>
-                  <p className="text-sm text-slate-600">{item.desc}</p>
-                </div>
-              ))}
-            </div>
           </div>
 
-          {/* Law 25 */}
-          <section className="mb-16">
-            <h2 className="text-3xl font-bold text-slate-900 mb-6">Quebec Law 25</h2>
-            <div className="grid md:grid-cols-2 gap-8">
-              <div>
-                <h3 className="text-xl font-bold text-slate-900 mb-4">Why it matters</h3>
-                <p className="text-slate-600 mb-4">
-                  Law 25 modernized Quebec&apos;s Act respecting the protection of personal information in the private
-                  sector. It applies to private organizations that collect, use, or disclose personal information in
-                  Quebec, including health related data.
+          <div>
+            <h2 className="text-xl font-semibold text-[#111] mb-3">What applies to you</h2>
+            <ul className="space-y-4">
+              <li>
+                <p className="font-medium text-[#111]">Quebec Law 25</p>
+                <p className="mt-1">
+                  Required for personal information handled in Quebec. Health data counts as sensitive, so consent
+                  must be clear. Moving data outside Quebec needs a privacy review and solid contracts.
                 </p>
-                <p className="text-slate-600">
-                  Health information is treated as sensitive. Consent must be clear and express. Transfers outside
-                  Quebec require a privacy impact assessment and contractual safeguards.
+              </li>
+              <li>
+                <p className="font-medium text-[#111]">PIPEDA</p>
+                <p className="mt-1">
+                  Canada&apos;s federal privacy rules matter when data crosses provincial or national borders in a
+                  commercial setting.
                 </p>
-              </div>
-              <div>
-                <h3 className="text-xl font-bold text-slate-900 mb-4">How we design for it</h3>
-                <ul className="space-y-3">
-                  {[
-                    'Privacy by default in product settings',
-                    'Clear consent and purpose limitation for wearable data',
-                    'Privacy impact assessments for new systems and transfers',
-                    'Incident register and breach response process',
-                    'Written processor agreements with customers and vendors',
-                    'Support for access, correction, and portability requests',
-                  ].map((item) => (
-                    <li key={item} className="flex items-start gap-3">
-                      <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
-                      <span className="text-slate-600">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-            <div className="mt-8 bg-blue-50 rounded-lg p-6 border border-blue-200">
-              <p className="text-sm text-slate-700">
-                Quebec also has the Act respecting health and social services information for certain health and
-                social services bodies. If your deployment falls under that regime, we help you keep controls aligned
-                with your institutional obligations.
-              </p>
-            </div>
-          </section>
+              </li>
+              <li>
+                <p className="font-medium text-[#111]">HIPAA for US customers</p>
+                <p className="mt-1">
+                  HIPAA is US law. It applies when you handle US patient data for a US covered entity. We support
+                  the usual controls and can sign a Business Associate Agreement when you need one.
+                </p>
+              </li>
+            </ul>
+          </div>
 
-          {/* PIPEDA */}
-          <section className="mb-16">
-            <h2 className="text-3xl font-bold text-slate-900 mb-6">PIPEDA (Canada federal)</h2>
-            <div className="grid md:grid-cols-2 gap-8">
-              <div>
-                <h3 className="text-xl font-bold text-slate-900 mb-4">Why it matters</h3>
-                <p className="text-slate-600 mb-4">
-                  PIPEDA is Canada&apos;s federal private sector privacy law. Quebec has a substantially similar
-                  provincial law for activity inside Quebec, but PIPEDA still matters for commercial personal
-                  information that crosses provincial or national borders.
-                </p>
-                <p className="text-slate-600">
-                  For a Montreal company shipping health products across Canada or abroad, PIPEDA principles remain
-                  part of a complete privacy program.
-                </p>
-              </div>
-              <div>
-                <h3 className="text-xl font-bold text-slate-900 mb-4">How we design for it</h3>
-                <ul className="space-y-3">
-                  {[
-                    'Accountability through a designated privacy contact',
-                    'Identified purposes before collection',
-                    'Meaningful consent and limited collection',
-                    'Safeguards matched to sensitivity of health data',
-                    'Breach assessment and notification when required',
-                    'Openness about policies and practices',
-                  ].map((item) => (
-                    <li key={item} className="flex items-start gap-3">
-                      <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
-                      <span className="text-slate-600">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </section>
-
-          {/* HIPAA */}
-          <section className="mb-16">
-            <h2 className="text-3xl font-bold text-slate-900 mb-6">HIPAA ready for US customers</h2>
-            <div className="grid md:grid-cols-2 gap-8">
-              <div>
-                <h3 className="text-xl font-bold text-slate-900 mb-4">Important distinction</h3>
-                <p className="text-slate-600 mb-4">
-                  HIPAA is US law. A Quebec company is not automatically under HIPAA for Canadian operations. HIPAA
-                  becomes relevant when you handle US Protected Health Information for a US covered entity, usually
-                  under a Business Associate Agreement.
-                </p>
-                <p className="text-slate-600">
-                  TechnoHealth supports those workflows so US healthcare customers can use our platform with the
-                  safeguards they expect.
-                </p>
-              </div>
-              <div>
-                <h3 className="text-xl font-bold text-slate-900 mb-4">Controls we support</h3>
-                <ul className="space-y-3">
-                  {[
-                    'Encryption in transit (TLS 1.3)',
-                    'Encryption at rest (AES-256)',
-                    'Access control and authentication',
-                    'Audit logs for data access',
-                    'Business Associate Agreement support',
-                    'Breach notification workflows',
-                  ].map((item) => (
-                    <li key={item} className="flex items-start gap-3">
-                      <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
-                      <span className="text-slate-600">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </section>
-
-          {/* Self hosted + security */}
-          <section className="mb-16">
-            <h2 className="text-3xl font-bold text-slate-900 mb-6">Safety architecture</h2>
-            <div className="grid md:grid-cols-2 gap-8">
-              <div className="border border-slate-200 rounded-lg p-6">
-                <Server className="w-8 h-8 text-blue-600 mb-4" />
-                <h3 className="text-xl font-bold text-slate-900 mb-3">Self hosted by default mindset</h3>
-                <p className="text-slate-600 mb-4">
-                  Deploy on your servers so you keep ownership of the data path. That helps with Quebec transfer
-                  assessments and customer security reviews.
-                </p>
-                <ul className="space-y-2 text-slate-600 text-sm">
-                  <li>• Customer controlled hosting regions</li>
-                  <li>• No forced multi tenant lock in</li>
-                  <li>• Clear processor boundaries</li>
-                </ul>
-              </div>
-              <div className="border border-slate-200 rounded-lg p-6">
-                <Lock className="w-8 h-8 text-blue-600 mb-4" />
-                <h3 className="text-xl font-bold text-slate-900 mb-3">Technical safeguards</h3>
-                <ul className="space-y-3">
-                  {[
-                    'AES-256 at rest and TLS 1.3 in transit',
-                    'Role based access and MFA support',
-                    'Audit logging for sensitive actions',
-                    'Network isolation and hardened defaults',
-                  ].map((item) => (
-                    <li key={item} className="flex items-start gap-3">
-                      <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
-                      <span className="text-slate-600">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </section>
-
-          <section className="mb-16">
-            <h2 className="text-3xl font-bold text-slate-900 mb-4">What we do not claim lightly</h2>
-            <p className="text-slate-600 max-w-3xl">
-              Voluntary frameworks such as SOC 2 or HITRUST are useful when independently audited. We do not present
-              unfinished certifications as completed seals. Ask us for the current status of any attestation you need
-              for procurement.
+          <div>
+            <h2 className="text-xl font-semibold text-[#111] mb-3">Where the data lives</h2>
+            <p>
+              You can run TechnoHealth on your own infrastructure. That keeps ownership with you, simplifies
+              security reviews, and helps with Quebec rules around transfers outside the province.
             </p>
-          </section>
+          </div>
 
-          <section className="rounded-xl p-10 md:p-12 border border-slate-200 bg-slate-50 text-center">
-            <h2 className="text-3xl font-bold text-slate-900 mb-4">Questions about safety and security?</h2>
-            <p className="text-slate-600 mb-8 max-w-2xl mx-auto">
-              Talk with us about Law 25, PIPEDA, HIPAA ready deployments, or self hosted architecture for your team.
+          <div>
+            <h2 className="text-xl font-semibold text-[#111] mb-3">How we protect it</h2>
+            <ul className="list-disc pl-5 space-y-2">
+              <li>Encryption in transit (TLS 1.3) and at rest (AES-256)</li>
+              <li>Role based access, with MFA where you need it</li>
+              <li>Audit logs for sensitive actions</li>
+              <li>Breach response you can include in your own policies</li>
+            </ul>
+          </div>
+
+          <div>
+            <h2 className="text-xl font-semibold text-[#111] mb-3">Certifications</h2>
+            <p>
+              We do not put unfinished seals on the site. If your procurement team needs SOC 2, HITRUST, or another
+              attestation, ask us for the current status and timeline.
+            </p>
+          </div>
+
+          <div
+            className="rounded-xl border border-[#e6e6e6] bg-[#fafafa] p-6 sm:p-8 text-center"
+          >
+            <h2 className="text-lg font-semibold text-[#111] mb-2">Need details for legal or security review?</h2>
+            <p className="text-[#666] mb-5">
+              Send us your questionnaire or BAA request. We will answer with what is in place today.
             </p>
             <Link
               to="/contact"
-              className="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition"
+              className="inline-block g-btn-primary no-underline"
+              style={{ color: 'var(--color-text-on-primary)' }}
             >
               Contact us
             </Link>
-          </section>
+          </div>
         </div>
       </section>
 
