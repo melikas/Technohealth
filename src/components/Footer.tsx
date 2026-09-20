@@ -122,28 +122,36 @@ export default function Footer() {
           ))}
         </div>
 
-        <div className="border-t pt-5 pb-2" style={{ borderColor: 'var(--color-border)' }}>
-          <div className="flex flex-col md:flex-row justify-between items-center gap-5">
+        <div className="border-t pt-8 pb-2" style={{ borderColor: 'var(--color-border)' }}>
+          <div className="flex flex-col gap-5">
+            <div>
+              <p
+                className="text-xs font-medium mb-4"
+                style={{ color: 'var(--color-text-secondary)' }}
+              >
+                Compliant with
+              </p>
+              <div className="flex flex-wrap items-center gap-4 sm:gap-5">
+                {COMPLIANCE_BADGES.map((badge) => (
+                  <Link
+                    key={badge.label}
+                    to="/compliance"
+                    className="inline-flex items-center no-underline opacity-80 hover:opacity-100 transition-opacity"
+                    title={badge.label}
+                    aria-label={badge.label}
+                  >
+                    <img
+                      src={badge.src}
+                      alt={badge.label}
+                      className="h-14 w-14 sm:h-16 sm:w-16 object-contain"
+                    />
+                  </Link>
+                ))}
+              </div>
+            </div>
             <p className="text-sm" style={{ color: 'var(--color-text-secondary)' }}>
               © 2026 TechnoHealth. All rights reserved.
             </p>
-            <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
-              {COMPLIANCE_BADGES.map((badge) => (
-                <Link
-                  key={badge.label}
-                  to="/compliance"
-                  className="inline-flex items-center no-underline opacity-90 hover:opacity-100 transition-opacity"
-                  title={badge.label}
-                  aria-label={badge.label}
-                >
-                  <img
-                    src={badge.src}
-                    alt={badge.label}
-                    className="h-11 w-11 sm:h-12 sm:w-12 object-contain"
-                  />
-                </Link>
-              ))}
-            </div>
           </div>
         </div>
       </div>
