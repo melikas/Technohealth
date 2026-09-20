@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { ChevronDown, Grid3X3, Menu, X } from 'lucide-react';
+import { ChevronDown, Menu, X } from 'lucide-react';
+import { openRequestDemo } from '../lib/demoRequest';
+import RequestDemoModal from './RequestDemoModal';
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -36,159 +38,169 @@ export default function Header() {
     { label: 'Contact', path: '/contact' },
   ];
 
-  return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-shadow duration-200 ${
-        isScrolled ? 'shadow-gcard' : ''
-      }`}
-      style={{ backgroundColor: 'var(--color-surface)' }}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-2 hover:opacity-90 transition-opacity no-underline">
-          <img src="/Images/Icon3.png" alt="TechnoHealth" className="h-8 w-auto" />
-          <span
-            className="text-[22px] font-normal tracking-tight hidden sm:inline"
-            style={{ color: 'var(--color-text-secondary)' }}
-          >
-            TechnoHealth
-          </span>
-        </Link>
+  const handleGetStarted = () => {
+    setMobileOpen(false);
+    openRequestDemo();
+  };
 
-        <nav className="hidden md:flex items-center gap-1">
-          {navLinks.map((link) => (
-            <div key={link.label} className="relative">
-              {link.hasDropdown ? (
-                <div
-                  onMouseEnter={() => setShowServicesMenu(true)}
-                  onMouseLeave={() => setShowServicesMenu(false)}
-                >
-                  <button
-                    type="button"
-                    className="g-btn-text flex items-center gap-1"
+  return (
+    <>
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 transition-shadow duration-200 ${
+          isScrolled ? 'shadow-gcard' : ''
+        }`}
+        style={{ backgroundColor: 'var(--color-surface)' }}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+          <Link
+            to="/"
+            className="inline-flex items-center hover:opacity-90 transition-opacity no-underline"
+            aria-label="TechnoHealth home"
+          >
+            <img src="/Images/Icon3.png" alt="TechnoHealth" className="h-9 w-auto" />
+          </Link>
+
+          <nav className="hidden md:flex items-center gap-1">
+            {navLinks.map((link) => (
+              <div key={link.label} className="relative">
+                {link.hasDropdown ? (
+                  <div
+                    onMouseEnter={() => setShowServicesMenu(true)}
+                    onMouseLeave={() => setShowServicesMenu(false)}
+                  >
+                    <button
+                      type="button"
+                      className="g-btn-text flex items-center gap-1"
+                      style={{
+                        color: showServicesMenu ? 'var(--color-text)' : 'var(--color-text-secondary)',
+                        backgroundColor: showServicesMenu ? 'var(--color-surface-chip)' : undefined,
+                      }}
+                    >
+                      {link.label}
+                      <ChevronDown
+                        className={`w-4 h-4 transition-transform ${showServicesMenu ? 'rotate-180' : ''}`}
+                        strokeWidth={1.75}
+                      />
+                    </button>
+
+                    {showServicesMenu && (
+                      <div
+                        className="absolute top-full left-0 mt-1 py-2 w-52 rounded-lg border shadow-gelevated"
+                        style={{
+                          backgroundColor: 'var(--color-surface)',
+                          borderColor: 'var(--color-border)',
+                        }}
+                      >
+                        {serviceItems.map((item) => (
+                          <Link
+                            key={item.label}
+                            to={item.path}
+                            onClick={() => setShowServicesMenu(false)}
+                            className="block px-4 py-2.5 text-sm no-underline transition-colors"
+                            style={{
+                              color: isActive(item.path) ? 'var(--color-primary)' : 'var(--color-text)',
+                              backgroundColor: isActive(item.path)
+                                ? 'var(--color-surface-chip)'
+                                : undefined,
+                            }}
+                            onMouseEnter={(e) => {
+                              e.currentTarget.style.backgroundColor = 'var(--color-surface-chip)';
+                            }}
+                            onMouseLeave={(e) => {
+                              e.currentTarget.style.backgroundColor = isActive(item.path)
+                                ? 'var(--color-surface-chip)'
+                                : 'transparent';
+                            }}
+                          >
+                            {item.label}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <Link
+                    to={link.path || '#'}
+                    className="g-btn-text"
                     style={{
-                      color: showServicesMenu ? 'var(--color-text)' : 'var(--color-text-secondary)',
-                      backgroundColor: showServicesMenu ? 'var(--color-surface-chip)' : undefined,
+                      color: isActive(link.path || '')
+                        ? 'var(--color-primary)'
+                        : 'var(--color-text-secondary)',
+                      backgroundColor: isActive(link.path || '')
+                        ? 'var(--color-surface-chip)'
+                        : undefined,
                     }}
                   >
                     {link.label}
-                    <ChevronDown
-                      className={`w-4 h-4 transition-transform ${showServicesMenu ? 'rotate-180' : ''}`}
-                      strokeWidth={1.75}
-                    />
-                  </button>
+                  </Link>
+                )}
+              </div>
+            ))}
 
-                  {showServicesMenu && (
-                    <div
-                      className="absolute top-full left-0 mt-1 py-2 w-52 rounded-lg border shadow-gelevated"
-                      style={{
-                        backgroundColor: 'var(--color-surface)',
-                        borderColor: 'var(--color-border)',
-                      }}
-                    >
-                      {serviceItems.map((item) => (
-                        <Link
-                          key={item.label}
-                          to={item.path}
-                          onClick={() => setShowServicesMenu(false)}
-                          className="block px-4 py-2.5 text-sm no-underline transition-colors"
-                          style={{
-                            color: isActive(item.path) ? 'var(--color-primary)' : 'var(--color-text)',
-                            backgroundColor: isActive(item.path) ? 'var(--color-surface-chip)' : undefined,
-                          }}
-                          onMouseEnter={(e) => {
-                            e.currentTarget.style.backgroundColor = 'var(--color-surface-chip)';
-                          }}
-                          onMouseLeave={(e) => {
-                            e.currentTarget.style.backgroundColor = isActive(item.path)
-                              ? 'var(--color-surface-chip)'
-                              : 'transparent';
-                          }}
-                        >
-                          {item.label}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              ) : (
-                <Link
-                  to={link.path || '#'}
-                  className="g-btn-text"
-                  style={{
-                    color: isActive(link.path || '') ? 'var(--color-primary)' : 'var(--color-text-secondary)',
-                    backgroundColor: isActive(link.path || '') ? 'var(--color-surface-chip)' : undefined,
-                  }}
-                >
-                  {link.label}
-                </Link>
-              )}
-            </div>
-          ))}
+            <button type="button" onClick={handleGetStarted} className="g-btn-primary ml-2">
+              Get Started
+            </button>
+          </nav>
 
           <button
             type="button"
-            className="ml-1 p-2 rounded-full transition-colors"
+            className="md:hidden p-2 rounded-full"
             style={{ color: 'var(--color-text-secondary)' }}
-            aria-label="Google apps"
-            title="Apps"
+            onClick={() => setMobileOpen((v) => !v)}
+            aria-label="Menu"
           >
-            <Grid3X3 className="w-5 h-5" strokeWidth={1.5} />
-          </button>
-
-          <Link to="/auth" className="g-btn-primary ml-2 no-underline">
-            Get Started
-          </Link>
-        </nav>
-
-        <button
-          type="button"
-          className="md:hidden p-2 rounded-full"
-          style={{ color: 'var(--color-text-secondary)' }}
-          onClick={() => setMobileOpen((v) => !v)}
-          aria-label="Menu"
-        >
-          {mobileOpen ? <X className="w-6 h-6" strokeWidth={1.75} /> : <Menu className="w-6 h-6" strokeWidth={1.75} />}
-        </button>
-      </div>
-
-      {mobileOpen && (
-        <div
-          className="md:hidden border-t px-4 py-3 space-y-1"
-          style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-surface)' }}
-        >
-          {navLinks.map((link) =>
-            link.hasDropdown ? (
-              <div key={link.label}>
-                <p className="px-3 py-2 text-xs font-medium uppercase tracking-wide" style={{ color: 'var(--color-text-tertiary)' }}>
-                  Services
-                </p>
-                {serviceItems.map((item) => (
-                  <Link
-                    key={item.label}
-                    to={item.path}
-                    className="block px-3 py-2.5 text-sm rounded-lg no-underline"
-                    style={{ color: 'var(--color-text)' }}
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-              </div>
+            {mobileOpen ? (
+              <X className="w-6 h-6" strokeWidth={1.75} />
             ) : (
-              <Link
-                key={link.label}
-                to={link.path || '#'}
-                className="block px-3 py-2.5 text-sm rounded-lg no-underline"
-                style={{ color: 'var(--color-text)' }}
-              >
-                {link.label}
-              </Link>
-            )
-          )}
-          <Link to="/auth" className="g-btn-primary w-full mt-2 no-underline">
-            Get Started
-          </Link>
+              <Menu className="w-6 h-6" strokeWidth={1.75} />
+            )}
+          </button>
         </div>
-      )}
-    </header>
+
+        {mobileOpen && (
+          <div
+            className="md:hidden border-t px-4 py-3 space-y-1"
+            style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-surface)' }}
+          >
+            {navLinks.map((link) =>
+              link.hasDropdown ? (
+                <div key={link.label}>
+                  <p
+                    className="px-3 py-2 text-xs font-medium uppercase tracking-wide"
+                    style={{ color: 'var(--color-text-tertiary)' }}
+                  >
+                    Services
+                  </p>
+                  {serviceItems.map((item) => (
+                    <Link
+                      key={item.label}
+                      to={item.path}
+                      className="block px-3 py-2.5 text-sm rounded-lg no-underline"
+                      style={{ color: 'var(--color-text)' }}
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+              ) : (
+                <Link
+                  key={link.label}
+                  to={link.path || '#'}
+                  className="block px-3 py-2.5 text-sm rounded-lg no-underline"
+                  style={{ color: 'var(--color-text)' }}
+                >
+                  {link.label}
+                </Link>
+              )
+            )}
+            <button type="button" onClick={handleGetStarted} className="g-btn-primary w-full mt-2">
+              Get Started
+            </button>
+          </div>
+        )}
+      </header>
+
+      <RequestDemoModal />
+    </>
   );
 }

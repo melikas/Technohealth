@@ -1,12 +1,18 @@
 import { Github, Linkedin, Twitter } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { openRequestDemo } from '../lib/demoRequest';
+
+type FooterLink =
+  | { label: string; to: string }
+  | { label: string; href: string }
+  | { label: string; action: 'demo' };
 
 export default function Footer() {
   const linkStyle = {
     color: 'var(--color-text-secondary)',
   };
 
-  const columns = [
+  const columns: { title: string; links: FooterLink[] }[] = [
     {
       title: 'Docs',
       links: [
@@ -22,7 +28,7 @@ export default function Footer() {
         { label: 'Pricing Plans', to: '/pricing' },
         { label: 'ROI Calculator', href: '#' },
         { label: 'Volume Licensing', href: '#' },
-        { label: 'Get Started', to: '/get-started' },
+        { label: 'Get Started', action: 'demo' },
       ],
     },
     {
@@ -81,16 +87,22 @@ export default function Footer() {
 
           {columns.map((col) => (
             <div key={col.title}>
-              <h4
-                className="text-sm font-medium mb-4"
-                style={{ color: 'var(--color-text)' }}
-              >
+              <h4 className="text-sm font-medium mb-4" style={{ color: 'var(--color-text)' }}>
                 {col.title}
               </h4>
               <ul className="space-y-3">
                 {col.links.map((link) => (
                   <li key={link.label}>
-                    {'to' in link && link.to ? (
+                    {'action' in link && link.action === 'demo' ? (
+                      <button
+                        type="button"
+                        onClick={openRequestDemo}
+                        className="text-sm bg-transparent border-0 p-0 cursor-pointer hover:underline"
+                        style={linkStyle}
+                      >
+                        {link.label}
+                      </button>
+                    ) : 'to' in link ? (
                       <Link
                         to={link.to}
                         className="text-sm no-underline hover:underline"
@@ -100,9 +112,9 @@ export default function Footer() {
                       </Link>
                     ) : (
                       <a
-                        href={'href' in link ? link.href : '#'}
-                        target={'href' in link && link.href?.startsWith('http') ? '_blank' : undefined}
-                        rel={'href' in link && link.href?.startsWith('http') ? 'noopener noreferrer' : undefined}
+                        href={link.href}
+                        target={link.href.startsWith('http') ? '_blank' : undefined}
+                        rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                         className="text-sm no-underline hover:underline"
                         style={linkStyle}
                       >
@@ -116,11 +128,7 @@ export default function Footer() {
           ))}
         </div>
 
-        {/* Google-style dual footer bar */}
-        <div
-          className="border-t pt-4 pb-2"
-          style={{ borderColor: 'var(--color-border)' }}
-        >
+        <div className="border-t pt-4 pb-2" style={{ borderColor: 'var(--color-border)' }}>
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
             <p style={{ color: 'var(--color-text-secondary)' }}>
               © 2026 TechnoHealth. All rights reserved.

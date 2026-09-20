@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom';
 import { ArrowRight, Mail } from 'lucide-react';
+import { openRequestDemo } from '../lib/demoRequest';
 
 export default function CTA() {
   return (
@@ -17,14 +17,14 @@ export default function CTA() {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-3 justify-center mt-10 mb-10">
-          <Link to="/schedule-demo" className="g-btn-primary no-underline">
-            <span>Schedule Demo</span>
+          <button type="button" onClick={openRequestDemo} className="g-btn-primary">
+            <span>Request a demo</span>
             <ArrowRight className="w-4 h-4" strokeWidth={2} />
-          </Link>
-          <Link to="/get-started" className="g-btn-secondary no-underline">
+          </button>
+          <button type="button" onClick={openRequestDemo} className="g-btn-secondary">
             <span>Get Started</span>
             <ArrowRight className="w-4 h-4" strokeWidth={2} />
-          </Link>
+          </button>
         </div>
 
         <div

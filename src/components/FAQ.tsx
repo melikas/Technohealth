@@ -1,6 +1,6 @@
 import { ChevronDown } from 'lucide-react';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { openRequestDemo } from '../lib/demoRequest';
 
 const faqs = [
   {
@@ -113,9 +113,9 @@ export default function FAQ() {
           <p className="text-sm mb-6" style={{ color: 'var(--color-text-secondary)' }}>
             Our team is ready to discuss your specific clinical requirements
           </p>
-          <Link to="/schedule-demo" className="g-btn-primary no-underline">
+          <button type="button" onClick={openRequestDemo} className="g-btn-primary">
             Schedule a Demo
-          </Link>
+          </button>
         </div>
       </div>
     </section>

@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom';
 import { Search, Mic, Check } from 'lucide-react';
+import { openRequestDemo } from '../lib/demoRequest';
 
 export default function Hero() {
   const metrics = [
@@ -69,12 +69,12 @@ export default function Hero() {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-3 mt-8">
-            <Link to="/auth" className="g-btn-primary no-underline min-w-[140px]">
+            <button type="button" onClick={openRequestDemo} className="g-btn-primary min-w-[140px]">
               Get Started
-            </Link>
-            <Link to="/schedule-demo" className="g-btn-secondary no-underline min-w-[140px]">
+            </button>
+            <button type="button" onClick={openRequestDemo} className="g-btn-secondary min-w-[140px]">
               Schedule a demo
-            </Link>
+            </button>
           </div>
         </div>
 
