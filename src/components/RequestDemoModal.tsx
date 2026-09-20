@@ -118,7 +118,7 @@ export default function RequestDemoModal() {
             <p className="text-sm mt-0.5" style={{ color: 'var(--color-text-secondary)' }}>
               {step === 'intro'
                 ? 'Tell us who you are and what you need'
-                : 'Pick a time for a 1:1 with Melika'}
+                : 'Pick a time with Support Team'}
             </p>
           </div>
           <button
@@ -274,19 +274,19 @@ export default function RequestDemoModal() {
                   </p>
                   <p className="text-sm" style={{ color: 'var(--color-text-secondary)' }}>
                     Add your Cal.com link in <code className="text-xs">.env</code> as{' '}
-                    <code className="text-xs">VITE_CAL_LINK=username/30min</code>, or email Melika
+                    <code className="text-xs">VITE_CAL_LINK=username/30min</code>, or email Support Team
                     directly.
                   </p>
                 </div>
                 <a
-                  href={`mailto:melika@technohealth.ai?subject=${encodeURIComponent(
+                  href={`mailto:hello@technohealth.ai?subject=${encodeURIComponent(
                     'Demo request — 30 min meeting'
                   )}&body=${encodeURIComponent(
                     `Name: ${form.name}\nEmail: ${form.email}\nCompany: ${form.company}\nRole: ${form.role}\n\nWhat I need:\n${form.needs}`
                   )}`}
                   className="g-btn-primary inline-flex no-underline"
                 >
-                  Email Melika to schedule
+                  Email SUPPORT TEAM
                 </a>
               </div>
             )}
