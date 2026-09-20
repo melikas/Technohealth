@@ -237,7 +237,7 @@ export default function PricingPage() {
               </div>
               <div>
                 <h4 className="font-semibold text-slate-900 mb-2">What's included in "HIPAA-compliant support"?</h4>
-                <p className="text-slate-600">All plans include data encryption, access logs, audit trails, and Business Associate Agreements (BAAs). Learn more in our <Link to="/compliance" className="text-blue-600 hover:underline">compliance documentation</Link>.</p>
+                <p className="text-slate-600">All plans include data encryption, access logs, audit trails, and Business Associate Agreements (BAAs). Learn more in our <Link to="/safety-security" className="text-blue-600 hover:underline">safety and security documentation</Link>.</p>
               </div>
             </div>
           </div>

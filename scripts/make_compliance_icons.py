@@ -1,12 +1,11 @@
-"""Generate TechnoHealth footer badges in the exact Spike API visual tone."""
-from PIL import Image, ImageDraw, ImageFont, ImageFilter
+"""Spike-style circular seals for Quebec-relevant TechnoHealth badges."""
+from PIL import Image, ImageDraw, ImageFont
 import os
 import math
-import shutil
 
 OUT = r"c:\Users\umroot\Documents\Technohealth\public\Images\compliance"
-SPIKE = os.path.join(OUT, "_spike")
-SIZE = 512  # high-res source; footer scales down
+SIZE = 512
+os.makedirs(OUT, exist_ok=True)
 
 
 def find_font(size, bold=True):
@@ -30,7 +29,6 @@ def circular_alpha(img):
 
 
 def draw_arc_text(base, text, cx, cy, radius, font, fill=(0, 0, 0, 255), top=True):
-    # measure
     widths = []
     for ch in text:
         b = ImageDraw.Draw(Image.new("RGBA", (1, 1))).textbbox((0, 0), ch, font=font)
@@ -57,80 +55,78 @@ def draw_arc_text(base, text, cx, cy, radius, font, fill=(0, 0, 0, 255), top=Tru
         angle += direction * (w / radius)
 
 
-def double_ring(d, size, outer=8, gap=10, inner=4):
-    """Spike-style double circular border."""
+def double_ring(d, size, outer=7, gap=9, inner=3):
     m = outer // 2 + 2
     d.ellipse((m, m, size - 1 - m, size - 1 - m), outline=(0, 0, 0, 255), width=outer)
     m2 = m + outer + gap
     d.ellipse((m2, m2, size - 1 - m2, size - 1 - m2), outline=(0, 0, 0, 255), width=inner)
 
 
-def make_from_spike_hipaa():
-    src = os.path.join(SPIKE, "hipaa.png")
-    im = Image.open(src).convert("RGBA")
-    # ensure pure black ink
-    px = im.load()
-    for y in range(im.height):
-        for x in range(im.width):
-            r, g, b, a = px[x, y]
-            if a < 20:
-                px[x, y] = (0, 0, 0, 0)
-            else:
-                px[x, y] = (0, 0, 0, a)
-    im = im.resize((SIZE, SIZE), Image.Resampling.LANCZOS)
-    return circular_alpha(im)
+def center_text(d, size, lines):
+    for text, font, y in lines:
+        bb = d.textbbox((0, 0), text, font=font)
+        d.text(((size - (bb[2] - bb[0])) // 2, y), text, font=font, fill=(0, 0, 0, 255))
 
 
-def make_hitrust():
-    """CCPA-like Spike seal for HITRUST."""
+def make_law25():
     size = SIZE
     img = Image.new("RGBA", (size, size), (0, 0, 0, 0))
     d = ImageDraw.Draw(img)
     double_ring(d, size)
-
-    # shield + check (top)
     cx = size // 2
-    shield = [
-        (cx, 95),
-        (cx + 55, 115),
-        (cx + 55, 175),
-        (cx, 215),
-        (cx - 55, 175),
-        (cx - 55, 115),
-    ]
-    d.line(shield + [shield[0]], fill=(0, 0, 0, 255), width=6)
-    d.line([(cx - 28, 155), (cx - 8, 175), (cx + 32, 130)], fill=(0, 0, 0, 255), width=8)
-
-    # center text
-    font_big = find_font(54)
-    font_sm = find_font(28)
-    for text, font, y in [("HITRUST", font_big, 235), ("CERTIFIED", font_sm, 300)]:
-        bb = d.textbbox((0, 0), text, font=font)
-        d.text(((size - (bb[2] - bb[0])) // 2, y), text, font=font, fill=(0, 0, 0, 255))
-
-    # bottom curved label
-    draw_arc_text(img, "RISK BASED", cx, size // 2, 200, find_font(22), top=False)
+    # fleur-de-lis simplified / maple-leaf-ish Quebec mark: shield
+    shield = [(cx, 95), (cx + 48, 112), (cx + 48, 168), (cx, 205), (cx - 48, 168), (cx - 48, 112)]
+    d.line(shield + [shield[0]], fill=(0, 0, 0, 255), width=5)
+    d.line([(cx - 18, 150), (cx - 2, 165), (cx + 22, 128)], fill=(0, 0, 0, 255), width=6)
+    center_text(d, size, [
+        ("LAW 25", find_font(52), 220),
+        ("QUEBEC", find_font(28), 285),
+    ])
+    draw_arc_text(img, "PRIVACY READY", cx, cx, 200, find_font(22), top=False)
     return circular_alpha(img)
 
 
-def make_soc2():
+def make_pipeda():
     size = SIZE
     img = Image.new("RGBA", (size, size), (0, 0, 0, 0))
     d = ImageDraw.Draw(img)
     double_ring(d, size)
     cx = size // 2
+    # maple leaf simplified as circle + check (Canada federal)
+    d.ellipse((cx - 34, 105, cx + 34, 173), outline=(0, 0, 0, 255), width=5)
+    d.line([(cx - 14, 142), (cx - 2, 154), (cx + 16, 126)], fill=(0, 0, 0, 255), width=6)
+    center_text(d, size, [
+        ("PIPEDA", find_font(54), 200),
+        ("CANADA", find_font(28), 270),
+    ])
+    draw_arc_text(img, "FEDERAL PRIVACY", cx, cx, 200, find_font(20), top=False)
+    return circular_alpha(img)
 
-    # small AICPA-style mark / circle with check at top
-    d.ellipse((cx - 36, 100, cx + 36, 172), outline=(0, 0, 0, 255), width=5)
-    d.line([(cx - 16, 138), (cx - 2, 152), (cx + 18, 122)], fill=(0, 0, 0, 255), width=6)
 
-    font_big = find_font(64)
-    font_sm = find_font(30)
-    for text, font, y in [("SOC 2", font_big, 200), ("TYPE II", font_sm, 275)]:
-        bb = d.textbbox((0, 0), text, font=font)
-        d.text(((size - (bb[2] - bb[0])) // 2, y), text, font=font, fill=(0, 0, 0, 255))
+def make_hipaa():
+    # Prefer Spike's real HIPAA badge if present, else draw
+    spike = os.path.join(OUT, "_spike", "hipaa.png")
+    if os.path.exists(spike):
+        im = Image.open(spike).convert("RGBA")
+        px = im.load()
+        for y in range(im.height):
+            for x in range(im.width):
+                r, g, b, a = px[x, y]
+                px[x, y] = (0, 0, 0, 0) if a < 20 else (0, 0, 0, a)
+        return circular_alpha(im.resize((SIZE, SIZE), Image.Resampling.LANCZOS))
 
-    draw_arc_text(img, "COMPLIANT", cx, size // 2, 200, find_font(24), top=False)
+    size = SIZE
+    img = Image.new("RGBA", (size, size), (0, 0, 0, 0))
+    d = ImageDraw.Draw(img)
+    double_ring(d, size)
+    cx = size // 2
+    d.line((cx, cx - 50, cx, cx + 40), fill=(0, 0, 0, 255), width=5)
+    d.arc((cx - 36, cx - 58, cx - 2, cx - 20), 200, 20, fill=(0, 0, 0, 255), width=4)
+    d.arc((cx + 2, cx - 58, cx + 36, cx - 20), 160, 340, fill=(0, 0, 0, 255), width=4)
+    d.arc((cx - 30, cx - 22, cx + 4, cx + 22), 200, 20, fill=(0, 0, 0, 255), width=3)
+    d.arc((cx - 4, cx - 22, cx + 30, cx + 22), 160, 340, fill=(0, 0, 0, 255), width=3)
+    draw_arc_text(img, "HIPAA", cx, cx, 195, find_font(28), top=True)
+    draw_arc_text(img, "COMPLIANT", cx, cx, 195, find_font(24), top=False)
     return circular_alpha(img)
 
 
@@ -140,42 +136,50 @@ def make_self_hosted():
     d = ImageDraw.Draw(img)
     double_ring(d, size)
     cx = size // 2
-
-    # server icon (Spike CCPA icon placement)
-    d.rounded_rectangle((cx - 48, 105, cx + 48, 185), radius=10, outline=(0, 0, 0, 255), width=5)
-    for y in (122, 145, 168):
-        d.rectangle((cx - 34, y, cx + 34, y + 12), outline=(0, 0, 0, 255), width=3)
-        d.ellipse((cx + 20, y + 2, cx + 30, y + 12), fill=(0, 0, 0, 255))
-
-    font_big = find_font(42)
-    font_sm = find_font(28)
-    for text, font, y in [("SELF", font_big, 210), ("HOSTED", font_big, 260)]:
-        bb = d.textbbox((0, 0), text, font=font)
-        d.text(((size - (bb[2] - bb[0])) // 2, y), text, font=font, fill=(0, 0, 0, 255))
-
-    draw_arc_text(img, "INFRASTRUCTURE", cx, size // 2, 200, find_font(20), top=False)
+    d.rounded_rectangle((cx - 46, 108, cx + 46, 182), radius=8, outline=(0, 0, 0, 255), width=5)
+    for y in (124, 146, 168):
+        d.rectangle((cx - 32, y, cx + 32, y + 12), outline=(0, 0, 0, 255), width=3)
+        d.ellipse((cx + 18, y + 2, cx + 28, y + 12), fill=(0, 0, 0, 255))
+    center_text(d, size, [
+        ("SELF", find_font(42), 210),
+        ("HOSTED", find_font(42), 260),
+    ])
+    draw_arc_text(img, "YOUR INFRASTRUCTURE", cx, cx, 198, find_font(18), top=False)
     return circular_alpha(img)
 
 
-def save_icon(img, name):
-    # also produce 256 display size
+def save(img, name):
     path = os.path.join(OUT, name)
-    img256 = img.resize((256, 256), Image.Resampling.LANCZOS)
-    img256.save(path, "PNG", optimize=True)
-    print("Wrote", path, os.path.getsize(path))
+    img.resize((256, 256), Image.Resampling.LANCZOS).save(path, "PNG", optimize=True)
+    print("Wrote", name, os.path.getsize(path))
 
 
-# Use Spike's own HIPAA badge for exact tone match
-save_icon(make_from_spike_hipaa(), "hipaa.png")
-save_icon(make_hitrust(), "hitrust.png")
-save_icon(make_soc2(), "soc2.png")
-save_icon(make_self_hosted(), "self-hosted.png")
+# Re-download Spike HIPAA for authenticity
+import urllib.request
+spike_dir = os.path.join(OUT, "_spike")
+os.makedirs(spike_dir, exist_ok=True)
+hipaa_url = "https://cdn.prod.website-files.com/683d56d98426b36891bcd07e/68483b18288d8ad0854c6b91_cd76ad85c0c6084d24b1779c0396b09b_HIPPA.avif"
+try:
+    req = urllib.request.Request(hipaa_url, headers={"User-Agent": "Mozilla/5.0"})
+    with urllib.request.urlopen(req, timeout=30) as resp:
+        open(os.path.join(spike_dir, "hipaa.avif"), "wb").write(resp.read())
+    Image.open(os.path.join(spike_dir, "hipaa.avif")).convert("RGBA").save(
+        os.path.join(spike_dir, "hipaa.png")
+    )
+except Exception as e:
+    print("Spike HIPAA download skipped:", e)
 
-# previews on white like Spike page
-prev = os.path.join(OUT, "_preview")
-os.makedirs(prev, exist_ok=True)
-for name in ["hipaa.png", "hitrust.png", "soc2.png", "self-hosted.png"]:
-    im = Image.open(os.path.join(OUT, name)).convert("RGBA")
-    bg = Image.new("RGB", im.size, (255, 255, 255))
-    bg.paste(im, mask=im.split()[-1])
-    bg.save(os.path.join(prev, name))
+save(make_law25(), "law25.png")
+save(make_pipeda(), "pipeda.png")
+save(make_hipaa(), "hipaa.png")
+save(make_self_hosted(), "self-hosted.png")
+
+# remove obsolete claimed certs
+for obsolete in ["hitrust.png", "soc2.png", "soc2.svg", "self-hosted.svg"]:
+    p = os.path.join(OUT, obsolete)
+    if os.path.exists(p):
+        os.remove(p)
+        print("Removed", obsolete)
+
+import shutil
+shutil.rmtree(spike_dir, ignore_errors=True)

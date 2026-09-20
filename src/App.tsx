@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import HomePage from './pages/HomePage';
 import SolutionsPage from './pages/SolutionsPage';
@@ -10,7 +10,7 @@ import AuthPage from './pages/AuthPage';
 import DashboardPage from './pages/DashboardPage';
 import ServicesPage from './pages/ServicesPage';
 import DocumentationPage from './pages/DocumentationPage';
-import CompliancePage from './pages/CompliancePage';
+import SafetySecurityPage from './pages/SafetySecurityPage';
 import ContactPage from './pages/ContactPage';
 import CaseStudiesPage from './pages/CaseStudiesPage';
 import ScheduleDemoPage from './pages/ScheduleDemoPage';
@@ -46,7 +46,8 @@ function App() {
         <Route path="/integrations" element={<DataSourcesPage />} />
         <Route path="/get-started" element={<GetStartedPage />} />
         <Route path="/docs" element={<DocumentationPage />} />
-        <Route path="/compliance" element={<CompliancePage />} />
+        <Route path="/safety-security" element={<SafetySecurityPage />} />
+        <Route path="/compliance" element={<Navigate to="/safety-security" replace />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/case-studies" element={<CaseStudiesPage />} />
       </Routes>

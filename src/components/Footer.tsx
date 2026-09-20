@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 type FooterLink = { label: string; to: string } | { label: string; href: string };
 
 const COMPLIANCE_BADGES = [
-  { label: 'HIPAA Compliant', src: '/Images/compliance/hipaa.png' },
-  { label: 'HITRUST Certified', src: '/Images/compliance/hitrust.png' },
-  { label: 'SOC 2 Type II', src: '/Images/compliance/soc2.png' },
+  { label: 'Quebec Law 25', src: '/Images/compliance/law25.png' },
+  { label: 'PIPEDA', src: '/Images/compliance/pipeda.png' },
+  { label: 'HIPAA ready', src: '/Images/compliance/hipaa.png' },
   { label: 'Self hosted', src: '/Images/compliance/self-hosted.png' },
 ];
 
@@ -31,7 +31,7 @@ export default function Footer() {
         { label: 'About Us', to: '/about' },
         { label: 'Services', to: '/services' },
         { label: 'Case Studies', to: '/case-studies' },
-        { label: 'Compliance', to: '/compliance' },
+        { label: 'Safety and Security', to: '/safety-security' },
       ],
     },
     {
@@ -122,28 +122,28 @@ export default function Footer() {
           ))}
         </div>
 
-        <div className="border-t pt-8 pb-2" style={{ borderColor: 'var(--color-border)' }}>
-          <div className="flex flex-col gap-5">
+        <div className="border-t pt-6 pb-2" style={{ borderColor: 'var(--color-border)' }}>
+          <div className="flex flex-col gap-4">
             <div>
               <p
-                className="text-xs font-medium mb-4"
+                className="text-xs font-medium mb-3"
                 style={{ color: 'var(--color-text-secondary)' }}
               >
                 Compliant with
               </p>
-              <div className="flex flex-wrap items-center gap-4 sm:gap-5">
+              <div className="flex flex-wrap items-center gap-3">
                 {COMPLIANCE_BADGES.map((badge) => (
                   <Link
                     key={badge.label}
-                    to="/compliance"
-                    className="inline-flex items-center no-underline opacity-80 hover:opacity-100 transition-opacity"
+                    to="/safety-security"
+                    className="inline-flex items-center no-underline opacity-75 hover:opacity-100 transition-opacity"
                     title={badge.label}
                     aria-label={badge.label}
                   >
                     <img
                       src={badge.src}
                       alt={badge.label}
-                      className="h-14 w-14 sm:h-16 sm:w-16 object-contain"
+                      className="h-8 w-8 object-contain"
                     />
                   </Link>
                 ))}
