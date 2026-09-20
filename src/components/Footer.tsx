@@ -63,7 +63,7 @@ export default function Footer() {
             </p>
             <div className="flex gap-3">
               <a
-                href="https://linkedin.com/in/melikaseyedi"
+                href="https://www.linkedin.com/company/technohealth.ca"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 rounded-full transition-colors no-underline"
