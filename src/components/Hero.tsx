@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { Search, Mic, Check } from 'lucide-react';
 import { openRequestDemo } from '../lib/demoRequest';
 
@@ -72,9 +73,9 @@ export default function Hero() {
             <button type="button" onClick={openRequestDemo} className="g-btn-primary min-w-[140px]">
               Get Started
             </button>
-            <button type="button" onClick={openRequestDemo} className="g-btn-secondary min-w-[140px]">
+            <Link to="/schedule-demo" className="g-btn-secondary no-underline min-w-[140px]">
               Schedule a demo
-            </button>
+            </Link>
           </div>
         </div>
 

@@ -1,211 +1,141 @@
-import { useMemo, useState } from 'react';
-import { Mail, Calendar, CheckCircle, ArrowRight } from 'lucide-react';
+import { useEffect } from 'react';
+import { Mail, Check, Clock, Shield, Zap } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { buildCalEmbedUrl, getCalLink } from '../lib/demoRequest';
 
-type FormState = {
-  name: string;
-  email: string;
-  company: string;
-  role: string;
-  needs: string;
-};
-
-const initialForm: FormState = {
-  name: '',
-  email: '',
-  company: '',
-  role: '',
-  needs: '',
-};
+const highlights = [
+  {
+    icon: Zap,
+    title: 'See the product live',
+    text: 'Walk through wearable integrations, APIs, and clinical workflows with Melika.',
+  },
+  {
+    icon: Clock,
+    title: '30-minute 1:1',
+    text: 'Pick a time that works for you — same-day or next-day slots when available.',
+  },
+  {
+    icon: Shield,
+    title: 'Built for healthcare',
+    text: 'HIPAA-ready, self-hosted options, and enterprise-grade data control.',
+  },
+];
 
 export default function ScheduleDemoPage() {
-  const [form, setForm] = useState<FormState>(initialForm);
-  const [showCalendar, setShowCalendar] = useState(false);
+  const calLink = getCalLink();
+  const calUrl = buildCalEmbedUrl();
 
-  const notes = useMemo(
-    () =>
-      [
-        form.company && `Company: ${form.company}`,
-        form.role && `Role: ${form.role}`,
-        form.needs && `Needs: ${form.needs}`,
-      ]
-        .filter(Boolean)
-        .join('\n'),
-    [form]
-  );
-
-  const calUrl = buildCalEmbedUrl({
-    name: form.name,
-    email: form.email,
-    notes,
-  });
-  const hasCal = Boolean(getCalLink());
-
-  const inputClass =
-    'w-full px-3 py-2.5 text-sm rounded-lg border outline-none transition-shadow focus:shadow-gsearch';
-  const inputStyle = {
-    borderColor: 'var(--color-border)',
-    color: 'var(--color-text)',
-    backgroundColor: 'var(--color-surface)',
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setShowCalendar(true);
-  };
+  useEffect(() => {
+    document.title = 'Book a Demo | TechnoHealth';
+    return () => {
+      document.title = 'TechnoHealth - Wearable Data. Clinical Grade. At Scale.';
+    };
+  }, []);
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: 'var(--color-surface)' }}>
       <Header />
 
-      <main className="pt-24 pb-16">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6">
-          <div className="text-center mb-10">
-            <h1 className="g-section-title">Request a demo</h1>
-            <p className="g-section-sub max-w-xl mx-auto">
-              Introduce yourself, tell us what you need, then book a free 30-minute 1:1 with Melika.
+      <main>
+        {/* Spike-style hero */}
+        <section
+          className="pt-28 pb-10 md:pt-32 md:pb-12"
+          style={{ backgroundColor: 'var(--color-surface-alt)' }}
+        >
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center">
+            <p
+              className="text-sm font-medium mb-4"
+              style={{ color: 'var(--color-primary)' }}
+            >
+              Book a demo
+            </p>
+            <h1
+              className="text-3xl sm:text-4xl md:text-5xl font-normal tracking-tight leading-tight mb-5"
+              style={{ color: 'var(--color-text)' }}
+            >
+              Schedule a personalized demo with our team
+            </h1>
+            <p
+              className="text-base md:text-lg leading-relaxed max-w-2xl mx-auto"
+              style={{ color: 'var(--color-text-secondary)' }}
+            >
+              TechnoHealth enables health apps to integrate wearables and health platforms
+              without building an expensive backend — one API, clinical-grade data, live in days.
             </p>
           </div>
+        </section>
 
-          <div className="grid lg:grid-cols-2 gap-6 items-start">
+        {/* Value points */}
+        <section className="py-10 border-b" style={{ borderColor: 'var(--color-border)' }}>
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 grid sm:grid-cols-3 gap-6">
+            {highlights.map((item) => {
+              const Icon = item.icon;
+              return (
+                <div key={item.title} className="flex gap-3 text-left">
+                  <div
+                    className="w-10 h-10 rounded-full flex items-center justify-center shrink-0"
+                    style={{ backgroundColor: 'var(--color-surface-chip)' }}
+                  >
+                    <Icon className="w-5 h-5" style={{ color: 'var(--color-primary)' }} strokeWidth={1.75} />
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-medium mb-1" style={{ color: 'var(--color-text)' }}>
+                      {item.title}
+                    </h3>
+                    <p className="text-sm leading-relaxed" style={{ color: 'var(--color-text-secondary)' }}>
+                      {item.text}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* Host + calendar — main booking surface */}
+        <section className="py-12 md:py-16">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6">
             <div
-              className="rounded-gcard border p-6 md:p-8"
+              className="flex flex-col sm:flex-row sm:items-center gap-4 mb-8 p-5 rounded-gcard border"
               style={{
                 backgroundColor: 'var(--color-surface)',
                 borderColor: 'var(--color-border)',
-                boxShadow: 'var(--shadow-card)',
               }}
             >
-              <div className="flex items-center gap-4 mb-6 pb-6 border-b" style={{ borderColor: 'var(--color-border)' }}>
-                <img
-                  src="/Images/Me.png"
-                  alt="Melika Seyedi"
-                  className="w-16 h-16 rounded-full object-cover"
-                />
-                <div>
-                  <p className="font-medium" style={{ color: 'var(--color-text)' }}>
-                    Melika Seyedi
-                  </p>
-                  <p className="text-sm" style={{ color: 'var(--color-text-secondary)' }}>
-                    Co-Founder · 30-min intro call
-                  </p>
-                  <a
-                    href="mailto:melika@technohealth.ai"
-                    className="inline-flex items-center gap-1.5 text-sm mt-1 no-underline hover:underline"
-                    style={{ color: 'var(--color-primary)' }}
-                  >
-                    <Mail className="w-3.5 h-3.5" strokeWidth={1.75} />
-                    melika@technohealth.ai
-                  </a>
-                </div>
+              <img
+                src="/Images/Me.png"
+                alt="Melika Seyedi"
+                className="w-16 h-16 rounded-full object-cover shrink-0"
+              />
+              <div className="flex-1">
+                <p className="font-medium text-lg" style={{ color: 'var(--color-text)' }}>
+                  Melika Seyedi
+                </p>
+                <p className="text-sm" style={{ color: 'var(--color-text-secondary)' }}>
+                  Co-Founder · Personalized product demo
+                </p>
+                <a
+                  href="mailto:melika@technohealth.ai"
+                  className="inline-flex items-center gap-1.5 text-sm mt-1 no-underline hover:underline"
+                  style={{ color: 'var(--color-primary)' }}
+                >
+                  <Mail className="w-3.5 h-3.5" strokeWidth={1.75} />
+                  melika@technohealth.ai
+                </a>
               </div>
-
-              {!showCalendar ? (
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div>
-                    <label className="block text-sm font-medium mb-1.5" style={{ color: 'var(--color-text)' }}>
-                      Full name <span style={{ color: 'var(--color-google-red)' }}>*</span>
-                    </label>
-                    <input
-                      required
-                      value={form.name}
-                      onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
-                      placeholder="Your name"
-                      className={inputClass}
-                      style={inputStyle}
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium mb-1.5" style={{ color: 'var(--color-text)' }}>
-                      Work email <span style={{ color: 'var(--color-google-red)' }}>*</span>
-                    </label>
-                    <input
-                      required
-                      type="email"
-                      value={form.email}
-                      onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
-                      placeholder="you@company.com"
-                      className={inputClass}
-                      style={inputStyle}
-                    />
-                  </div>
-                  <div className="grid grid-cols-2 gap-3">
-                    <div>
-                      <label className="block text-sm font-medium mb-1.5" style={{ color: 'var(--color-text)' }}>
-                        Company
-                      </label>
-                      <input
-                        value={form.company}
-                        onChange={(e) => setForm((f) => ({ ...f, company: e.target.value }))}
-                        placeholder="Company"
-                        className={inputClass}
-                        style={inputStyle}
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium mb-1.5" style={{ color: 'var(--color-text)' }}>
-                        Role
-                      </label>
-                      <input
-                        value={form.role}
-                        onChange={(e) => setForm((f) => ({ ...f, role: e.target.value }))}
-                        placeholder="e.g. CTO"
-                        className={inputClass}
-                        style={inputStyle}
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium mb-1.5" style={{ color: 'var(--color-text)' }}>
-                      What do you need? <span style={{ color: 'var(--color-google-red)' }}>*</span>
-                    </label>
-                    <textarea
-                      required
-                      value={form.needs}
-                      onChange={(e) => setForm((f) => ({ ...f, needs: e.target.value }))}
-                      placeholder="Describe your product, devices, and goals for this meeting…"
-                      rows={4}
-                      className={`${inputClass} resize-none`}
-                      style={inputStyle}
-                    />
-                  </div>
-                  <button type="submit" className="g-btn-primary w-full">
-                    Continue to pick a time
-                    <ArrowRight className="w-4 h-4" strokeWidth={2} />
-                  </button>
-                </form>
-              ) : (
-                <div className="space-y-4">
-                  <div
-                    className="flex items-start gap-3 rounded-lg border p-4"
-                    style={{
-                      backgroundColor: 'var(--color-surface-success)',
-                      borderColor: 'var(--color-border)',
-                    }}
+              <ul className="sm:text-right space-y-1.5">
+                {['30 minutes', 'Video or call', 'No commitment'].map((t) => (
+                  <li
+                    key={t}
+                    className="flex sm:justify-end items-center gap-1.5 text-sm"
+                    style={{ color: 'var(--color-text-secondary)' }}
                   >
-                    <CheckCircle
-                      className="w-5 h-5 shrink-0 mt-0.5"
-                      style={{ color: 'var(--color-google-green)' }}
-                      strokeWidth={2}
-                    />
-                    <div className="text-sm" style={{ color: 'var(--color-text)' }}>
-                      <p className="font-medium">Thanks, {form.name.split(' ')[0]}!</p>
-                      <p style={{ color: 'var(--color-text-secondary)' }}>
-                        Now choose a 30-minute slot on the right (or below on mobile).
-                      </p>
-                    </div>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => setShowCalendar(false)}
-                    className="g-btn-text px-0"
-                  >
-                    Edit your details
-                  </button>
-                </div>
-              )}
+                    <Check className="w-4 h-4" style={{ color: 'var(--color-google-green)' }} strokeWidth={2.5} />
+                    {t}
+                  </li>
+                ))}
+              </ul>
             </div>
 
             <div
@@ -214,73 +144,61 @@ export default function ScheduleDemoPage() {
                 backgroundColor: 'var(--color-surface)',
                 borderColor: 'var(--color-border)',
                 boxShadow: 'var(--shadow-card)',
-                minHeight: 480,
               }}
             >
-              {!showCalendar ? (
-                <div className="h-full min-h-[480px] flex flex-col items-center justify-center p-8 text-center gap-3">
-                  <Calendar
-                    className="w-12 h-12"
-                    style={{ color: 'var(--color-text-tertiary)' }}
-                    strokeWidth={1.5}
-                  />
-                  <p className="font-medium" style={{ color: 'var(--color-text)' }}>
-                    Calendar unlocks after your intro
-                  </p>
-                  <p className="text-sm max-w-xs" style={{ color: 'var(--color-text-secondary)' }}>
-                    Fill in the form so Melika knows who you are and what you want to discuss.
-                  </p>
-                </div>
-              ) : hasCal && calUrl ? (
+              <div
+                className="px-5 py-4 border-b"
+                style={{
+                  borderColor: 'var(--color-border)',
+                  backgroundColor: 'var(--color-surface-alt)',
+                }}
+              >
+                <h2 className="text-base font-medium" style={{ color: 'var(--color-text)' }}>
+                  Pick a time that works for you
+                </h2>
+                <p className="text-sm mt-0.5" style={{ color: 'var(--color-text-secondary)' }}>
+                  Select a slot below to book your demo.
+                </p>
+              </div>
+
+              {calLink && calUrl ? (
                 <iframe
-                  title="Book a 30-minute demo"
+                  title="Schedule a TechnoHealth demo"
                   src={calUrl}
-                  className="w-full border-0"
-                  style={{ height: 700 }}
+                  className="w-full border-0 block"
+                  style={{ minHeight: 720, height: 'min(80vh, 900px)' }}
                   loading="lazy"
                 />
               ) : (
-                <div className="h-full min-h-[480px] flex flex-col items-center justify-center p-8 text-center gap-4">
-                  <Calendar
-                    className="w-12 h-12"
-                    style={{ color: 'var(--color-primary)' }}
-                    strokeWidth={1.5}
-                  />
-                  <div>
-                    <p className="font-medium mb-1" style={{ color: 'var(--color-text)' }}>
-                      Connect your Cal.com calendar
-                    </p>
-                    <p className="text-sm max-w-sm mx-auto" style={{ color: 'var(--color-text-secondary)' }}>
-                      Create a free account at{' '}
-                      <a
-                        href="https://cal.com"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="hover:underline"
-                        style={{ color: 'var(--color-primary)' }}
-                      >
-                        cal.com
-                      </a>
-                      , add a 30-min event, connect Google Calendar, then set{' '}
-                      <code className="text-xs">VITE_CAL_LINK=username/30min</code> in{' '}
-                      <code className="text-xs">.env</code>.
-                    </p>
-                  </div>
+                <div className="px-6 py-16 text-center space-y-4">
+                  <p style={{ color: 'var(--color-text-secondary)' }}>
+                    Calendar is temporarily unavailable. Email Melika to book a time.
+                  </p>
                   <a
-                    href={`mailto:melika@technohealth.ai?subject=${encodeURIComponent(
-                      'Demo request — 30 min meeting'
-                    )}&body=${encodeURIComponent(
-                      `Name: ${form.name}\nEmail: ${form.email}\nCompany: ${form.company}\nRole: ${form.role}\n\nWhat I need:\n${form.needs}`
-                    )}`}
-                    className="g-btn-primary no-underline"
+                    href="mailto:melika@technohealth.ai?subject=Book%20a%20demo"
+                    className="g-btn-primary inline-flex no-underline"
                   >
-                    Email Melika to schedule
+                    Email to schedule
                   </a>
                 </div>
               )}
             </div>
+
+            <p
+              className="text-center text-sm mt-6"
+              style={{ color: 'var(--color-text-tertiary)' }}
+            >
+              Prefer email?{' '}
+              <a
+                href="mailto:melika@technohealth.ai"
+                className="hover:underline"
+                style={{ color: 'var(--color-primary)' }}
+              >
+                melika@technohealth.ai
+              </a>
+            </p>
           </div>
-        </div>
+        </section>
       </main>
 
       <Footer />
