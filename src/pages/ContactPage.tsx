@@ -74,7 +74,7 @@ export default function ContactPage() {
             </div>
             <div>
               <p className="text-sm font-medium text-[#111]">Headquarters</p>
-              <p className="text-sm text-[#555] mt-0.5">Montreal</p>
+              <p className="text-sm text-[#555] mt-0.5">Montreal, Quebec, CA</p>
             </div>
           </div>
 
