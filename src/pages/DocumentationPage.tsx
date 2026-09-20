@@ -387,45 +387,46 @@ export function ConnectFitbit({ userId }: { userId: string }) {
               </div>
 
               <p className="text-[15px] text-[#888] mb-6 italic">
-                این بخش به‌زودی در دسترس قرار می‌گیرد — هنوز برای استفاده عمومی باز نیست.
+                Coming soon — not available for public use yet.
               </p>
 
               <p className="text-[16px] text-[#555] leading-relaxed mb-5">
-                خلاصهٔ ماجرا اینه: می‌خوایم یه ابزار MCP برای TechnoHealth بیاریم تا بتونی از داخل
-                دستیارهای AI (مثل Claude یا ChatGPT) مستقیم از داده‌های پوشیدنی سوال بپرسی — بدون اینکه
-                خودت endpoint به endpoint API رو دستی بچسبونی.
+                Here&apos;s the idea in plain terms: we&apos;re building an MCP tool for TechnoHealth so
+                you can ask AI assistants (like Claude or ChatGPT) about wearable data directly —
+                without wiring every API endpoint by hand.
               </p>
 
               <p className="text-[16px] text-[#555] leading-relaxed mb-8">
-                یعنی به‌جای اینکه اول همه‌چیز رو از API بکشی و بعد به مدل بدی، خود مدل می‌تونه از
-                طریق MCP Tool به متریک‌هایی مثل خواب، فعالیت و ضربان قلب دسترسی بگیره و برات تحلیل کنه.
+                Instead of pulling everything from the API first and then feeding it to a model, the
+                model can use the MCP Tool to reach metrics like sleep, activity, and heart rate, then
+                help you make sense of them.
               </p>
 
-              <h3 className="text-lg font-semibold text-[#111] mb-3">چیزایی که بعداً می‌تونی باهاش بپرسی</h3>
+              <h3 className="text-lg font-semibold text-[#111] mb-3">Things you&apos;ll be able to ask later</h3>
               <ul className="space-y-3 text-[15px] text-[#555] mb-8">
                 <li className="flex gap-2">
                   <span className="text-[#1A73E8] shrink-0">•</span>
-                  <span>خواب این ماه نسبت به ماه قبل چطور بوده؟</span>
+                  <span>How has my sleep changed this month compared to last month?</span>
                 </li>
                 <li className="flex gap-2">
                   <span className="text-[#1A73E8] shrink-0">•</span>
-                  <span>فعالیت روزای کاری با آخر هفته فرق داره؟</span>
+                  <span>Does weekday activity look different from weekends?</span>
                 </li>
                 <li className="flex gap-2">
                   <span className="text-[#1A73E8] shrink-0">•</span>
-                  <span>بین کیفیت خواب و سطح فعالیت روز بعد رابطه‌ای می‌بینی؟</span>
+                  <span>Is there a link between sleep quality and next-day activity?</span>
                 </li>
                 <li className="flex gap-2">
                   <span className="text-[#1A73E8] shrink-0">•</span>
-                  <span>یه خلاصهٔ هفتگی بساز که بشه برای پزشک یا تیم محصول فرستاد.</span>
+                  <span>Make a short weekly summary I can share with a clinician or product team.</span>
                 </li>
               </ul>
 
               <div className="rounded-xl border border-[#f0e0a0] bg-[#fffdf5] p-5">
                 <p className="text-sm font-medium text-[#8a6d1d] mb-1">Upcoming</p>
                 <p className="text-sm text-[#666] leading-relaxed">
-                  راهنمای اتصال، لیست toolها و مثال‌های واقعی وقتی آماده بشه همین‌جا اضافه می‌شن.
-                  فعلاً می‌تونی از API و React SDK استفاده کنی؛ برای MCP فعلاً صبر کن تا اعلام کنیم.
+                  Setup guides, tool lists, and real examples will show up here when they&apos;re ready.
+                  For now, use the API and React SDK — we&apos;ll announce MCP when it launches.
                 </p>
               </div>
             </section>

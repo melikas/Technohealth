@@ -6,23 +6,23 @@ export default function Dashboard() {
   const [selectedWindow, setSelectedWindow] = useState('30d');
 
   const timeWindows = [
-    { value: '1s', label: '1 ثانیه' },
-    { value: '1m', label: '1 دقیقه' },
-    { value: '5m', label: '5 دقیقه' },
-    { value: '10m', label: '10 دقیقه' },
-    { value: '1h', label: '1 ساعت' },
-    { value: '6h', label: '6 ساعت' },
-    { value: '1d', label: 'روزانه' },
-    { value: '3d', label: '3 روز' },
-    { value: '4d', label: '4 روز' },
-    { value: '7d', label: 'هفته' },
-    { value: '30d', label: 'ماه' },
-    { value: '90d', label: '3 ماه' },
-    { value: '365d', label: 'سالانه' },
+    { value: '1s', label: '1 second' },
+    { value: '1m', label: '1 minute' },
+    { value: '5m', label: '5 minutes' },
+    { value: '10m', label: '10 minutes' },
+    { value: '1h', label: '1 hour' },
+    { value: '6h', label: '6 hours' },
+    { value: '1d', label: 'Daily' },
+    { value: '3d', label: '3 days' },
+    { value: '4d', label: '4 days' },
+    { value: '7d', label: 'Weekly' },
+    { value: '30d', label: 'Monthly' },
+    { value: '90d', label: '3 months' },
+    { value: '365d', label: 'Yearly' },
   ];
 
   const getWindowLabel = (value) => {
-    return timeWindows.find(w => w.value === value)?.label || 'روزانه';
+    return timeWindows.find(w => w.value === value)?.label || 'Daily';
   };
 
   return (
