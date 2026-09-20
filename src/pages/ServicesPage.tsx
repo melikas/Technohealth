@@ -167,7 +167,7 @@ export default function ServicesPage() {
               </div>
 
               <Link 
-                to="/get-started"
+                to="/schedule-demo"
                 className="inline-block px-8 py-3 bg-cyan-600 text-white font-semibold rounded-lg hover:bg-cyan-700 transition-colors"
               >
                 Get Started Today

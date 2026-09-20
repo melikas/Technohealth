@@ -1,11 +1,7 @@
 import { Github, Linkedin, Twitter } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { openRequestDemo } from '../lib/demoRequest';
 
-type FooterLink =
-  | { label: string; to: string }
-  | { label: string; href: string }
-  | { label: string; action: 'demo' };
+type FooterLink = { label: string; to: string } | { label: string; href: string };
 
 export default function Footer() {
   const linkStyle = {
@@ -28,7 +24,7 @@ export default function Footer() {
         { label: 'Pricing Plans', to: '/pricing' },
         { label: 'ROI Calculator', href: '#' },
         { label: 'Volume Licensing', href: '#' },
-        { label: 'Get Started', action: 'demo' },
+        { label: 'Book a demo', to: '/schedule-demo' },
       ],
     },
     {
@@ -93,16 +89,7 @@ export default function Footer() {
               <ul className="space-y-3">
                 {col.links.map((link) => (
                   <li key={link.label}>
-                    {'action' in link && link.action === 'demo' ? (
-                      <button
-                        type="button"
-                        onClick={openRequestDemo}
-                        className="text-sm bg-transparent border-0 p-0 cursor-pointer hover:underline"
-                        style={linkStyle}
-                      >
-                        {link.label}
-                      </button>
-                    ) : 'to' in link ? (
+                    {'to' in link ? (
                       <Link
                         to={link.to}
                         className="text-sm no-underline hover:underline"
@@ -146,9 +133,9 @@ export default function Footer() {
               <a href="#" className="no-underline hover:underline" style={linkStyle}>
                 Advertising
               </a>
-              <a href="#" className="no-underline hover:underline" style={linkStyle}>
+              <Link to="/about" className="no-underline hover:underline" style={linkStyle}>
                 About
-              </a>
+              </Link>
             </div>
           </div>
         </div>

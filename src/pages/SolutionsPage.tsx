@@ -1,6 +1,7 @@
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { AlertCircle, LineChart, Users, Building2, Microscope, Package } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export default function SolutionsPage() {
   const solutions = [
@@ -160,9 +161,9 @@ export default function SolutionsPage() {
           <p className="text-cyan-100 mb-8 max-w-2xl mx-auto">
             Let's discuss which solution best aligns with your clinical goals and patient population
           </p>
-          <button className="bg-white text-cyan-600 px-8 py-3 rounded-lg font-bold hover:bg-slate-100 transition-colors">
+          <Link to="/schedule-demo" className="bg-white text-cyan-600 px-8 py-3 rounded-lg font-bold hover:bg-slate-100 transition-colors">
             Get Started
-          </button>
+          </Link>
         </div>
       </section>
 

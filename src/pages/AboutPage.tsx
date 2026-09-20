@@ -162,7 +162,7 @@ export default function AboutPage() {
           <p className="text-cyan-100 mb-8 max-w-2xl mx-auto">
             Let's discuss your research goals, device requirements, and deployment timeline over a 30-minute call
           </p>
-          <Link to="/get-started" className="inline-block bg-white text-cyan-600 px-8 py-3 rounded-lg font-bold hover:bg-slate-100 transition-colors">
+          <Link to="/schedule-demo" className="inline-block bg-white text-cyan-600 px-8 py-3 rounded-lg font-bold hover:bg-slate-100 transition-colors">
             Get Started
           </Link>
         </div>

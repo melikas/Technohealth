@@ -2,6 +2,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -273,12 +274,12 @@ export default function ContactPage() {
             <p className="text-lg text-blue-100 mb-8">
               Let's discuss how TechnoHealth can help your organization.
             </p>
-            <a
-              href="mailto:sales@technohealth.com"
+            <Link
+              to="/schedule-demo"
               className="inline-block bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition"
             >
               Schedule a Demo
-            </a>
+            </Link>
           </div>
         </div>
       </section>

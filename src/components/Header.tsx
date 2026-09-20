@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ChevronDown, Menu, X } from 'lucide-react';
-import { openRequestDemo } from '../lib/demoRequest';
 import RequestDemoModal from './RequestDemoModal';
 
 export default function Header() {
@@ -37,11 +36,6 @@ export default function Header() {
     { label: 'About', path: '/about' },
     { label: 'Contact', path: '/contact' },
   ];
-
-  const handleGetStarted = () => {
-    setMobileOpen(false);
-    openRequestDemo();
-  };
 
   return (
     <>
@@ -137,9 +131,13 @@ export default function Header() {
               </div>
             ))}
 
-            <button type="button" onClick={handleGetStarted} className="g-btn-primary ml-2">
-              Get Started
-            </button>
+            <Link
+              to="/schedule-demo"
+              className="g-btn-primary ml-2 no-underline"
+              style={{ color: 'var(--color-text-on-primary)' }}
+            >
+              Book a demo
+            </Link>
           </nav>
 
           <button
@@ -193,9 +191,13 @@ export default function Header() {
                 </Link>
               )
             )}
-            <button type="button" onClick={handleGetStarted} className="g-btn-primary w-full mt-2">
-              Get Started
-            </button>
+            <Link
+              to="/schedule-demo"
+              className="g-btn-primary w-full mt-2 no-underline"
+              style={{ color: 'var(--color-text-on-primary)' }}
+            >
+              Book a demo
+            </Link>
           </div>
         )}
       </header>

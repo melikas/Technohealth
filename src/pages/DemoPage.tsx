@@ -336,7 +336,7 @@ export default function DemoPage() {
             <button className="bg-white text-cyan-600 px-8 py-3 rounded-lg font-bold hover:bg-slate-100 transition-colors inline-flex items-center justify-center gap-2">
               Full Live Demo <ChevronRight className="w-4 h-4" />
             </button>
-            <Link to="/get-started" className="border-2 border-white text-white px-8 py-3 rounded-lg font-bold hover:bg-white/10 transition-colors inline-flex items-center justify-center">
+            <Link to="/schedule-demo" className="border-2 border-white text-white px-8 py-3 rounded-lg font-bold hover:bg-white/10 transition-colors inline-flex items-center justify-center">
               Get Started
             </Link>
           </div>
