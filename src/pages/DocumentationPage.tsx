@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Copy, Check, ChevronRight } from 'lucide-react';
 import Header from '../components/Header';
@@ -49,6 +49,7 @@ export default function DocumentationPage() {
   const location = useLocation();
   const [active, setActive] = useState<SectionId>('introduction');
   const [copiedId, setCopiedId] = useState<string | null>(null);
+  const clickingRef = useRef(false);
 
   useEffect(() => {
     document.title = 'Documentation | TechnoHealth';
@@ -65,6 +66,41 @@ export default function DocumentationPage() {
     }
   }, [location.hash]);
 
+  // Highlight sidebar item as sections enter the viewport while scrolling
+  useEffect(() => {
+    const ids = NAV.map((n) => n.id);
+    const elements = ids
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => Boolean(el));
+
+    if (!elements.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (clickingRef.current) return;
+
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+
+        if (visible[0]?.target?.id) {
+          const id = visible[0].target.id as SectionId;
+          setActive(id);
+          window.history.replaceState(null, '', `#${id}`);
+        }
+      },
+      {
+        root: null,
+        // Account for fixed header — section is "active" near the top third
+        rootMargin: '-20% 0px -55% 0px',
+        threshold: [0, 0.1, 0.25, 0.5, 1],
+      }
+    );
+
+    elements.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
   const copyToClipboard = (code: string, id: string) => {
     navigator.clipboard.writeText(code);
     setCopiedId(id);
@@ -72,9 +108,13 @@ export default function DocumentationPage() {
   };
 
   const goTo = (id: SectionId) => {
+    clickingRef.current = true;
     setActive(id);
     window.history.replaceState(null, '', `#${id}`);
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    window.setTimeout(() => {
+      clickingRef.current = false;
+    }, 800);
   };
 
   return (
