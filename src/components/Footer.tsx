@@ -1,5 +1,7 @@
 import { Github, Linkedin, Twitter } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '../context/LanguageContext';
+import { getSiteCopy } from '../config/siteCopy';
 
 type FooterLink = { label: string; to: string } | { label: string; href: string };
 
@@ -11,45 +13,48 @@ const COMPLIANCE_BADGES = [
 ];
 
 export default function Footer() {
+  const { language } = useLanguage();
+  const t = getSiteCopy(language);
+
   const linkStyle = {
     color: 'var(--color-text-secondary)',
   };
 
   const columns: { title: string; links: FooterLink[] }[] = [
     {
-      title: 'Docs',
+      title: t.footerDocs,
       links: [
-        { label: 'Documentation', to: '/docs' },
-        { label: 'API Reference', to: '/docs' },
-        { label: 'SDK and Libraries', to: '/docs' },
-        { label: 'System Status', href: 'https://status.technohealth.com' },
+        { label: t.footerDocumentation, to: '/docs' },
+        { label: t.footerApi, to: '/docs' },
+        { label: t.footerSdk, to: '/docs' },
+        { label: t.footerStatus, href: 'https://status.technohealth.com' },
       ],
     },
     {
-      title: 'Company',
+      title: t.footerCompany,
       links: [
-        { label: 'About Us', to: '/about' },
-        { label: 'Services', to: '/services' },
-        { label: 'Case Studies', to: '/case-studies' },
-        { label: 'Safety and Security', to: '/safety-security' },
+        { label: t.footerAbout, to: '/about' },
+        { label: t.footerServices, to: '/services' },
+        { label: t.footerCaseStudies, to: '/case-studies' },
+        { label: t.footerSafety, to: '/safety-security' },
       ],
     },
     {
-      title: 'Product',
+      title: t.footerProduct,
       links: [
-        { label: 'Data Sources', to: '/data-sources' },
-        { label: 'Solutions', to: '/solutions' },
-        { label: 'Book a demo', to: '/schedule-demo' },
-        { label: 'Get Started', to: '/get-started' },
+        { label: t.footerDataSources, to: '/data-sources' },
+        { label: t.footerSolutions, to: '/solutions' },
+        { label: t.footerBookDemo, to: '/schedule-demo' },
+        { label: t.footerGetStarted, to: '/get-started' },
       ],
     },
     {
-      title: 'Resources',
+      title: t.footerResources,
       links: [
-        { label: 'Contact Us', to: '/contact' },
-        { label: 'Blog and Insights', href: '#' },
-        { label: 'White Papers', href: '#' },
-        { label: 'Webinars', href: '#' },
+        { label: t.footerContact, to: '/contact' },
+        { label: t.footerBlog, href: '#' },
+        { label: t.footerWhitePapers, href: '#' },
+        { label: t.footerWebinars, href: '#' },
       ],
     },
   ];
@@ -61,12 +66,10 @@ export default function Footer() {
           <div>
             <div className="flex items-center gap-2 mb-3">
               <img src="/Images/Icon.png" alt="TechnoHealth" className="w-7 h-7" />
-              <span className="g-wordmark text-lg font-medium">
-                TechnoHealth
-              </span>
+              <span className="g-wordmark text-lg font-medium">TechnoHealth</span>
             </div>
             <p className="text-sm mb-5 leading-relaxed" style={{ color: 'var(--color-text-secondary)' }}>
-              One infrastructure for wearable health data.
+              {t.footerTagline}
             </p>
             <div className="flex gap-3">
               <a
@@ -75,7 +78,7 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 className="p-2 rounded-full transition-colors no-underline"
                 style={linkStyle}
-                aria-label="TechnoHealth on LinkedIn"
+                aria-label={t.footerLinkedIn}
               >
                 <Linkedin className="w-5 h-5" strokeWidth={1.75} />
               </a>
@@ -129,7 +132,7 @@ export default function Footer() {
                 className="text-xs font-medium mb-3"
                 style={{ color: 'var(--color-text-secondary)' }}
               >
-                Compliant with
+                {t.footerCompliantWith}
               </p>
               <div className="flex flex-wrap items-center gap-3">
                 {COMPLIANCE_BADGES.map((badge) => (
@@ -150,7 +153,7 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-sm" style={{ color: 'var(--color-text-secondary)' }}>
-              © 2026 TechnoHealth. All rights reserved.
+              {t.footerRights}
             </p>
           </div>
         </div>

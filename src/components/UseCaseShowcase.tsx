@@ -1,49 +1,48 @@
 import { Link } from 'react-router-dom';
 import { MessageCircle, ArrowRight } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
+import { getSiteCopy } from '../config/siteCopy';
 
 export default function UseCaseShowcase() {
+  const { language } = useLanguage();
+  const t = getSiteCopy(language);
+
   const showcases = [
     {
-      industry: 'Remote Patient Monitoring',
-      company: 'Digital Health Platform',
-      stat: '+25% Readmission Reduction',
-      testimonial:
-        'TechnoHealth unified our wearable integrations in 4 weeks. We now monitor 10,000+ patients with real-time alerts.',
+      industry: t.useCase1Industry,
+      company: t.useCase1Company,
+      stat: t.useCase1Stat,
+      testimonial: t.useCase1Quote,
     },
     {
-      industry: 'Clinical Research',
-      company: 'Medical Research Institute',
-      stat: '5,000+ Study Participants',
-      testimonial:
-        'Finally, continuous objective data from research subjects without custom device integrations.',
+      industry: t.useCase2Industry,
+      company: t.useCase2Company,
+      stat: t.useCase2Stat,
+      testimonial: t.useCase2Quote,
     },
     {
-      industry: 'Corporate Wellness',
-      company: 'Fortune 500 Company',
-      stat: '30,000 Employees Tracked',
-      testimonial:
-        'Population-level health insights while keeping data on-premise. Mission-critical for compliance.',
+      industry: t.useCase3Industry,
+      company: t.useCase3Company,
+      stat: t.useCase3Stat,
+      testimonial: t.useCase3Quote,
     },
     {
-      industry: 'Precision Medicine',
-      company: 'Healthcare System',
-      stat: '+40% Treatment Success',
-      testimonial:
-        'Correlated wearable data with clinical outcomes. Personalized medicine at scale.',
+      industry: t.useCase4Industry,
+      company: t.useCase4Company,
+      stat: t.useCase4Stat,
+      testimonial: t.useCase4Quote,
     },
     {
-      industry: 'Digital Therapeutics',
-      company: 'MedTech Company',
-      stat: '+50% Patient Engagement',
-      testimonial:
-        'Real-time biometric feedback powers our AI-driven health coaching platform.',
+      industry: t.useCase5Industry,
+      company: t.useCase5Company,
+      stat: t.useCase5Stat,
+      testimonial: t.useCase5Quote,
     },
     {
-      industry: 'Aging Care',
-      company: 'Senior Living Network',
-      stat: '15,000+ Residents',
-      testimonial:
-        'Proactive health monitoring. Alerts caregivers before clinical events occur.',
+      industry: t.useCase6Industry,
+      company: t.useCase6Company,
+      stat: t.useCase6Stat,
+      testimonial: t.useCase6Quote,
     },
   ];
 
@@ -57,10 +56,8 @@ export default function UseCaseShowcase() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-12">
-          <h2 className="g-section-title">Real world results</h2>
-          <p className="g-section-sub max-w-2xl mx-auto">
-            Hospitals, researchers, and wellness companies use TechnoHealth today
-          </p>
+          <h2 className="g-section-title">{t.useCasesTitle}</h2>
+          <p className="g-section-sub max-w-2xl mx-auto">{t.useCasesSub}</p>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
@@ -125,7 +122,7 @@ export default function UseCaseShowcase() {
             className="inline-flex items-center gap-1.5 text-sm font-medium no-underline hover:underline"
             style={{ color: 'var(--color-primary)' }}
           >
-            View case studies
+            {t.readCaseStudies}
             <ArrowRight className="w-4 h-4" strokeWidth={2} />
           </Link>
         </div>

@@ -2,12 +2,16 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ChevronDown, Menu, X } from 'lucide-react';
 import RequestDemoModal from './RequestDemoModal';
+import { useLanguage } from '../context/LanguageContext';
+import { getSiteCopy } from '../config/siteCopy';
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [showServicesMenu, setShowServicesMenu] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
+  const { language, toggleLanguage } = useLanguage();
+  const t = getSiteCopy(language);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 8);
@@ -23,18 +27,31 @@ export default function Header() {
   const isActive = (path: string) => location.pathname === path;
 
   const serviceItems = [
-    { label: 'AI Tools', path: '/services' },
-    { label: 'TechnoHealth App', path: '/services' },
-    { label: 'Supported Devices', path: '/data-sources' },
-    { label: 'APIs & SDKs', path: '/docs' },
+    { label: t.serviceAiTools, path: '/services' },
+    { label: t.serviceApp, path: '/services' },
+    { label: t.serviceDevices, path: '/data-sources' },
+    { label: t.serviceApis, path: '/docs' },
   ];
 
   const navLinks = [
-    { label: 'Services', hasDropdown: true },
-    { label: 'Docs', path: '/docs' },
-    { label: 'About', path: '/about' },
-    { label: 'Contact', path: '/contact' },
+    { label: t.navServices, hasDropdown: true },
+    { label: t.navDocs, path: '/docs' },
+    { label: t.navAbout, path: '/about' },
+    { label: t.navContact, path: '/contact' },
   ];
+
+  const langButton = (
+    <button
+      type="button"
+      onClick={toggleLanguage}
+      className="g-btn-text uppercase tracking-wide min-w-[2.25rem] justify-center"
+      style={{ color: 'var(--color-text-secondary)' }}
+      aria-label={t.switchLanguage}
+      title={t.switchLanguage}
+    >
+      {language}
+    </button>
+  );
 
   return (
     <>
@@ -130,28 +147,33 @@ export default function Header() {
               </div>
             ))}
 
+            {langButton}
+
             <Link
               to="/schedule-demo"
-              className="g-btn-primary ml-2 no-underline"
+              className="g-btn-primary ml-1 no-underline"
               style={{ color: 'var(--color-text-on-primary)' }}
             >
-              Book a demo
+              {t.bookDemo}
             </Link>
           </nav>
 
-          <button
-            type="button"
-            className="md:hidden p-2 rounded-full"
-            style={{ color: 'var(--color-text-secondary)' }}
-            onClick={() => setMobileOpen((v) => !v)}
-            aria-label="Menu"
-          >
-            {mobileOpen ? (
-              <X className="w-6 h-6" strokeWidth={1.75} />
-            ) : (
-              <Menu className="w-6 h-6" strokeWidth={1.75} />
-            )}
-          </button>
+          <div className="flex md:hidden items-center gap-1">
+            {langButton}
+            <button
+              type="button"
+              className="p-2 rounded-full"
+              style={{ color: 'var(--color-text-secondary)' }}
+              onClick={() => setMobileOpen((v) => !v)}
+              aria-label={t.menu}
+            >
+              {mobileOpen ? (
+                <X className="w-6 h-6" strokeWidth={1.75} />
+              ) : (
+                <Menu className="w-6 h-6" strokeWidth={1.75} />
+              )}
+            </button>
+          </div>
         </div>
 
         {mobileOpen && (
@@ -166,7 +188,7 @@ export default function Header() {
                     className="px-3 py-2 text-xs font-medium uppercase tracking-wide"
                     style={{ color: 'var(--color-text-tertiary)' }}
                   >
-                    Services
+                    {t.navServices}
                   </p>
                   {serviceItems.map((item) => (
                     <Link
@@ -195,7 +217,7 @@ export default function Header() {
               className="g-btn-primary w-full mt-2 no-underline"
               style={{ color: 'var(--color-text-on-primary)' }}
             >
-              Book a demo
+              {t.bookDemo}
             </Link>
           </div>
         )}

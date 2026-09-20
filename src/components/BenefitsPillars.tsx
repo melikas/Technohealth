@@ -1,29 +1,34 @@
 import { Zap, CheckCircle, Database, Shield } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
+import { getSiteCopy } from '../config/siteCopy';
 
 export default function BenefitsPillars() {
+  const { language } = useLanguage();
+  const t = getSiteCopy(language);
+
   const benefits = [
     {
       icon: Zap,
-      title: 'Days, not months',
-      description: 'Go from zero to live data in about 7 days. You do not need custom development for every device.',
+      title: t.benefit1Title,
+      description: t.benefit1Desc,
       color: 'var(--color-brand-blue-light)',
     },
     {
       icon: CheckCircle,
-      title: 'One API for all',
-      description: 'Stop building a separate integration for each device. Add Apple, Fitbit, or Oura from your dashboard.',
+      title: t.benefit2Title,
+      description: t.benefit2Desc,
       color: 'var(--color-brand-blue)',
     },
     {
       icon: Database,
-      title: 'Your infrastructure',
-      description: 'Deploy on your servers and keep ownership of your data. No per user fees or vendor lock in.',
+      title: t.benefit3Title,
+      description: t.benefit3Desc,
       color: 'var(--color-brand-blue-mid)',
     },
     {
       icon: Shield,
-      title: 'Enterprise ready',
-      description: 'HIPAA compliant, SOC 2 audited, and built with role based access for regulated teams.',
+      title: t.benefit4Title,
+      description: t.benefit4Desc,
       color: 'var(--color-brand-blue-deep)',
     },
   ];
@@ -35,10 +40,8 @@ export default function BenefitsPillars() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-14">
-          <h2 className="g-section-title">Get wearable data into your product faster</h2>
-          <p className="g-section-sub max-w-2xl mx-auto">
-            Go from signing to production in about a week, and keep the data on your infrastructure.
-          </p>
+          <h2 className="g-section-title">{t.benefitsTitle}</h2>
+          <p className="g-section-sub max-w-2xl mx-auto">{t.benefitsSub}</p>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">

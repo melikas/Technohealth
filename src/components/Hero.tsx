@@ -2,9 +2,13 @@ import { FormEvent, useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Search, Mic } from 'lucide-react';
 import { resolveSearchDestination, searchSite, type SiteSearchResult } from '../lib/siteSearch';
+import { useLanguage } from '../context/LanguageContext';
+import { getSiteCopy } from '../config/siteCopy';
 
 export default function Hero() {
   const navigate = useNavigate();
+  const { language } = useLanguage();
+  const t = getSiteCopy(language);
   const [query, setQuery] = useState('');
   const [open, setOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -13,20 +17,20 @@ export default function Hero() {
   const metrics = [
     {
       number: '+100',
-      label: 'Data Resources',
-      description: 'Integrated data platforms',
+      label: t.metricResources,
+      description: t.metricResourcesDesc,
       accent: 'var(--color-brand-blue-deep)',
     },
     {
       number: 'AI',
-      label: 'Advanced ML Models',
-      description: 'Predicting health, powering care',
+      label: t.metricMl,
+      description: t.metricMlDesc,
       accent: 'var(--color-brand-blue)',
     },
     {
       number: '+30%',
-      label: 'Efficiency Boost',
-      description: 'Developer time saved',
+      label: t.metricEfficiency,
+      description: t.metricEfficiencyDesc,
       accent: 'var(--color-brand-blue-light)',
     },
   ];
@@ -81,8 +85,7 @@ export default function Hero() {
             className="text-base md:text-lg mt-5 max-w-2xl leading-relaxed"
             style={{ color: 'var(--color-text-secondary)' }}
           >
-            One infrastructure for wearable health data. Connect any device, standardize the
-            complexity, and build trusted health products faster.
+            {t.heroTagline}
           </p>
 
           <div ref={wrapRef} className="relative mt-10 max-w-[584px] w-full z-20">
@@ -113,10 +116,10 @@ export default function Hero() {
                     setOpen(false);
                   }
                 }}
-                placeholder="Search devices, APIs, docs…"
+                placeholder={t.heroSearchPlaceholder}
                 className="flex-1 min-w-0 bg-transparent border-0 outline-none text-left text-base px-3"
                 style={{ color: 'var(--color-text)' }}
-                aria-label="Search TechnoHealth"
+                aria-label={t.heroSearchAria}
                 aria-expanded={open}
                 aria-controls="hero-search-results"
                 autoComplete="off"
@@ -171,13 +174,13 @@ export default function Hero() {
               className="g-btn-primary no-underline min-w-[140px]"
               style={{ color: 'var(--color-text-on-primary)' }}
             >
-              Book a demo
+              {t.bookDemo}
             </Link>
             <Link
               to="/schedule-demo"
               className="g-btn-secondary no-underline min-w-[140px]"
             >
-              Schedule a demo
+              {t.scheduleDemo}
             </Link>
           </div>
         </div>
@@ -189,7 +192,7 @@ export default function Hero() {
           >
             <img
               src="/Images/hero-second.png"
-              alt="TechnoHealth wearable integration"
+              alt="TechnoHealth"
               className="w-full h-auto object-cover max-h-80 md:max-h-96"
             />
           </div>
