@@ -1,13 +1,13 @@
-import { Github, Linkedin, Twitter, Shield } from 'lucide-react';
+import { Github, Linkedin, Twitter } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 type FooterLink = { label: string; to: string } | { label: string; href: string };
 
 const COMPLIANCE_BADGES = [
-  'HIPAA Compliant',
-  'HITRUST Certified',
-  'SOC 2 Type II',
-  'Self hosted',
+  { label: 'HIPAA Compliant', src: '/Images/compliance/hipaa.png' },
+  { label: 'HITRUST Certified', src: '/Images/compliance/hitrust.png' },
+  { label: 'SOC 2 Type II', src: '/Images/compliance/soc2.svg' },
+  { label: 'Self hosted', src: '/Images/compliance/self-hosted.svg' },
 ];
 
 export default function Footer() {
@@ -122,57 +122,27 @@ export default function Footer() {
           ))}
         </div>
 
-        <div className="border-t pt-8 pb-6" style={{ borderColor: 'var(--color-border)' }}>
-          <p
-            className="text-xs font-medium uppercase tracking-wider mb-4"
-            style={{ color: 'var(--color-text-tertiary)' }}
-          >
-            Compliant with
-          </p>
-          <div className="flex flex-wrap items-center gap-3 sm:gap-4">
-            {COMPLIANCE_BADGES.map((badge) => (
-              <Link
-                key={badge}
-                to="/compliance"
-                className="inline-flex items-center gap-2 px-3 py-2 rounded-full border text-xs sm:text-sm no-underline transition-colors hover:opacity-90"
-                style={{
-                  color: 'var(--color-text-secondary)',
-                  borderColor: 'var(--color-border)',
-                  backgroundColor: 'var(--color-surface)',
-                }}
-              >
-                <Shield
-                  className="w-3.5 h-3.5 shrink-0"
-                  style={{ color: 'var(--color-brand-blue)' }}
-                  strokeWidth={2}
-                />
-                {badge}
-              </Link>
-            ))}
-          </div>
-        </div>
-
-        <div className="border-t pt-4 pb-2" style={{ borderColor: 'var(--color-border)' }}>
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
-            <p style={{ color: 'var(--color-text-secondary)' }}>
+        <div className="border-t pt-5 pb-2" style={{ borderColor: 'var(--color-border)' }}>
+          <div className="flex flex-col md:flex-row justify-between items-center gap-5">
+            <p className="text-sm" style={{ color: 'var(--color-text-secondary)' }}>
               © 2026 TechnoHealth. All rights reserved.
             </p>
-            <div className="flex flex-wrap justify-center gap-6">
-              <a href="#" className="no-underline hover:underline" style={linkStyle}>
-                Privacy
-              </a>
-              <a href="#" className="no-underline hover:underline" style={linkStyle}>
-                Terms
-              </a>
-              <Link to="/compliance" className="no-underline hover:underline" style={linkStyle}>
-                Compliance
-              </Link>
-              <a href="#" className="no-underline hover:underline" style={linkStyle}>
-                Advertising
-              </a>
-              <Link to="/about" className="no-underline hover:underline" style={linkStyle}>
-                About
-              </Link>
+            <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+              {COMPLIANCE_BADGES.map((badge) => (
+                <Link
+                  key={badge.label}
+                  to="/compliance"
+                  className="inline-flex items-center no-underline opacity-90 hover:opacity-100 transition-opacity"
+                  title={badge.label}
+                  aria-label={badge.label}
+                >
+                  <img
+                    src={badge.src}
+                    alt={badge.label}
+                    className="h-12 w-auto object-contain"
+                  />
+                </Link>
+              ))}
             </div>
           </div>
         </div>
