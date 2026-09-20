@@ -35,8 +35,12 @@ export default function IntegrationShowcase() {
         </div>
 
         <div className="text-center">
-          <Link to="/data-sources" className="g-btn-primary no-underline">
-            Data sources
+          <Link
+            to="/data-sources"
+            className="g-btn-primary no-underline tracking-wide"
+            style={{ color: 'var(--color-text-on-primary)' }}
+          >
+            DATA SOURCES
             <ArrowRight className="w-4 h-4" strokeWidth={2} />
           </Link>
         </div>

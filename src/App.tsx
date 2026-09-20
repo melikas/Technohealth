@@ -45,6 +45,7 @@ function App() {
         <Route path="/schedule-demo" element={<ScheduleDemoPage />} />
         <Route path="/book-a-demo" element={<ScheduleDemoPage />} />
         <Route path="/data-sources" element={<DataSourcesPage />} />
+        <Route path="/integrations" element={<DataSourcesPage />} />
         <Route path="/get-started" element={<GetStartedPage />} />
         <Route path="/docs" element={<DocumentationPage />} />
         <Route path="/compliance" element={<CompliancePage />} />

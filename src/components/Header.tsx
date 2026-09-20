@@ -25,8 +25,8 @@ export default function Header() {
   const serviceItems = [
     { label: 'AI Tools', path: '/services' },
     { label: 'TechnoHealth App', path: '/services' },
-    { label: 'Supported Devices', path: '/services' },
-    { label: 'APIs & SDKs', path: '/services' },
+    { label: 'Supported Devices', path: '/data-sources' },
+    { label: 'APIs & SDKs', path: '/docs' },
   ];
 
   const navLinks = [
