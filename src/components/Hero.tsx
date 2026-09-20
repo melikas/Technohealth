@@ -1,134 +1,146 @@
 import { Link } from 'react-router-dom';
+import { Search, Mic, Check } from 'lucide-react';
 
 export default function Hero() {
   const metrics = [
-    { 
-      number: '+100', 
+    {
+      number: '+100',
       label: 'Data Resources',
-      description: 'Integrated Data Platforms',
-      color: 'from-cyan-500 to-cyan-600',
-      bgColor: 'from-cyan-500/15 to-cyan-600/10'
+      description: 'Integrated data platforms',
+      accent: 'var(--color-google-blue)',
     },
-    { 
-      number: 'AI', 
+    {
+      number: 'AI',
       label: 'Advanced ML Models',
-      description: 'Predicting Health, Powering Care',
-      color: 'from-blue-400 to-blue-500',
-      bgColor: 'from-blue-500/15 to-blue-600/10'
+      description: 'Predicting health, powering care',
+      accent: 'var(--color-google-green)',
     },
-    { 
-      number: '+30%', 
+    {
+      number: '+30%',
       label: 'Efficiency Boost',
-      description: 'Developer Time Saved',
-      color: 'from-purple-400 to-purple-500',
-      bgColor: 'from-purple-500/15 to-purple-600/10'
-    }
+      description: 'Developer time saved',
+      accent: 'var(--color-google-yellow)',
+    },
   ];
 
+  const trustItems = ['HIPAA Compliant', 'HITRUST Certified', 'SOC 2 Type II', 'Self-Hosted'];
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900 text-white pt-32 pb-24 relative overflow-hidden">
-      {/* Background gradients */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
-      
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
-        {/* Main Content */}
-        <div className="grid md:grid-cols-2 gap-12 items-center mb-20">
-          {/* Left Side - Text */}
-          <div>
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              <div className="mb-4">Wearables Integration</div>
-              <div className="mb-4">For your</div>
-              <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
-              Health Tracking App 
-              </span>
-            </h1>
+    <section
+      className="pt-28 pb-20 md:pt-32 md:pb-24 relative overflow-hidden"
+      style={{ backgroundColor: 'var(--color-surface)' }}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+        <div className="flex flex-col items-center text-center mb-14">
+          <h1 className="text-4xl sm:text-5xl md:text-[56px] font-normal tracking-tight leading-tight mb-2">
+            <span style={{ color: 'var(--color-google-blue)' }}>T</span>
+            <span style={{ color: 'var(--color-google-red)' }}>e</span>
+            <span style={{ color: 'var(--color-google-yellow)' }}>c</span>
+            <span style={{ color: 'var(--color-google-blue)' }}>h</span>
+            <span style={{ color: 'var(--color-google-green)' }}>n</span>
+            <span style={{ color: 'var(--color-google-red)' }}>o</span>
+            <span style={{ color: 'var(--color-text-secondary)' }}>Health</span>
+          </h1>
 
-            <p className="text-lg md:text-xl text-slate-300 mb-10 max-w-2xl leading-relaxed">
-              Connect wearables and health platforms with one integration. We build digital products that accelerate healthcare services.
-            </p>
+          <p
+            className="text-xl md:text-2xl font-normal mt-4 max-w-2xl leading-snug"
+            style={{ color: 'var(--color-text)' }}
+          >
+            Wearables integration for your health tracking app
+          </p>
 
-            <div className="flex flex-col md:flex-row gap-4 mb-12">
-              <Link
-                to="/auth"
-                className="px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-lg font-bold hover:shadow-lg hover:shadow-cyan-500/50 transition-all text-lg"
-              >
-                Get Started
-              </Link>
-              <Link
-                to="/schedule-demo"
-                className="px-8 py-4 border-2 border-cyan-400/50 text-cyan-300 rounded-lg font-bold hover:bg-cyan-400/10 transition-all text-lg"
-              >
-                Schedule a demo
-              </Link>
-            </div>
+          <p
+            className="text-base md:text-lg mt-4 max-w-xl leading-relaxed"
+            style={{ color: 'var(--color-text-secondary)' }}
+          >
+            Connect wearables and health platforms with one integration. We build digital products that accelerate healthcare services.
+          </p>
+
+          {/* Google-style search affordance */}
+          <div className="g-search mt-10 max-w-[584px] w-full cursor-default">
+            <Search className="w-5 h-5 shrink-0" style={{ color: 'var(--color-text-tertiary)' }} strokeWidth={1.75} />
+            <span
+              className="flex-1 text-left text-base px-3 truncate"
+              style={{ color: 'var(--color-text-tertiary)' }}
+            >
+              Search devices, APIs, docs…
+            </span>
+            <Mic className="w-5 h-5 shrink-0" style={{ color: 'var(--color-google-blue)' }} strokeWidth={1.75} />
           </div>
 
-          {/* Right Side - Image */}
-          <div className="flex justify-center">
-            <div className="w-full h-96 bg-gradient-to-br from-cyan-500/20 to-blue-600/20 rounded-2xl overflow-hidden border border-cyan-400/30 shadow-2xl relative">
-              <img 
-                src="/Images/hero-second.png" 
-                alt="Hero Illustration"
-                className="w-full h-full object-cover opacity-80 transition-opacity duration-300 hover:opacity-95"
-                style={{ mixBlendMode: 'screen' }}
-              />
-              {/* Blend overlay */}
-              <div 
-                className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-blue-600/5 pointer-events-none"
-                style={{ mixBlendMode: 'multiply' }}
-              ></div>
-            </div>
+          <div className="flex flex-col sm:flex-row gap-3 mt-8">
+            <Link to="/auth" className="g-btn-primary no-underline min-w-[140px]">
+              Get Started
+            </Link>
+            <Link to="/schedule-demo" className="g-btn-secondary no-underline min-w-[140px]">
+              Schedule a demo
+            </Link>
           </div>
         </div>
 
-        {/* Metrics Grid */}
-        <div className="grid md:grid-cols-3 gap-6 mb-20">
-          {metrics.map((metric, idx) => (
+        <div className="flex justify-center mb-16">
+          <div
+            className="w-full max-w-3xl overflow-hidden rounded-gcard border"
+            style={{ borderColor: 'var(--color-border)', boxShadow: 'var(--shadow-card)' }}
+          >
+            <img
+              src="/Images/hero-second.png"
+              alt="TechnoHealth wearable integration"
+              className="w-full h-auto object-cover max-h-80 md:max-h-96"
+            />
+          </div>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-4 mb-12">
+          {metrics.map((metric) => (
             <div
-              key={idx}
-              className={`rounded-2xl border backdrop-blur-md bg-gradient-to-br ${metric.bgColor} border-white/10 p-8`}
+              key={metric.label}
+              className="p-6 text-left rounded-gcard border transition-shadow hover:shadow-gcard"
+              style={{
+                backgroundColor: 'var(--color-surface)',
+                borderColor: 'var(--color-border)',
+              }}
             >
-              {/* Number */}
-              <div className={`text-6xl font-bold mb-3 bg-gradient-to-r ${metric.color} bg-clip-text text-transparent`}>
+              <div className="text-4xl font-normal mb-2" style={{ color: metric.accent }}>
                 {metric.number}
               </div>
-
-              {/* Main Label */}
-              <h3 className="text-xl font-bold text-white mb-2">
+              <h3 className="text-base font-medium mb-1" style={{ color: 'var(--color-text)' }}>
                 {metric.label}
               </h3>
-
-              {/* Description */}
-              <p className="text-slate-300 text-sm leading-relaxed">
+              <p className="text-sm leading-relaxed" style={{ color: 'var(--color-text-secondary)' }}>
                 {metric.description}
               </p>
-
-              {/* Accent Line */}
-              <div className={`border-t border-gradient-to-r ${metric.color} mt-4 pt-4`}></div>
             </div>
           ))}
         </div>
 
-        {/* Trust Banner */}
-        <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl backdrop-blur-sm p-8 text-center">
-          <p className="text-slate-400 text-sm font-semibold uppercase tracking-wider mb-4">Enterprise-Grade Security</p>
-          <div className="flex flex-wrap items-center justify-center gap-8 text-slate-500">
-            <span className="flex items-center gap-2">
-              <span className="text-cyan-400">✓</span> HIPAA Compliant
-            </span>
-            <span className="flex items-center gap-2">
-              <span className="text-cyan-400">✓</span> HITRUST Certified
-            </span>
-            <span className="flex items-center gap-2">
-              <span className="text-cyan-400">✓</span> SOC 2 Type II
-            </span>
-            <span className="flex items-center gap-2">
-              <span className="text-cyan-400">✓</span> Self-Hosted
-            </span>
+        <div
+          className="rounded-gcard border px-6 py-5 text-center"
+          style={{
+            backgroundColor: 'var(--color-surface-alt)',
+            borderColor: 'var(--color-border)',
+          }}
+        >
+          <p
+            className="text-xs font-medium uppercase tracking-wider mb-4"
+            style={{ color: 'var(--color-text-tertiary)' }}
+          >
+            Enterprise-grade security
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
+            {trustItems.map((item) => (
+              <span
+                key={item}
+                className="inline-flex items-center gap-2 text-sm"
+                style={{ color: 'var(--color-text-secondary)' }}
+              >
+                <Check className="w-4 h-4" style={{ color: 'var(--color-google-green)' }} strokeWidth={2.5} />
+                {item}
+              </span>
+            ))}
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

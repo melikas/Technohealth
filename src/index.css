@@ -1,3 +1,183 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Google design tokens — all colors in #RRGGBB */
+:root {
+  /* Brand (Google logo colors) */
+  --color-google-blue: #4285F4;
+  --color-google-red: #EA4335;
+  --color-google-yellow: #FBBC05;
+  --color-google-green: #34A853;
+
+  /* Actions / links */
+  --color-primary: #1A73E8;
+  --color-primary-hover: #1765CC;
+  --color-primary-pressed: #1557B0;
+  --color-link: #1A0DAB;
+  --color-link-visited: #681DA8;
+
+  /* Surfaces */
+  --color-surface: #FFFFFF;
+  --color-surface-alt: #F8F9FA;
+  --color-surface-footer: #F2F2F2;
+  --color-surface-chip: #F1F3F4;
+  --color-surface-success: #E6F4EA;
+  --color-surface-info: #E8F0FE;
+
+  /* Text */
+  --color-text: #202124;
+  --color-text-secondary: #5F6368;
+  --color-text-tertiary: #80868B;
+  --color-text-on-primary: #FFFFFF;
+
+  /* Borders & focus */
+  --color-border: #DADCE0;
+  --color-border-strong: #BDC1C6;
+  --color-focus-ring: #1A73E8;
+
+  /* Shadows (Google search / card style) */
+  --shadow-search: 0 1px 6px rgba(32, 33, 36, 0.28);
+  --shadow-search-hover: 0 2px 8px rgba(32, 33, 36, 0.30);
+  --shadow-card: 0 1px 2px 0 rgba(60, 64, 67, 0.30), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+  --shadow-elevated: 0 1px 3px 0 rgba(60, 64, 67, 0.30), 0 4px 8px 3px rgba(60, 64, 67, 0.15);
+
+  /* Radii */
+  --radius-button: 24px;
+  --radius-input: 24px;
+  --radius-card: 8px;
+  --radius-chip: 16px;
+
+  /* Typography */
+  --font-sans: Roboto, "Google Sans", Arial, sans-serif;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    color: var(--color-text);
+    background-color: var(--color-surface);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background-color: var(--color-surface);
+  }
+
+  a {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  *:focus-visible {
+    outline: 2px solid var(--color-focus-ring);
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  .g-btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-2.5 text-sm font-medium transition-colors;
+    background-color: var(--color-primary);
+    color: var(--color-text-on-primary);
+    border-radius: var(--radius-button);
+    border: 1px solid transparent;
+    text-decoration: none;
+  }
+
+  .g-btn-primary:hover {
+    background-color: var(--color-primary-hover);
+    text-decoration: none;
+    box-shadow: var(--shadow-card);
+  }
+
+  .g-btn-primary:active {
+    background-color: var(--color-primary-pressed);
+  }
+
+  .g-btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-2.5 text-sm font-medium transition-colors;
+    background-color: var(--color-surface);
+    color: var(--color-primary);
+    border-radius: var(--radius-button);
+    border: 1px solid var(--color-border);
+    text-decoration: none;
+  }
+
+  .g-btn-secondary:hover {
+    background-color: var(--color-surface-alt);
+    border-color: var(--color-border-strong);
+    text-decoration: none;
+    box-shadow: var(--shadow-card);
+  }
+
+  .g-btn-text {
+    @apply inline-flex items-center justify-center gap-1 px-3 py-2 text-sm font-medium transition-colors;
+    color: var(--color-text-secondary);
+    border-radius: 4px;
+    text-decoration: none;
+  }
+
+  .g-btn-text:hover {
+    background-color: var(--color-surface-chip);
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  .g-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card);
+  }
+
+  .g-card-elevated {
+    background-color: var(--color-surface);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+  }
+
+  .g-search {
+    @apply flex items-center w-full max-w-xl px-4 py-3 transition-shadow;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-input);
+    box-shadow: none;
+  }
+
+  .g-search:hover,
+  .g-search:focus-within {
+    box-shadow: var(--shadow-search);
+    border-color: transparent;
+  }
+
+  .g-chip {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 text-sm;
+    background-color: var(--color-surface-chip);
+    color: var(--color-text-secondary);
+    border-radius: var(--radius-chip);
+  }
+
+  .g-section-title {
+    @apply text-3xl md:text-4xl font-normal tracking-tight;
+    color: var(--color-text);
+  }
+
+  .g-section-sub {
+    @apply text-base md:text-lg mt-3;
+    color: var(--color-text-secondary);
+  }
+
+  .g-icon-wrap {
+    @apply flex items-center justify-center w-12 h-12;
+    background-color: var(--color-surface-chip);
+    border-radius: 50%;
+    color: var(--color-primary);
+  }
+}
