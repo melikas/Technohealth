@@ -49,7 +49,7 @@ const DEVICES: Device[] = [
   {
     name: 'WHOOP',
     categories: ['Fitness', 'Sleep'],
-    summary: 'Recovery-focused band for strain, sleep, and performance.',
+    summary: 'Recovery focused band for strain, sleep, and performance.',
     data: ['Strain', 'Recovery', 'Sleep performance', 'HRV', 'Respiratory rate'],
   },
   {
@@ -73,13 +73,13 @@ const DEVICES: Device[] = [
   {
     name: 'Polar',
     categories: ['Fitness', 'Sleep'],
-    summary: 'Heart-rate and sports watches built for athletes and training.',
+    summary: 'Heart rate and sports watches built for athletes and training.',
     data: ['Heart rate', 'Training sessions', 'Calories', 'Sleep', 'Recovery'],
   },
   {
     name: 'COROS',
     categories: ['Fitness', 'Sleep', 'Wellness'],
-    summary: 'Endurance-focused watches for running, cycling, and training load.',
+    summary: 'Endurance focused watches for running, cycling, and training load.',
     data: ['Running metrics', 'Heart rate', 'Training load', 'GPS', 'Sleep'],
   },
   {
@@ -200,10 +200,10 @@ export default function DataSourcesPage() {
         <section className="pt-28 md:pt-32 pb-8 px-4 sm:px-6">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-3xl sm:text-4xl md:text-[42px] font-semibold tracking-tight text-[#111] leading-[1.2] mb-4">
-              Access data from devices and fitness apps via a single wearable API
+              Get health data from devices and fitness apps through one wearable API
             </h1>
             <p className="text-[15px] sm:text-[16px] text-[#666]">
-              Click a provider to see the data it can share.
+              Select a provider to see which data it can share.
             </p>
           </div>
         </section>
@@ -284,7 +284,7 @@ export default function DataSourcesPage() {
           <div className="max-w-3xl mx-auto text-center rounded-2xl border border-[#e6e6e6] bg-[#fafafa] px-6 py-12">
             <h2 className="text-2xl font-semibold text-[#111] mb-3">Want to see it live?</h2>
             <p className="text-[#666] mb-6 max-w-md mx-auto">
-              Book a short demo and we’ll walk through the devices that matter for your product.
+              Book a short demo and we will walk through the devices that matter for your product.
             </p>
             <Link
               to="/schedule-demo"

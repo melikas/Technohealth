@@ -6,32 +6,32 @@ const faqs = [
   {
     question: 'How fast can you get us live?',
     answer:
-      'Typically 7 days. We identify your wearables, set up integrations, and deploy to production. Your team starts analyzing data immediately.',
+      'Usually about 7 days. We identify your wearables, set up the integrations, and deploy to production so your team can start using the data right away.',
   },
   {
     question: 'Which devices do you support?',
     answer:
-      'Apple Watch, Fitbit, Oura, WHOOP, Samsung Galaxy Watch, Garmin, Withings, Dexcom, Empatica, Polar, and 5+ more. One unified API for all of them.',
+      'Apple Watch, Fitbit, Oura, WHOOP, Samsung Galaxy Watch, Garmin, Withings, Dexcom, Empatica, Polar, and more. You get one API for all of them.',
   },
   {
     question: 'What metrics can clinicians see?',
     answer:
-      'Heart rate trends, sleep quality, activity patterns, biological rhythms, risk stratification scores, and custom metrics you define. All interpretable and actionable.',
+      'Heart rate trends, sleep quality, activity patterns, biological rhythms, risk scores, and custom metrics you define. Everything is meant to be clear and useful.',
   },
   {
     question: 'How much does it cost?',
     answer:
-      "Self-hosted: $600-$6,000/year depending on scale. Cloud: $1,000-$10,000/year. No per-user fees. That's 90% cheaper than SaaS platforms.",
+      'Self hosted plans start around $600 to $6,000 per year depending on scale. Cloud plans start around $1,000 to $10,000 per year. There are no per user fees.',
   },
   {
     question: 'Is our patient data secure?',
     answer:
-      'Completely. HIPAA compliant, HITRUST certified, SOC 2 audited, and self-hosted on your infrastructure. Your data never leaves your servers.',
+      'Yes. TechnoHealth is HIPAA compliant, HITRUST certified, and SOC 2 audited. You can also self host so data stays on your infrastructure.',
   },
   {
     question: 'Can it connect to our EHR?',
     answer:
-      'Yes. FHIR-compliant export works with Epic, Cerner, and other systems. Real-time API feeds available for custom workflows.',
+      'Yes. FHIR compliant export works with Epic, Cerner, and other systems. Real time API feeds are available for custom workflows.',
   },
 ];
 
@@ -49,7 +49,7 @@ export default function FAQ() {
       <div className="max-w-3xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-12">
           <h2 className="g-section-title">Frequently asked questions</h2>
-          <p className="g-section-sub">Quick answers to your most important questions</p>
+          <p className="g-section-sub">Short answers to the questions we hear most often</p>
         </div>
 
         <div className="space-y-2">
@@ -111,7 +111,7 @@ export default function FAQ() {
             Still have questions?
           </h3>
           <p className="text-sm mb-6" style={{ color: 'var(--color-text-secondary)' }}>
-            Our team is ready to discuss your specific clinical requirements
+            Our team is happy to talk through your clinical requirements.
           </p>
           <Link to="/schedule-demo" className="g-btn-primary no-underline">
             Schedule a Demo

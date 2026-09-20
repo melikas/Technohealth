@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+﻿import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Copy, Check, ChevronRight } from 'lucide-react';
 import Header from '../components/Header';
@@ -54,7 +54,7 @@ export default function DocumentationPage() {
   useEffect(() => {
     document.title = 'Documentation | TechnoHealth';
     return () => {
-      document.title = 'TechnoHealth — Wearable health data infrastructure';
+      document.title = 'TechnoHealth. Wearable health data infrastructure';
     };
   }, []);
 
@@ -91,7 +91,7 @@ export default function DocumentationPage() {
       },
       {
         root: null,
-        // Account for fixed header — section is "active" near the top third
+        // Account for fixed header   section is "active" near the top third
         rootMargin: '-20% 0px -55% 0px',
         threshold: [0, 0.1, 0.25, 0.5, 1],
       }
@@ -128,15 +128,15 @@ export default function DocumentationPage() {
             TechnoHealth Docs
           </h1>
           <p className="text-[16px] text-[#666] max-w-2xl">
-            Connect wearable health data to your product. Start with the introduction, then use the
-            API or the React SDK.
+            Learn how to connect wearable health data to your product. Start with the introduction,
+            then explore the API or the React SDK.
           </p>
         </div>
       </div>
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10 md:py-14">
         <div className="grid lg:grid-cols-[240px_1fr] gap-10 lg:gap-14">
-          {/* Sidebar — Spike/Mintlify-style */}
+          {/* Sidebar   Spike/Mintlify-style */}
           <aside className="lg:sticky lg:top-24 lg:self-start">
             <p className="text-[11px] font-semibold uppercase tracking-[0.1em] text-[#999] mb-3 px-3">
               Docs
@@ -182,16 +182,16 @@ export default function DocumentationPage() {
                 Introduction
               </h2>
               <p className="text-[16px] text-[#555] leading-relaxed mb-6">
-                TechnoHealth is one infrastructure for wearable health data. Connect devices, normalize
-                the messy parts, and read clean metrics in your app — without building every vendor
-                integration yourself.
+                TechnoHealth gives you one place to work with wearable health data. You connect
+                devices, we clean up the messy formats, and your app reads clear metrics. You do not
+                need to build a separate integration for every vendor.
               </p>
 
               <div className="rounded-xl border border-[#e6e6e6] bg-[#fafafa] p-5 mb-8">
                 <h3 className="text-base font-semibold text-[#111] mb-2">What you get</h3>
                 <ul className="space-y-2 text-sm text-[#555]">
                   <li>• One API for many wearables and health platforms</li>
-                  <li>• Normalized metrics (heart rate, sleep, activity, and more)</li>
+                  <li>• Clear metrics such as heart rate, sleep, and activity</li>
                   <li>• A React SDK when you want to move faster in the browser</li>
                 </ul>
               </div>
@@ -205,7 +205,7 @@ export default function DocumentationPage() {
                 >
                   <p className="font-semibold text-[#111] mb-1">API Documentation</p>
                   <p className="text-sm text-[#666]">
-                    Best for backends and full control over auth, sync, and storage.
+                    Use this when you want full control on your server for auth, sync, and storage.
                   </p>
                 </button>
                 <button
@@ -215,13 +215,13 @@ export default function DocumentationPage() {
                 >
                   <p className="font-semibold text-[#111] mb-1">SDK Documentation for React</p>
                   <p className="text-sm text-[#666]">
-                    Best for product UIs — connect devices and fetch data from React.
+                    Use this when you want to connect devices and fetch data from your React app.
                   </p>
                 </button>
               </div>
 
               <p className="text-sm text-[#666]">
-                Browse supported providers on the{' '}
+                See which providers we support on the{' '}
                 <Link to="/data-sources" className="text-[#1A73E8] hover:underline">
                   Data Sources
                 </Link>{' '}
@@ -235,7 +235,7 @@ export default function DocumentationPage() {
                 API Documentation
               </h2>
               <p className="text-[16px] text-[#555] leading-relaxed mb-8">
-                Use the REST API from your server to authenticate users, connect providers, and query
+                Call the REST API from your server to sign users in, connect providers, and read
                 health data.
               </p>
 
@@ -249,7 +249,7 @@ export default function DocumentationPage() {
 
               <h3 className="text-lg font-semibold text-[#111] mt-8 mb-2">Authentication</h3>
               <p className="text-sm text-[#555] mb-3">
-                Send your API key as a Bearer token on every request:
+                Put your API key in the Authorization header on every request:
               </p>
               <CodeBlock
                 id="auth-header"
@@ -260,7 +260,7 @@ export default function DocumentationPage() {
 
               <h3 className="text-lg font-semibold text-[#111] mt-8 mb-2">Fetch health data</h3>
               <p className="text-sm text-[#555] mb-3">
-                Example: get normalized metrics for a user over a date range.
+                Here is an example that loads clear metrics for a user across a date range.
               </p>
               <CodeBlock
                 id="curl-health"
@@ -301,9 +301,9 @@ export default function DocumentationPage() {
                   </thead>
                   <tbody className="text-[#333]">
                     {[
-                      ['GET', '/users/{id}/health-data', 'Normalized health metrics'],
-                      ['GET', '/users/{id}/devices', 'Connected devices for a user'],
-                      ['POST', '/users/{id}/devices/connect', 'Start a provider connection'],
+                      ['GET', '/users/{id}/health-data', 'Clear health metrics'],
+                      ['GET', '/users/{id}/devices', 'Devices linked to a user'],
+                      ['POST', '/users/{id}/devices/connect', 'Start connecting a provider'],
                       ['GET', '/providers', 'List available data sources'],
                     ].map(([method, path, desc]) => (
                       <tr key={path} className="border-t border-[#eee]">
@@ -323,8 +323,8 @@ export default function DocumentationPage() {
                 SDK Documentation for React
               </h2>
               <p className="text-[16px] text-[#555] leading-relaxed mb-8">
-                The React SDK helps you connect devices and read TechnoHealth data inside your React
-                app with less boilerplate.
+                The React SDK helps you connect devices and read TechnoHealth data in your React app
+                with less setup work.
               </p>
 
               <h3 className="text-lg font-semibold text-[#111] mb-2">Install</h3>
@@ -337,7 +337,8 @@ export default function DocumentationPage() {
 
               <h3 className="text-lg font-semibold text-[#111] mt-8 mb-2">Wrap your app</h3>
               <p className="text-sm text-[#555] mb-3">
-                Provide your API key once with <code className="text-[13px] bg-[#f1f3f4] px-1.5 py-0.5 rounded">TechnoHealthProvider</code>:
+                Add your API key once with{' '}
+                <code className="text-[13px] bg-[#f1f3f4] px-1.5 py-0.5 rounded">TechnoHealthProvider</code>:
               </p>
               <CodeBlock
                 id="provider"
@@ -382,7 +383,7 @@ export function DailySummary({ userId }: { userId: string }) {
 
               <h3 className="text-lg font-semibold text-[#111] mt-8 mb-2">Connect a device</h3>
               <p className="text-sm text-[#555] mb-3">
-                Start a provider connection from the UI (user completes consent in a secure flow):
+                Start connecting a provider from your UI. The user finishes consent in a secure flow.
               </p>
               <CodeBlock
                 id="connect-device"
@@ -406,7 +407,7 @@ export function ConnectFitbit({ userId }: { userId: string }) {
 
               <div className="mt-8 rounded-xl border border-[#e8f0fe] bg-[#f8fbff] p-5">
                 <p className="text-sm text-[#555]">
-                  Need help wiring this into your product?{' '}
+                  Need help adding this to your product?{' '}
                   <Link to="/schedule-demo" className="text-[#1A73E8] font-medium hover:underline">
                     Book a demo with Support Team
                   </Link>
@@ -415,7 +416,7 @@ export function ConnectFitbit({ userId }: { userId: string }) {
               </div>
             </section>
 
-            {/* MCP TOOL — UPCOMING */}
+            {/* MCP TOOL   UPCOMING */}
             <section id="mcp" className="scroll-mt-28">
               <div className="flex flex-wrap items-center gap-3 mb-4">
                 <h2 className="text-2xl sm:text-3xl font-semibold text-[#111] tracking-tight">
@@ -427,22 +428,22 @@ export function ConnectFitbit({ userId }: { userId: string }) {
               </div>
 
               <p className="text-[15px] text-[#888] mb-6 italic">
-                Coming soon — not available for public use yet.
+                Coming soon. Not available for public use yet.
               </p>
 
               <p className="text-[16px] text-[#555] leading-relaxed mb-5">
-                Here&apos;s the idea in plain terms: we&apos;re building an MCP tool for TechnoHealth so
-                you can ask AI assistants (like Claude or ChatGPT) about wearable data directly —
-                without wiring every API endpoint by hand.
+                Here is the simple idea. We are building an MCP tool for TechnoHealth so you can ask
+                AI assistants such as Claude or ChatGPT about wearable data. You will not need to
+                connect every API endpoint by hand.
               </p>
 
               <p className="text-[16px] text-[#555] leading-relaxed mb-8">
-                Instead of pulling everything from the API first and then feeding it to a model, the
+                Instead of pulling everything from the API first and then giving it to a model, the
                 model can use the MCP Tool to reach metrics like sleep, activity, and heart rate, then
-                help you make sense of them.
+                help you understand them.
               </p>
 
-              <h3 className="text-lg font-semibold text-[#111] mb-3">Things you&apos;ll be able to ask later</h3>
+              <h3 className="text-lg font-semibold text-[#111] mb-3">Things you will be able to ask later</h3>
               <ul className="space-y-3 text-[15px] text-[#555] mb-8">
                 <li className="flex gap-2">
                   <span className="text-[#1A73E8] shrink-0">•</span>
@@ -454,7 +455,7 @@ export function ConnectFitbit({ userId }: { userId: string }) {
                 </li>
                 <li className="flex gap-2">
                   <span className="text-[#1A73E8] shrink-0">•</span>
-                  <span>Is there a link between sleep quality and next-day activity?</span>
+                  <span>Is there a link between sleep quality and next day activity?</span>
                 </li>
                 <li className="flex gap-2">
                   <span className="text-[#1A73E8] shrink-0">•</span>
@@ -465,8 +466,8 @@ export function ConnectFitbit({ userId }: { userId: string }) {
               <div className="rounded-xl border border-[#f0e0a0] bg-[#fffdf5] p-5">
                 <p className="text-sm font-medium text-[#8a6d1d] mb-1">Upcoming</p>
                 <p className="text-sm text-[#666] leading-relaxed">
-                  Setup guides, tool lists, and real examples will show up here when they&apos;re ready.
-                  For now, use the API and React SDK — we&apos;ll announce MCP when it launches.
+                  Setup guides, tool lists, and real examples will appear here when they are ready.
+                  For now, use the API and React SDK. We will announce MCP when it launches.
                 </p>
               </div>
             </section>

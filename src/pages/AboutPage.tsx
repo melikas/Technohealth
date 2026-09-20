@@ -1,4 +1,4 @@
-import Header from '../components/Header';
+﻿import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { Heart, Users, Award, Zap } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -25,13 +25,13 @@ export default function AboutPage() {
             <div>
               <h2 className="text-4xl font-bold text-slate-900 mb-6">Why Healthcare Teams Choose TechnoHealth</h2>
               <p className="text-lg text-slate-700 mb-6 leading-relaxed">
-                Wearable devices are powerful—but only if your data works. Every vendor uses different formats, APIs, and update cycles. Building it yourself takes months and costs six figures.
+                Wearable devices are powerful but only if your data works. Every vendor uses different formats, APIs, and update cycles. Building it yourself takes months and costs six figures.
               </p>
               <p className="text-lg text-slate-700 mb-6 leading-relaxed">
-                TechnoHealth eliminates the integration headache. Connect your patients' Apple Watches, Fitbits, Oura rings,and clinical devices—all in one platform. Start analyzing data in days, not months.
+                TechnoHealth eliminates the integration headache. Connect your patients' Apple Watches, Fitbits, Oura rings, and clinical devices all in one platform. Start analyzing data in days, not months.
               </p>
               <p className="text-lg text-slate-700 leading-relaxed">
-                Your infrastructure. Your data. Enterprise security. No vendor lock-in.
+                Your infrastructure. Your data. Enterprise security. No vendor lock in.
               </p>
             </div>
             <div className="bg-gradient-to-br from-cyan-50 to-blue-50 rounded-xl border-2 border-cyan-200 p-12">
@@ -39,7 +39,7 @@ export default function AboutPage() {
                 <div className="flex gap-4">
                   <Heart className="w-8 h-8 text-red-600 flex-shrink-0" />
                   <div>
-                    <h3 className="font-bold text-slate-900 mb-2">Patient-Centric</h3>
+                    <h3 className="font-bold text-slate-900 mb-2">Patient centric</h3>
                     <p className="text-slate-700 text-sm">Every decision prioritizes patient data security and care outcomes</p>
                   </div>
                 </div>
@@ -47,14 +47,14 @@ export default function AboutPage() {
                   <Users className="w-8 h-8 text-blue-600 flex-shrink-0" />
                   <div>
                     <h3 className="font-bold text-slate-900 mb-2">Open Standards</h3>
-                    <p className="text-slate-700 text-sm">Built on FHIR, HL7, and open protocols—never locked in</p>
+                    <p className="text-slate-700 text-sm">Built on FHIR, HL7, and open protocols. You are never locked in.</p>
                   </div>
                 </div>
                 <div className="flex gap-4">
                   <Award className="w-8 h-8 text-yellow-600 flex-shrink-0" />
                   <div>
                     <h3 className="font-bold text-slate-900 mb-2">Clinical Grade</h3>
-                    <p className="text-slate-700 text-sm">HIPAA compliant, audit-ready, designed for regulated environments</p>
+                    <p className="text-slate-700 text-sm">HIPAA compliant, audit ready, and designed for regulated environments</p>
                   </div>
                 </div>
               </div>
@@ -73,7 +73,7 @@ export default function AboutPage() {
                 <ul className="space-y-3 text-slate-700">
                   <li className="flex gap-3">
                     <span className="text-red-600 font-bold">•</span>
-                    <span>Building integrations for Apple, Fitbit, Oura, Empatica? That's $150K-$400K in development</span>
+                    <span>Building integrations for Apple, Fitbit, Oura, Empatica? That can cost $150K to $400K in development</span>
                   </li>
                   <li className="flex gap-3">
                     <span className="text-red-600 font-bold">•</span>
@@ -105,7 +105,7 @@ export default function AboutPage() {
                   </li>
                   <li className="flex gap-3">
                     <span className="text-green-600 font-bold">•</span>
-                    <span>One unified API—add Apple, Fitbit, Oura without touching code</span>
+                    <span>One unified API. Add Apple, Fitbit, or Oura without touching code</span>
                   </li>
                   <li className="flex gap-3">
                     <span className="text-green-600 font-bold">•</span>

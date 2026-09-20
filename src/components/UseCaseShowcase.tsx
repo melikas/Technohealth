@@ -57,9 +57,9 @@ export default function UseCaseShowcase() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-12">
-          <h2 className="g-section-title">Real-world results</h2>
+          <h2 className="g-section-title">Real world results</h2>
           <p className="g-section-sub max-w-2xl mx-auto">
-            Hospitals, researchers, and wellness companies using TechnoHealth today
+            Hospitals, researchers, and wellness companies use TechnoHealth today
           </p>
         </div>
 

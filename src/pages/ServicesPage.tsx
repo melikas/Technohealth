@@ -1,4 +1,4 @@
-import Header from '../components/Header';
+﻿import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { LineChart, Building2, AlertCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -189,10 +189,10 @@ export default function ServicesPage() {
             <div className="bg-gradient-to-br from-cyan-50 to-blue-50 border border-cyan-200 rounded-xl p-8">
               <div className="w-12 h-12 bg-cyan-600 text-white rounded-lg flex items-center justify-center mb-6 text-xl font-bold">1</div>
               <h3 className="text-2xl font-bold text-slate-900 mb-3">Data Fragmentation</h3>
-              <p className="text-slate-700 mb-6">Apple Watch, Fitbit, Oura—different APIs, different formats, different update cycles. We normalize everything into one clean data model.</p>
+              <p className="text-slate-700 mb-6">Apple Watch, Fitbit, and Oura each use different APIs, formats, and update cycles. We normalize everything into one clean data model.</p>
               <ul className="space-y-2 text-sm text-slate-700">
                 <li>✓ 15+ device platforms unified</li>
-                <li>✓ Preserves metadata & context</li>
+                <li>✓ Preserves metadata and context</li>
                 <li>✓ Add new devices in minutes</li>
                 <li>✓ No code changes needed</li>
               </ul>

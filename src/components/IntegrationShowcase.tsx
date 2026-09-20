@@ -12,9 +12,9 @@ export default function IntegrationShowcase() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-12">
-          <h2 className="g-section-title">Works with everything your patients have</h2>
+          <h2 className="g-section-title">Works with the devices your users already have</h2>
           <p className="g-section-sub max-w-2xl mx-auto">
-            Explore TechnoHealth&apos;s available data sources, both API and SDK options, to find the best fit for your integration.
+            Explore the data sources and SDKs that fit your product.
           </p>
         </div>
 

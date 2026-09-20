@@ -1,11 +1,11 @@
-import { Shuffle as ShuffleIcon, AlertCircle, TrendingDown } from 'lucide-react';
+﻿import { Shuffle as ShuffleIcon, AlertCircle, TrendingDown } from 'lucide-react';
 
 export default function Problem() {
   const problems = [
     {
       icon: ShuffleIcon,
       title: 'Disconnected Wearable Ecosystems',
-      description: 'Patients use Apple Watch, Fitbit, Oura, CGMs, and more. Each device has its own data silo—invisible to your clinical platform.',
+      description: 'Patients use Apple Watch, Fitbit, Oura, CGMs, and more. Each device has its own data silo that stays invisible to your clinical platform.',
     },
     {
       icon: AlertCircle,
@@ -15,7 +15,7 @@ export default function Problem() {
     {
       icon: TrendingDown,
       title: 'Missed Real-Time Signals',
-      description: 'Continuous wearable streams could catch early risk indicators. Instead, data sits in patient apps—inaccessible to care teams until it\'s too late.',
+      description: 'Continuous wearable streams could catch early risk indicators. Instead, data sits in patient apps inaccessible to care teams until it\'s too late.',
     },
   ];
 

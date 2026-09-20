@@ -1,8 +1,8 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Mail, Lock, AlertCircle, CheckCircle } from 'lucide-react';
 
-// Mock database — replace with a real backend
+// Mock database. Replace with a real backend.
 
 const mockDatabase: Record<string, string> = {
   'demo@example.com': 'password123',

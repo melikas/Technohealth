@@ -1,4 +1,4 @@
-import Header from '../components/Header';
+﻿import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { Heart, Activity, Zap, TrendingUp, Bell, Users, CheckCircle, ChevronRight } from 'lucide-react';
 import { useState } from 'react';
@@ -268,7 +268,7 @@ export default function DemoPage() {
               </div>
               <h3 className="text-lg font-bold text-slate-900 mb-3">Real-Time Vitals</h3>
               <p className="text-slate-600 text-sm">
-                Watch heart rate, activity, sleep, glucose—all streamed live from wearables.
+                Watch heart rate, activity, sleep, and glucose streamed live from wearables.
               </p>
             </div>
 

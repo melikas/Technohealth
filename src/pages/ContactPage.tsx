@@ -4,7 +4,7 @@ import { MapPin, Send, CheckCircle } from 'lucide-react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-/** Delivery address only — never shown in the UI */
+/** Delivery address only. Never shown in the UI */
 const CONTACT_INBOX = 'melikamirzaseyedi@gmail.com';
 
 export default function ContactPage() {
@@ -41,7 +41,7 @@ export default function ContactPage() {
       `[TechnoHealth Contact] ${subjectLabel[formData.subject] || 'Message'}`
     );
     const body = encodeURIComponent(
-      `Name: ${formData.name}\nEmail: ${formData.email}\nCompany: ${formData.company || '—'}\nSubject: ${subjectLabel[formData.subject]}\n\nMessage:\n${formData.message}`
+      `Name: ${formData.name}\nEmail: ${formData.email}\nCompany: ${formData.company || 'N/A'}\nSubject: ${subjectLabel[formData.subject]}\n\nMessage:\n${formData.message}`
     );
 
     window.location.href = `mailto:${CONTACT_INBOX}?subject=${subject}&body=${body}`;
@@ -61,7 +61,7 @@ export default function ContactPage() {
             Contact us
           </h1>
           <p className="text-[16px] text-[#666] max-w-md mx-auto">
-            Ask a question and we’ll get back to you soon.
+            Ask a question and we will get back to you soon.
           </p>
         </div>
       </section>
@@ -86,7 +86,7 @@ export default function ContactPage() {
                 <CheckCircle className="w-10 h-10 text-[#1E8E3E] mx-auto mb-3" strokeWidth={1.75} />
                 <h3 className="text-lg font-medium text-[#111] mb-2">Almost done</h3>
                 <p className="text-sm text-[#666] max-w-sm mx-auto mb-4">
-                  Your email app should open with the message ready. Send it and we’ll reply soon.
+                  Your email app should open with the message ready. Send it and we will reply soon.
                 </p>
                 <button
                   type="button"
@@ -133,7 +133,7 @@ export default function ContactPage() {
                     placeholder="you@company.com"
                     autoComplete="email"
                   />
-                  <p className="text-xs text-[#888] mt-1.5">So we can reply to you — not shown publicly.</p>
+                  <p className="text-xs text-[#888] mt-1.5">We use this to reply to you. It is not shown publicly.</p>
                 </div>
 
                 <div>

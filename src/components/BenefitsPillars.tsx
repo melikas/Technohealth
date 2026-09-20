@@ -4,26 +4,26 @@ export default function BenefitsPillars() {
   const benefits = [
     {
       icon: Zap,
-      title: 'Days, Not Months',
-      description: 'Go from zero to live data integration in 7 days. No custom development required.',
+      title: 'Days, not months',
+      description: 'Go from zero to live data in about 7 days. You do not need custom development for every device.',
       color: 'var(--color-brand-blue-light)',
     },
     {
       icon: CheckCircle,
-      title: 'One API for All',
-      description: 'Stop building separate integrations for each device. Add Apple, Fitbit, Oura from your dashboard.',
+      title: 'One API for all',
+      description: 'Stop building a separate integration for each device. Add Apple, Fitbit, or Oura from your dashboard.',
       color: 'var(--color-brand-blue)',
     },
     {
       icon: Database,
-      title: 'Your Infrastructure',
-      description: 'Deploy on your servers. Own your data. No recurring per-user fees or vendor lock-in.',
+      title: 'Your infrastructure',
+      description: 'Deploy on your servers and keep ownership of your data. No per user fees or vendor lock in.',
       color: 'var(--color-brand-blue-mid)',
     },
     {
       icon: Shield,
-      title: 'Enterprise Ready',
-      description: 'HIPAA compliant, SOC 2 audited, role-based access control. Built for regulated industries.',
+      title: 'Enterprise ready',
+      description: 'HIPAA compliant, SOC 2 audited, and built with role based access for regulated teams.',
       color: 'var(--color-brand-blue-deep)',
     },
   ];
@@ -42,9 +42,9 @@ export default function BenefitsPillars() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-14">
-          <h2 className="g-section-title">The fastest way to unify your data</h2>
+          <h2 className="g-section-title">Get wearable data into your product faster</h2>
           <p className="g-section-sub max-w-2xl mx-auto">
-            Seven days from signing to production. Own your data pipeline.
+            Go from signing to production in about a week, and keep the data on your infrastructure.
           </p>
         </div>
 

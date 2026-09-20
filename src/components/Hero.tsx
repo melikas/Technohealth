@@ -23,7 +23,7 @@ export default function Hero() {
     },
   ];
 
-  const trustItems = ['HIPAA Compliant', 'HITRUST Certified', 'SOC 2 Type II', 'Self-Hosted'];
+  const trustItems = ['HIPAA Compliant', 'HITRUST Certified', 'SOC 2 Type II', 'Self hosted'];
 
   return (
     <section
@@ -40,7 +40,7 @@ export default function Hero() {
             className="text-base md:text-lg mt-5 max-w-2xl leading-relaxed"
             style={{ color: 'var(--color-text-secondary)' }}
           >
-            One infrastructure for wearable health data — connect any device, standardize the
+            One infrastructure for wearable health data. Connect any device, standardize the
             complexity, and build trusted health products faster.
           </p>
 

@@ -14,7 +14,7 @@ export default function Footer() {
       links: [
         { label: 'Documentation', to: '/docs' },
         { label: 'API Reference', to: '/docs' },
-        { label: 'SDK & Libraries', to: '/docs' },
+        { label: 'SDK and Libraries', to: '/docs' },
         { label: 'System Status', href: 'https://status.technohealth.com' },
       ],
     },
@@ -40,7 +40,7 @@ export default function Footer() {
       title: 'Resources',
       links: [
         { label: 'Contact Us', to: '/contact' },
-        { label: 'Blog & Insights', href: '#' },
+        { label: 'Blog and Insights', href: '#' },
         { label: 'White Papers', href: '#' },
         { label: 'Webinars', href: '#' },
       ],
@@ -59,7 +59,7 @@ export default function Footer() {
               </span>
             </div>
             <p className="text-sm mb-5 leading-relaxed" style={{ color: 'var(--color-text-secondary)' }}>
-              Unified wearable data platform for healthcare.
+              One infrastructure for wearable health data.
             </p>
             <div className="flex gap-3">
               <a

@@ -1,4 +1,4 @@
-import Header from '../components/Header';
+﻿import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { AlertCircle, LineChart, Users, Building2, Microscope, Package } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -101,7 +101,7 @@ export default function SolutionsPage() {
         <div className="max-w-7xl mx-auto px-6">
           <h1 className="text-5xl font-bold mb-6">Solutions for Everyone</h1>
           <p className="text-xl text-slate-300 max-w-3xl">
-            Remote monitoring, research, wellness, precision medicine—all use cases covered
+            Remote monitoring, research, wellness, and precision medicine. All covered.
           </p>
         </div>
       </section>

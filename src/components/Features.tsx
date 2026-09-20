@@ -1,4 +1,4 @@
-import { Link2, Filter, Activity, BarChart3, GitCompare, Lightbulb, Settings, FileCheck, Lock } from 'lucide-react';
+﻿import { Link2, Filter, Activity, BarChart3, GitCompare, Lightbulb, Settings, FileCheck, Lock } from 'lucide-react';
 
 export default function Features() {
   const features = [
@@ -14,8 +14,8 @@ export default function Features() {
     },
     {
       icon: Activity,
-      title: 'Real-Time Monitoring Dashboards',
-      description: 'Stream continuous vitals to caregiver dashboards. Heart rate, activity, sleep, glucose—all visible at a glance.',
+      title: 'Real time monitoring dashboards',
+      description: 'Stream continuous vitals to caregiver dashboards. Heart rate, activity, sleep, and glucose are all visible at a glance.',
       featured: true,
     },
     {
@@ -40,13 +40,13 @@ export default function Features() {
     },
     {
       icon: FileCheck,
-      title: 'Self-Hosted Infrastructure',
-      description: 'Your data stays on-premise. HIPAA compliance built into architecture—no third-party SaaS.',
+      title: 'Self hosted infrastructure',
+      description: 'Your data stays on premise. HIPAA compliance is built into the architecture with no third party SaaS.',
     },
     {
       icon: Lock,
-      title: 'Enterprise Security & Audit',
-      description: 'Encryption, access controls, comprehensive audit logs, and role-based permissions for protected health data.',
+      title: 'Enterprise security and audit',
+      description: 'Encryption, access controls, comprehensive audit logs, and role based permissions for protected health data.',
     },
   ];
 

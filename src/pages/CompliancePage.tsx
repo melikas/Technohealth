@@ -1,4 +1,4 @@
-import Header from '../components/Header';
+﻿import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { Link } from 'react-router-dom';
 import { Shield, CheckCircle } from 'lucide-react';
@@ -83,7 +83,7 @@ export default function CompliancePage() {
                 <div>
                   <p className="text-sm font-semibold text-slate-900 mb-2">Privacy Rule</p>
                   <p className="text-sm text-slate-600">
-                    Controls the use and disclosure of PHI. TechnoHealth implements minimum necessary standard—we only collect data required for the service.
+                    Controls the use and disclosure of PHI. TechnoHealth implements the minimum necessary standard. We only collect data required for the service.
                   </p>
                 </div>
                 <div>

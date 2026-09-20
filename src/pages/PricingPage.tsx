@@ -184,20 +184,20 @@ export default function PricingPage() {
                   </tr>
                   <tr className="bg-slate-50">
                     <td className="px-6 py-4 text-slate-900 font-medium">ML Health Prediction</td>
-                    <td className="text-center px-6 py-4"><span className="text-slate-400">—</span></td>
+                    <td className="text-center px-6 py-4"><span className="text-slate-400">N/A</span></td>
                     <td className="text-center px-6 py-4"><Check className="w-5 h-5 text-green-600 mx-auto" /></td>
                     <td className="text-center px-6 py-4"><Check className="w-5 h-5 text-green-600 mx-auto" /></td>
                   </tr>
                   <tr>
                     <td className="px-6 py-4 text-slate-900 font-medium">EHR/EMR Integration</td>
-                    <td className="text-center px-6 py-4"><span className="text-slate-400">—</span></td>
+                    <td className="text-center px-6 py-4"><span className="text-slate-400">N/A</span></td>
                     <td className="text-center px-6 py-4"><Check className="w-5 h-5 text-green-600 mx-auto" /></td>
                     <td className="text-center px-6 py-4"><Check className="w-5 h-5 text-green-600 mx-auto" /></td>
                   </tr>
                   <tr className="bg-slate-50">
                     <td className="px-6 py-4 text-slate-900 font-medium">Multi-Location Support</td>
-                    <td className="text-center px-6 py-4"><span className="text-slate-400">—</span></td>
-                    <td className="text-center px-6 py-4"><span className="text-slate-400">—</span></td>
+                    <td className="text-center px-6 py-4"><span className="text-slate-400">N/A</span></td>
+                    <td className="text-center px-6 py-4"><span className="text-slate-400">N/A</span></td>
                     <td className="text-center px-6 py-4"><Check className="w-5 h-5 text-green-600 mx-auto" /></td>
                   </tr>
                   <tr>

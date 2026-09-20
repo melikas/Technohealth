@@ -48,7 +48,7 @@ export default function ScheduleDemoPage() {
   useEffect(() => {
     document.title = 'Book a Demo | TechnoHealth';
     return () => {
-      document.title = 'TechnoHealth - Wearable Data. Clinical Grade. At Scale.';
+      document.title = 'TechnoHealth. Wearable health data infrastructure';
     };
   }, []);
 
@@ -61,7 +61,7 @@ export default function ScheduleDemoPage() {
     const dateLabel = dates.find((d) => d.value === date)?.label || date;
     const subject = encodeURIComponent('Demo request');
     const body = encodeURIComponent(
-      `Hi Support Team,\n\nI'd like a 30-min demo.\n\nName: ${name}\nEmail: ${email}\nPreferred: ${dateLabel} at ${time}\n\n${note ? `Note:\n${note}\n` : ''}Thanks!`
+      `Hi Support Team,\n\nI'd like a 30 minute demo.\n\nName: ${name}\nEmail: ${email}\nPreferred: ${dateLabel} at ${time}\n\n${note ? `Note:\n${note}\n` : ''}Thanks!`
     );
     window.location.href = `mailto:hello@technohealth.ai?subject=${subject}&body=${body}`;
     setSent(true);
@@ -81,7 +81,7 @@ export default function ScheduleDemoPage() {
               Schedule a demo with our team
             </h1>
             <p className="text-[16px] sm:text-[17px] leading-relaxed text-[#666] max-w-[480px] mx-auto">
-              A quick 30-minute call to see how TechnoHealth works with your wearables.
+              Join a quick 30 minute call to see how TechnoHealth works with your wearables.
             </p>
           </div>
         </section>
@@ -115,7 +115,7 @@ export default function ScheduleDemoPage() {
                   </ul>
 
                   <p className="text-[14px] leading-relaxed text-[#666]">
-                    Tell us a bit about yourself and pick a time that works. We’ll confirm by email.
+                    Tell us a bit about yourself and pick a time that works. We will confirm by email.
                   </p>
                 </aside>
 
@@ -123,9 +123,9 @@ export default function ScheduleDemoPage() {
                   {sent ? (
                     <div className="flex flex-col items-center justify-center text-center min-h-[360px] gap-3">
                       <CheckCircle className="w-10 h-10 text-[#34A853]" strokeWidth={1.75} />
-                      <p className="text-[17px] font-medium text-[#111]">Thanks — almost done</p>
+                      <p className="text-[17px] font-medium text-[#111]">Thanks. Almost done</p>
                       <p className="text-[14px] text-[#666] max-w-xs">
-                        Your email app should open with the request. Send it and we’ll get back to you soon.
+                        Your email app should open with the request. Send it and we will get back to you soon.
                       </p>
                       <button
                         type="button"

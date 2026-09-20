@@ -1,4 +1,4 @@
-import { HeartPulse, Rocket, FlaskConical } from 'lucide-react';
+﻿import { HeartPulse, Rocket, FlaskConical } from 'lucide-react';
 
 export default function UseCases() {
   const useCases = [
@@ -36,7 +36,7 @@ export default function UseCases() {
             Wearables Use Cases
           </h2>
           <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-            From remote monitoring to research to consumer health apps—wearable integration powers modern healthcare
+            From remote monitoring to research to consumer health apps, wearable integration powers modern healthcare
           </p>
         </div>
 
