@@ -320,7 +320,7 @@ export default function ServicesPage() {
           <p className="text-cyan-100 mb-8 max-w-2xl mx-auto">
             Let's scope your project and show you what's possible in 7 days.
           </p>
-          <Link to="/get-started" className="inline-block bg-white text-cyan-600 px-8 py-3 rounded-lg font-bold hover:bg-slate-100 transition-colors">
+          <Link to="/schedule-demo" className="inline-block bg-white text-cyan-600 px-8 py-3 rounded-lg font-bold hover:bg-slate-100 transition-colors">
             Get Started
           </Link>
         </div>
