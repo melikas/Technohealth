@@ -63,12 +63,12 @@ export default function Footer() {
             </p>
             <div className="flex gap-3">
               <a
-                href="https://www.linkedin.com/company/technohealth.ca"
+                href="https://www.linkedin.com/company/technohealth.ca/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 rounded-full transition-colors no-underline"
                 style={linkStyle}
-                aria-label="LinkedIn"
+                aria-label="TechnoHealth on LinkedIn"
               >
                 <Linkedin className="w-5 h-5" strokeWidth={1.75} />
               </a>
