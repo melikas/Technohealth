@@ -4,12 +4,13 @@ import { Copy, Check, ChevronRight } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
-type SectionId = 'introduction' | 'api' | 'sdk-react';
+type SectionId = 'introduction' | 'api' | 'sdk-react' | 'mcp';
 
-const NAV: { id: SectionId; label: string }[] = [
+const NAV: { id: SectionId; label: string; badge?: string }[] = [
   { id: 'introduction', label: 'Introduction' },
   { id: 'api', label: 'API Documentation' },
   { id: 'sdk-react', label: 'SDK Documentation for React' },
+  { id: 'mcp', label: 'MCP Tool', badge: 'UPCOMING' },
 ];
 
 function CodeBlock({
@@ -106,13 +107,18 @@ export default function DocumentationPage() {
                   key={item.id}
                   type="button"
                   onClick={() => goTo(item.id)}
-                  className={`w-full text-left px-3 py-2 rounded-lg text-sm border-0 cursor-pointer transition-colors ${
+                  className={`w-full text-left px-3 py-2 rounded-lg text-sm border-0 cursor-pointer transition-colors flex items-center justify-between gap-2 ${
                     active === item.id
                       ? 'bg-[#e8f0fe] text-[#1A73E8] font-medium'
                       : 'bg-transparent text-[#444] hover:bg-[#f5f5f5]'
                   }`}
                 >
-                  {item.label}
+                  <span>{item.label}</span>
+                  {item.badge && (
+                    <span className="shrink-0 text-[10px] font-semibold uppercase tracking-wide px-1.5 py-0.5 rounded bg-[#fff3cd] text-[#8a6d1d]">
+                      {item.badge}
+                    </span>
+                  )}
                 </button>
               ))}
             </nav>
@@ -365,6 +371,61 @@ export function ConnectFitbit({ userId }: { userId: string }) {
                     Book a demo with Support Team
                   </Link>
                   .
+                </p>
+              </div>
+            </section>
+
+            {/* MCP TOOL — UPCOMING */}
+            <section id="mcp" className="scroll-mt-28">
+              <div className="flex flex-wrap items-center gap-3 mb-4">
+                <h2 className="text-2xl sm:text-3xl font-semibold text-[#111] tracking-tight">
+                  MCP Tool
+                </h2>
+                <span className="text-[11px] font-semibold uppercase tracking-wide px-2.5 py-1 rounded-full bg-[#fff3cd] text-[#8a6d1d] border border-[#f0e0a0]">
+                  Upcoming
+                </span>
+              </div>
+
+              <p className="text-[15px] text-[#888] mb-6 italic">
+                این بخش به‌زودی در دسترس قرار می‌گیرد — هنوز برای استفاده عمومی باز نیست.
+              </p>
+
+              <p className="text-[16px] text-[#555] leading-relaxed mb-5">
+                خلاصهٔ ماجرا اینه: می‌خوایم یه ابزار MCP برای TechnoHealth بیاریم تا بتونی از داخل
+                دستیارهای AI (مثل Claude یا ChatGPT) مستقیم از داده‌های پوشیدنی سوال بپرسی — بدون اینکه
+                خودت endpoint به endpoint API رو دستی بچسبونی.
+              </p>
+
+              <p className="text-[16px] text-[#555] leading-relaxed mb-8">
+                یعنی به‌جای اینکه اول همه‌چیز رو از API بکشی و بعد به مدل بدی، خود مدل می‌تونه از
+                طریق MCP Tool به متریک‌هایی مثل خواب، فعالیت و ضربان قلب دسترسی بگیره و برات تحلیل کنه.
+              </p>
+
+              <h3 className="text-lg font-semibold text-[#111] mb-3">چیزایی که بعداً می‌تونی باهاش بپرسی</h3>
+              <ul className="space-y-3 text-[15px] text-[#555] mb-8">
+                <li className="flex gap-2">
+                  <span className="text-[#1A73E8] shrink-0">•</span>
+                  <span>خواب این ماه نسبت به ماه قبل چطور بوده؟</span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="text-[#1A73E8] shrink-0">•</span>
+                  <span>فعالیت روزای کاری با آخر هفته فرق داره؟</span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="text-[#1A73E8] shrink-0">•</span>
+                  <span>بین کیفیت خواب و سطح فعالیت روز بعد رابطه‌ای می‌بینی؟</span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="text-[#1A73E8] shrink-0">•</span>
+                  <span>یه خلاصهٔ هفتگی بساز که بشه برای پزشک یا تیم محصول فرستاد.</span>
+                </li>
+              </ul>
+
+              <div className="rounded-xl border border-[#f0e0a0] bg-[#fffdf5] p-5">
+                <p className="text-sm font-medium text-[#8a6d1d] mb-1">Upcoming</p>
+                <p className="text-sm text-[#666] leading-relaxed">
+                  راهنمای اتصال، لیست toolها و مثال‌های واقعی وقتی آماده بشه همین‌جا اضافه می‌شن.
+                  فعلاً می‌تونی از API و React SDK استفاده کنی؛ برای MCP فعلاً صبر کن تا اعلام کنیم.
                 </p>
               </div>
             </section>
