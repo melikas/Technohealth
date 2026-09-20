@@ -1,5 +1,5 @@
-import { useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useMemo, useState } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
 import { Search, X } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -175,9 +175,14 @@ const DEVICES: Device[] = [
 ];
 
 export default function DataSourcesPage() {
+  const [searchParams] = useSearchParams();
   const [category, setCategory] = useState<Category>('All');
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState(() => searchParams.get('q') ?? '');
   const [selected, setSelected] = useState<Device | null>(null);
+
+  useEffect(() => {
+    setQuery(searchParams.get('q') ?? '');
+  }, [searchParams]);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
