@@ -6,8 +6,8 @@ type FooterLink = { label: string; to: string } | { label: string; href: string 
 const COMPLIANCE_BADGES = [
   { label: 'HIPAA Compliant', src: '/Images/compliance/hipaa.png' },
   { label: 'HITRUST Certified', src: '/Images/compliance/hitrust.png' },
-  { label: 'SOC 2 Type II', src: '/Images/compliance/soc2.svg' },
-  { label: 'Self hosted', src: '/Images/compliance/self-hosted.svg' },
+  { label: 'SOC 2 Type II', src: '/Images/compliance/soc2.png' },
+  { label: 'Self hosted', src: '/Images/compliance/self-hosted.png' },
 ];
 
 export default function Footer() {
@@ -139,7 +139,7 @@ export default function Footer() {
                   <img
                     src={badge.src}
                     alt={badge.label}
-                    className="h-12 w-auto object-contain"
+                    className="h-11 w-11 sm:h-12 sm:w-12 object-contain"
                   />
                 </Link>
               ))}
