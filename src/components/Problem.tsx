@@ -9,13 +9,13 @@ export default function Problem() {
     },
     {
       icon: AlertCircle,
-      title: 'Data Normalization Nightmare',
-      description: 'Each vendor reports heart rate, sleep, activity differently. Custom integrations are expensive, fragile, and don\'t scale.',
+      title: 'Data normalization nightmare',
+      description: 'Each vendor reports heart rate, sleep, and activity differently. Custom integrations are expensive, fragile, and do not scale.',
     },
     {
       icon: TrendingDown,
-      title: 'Missed Real-Time Signals',
-      description: 'Continuous wearable streams could catch early risk indicators. Instead, data sits in patient apps inaccessible to care teams until it\'s too late.',
+      title: 'Missed real time signals',
+      description: 'Continuous wearable streams could catch early risk indicators. Instead, data sits in patient apps and stays inaccessible to care teams until it is too late.',
     },
   ];
 
