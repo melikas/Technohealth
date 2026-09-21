@@ -238,7 +238,7 @@ export default function BenefitsPillars() {
                   <img
                     src={monitoringImg}
                     alt={t.platformMonitorAlt}
-                    className="w-full h-full min-h-[240px] max-h-[380px] object-cover object-top"
+                    className="w-full h-full min-h-[240px] max-h-[380px] object-contain object-top bg-white"
                     loading="lazy"
                   />
                 </div>

@@ -57,7 +57,7 @@ const siteCopy = {
     platformTab2F3Title: 'Compare runs and promote winners',
     platformTab2F3Desc:
       'Track accuracy, F1, and status across runs. Keep the best model, catch regressions, and move approved versions into production.',
-    platformMonitorAlt: 'TechnoHealth device management and experiment results screens',
+    platformMonitorAlt: 'TechnoHealth Data Ingestion dashboard with experiment upload and jobs',
 
     platformTab3: 'MCP for LLM and Agents',
     platformTab3Intro: 'Give any LLM or agent structured tools for health data — without giving up control.',
@@ -189,7 +189,7 @@ const siteCopy = {
     platformTab2F3Title: 'Comparez les runs et promouvez les gagnants',
     platformTab2F3Desc:
       'Suivez accuracy, F1 et statut entre runs. Gardez le meilleur modèle, détectez les régressions, et passez les versions approuvées en production.',
-    platformMonitorAlt: 'Écrans TechnoHealth de gestion des appareils et de résultats d’expérience',
+    platformMonitorAlt: 'Tableau TechnoHealth Data Ingestion avec upload d’expérience et jobs',
 
     platformTab3: 'MCP pour LLM et agents',
     platformTab3Intro: 'Donnez à tout LLM ou agent des outils structurés sur les données santé — sans perdre le contrôle.',
