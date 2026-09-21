@@ -168,7 +168,7 @@ export default function BenefitsPillars() {
                 className="w-9 h-9 flex items-center justify-center"
                 style={{ backgroundColor: 'rgba(255,255,255,0.92)', color: active.accent }}
               >
-                <ActiveIcon className="w-4.5 h-4.5" strokeWidth={1.75} />
+                <ActiveIcon className="w-4 h-4" strokeWidth={1.75} />
               </div>
               <span className="text-sm font-medium text-white drop-shadow">
                 {active.label}
