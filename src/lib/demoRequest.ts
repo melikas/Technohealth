@@ -6,7 +6,9 @@ export function openRequestDemo() {
 }
 
 /**
- * Cal.com booking path, e.g. "username" or "username/30min"
+ * Cal.com booking path.
+ * Must include an event type for calendar booking, e.g. "username/30min".
+ * Profile-only links (no slash) show “no booking links” on Cal.com.
  * Override with .env: VITE_CAL_LINK=username/30min
  */
 export function getCalLink(): string {

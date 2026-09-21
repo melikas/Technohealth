@@ -3,9 +3,15 @@ import Footer from '../components/Footer';
 import { MapPin, Send, CheckCircle } from 'lucide-react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { submitLead } from '../lib/submitLead';
 
-/** Delivery address only. Never shown in the UI */
-const CONTACT_INBOX = 'melikamirzaseyedi@gmail.com';
+const SUBJECT_LABEL: Record<string, string> = {
+  general: 'General Inquiry',
+  sales: 'Sales Question',
+  technical: 'Technical Support',
+  compliance: 'Compliance & Legal',
+  partnership: 'Partnership',
+};
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -16,6 +22,8 @@ export default function ContactPage() {
     message: '',
   });
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState('');
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -26,26 +34,32 @@ export default function ContactPage() {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (submitting) return;
+    setSubmitting(true);
+    setError('');
 
-    const subjectLabel: Record<string, string> = {
-      general: 'General Inquiry',
-      sales: 'Sales Question',
-      technical: 'Technical Support',
-      compliance: 'Compliance & Legal',
-      partnership: 'Partnership',
-    };
+    const topic = SUBJECT_LABEL[formData.subject] || 'Message';
 
-    const subject = encodeURIComponent(
-      `[TechnoHealth Contact] ${subjectLabel[formData.subject] || 'Message'}`
-    );
-    const body = encodeURIComponent(
-      `Name: ${formData.name}\nEmail: ${formData.email}\nCompany: ${formData.company || 'N/A'}\nSubject: ${subjectLabel[formData.subject]}\n\nMessage:\n${formData.message}`
-    );
-
-    window.location.href = `mailto:${CONTACT_INBOX}?subject=${subject}&body=${body}`;
-    setSubmitted(true);
+    try {
+      await submitLead({
+        name: formData.name,
+        email: formData.email,
+        subject: `[TechnoHealth Contact] ${topic}`,
+        message: formData.message,
+        meta: {
+          company: formData.company || 'N/A',
+          topic,
+          source: 'contact',
+        },
+      });
+      setSubmitted(true);
+    } catch {
+      setError('Something went wrong. Please try again in a moment.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const field =
@@ -84,14 +98,15 @@ export default function ContactPage() {
             {submitted ? (
               <div className="text-center py-10">
                 <CheckCircle className="w-10 h-10 text-[#1E8E3E] mx-auto mb-3" strokeWidth={1.75} />
-                <h3 className="text-lg font-medium text-[#111] mb-2">Almost done</h3>
+                <h3 className="text-lg font-medium text-[#111] mb-2">Message received</h3>
                 <p className="text-sm text-[#666] max-w-sm mx-auto mb-4">
-                  Your email app should open with the message ready. Send it and we will reply soon.
+                  Thanks — we got your message and will reply soon.
                 </p>
                 <button
                   type="button"
                   onClick={() => {
                     setSubmitted(false);
+                    setError('');
                     setFormData({
                       name: '',
                       email: '',
@@ -180,12 +195,19 @@ export default function ContactPage() {
                   />
                 </div>
 
+                {error ? (
+                  <p className="text-sm text-[#c5221f]" role="alert">
+                    {error}
+                  </p>
+                ) : null}
+
                 <button
                   type="submit"
-                  className="w-full py-3 rounded-full bg-[#1A73E8] text-white text-sm font-medium border-0 cursor-pointer hover:bg-[#1765CC] flex items-center justify-center gap-2"
+                  disabled={submitting}
+                  className="w-full py-3 rounded-full bg-[#1A73E8] text-white text-sm font-medium border-0 cursor-pointer hover:bg-[#1765CC] flex items-center justify-center gap-2 disabled:opacity-50"
                 >
                   <Send className="w-4 h-4" strokeWidth={2} />
-                  Send message
+                  {submitting ? 'Sending…' : 'Send message'}
                 </button>
               </form>
             )}

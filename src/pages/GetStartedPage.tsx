@@ -2,6 +2,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { Mail, Phone, MapPin, CheckCircle } from 'lucide-react';
 import { useState } from 'react';
+import { submitLead } from '../lib/submitLead';
 
 export default function GetStartedPage() {
   const [formData, setFormData] = useState({
@@ -13,6 +14,8 @@ export default function GetStartedPage() {
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -22,23 +25,38 @@ export default function GetStartedPage() {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you would send the form data to your backend
-    console.log('Form submitted:', formData);
-    setSubmitted(true);
-    
-    // Reset form after 3 seconds
-    setTimeout(() => {
+    if (submitting) return;
+    setSubmitting(true);
+    setError('');
+
+    const fullName = `${formData.firstName} ${formData.lastName}`.trim();
+
+    try {
+      await submitLead({
+        name: fullName,
+        email: formData.email,
+        subject: 'Get started — TechnoHealth',
+        message: formData.message,
+        meta: {
+          website: formData.website || 'N/A',
+          source: 'get-started',
+        },
+      });
+      setSubmitted(true);
       setFormData({
         firstName: '',
         lastName: '',
         email: '',
         website: '',
-        message: ''
+        message: '',
       });
-      setSubmitted(false);
-    }, 3000);
+    } catch {
+      setError('Something went wrong. Please try again in a moment.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -136,12 +154,19 @@ export default function GetStartedPage() {
                 />
               </div>
 
+              {error ? (
+                <p className="text-sm text-red-600" role="alert">
+                  {error}
+                </p>
+              ) : null}
+
               {/* Submit Button */}
               <button
                 type="submit"
-                className="w-full px-6 py-3 bg-cyan-600 text-white font-bold rounded-lg hover:bg-cyan-700 transition-colors"
+                disabled={submitting}
+                className="w-full px-6 py-3 bg-cyan-600 text-white font-bold rounded-lg hover:bg-cyan-700 transition-colors disabled:opacity-50"
               >
-                Send
+                {submitting ? 'Sending…' : 'Send'}
               </button>
             </form>
           ) : (
@@ -169,8 +194,8 @@ export default function GetStartedPage() {
               </div>
               <div>
                 <p className="text-sm font-semibold text-slate-600 uppercase tracking-wider">Email</p>
-                <a href="mailto:hello@technohealth.io" className="text-lg font-bold text-slate-900 hover:text-cyan-600">
-                  hello@technohealth.io
+                <a href="/contact" className="text-lg font-bold text-slate-900 hover:text-cyan-600">
+                  Contact form
                 </a>
               </div>
             </div>
