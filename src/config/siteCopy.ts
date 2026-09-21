@@ -48,18 +48,23 @@ const siteCopy = {
     platformTab1F3Desc:
       'Pull with SDKs or push with webhooks. Self-host when you need the data to stay on your servers.',
 
-    platformTab2: 'Health Model Training',
-    platformTab2Blurb: 'From signals to models',
-    platformTab2Intro: 'Train on real wearable streams — then compare, evaluate, and promote with confidence.',
-    platformTab2F1Title: 'Learn from everyday signals',
+    platformTab2: 'Health Monitoring',
+    platformTab2Blurb: 'Devices, training, and results',
+    platformTab2Intro:
+      'Monitor connected devices in one dashboard — then train models and compare results the way teams use MLflow.',
+    platformTab2F1Title: 'See every device in the study',
     platformTab2F1Desc:
-      'Use continuous wearable data for risk, readiness, and outcome models instead of thin, one-off datasets.',
-    platformTab2F2Title: 'See what actually improved',
+      'Filter by date and body position, check connection status, and follow sensors like HR and IMU from one management view.',
+    platformTab2F2Title: 'Train models on those signals',
     platformTab2F2Desc:
-      'Track versions, cohorts, and results side by side so you promote winners — and catch regressions early.',
-    platformTab2F3Title: 'Check quality before go-live',
+      'Turn continuous streams into risk, readiness, and outcome models without rebuilding a separate data pipeline.',
+    platformTab2F3Title: 'Compare runs and promote winners',
     platformTab2F3Desc:
-      'Evaluate against health metrics that matter for your use case, then deploy approved models into production workflows.',
+      'Track accuracy, F1, and status across runs. Keep the best model, catch regressions, and move approved versions into production.',
+    platformMonitorLabel: 'Health monitoring dashboard',
+    platformMonitorAlt: 'TechnoHealth device management dashboard for PAMAP2 sensors',
+    platformRunsTitle: 'Model training & results',
+    platformRunsSub: 'Experiment runs with metrics — MLflow-style tracking',
 
     platformTab3: 'MCP for LLM and Agents',
     platformTab3Blurb: 'Agents on health data',
@@ -183,18 +188,23 @@ const siteCopy = {
     platformTab1F3Desc:
       'Tirez avec les SDK ou poussez avec des webhooks. Auto-hébergez quand les données doivent rester chez vous.',
 
-    platformTab2: 'Entraînement de modèles santé',
-    platformTab2Blurb: 'Des signaux aux modèles',
-    platformTab2Intro: 'Entraînez sur de vrais flux wearables — puis comparez, évaluez et promouvez en confiance.',
-    platformTab2F1Title: 'Apprenez des signaux du quotidien',
+    platformTab2: 'Suivi de santé',
+    platformTab2Blurb: 'Appareils, entraînement et résultats',
+    platformTab2Intro:
+      'Suivez les appareils connectés dans un tableau de bord — puis entraînez des modèles et comparez les résultats à la manière de MLflow.',
+    platformTab2F1Title: 'Voyez chaque appareil de l’étude',
     platformTab2F1Desc:
-      'Utilisez des données wearables continues pour risque, disponibilité et résultats, au lieu de jeux de données ponctuels.',
-    platformTab2F2Title: 'Voyez ce qui s’améliore vraiment',
+      'Filtrez par date et position corporelle, vérifiez la connexion, et suivez des capteurs comme HR et IMU dans une seule vue.',
+    platformTab2F2Title: 'Entraînez des modèles sur ces signaux',
     platformTab2F2Desc:
-      'Suivez versions, cohortes et résultats côte à côte pour promouvoir les gagnants — et détecter tôt les régressions.',
-    platformTab2F3Title: 'Vérifiez la qualité avant le go-live',
+      'Transformez des flux continus en modèles de risque, disponibilité et résultats sans reconstruire un pipeline séparé.',
+    platformTab2F3Title: 'Comparez les runs et promouvez les gagnants',
     platformTab2F3Desc:
-      'Évaluez sur des métriques santé utiles à votre cas, puis déployez les modèles approuvés dans vos workflows.',
+      'Suivez accuracy, F1 et statut entre runs. Gardez le meilleur modèle, détectez les régressions, et passez les versions approuvées en production.',
+    platformMonitorLabel: 'Tableau de suivi de santé',
+    platformMonitorAlt: 'Tableau de gestion des appareils TechnoHealth pour les capteurs PAMAP2',
+    platformRunsTitle: 'Entraînement et résultats des modèles',
+    platformRunsSub: 'Runs d’expérience avec métriques — suivi façon MLflow',
 
     platformTab3: 'MCP pour LLM et agents',
     platformTab3Blurb: 'Des agents sur les données santé',
