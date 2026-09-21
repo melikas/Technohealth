@@ -73,8 +73,8 @@ export default function RequestDemoModal() {
         meta: { source: 'request-demo-modal' },
       });
       setSent(true);
-    } catch {
-      setError('Something went wrong. Please try again.');
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Something went wrong. Please try again.');
     } finally {
       setSubmitting(false);
     }

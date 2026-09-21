@@ -55,8 +55,12 @@ export default function ContactPage() {
         },
       });
       setSubmitted(true);
-    } catch {
-      setError('Something went wrong. Please try again in a moment.');
+    } catch (err) {
+      setError(
+        err instanceof Error
+          ? err.message
+          : 'Something went wrong. Please try again in a moment.'
+      );
     } finally {
       setSubmitting(false);
     }
