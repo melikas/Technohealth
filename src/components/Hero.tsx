@@ -16,21 +16,18 @@ export default function Hero() {
 
   const metrics = [
     {
-      number: '+100',
-      label: t.metricResources,
-      description: t.metricResourcesDesc,
+      title: t.metric1Title,
+      description: t.metric1Desc,
       accent: 'var(--color-brand-blue-deep)',
     },
     {
-      number: 'AI',
-      label: t.metricMl,
-      description: t.metricMlDesc,
+      title: t.metric2Title,
+      description: t.metric2Desc,
       accent: 'var(--color-brand-blue)',
     },
     {
-      number: '+30%',
-      label: t.metricEfficiency,
-      description: t.metricEfficiencyDesc,
+      title: t.metric3Title,
+      description: t.metric3Desc,
       accent: 'var(--color-brand-blue-light)',
     },
   ];
@@ -218,23 +215,33 @@ export default function Hero() {
           </ul>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-4">
-          {metrics.map((metric) => (
+        <div
+          className="grid md:grid-cols-3 gap-10 md:gap-0 md:divide-x pt-2"
+          style={{ borderColor: 'var(--color-border)' }}
+        >
+          {metrics.map((metric, index) => (
             <div
-              key={metric.label}
-              className="p-6 text-left rounded-gcard border transition-shadow hover:shadow-gcard"
-              style={{
-                backgroundColor: 'var(--color-surface)',
-                borderColor: 'var(--color-border)',
-              }}
+              key={metric.title}
+              className={`text-left md:px-8 ${index === 0 ? 'md:pl-0' : ''} ${
+                index === metrics.length - 1 ? 'md:pr-0' : ''
+              }`}
             >
-              <div className="text-4xl font-normal mb-2" style={{ color: metric.accent }}>
-                {metric.number}
-              </div>
-              <h3 className="text-base font-medium mb-1" style={{ color: 'var(--color-text)' }}>
-                {metric.label}
+              <p
+                className="text-xs font-medium uppercase tracking-[0.14em] mb-3"
+                style={{ color: metric.accent }}
+              >
+                {String(index + 1).padStart(2, '0')}
+              </p>
+              <h3
+                className="text-2xl md:text-[28px] font-normal tracking-tight leading-snug mb-2"
+                style={{ color: 'var(--color-text)' }}
+              >
+                {metric.title}
               </h3>
-              <p className="text-sm leading-relaxed" style={{ color: 'var(--color-text-secondary)' }}>
+              <p
+                className="text-sm md:text-[15px] leading-relaxed max-w-xs"
+                style={{ color: 'var(--color-text-secondary)' }}
+              >
                 {metric.description}
               </p>
             </div>
