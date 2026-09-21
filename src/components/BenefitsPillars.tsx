@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Cable, BrainCircuit, Bot, CheckCircle2 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { getSiteCopy } from '../config/siteCopy';
-import apiImg from '../assets/platform/api-integration.jpg';
+import apiImg from '../assets/platform/api-integration.png';
 import monitoringImg from '../assets/platform/health-monitoring.png';
 import mcpImg from '../assets/platform/mcp_n3.jpg';
 
@@ -294,7 +294,6 @@ export default function BenefitsPillars() {
                     src={active.image}
                     alt={active.imageAlt}
                     className="w-full max-w-[420px] h-auto object-contain"
-                    style={{ mixBlendMode: 'lighten' }}
                     loading="lazy"
                   />
                 ) : (
