@@ -118,10 +118,14 @@ export default function BenefitsPillars() {
           style={{ animation: 'platformFade 320ms ease-out' }}
         >
           <div
-            className={`lg:col-span-5 flex items-center justify-center ${
+            className={`${
+              active.id === 'mcp' ? 'lg:col-span-6' : 'lg:col-span-5'
+            } flex items-center justify-center ${
               active.media === 'cover'
                 ? 'relative min-h-[240px] md:min-h-[420px]'
-                : 'bg-white py-4 md:py-6'
+                : active.id === 'mcp'
+                  ? 'bg-white py-2 md:py-4 px-1'
+                  : 'bg-white py-4 md:py-6'
             }`}
           >
             {active.media === 'cover' ? (
@@ -155,7 +159,7 @@ export default function BenefitsPillars() {
                 className={
                   active.media === 'icon'
                     ? active.id === 'mcp'
-                      ? 'w-full max-w-[360px] h-auto object-contain'
+                      ? 'w-full max-w-[540px] h-auto object-contain scale-105'
                       : 'w-full max-w-[420px] h-auto object-contain'
                     : 'w-full h-auto max-h-[420px] object-contain object-top'
                 }
@@ -164,7 +168,11 @@ export default function BenefitsPillars() {
             )}
           </div>
 
-          <div className="lg:col-span-7 p-6 md:p-10 flex flex-col justify-center">
+          <div
+            className={`${
+              active.id === 'mcp' ? 'lg:col-span-6' : 'lg:col-span-7'
+            } p-6 md:p-10 flex flex-col justify-center`}
+          >
             <p
               className="text-lg md:text-xl font-medium tracking-tight leading-snug mb-8"
               style={{ color: 'var(--color-text)' }}
