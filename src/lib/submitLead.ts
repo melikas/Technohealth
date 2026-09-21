@@ -18,7 +18,11 @@ export function getLeadInbox(): string {
 }
 
 export function getWeb3FormsKey(): string {
-  return (import.meta.env.VITE_WEB3FORMS_KEY as string | undefined)?.trim() || '';
+  return (
+    (import.meta.env.VITE_WEB3FORMS_KEY as string | undefined)?.trim() ||
+    // Public access key (Web3Forms treats this as a form id, safe in client code)
+    '5e498e37-a967-469d-a3c0-74dd430e76f6'
+  );
 }
 
 export type LeadPayload = {
