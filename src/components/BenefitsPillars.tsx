@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Cable, BrainCircuit, Bot, CheckCircle2 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { getSiteCopy } from '../config/siteCopy';
-import apiImg from '../assets/platform/wear.jpg';
+import apiImg from '../assets/platform/api-integration.jpg';
 import monitoringImg from '../assets/platform/health-monitoring.png';
 import mcpImg from '../assets/platform/mcp_n3.jpg';
 
@@ -143,7 +143,7 @@ export default function BenefitsPillars() {
       label: t.platformTab1,
       intro: t.platformTab1Intro,
       image: apiImg,
-      imageAlt: 'Fitness wearable showing live activity data',
+      imageAlt: 'TechnoHealth connecting wearables and devices through one API',
       icon: Cable,
       accent: 'var(--color-brand-blue)',
       visual: 'image',
