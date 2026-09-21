@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Cable, BrainCircuit, Bot, CheckCircle2 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { getSiteCopy } from '../config/siteCopy';
@@ -283,28 +284,50 @@ export default function BenefitsPillars() {
             </div>
           ) : (
             <div className="grid lg:grid-cols-12">
-              <div className="lg:col-span-5 relative min-h-[240px] md:min-h-[420px]">
-                <img
-                  src={active.image}
-                  alt={active.imageAlt}
-                  className="absolute inset-0 w-full h-full object-cover"
-                  loading="lazy"
-                />
-                <div
-                  className="absolute inset-0"
-                  style={{
-                    background: 'linear-gradient(to top, rgba(13,71,161,0.35) 0%, transparent 45%)',
-                  }}
-                />
-                <div className="absolute bottom-4 left-4 right-4 flex items-center gap-2">
-                  <div
-                    className="w-9 h-9 flex items-center justify-center"
-                    style={{ backgroundColor: 'rgba(255,255,255,0.92)', color: active.accent }}
-                  >
-                    <ActiveIcon className="w-4 h-4" strokeWidth={1.75} />
-                  </div>
-                  <span className="text-sm font-medium text-white drop-shadow">{active.label}</span>
+              <div
+                className={`lg:col-span-5 relative min-h-[240px] md:min-h-[420px] flex flex-col ${
+                  active.id === 'api' ? 'bg-black' : ''
+                }`}
+              >
+                <div className="relative flex-1 min-h-[240px] md:min-h-[360px]">
+                  <img
+                    src={active.image}
+                    alt={active.imageAlt}
+                    className={`absolute inset-0 w-full h-full ${
+                      active.id === 'api' ? 'object-contain p-4 md:p-6' : 'object-cover'
+                    }`}
+                    loading="lazy"
+                  />
+                  {active.id !== 'api' && (
+                    <>
+                      <div
+                        className="absolute inset-0"
+                        style={{
+                          background:
+                            'linear-gradient(to top, rgba(13,71,161,0.35) 0%, transparent 45%)',
+                        }}
+                      />
+                      <div className="absolute bottom-4 left-4 right-4 flex items-center gap-2">
+                        <div
+                          className="w-9 h-9 flex items-center justify-center"
+                          style={{ backgroundColor: 'rgba(255,255,255,0.92)', color: active.accent }}
+                        >
+                          <ActiveIcon className="w-4 h-4" strokeWidth={1.75} />
+                        </div>
+                        <span className="text-sm font-medium text-white drop-shadow">
+                          {active.label}
+                        </span>
+                      </div>
+                    </>
+                  )}
                 </div>
+                {active.id === 'api' && (
+                  <div className="px-4 pb-5 pt-2 flex justify-center bg-black">
+                    <Link to="/docs#api" className="g-btn-primary no-underline">
+                      {t.platformApiDocsCta}
+                    </Link>
+                  </div>
+                )}
               </div>
 
               <div className="lg:col-span-7 p-6 md:p-10 flex flex-col justify-center">

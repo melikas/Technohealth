@@ -43,6 +43,7 @@ const siteCopy = {
     platformTab1F3Title: 'Sync your way',
     platformTab1F3Desc:
       'Pull with SDKs or push with webhooks. Self-host when you need the data to stay on your servers.',
+    platformApiDocsCta: 'See API Documentation',
 
     platformTab2: 'Health Monitoring',
     platformTab2Intro:
@@ -174,6 +175,7 @@ const siteCopy = {
     platformTab1F3Title: 'Synchronisez comme vous voulez',
     platformTab1F3Desc:
       'Tirez avec les SDK ou poussez avec des webhooks. Auto-hébergez quand les données doivent rester chez vous.',
+    platformApiDocsCta: 'Voir la documentation API',
 
     platformTab2: 'Suivi de santé',
     platformTab2Intro:
