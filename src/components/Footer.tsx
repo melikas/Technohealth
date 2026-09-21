@@ -22,12 +22,12 @@ export default function Footer() {
 
   const columns: { title: string; links: FooterLink[] }[] = [
     {
-      title: t.footerDocs,
+      title: t.footerServicesCol,
       links: [
-        { label: t.footerDocumentation, to: '/docs' },
-        { label: t.footerApi, to: '/docs' },
-        { label: t.footerSdk, to: '/docs' },
-        { label: t.footerStatus, href: 'https://status.technohealth.com' },
+        { label: t.footerApiDocs, to: '/docs#api' },
+        { label: t.footerResearchDashboard, to: '/dashboard' },
+        { label: t.footerMcp, to: '/docs#mcp' },
+        { label: t.footerSdk, to: '/docs#sdk-react' },
       ],
     },
     {
@@ -41,59 +41,51 @@ export default function Footer() {
       ],
     },
     {
-      title: t.footerProduct,
+      title: t.footerCompany,
       links: [
-        { label: t.footerDataSources, to: '/data-sources' },
-        { label: t.footerSolutions, to: '/solutions' },
-        { label: t.footerBookDemo, to: '/schedule-demo' },
-        { label: t.footerGetStarted, to: '/get-started' },
-      ],
-    },
-    {
-      title: t.footerResources,
-      links: [
-        { label: t.footerAbout, to: '/about' },
-        { label: t.footerSafety, to: '/safety-security' },
         { label: t.footerContact, to: '/contact' },
-        { label: t.footerCaseStudies, to: '/case-studies' },
+        { label: t.footerAbout, to: '/about' },
+        { label: t.footerTerms, href: '#' },
+        { label: t.footerPrivacy, href: '#' },
+        { label: t.footerBookDemo, to: '/schedule-demo' },
       ],
     },
   ];
 
   return (
     <footer style={{ backgroundColor: 'var(--color-surface-footer)', color: 'var(--color-text-secondary)' }}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-12 pb-6">
-        <div className="grid md:grid-cols-5 gap-10 mb-10">
-          <div>
-            <div className="flex items-center gap-2 mb-3">
-              <img src="/Images/Icon.png" alt="TechnoHealth" className="w-7 h-7" />
-              <span className="g-wordmark text-lg font-medium">TechnoHealth</span>
-            </div>
-            <p className="text-sm mb-5 leading-relaxed" style={{ color: 'var(--color-text-secondary)' }}>
-              {t.footerTagline}
-            </p>
-            <div className="flex gap-3">
-              <a
-                href="https://www.linkedin.com/company/technohealth.ca/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 rounded-full transition-colors no-underline"
-                style={linkStyle}
-                aria-label={t.footerLinkedIn}
-              >
-                <Linkedin className="w-5 h-5" strokeWidth={1.75} />
-              </a>
-              <a href="#" className="p-2 rounded-full no-underline" style={linkStyle} aria-label="Twitter">
-                <Twitter className="w-5 h-5" strokeWidth={1.75} />
-              </a>
-              <a href="#" className="p-2 rounded-full no-underline" style={linkStyle} aria-label="GitHub">
-                <Github className="w-5 h-5" strokeWidth={1.75} />
-              </a>
-            </div>
+      <div className="max-w-5xl mx-auto px-8 sm:px-12 lg:px-16 pt-14 pb-8">
+        <div className="flex flex-col items-center text-center mb-10">
+          <div className="flex items-center gap-2 mb-3">
+            <img src="/Images/Icon.png" alt="TechnoHealth" className="w-7 h-7" />
+            <span className="g-wordmark text-lg font-medium">TechnoHealth</span>
           </div>
+          <p className="text-sm max-w-md leading-relaxed mb-4" style={{ color: 'var(--color-text-secondary)' }}>
+            {t.footerTagline}
+          </p>
+          <div className="flex gap-3 justify-center">
+            <a
+              href="https://www.linkedin.com/company/technohealth.ca/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2 rounded-full transition-colors no-underline"
+              style={linkStyle}
+              aria-label={t.footerLinkedIn}
+            >
+              <Linkedin className="w-5 h-5" strokeWidth={1.75} />
+            </a>
+            <a href="#" className="p-2 rounded-full no-underline" style={linkStyle} aria-label="Twitter">
+              <Twitter className="w-5 h-5" strokeWidth={1.75} />
+            </a>
+            <a href="#" className="p-2 rounded-full no-underline" style={linkStyle} aria-label="GitHub">
+              <Github className="w-5 h-5" strokeWidth={1.75} />
+            </a>
+          </div>
+        </div>
 
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 sm:gap-12 mb-12 text-center sm:text-left max-w-3xl mx-auto">
           {columns.map((col) => (
-            <div key={col.title}>
+            <div key={col.title} className="flex flex-col items-center sm:items-start">
               <h4 className="text-sm font-medium mb-4" style={{ color: 'var(--color-text)' }}>
                 {col.title}
               </h4>
@@ -111,8 +103,6 @@ export default function Footer() {
                     ) : (
                       <a
                         href={link.href}
-                        target={link.href.startsWith('http') ? '_blank' : undefined}
-                        rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                         className="text-sm no-underline hover:underline"
                         style={linkStyle}
                       >
@@ -126,8 +116,8 @@ export default function Footer() {
           ))}
         </div>
 
-        <div className="border-t pt-6 pb-2" style={{ borderColor: 'var(--color-border)' }}>
-          <div className="flex flex-col gap-4">
+        <div className="border-t pt-6" style={{ borderColor: 'var(--color-border)' }}>
+          <div className="flex flex-col items-center gap-4 text-center">
             <div>
               <p
                 className="text-xs font-medium mb-3"
@@ -135,7 +125,7 @@ export default function Footer() {
               >
                 {t.footerCompliantWith}
               </p>
-              <div className="flex flex-wrap items-center gap-3">
+              <div className="flex flex-wrap items-center justify-center gap-3">
                 {COMPLIANCE_BADGES.map((badge) => (
                   <Link
                     key={badge.label}
