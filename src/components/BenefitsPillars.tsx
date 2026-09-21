@@ -9,7 +9,6 @@ import mcpImg from '../assets/platform/mcp_n3.jpg';
 type PlatformTab = {
   id: string;
   label: string;
-  blurb: string;
   intro: string;
   image?: string;
   imageAlt?: string;
@@ -142,7 +141,6 @@ export default function BenefitsPillars() {
     {
       id: 'api',
       label: t.platformTab1,
-      blurb: t.platformTab1Blurb,
       intro: t.platformTab1Intro,
       image: apiImg,
       imageAlt: 'Fitness wearable showing live activity data',
@@ -158,7 +156,6 @@ export default function BenefitsPillars() {
     {
       id: 'training',
       label: t.platformTab2,
-      blurb: t.platformTab2Blurb,
       intro: t.platformTab2Intro,
       icon: BrainCircuit,
       accent: 'var(--color-brand-blue-mid)',
@@ -172,7 +169,6 @@ export default function BenefitsPillars() {
     {
       id: 'mcp',
       label: t.platformTab3,
-      blurb: t.platformTab3Blurb,
       intro: t.platformTab3Intro,
       image: mcpImg,
       imageAlt: 'AI agent connected to a health data network',
@@ -200,54 +196,28 @@ export default function BenefitsPillars() {
       }}
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
-        <div className="text-center max-w-2xl mx-auto mb-12 md:mb-14">
-          <h2 className="g-wordmark text-3xl md:text-4xl font-medium tracking-tight mb-3">
-            {t.platformTitle}
-          </h2>
-          <p
-            className="text-base md:text-lg leading-relaxed"
-            style={{ color: 'var(--color-text-secondary)' }}
-          >
-            {t.platformSub}
-          </p>
-        </div>
-
-        <div className="grid sm:grid-cols-3 gap-3 md:gap-4 mb-10 md:mb-12">
+        <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-3 mb-10 md:mb-12">
           {tabs.map((tab) => {
-            const Icon = tab.icon;
             const isActive = tab.id === activeId;
             return (
               <button
                 key={tab.id}
                 type="button"
                 onClick={() => setActiveId(tab.id)}
-                className="text-left p-4 md:p-5 transition-all duration-300 border bg-transparent cursor-pointer"
+                className="relative pb-3 text-base md:text-lg font-medium tracking-tight transition-colors bg-transparent border-0 cursor-pointer"
                 style={{
-                  borderColor: isActive ? tab.accent : 'var(--color-border)',
-                  backgroundColor: isActive ? 'var(--color-surface)' : 'transparent',
-                  boxShadow: isActive ? 'var(--shadow-elevated)' : 'none',
-                  transform: isActive ? 'translateY(-2px)' : 'none',
+                  color: isActive ? 'var(--color-brand-blue)' : 'var(--color-text-secondary)',
                 }}
                 aria-pressed={isActive}
               >
-                <div
-                  className="w-10 h-10 flex items-center justify-center mb-3"
+                {tab.label}
+                <span
+                  className="absolute left-0 right-0 bottom-0 h-0.5 rounded-full transition-opacity"
                   style={{
-                    backgroundColor: isActive ? 'var(--color-surface-info)' : 'var(--color-surface-chip)',
-                    color: tab.accent,
+                    backgroundColor: 'var(--color-brand-blue)',
+                    opacity: isActive ? 1 : 0,
                   }}
-                >
-                  <Icon className="w-5 h-5" strokeWidth={1.75} />
-                </div>
-                <div
-                  className="text-base font-semibold tracking-tight mb-1"
-                  style={{ color: isActive ? 'var(--color-text)' : 'var(--color-text-secondary)' }}
-                >
-                  {tab.label}
-                </div>
-                <p className="text-sm leading-snug" style={{ color: 'var(--color-text-tertiary)' }}>
-                  {tab.blurb}
-                </p>
+                />
               </button>
             );
           })}
@@ -255,11 +225,8 @@ export default function BenefitsPillars() {
 
         <div
           key={active.id}
-          className="border overflow-hidden"
+          className="overflow-hidden"
           style={{
-            borderColor: 'var(--color-border)',
-            backgroundColor: 'var(--color-surface)',
-            boxShadow: 'var(--shadow-card)',
             animation: 'platformFade 320ms ease-out',
           }}
         >

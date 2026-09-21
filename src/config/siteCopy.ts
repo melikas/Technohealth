@@ -32,11 +32,7 @@ const siteCopy = {
     heroPoint3Title: 'Easy to implement',
     heroPoint3Desc: 'Built for product teams and research.',
 
-    platformTitle: 'One platform. Three ways to build.',
-    platformSub:
-      'Pick a lane — connect devices, train health models, or give agents safe access to live signals.',
     platformTab1: 'API Integration',
-    platformTab1Blurb: 'Wearables into your product',
     platformTab1Intro: 'Stop rebuilding device integrations. Ship health data through one API.',
     platformTab1F1Title: 'All the wearables, one connection',
     platformTab1F1Desc:
@@ -49,7 +45,6 @@ const siteCopy = {
       'Pull with SDKs or push with webhooks. Self-host when you need the data to stay on your servers.',
 
     platformTab2: 'Health Monitoring',
-    platformTab2Blurb: 'Devices, training, and results',
     platformTab2Intro:
       'Monitor connected devices in one dashboard — then train models and compare experiment results in the same product.',
     platformTab2F1Title: 'See every device in the study',
@@ -64,7 +59,6 @@ const siteCopy = {
     platformMonitorAlt: 'TechnoHealth device management and experiment results screens',
 
     platformTab3: 'MCP for LLM and Agents',
-    platformTab3Blurb: 'Agents on health data',
     platformTab3Intro: 'Give any LLM or agent structured tools for health data — without giving up control.',
     platformTab3F1Title: 'Health data as agent tools',
     platformTab3F1Desc:
@@ -169,11 +163,7 @@ const siteCopy = {
     heroPoint3Title: 'Facile à implémenter',
     heroPoint3Desc: 'Conçu pour les équipes produit et la recherche.',
 
-    platformTitle: 'Une plateforme. Trois façons de construire.',
-    platformSub:
-      'Choisissez une voie — connecter des appareils, entraîner des modèles santé, ou donner aux agents un accès sûr aux signaux live.',
     platformTab1: 'Intégration API',
-    platformTab1Blurb: 'Wearables dans votre produit',
     platformTab1Intro: 'Arrêtez de reconstruire les intégrations appareils. Livrez les données santé via une seule API.',
     platformTab1F1Title: 'Tous les wearables, une connexion',
     platformTab1F1Desc:
@@ -186,7 +176,6 @@ const siteCopy = {
       'Tirez avec les SDK ou poussez avec des webhooks. Auto-hébergez quand les données doivent rester chez vous.',
 
     platformTab2: 'Suivi de santé',
-    platformTab2Blurb: 'Appareils, entraînement et résultats',
     platformTab2Intro:
       'Suivez les appareils connectés dans un tableau de bord — puis entraînez des modèles et comparez les résultats d’expérience dans le même produit.',
     platformTab2F1Title: 'Voyez chaque appareil de l’étude',
@@ -201,7 +190,6 @@ const siteCopy = {
     platformMonitorAlt: 'Écrans TechnoHealth de gestion des appareils et de résultats d’expérience',
 
     platformTab3: 'MCP pour LLM et agents',
-    platformTab3Blurb: 'Des agents sur les données santé',
     platformTab3Intro: 'Donnez à tout LLM ou agent des outils structurés sur les données santé — sans perdre le contrôle.',
     platformTab3F1Title: 'La santé comme outils d’agent',
     platformTab3F1Desc:
