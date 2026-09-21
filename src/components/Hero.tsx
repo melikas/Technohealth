@@ -216,30 +216,24 @@ export default function Hero() {
         </div>
 
         <div
-          className="grid md:grid-cols-3 gap-10 md:gap-0 md:divide-x pt-2"
+          className="grid md:grid-cols-3 gap-10 md:gap-0 md:divide-x pt-2 text-center"
           style={{ borderColor: 'var(--color-border)' }}
         >
           {metrics.map((metric, index) => (
             <div
               key={metric.title}
-              className={`text-left md:px-8 ${index === 0 ? 'md:pl-0' : ''} ${
+              className={`flex flex-col items-center md:px-8 ${index === 0 ? 'md:pl-0' : ''} ${
                 index === metrics.length - 1 ? 'md:pr-0' : ''
               }`}
             >
-              <p
-                className="text-xs font-medium uppercase tracking-[0.14em] mb-3"
-                style={{ color: metric.accent }}
-              >
-                {String(index + 1).padStart(2, '0')}
-              </p>
               <h3
-                className="text-2xl md:text-[28px] font-normal tracking-tight leading-snug mb-2"
-                style={{ color: 'var(--color-text)' }}
+                className="text-2xl md:text-[28px] font-semibold tracking-tight leading-snug mb-2"
+                style={{ color: metric.accent }}
               >
                 {metric.title}
               </h3>
               <p
-                className="text-sm md:text-[15px] leading-relaxed max-w-xs"
+                className="text-sm md:text-[15px] leading-relaxed max-w-[220px]"
                 style={{ color: 'var(--color-text-secondary)' }}
               >
                 {metric.description}
