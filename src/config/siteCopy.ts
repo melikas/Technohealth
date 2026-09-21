@@ -32,21 +32,53 @@ const siteCopy = {
     heroPoint3Title: 'Easy to implement',
     heroPoint3Desc: 'Built for product teams and research.',
 
-    benefitsTitle: 'Get wearable data into your product faster',
-    benefitsSub:
-      'Go from signing to production in about a week, and keep the data on your infrastructure.',
-    benefit1Title: 'Days, not months',
-    benefit1Desc:
-      'Go from zero to live data in about 7 days. You do not need custom development for every device.',
-    benefit2Title: 'One API for all',
-    benefit2Desc:
-      'Stop building a separate integration for each device. Add Apple, Fitbit, or Oura from your dashboard.',
-    benefit3Title: 'Your infrastructure',
-    benefit3Desc:
-      'Deploy on your servers and keep ownership of your data. No per user fees or vendor lock in.',
-    benefit4Title: 'Enterprise ready',
-    benefit4Desc:
-      'Built for regulated teams with privacy controls, access management, and self hosted options.',
+    platformTab1: 'API Integration',
+    platformTab1Intro:
+      'Connect wearables and health apps through one API so your product can ship without custom device work.',
+    platformTab1F1Title: 'One wearable API',
+    platformTab1F1Desc:
+      'Add Apple, Fitbit, Oura, WHOOP, Garmin, and more from a single integration path.',
+    platformTab1F2Title: 'Normalized metrics',
+    platformTab1F2Desc:
+      'Receive structured activity, sleep, heart rate, and recovery data ready for your product.',
+    platformTab1F3Title: 'SDKs and webhooks',
+    platformTab1F3Desc:
+      'Pull data on demand or stream updates into your app, dashboard, or backend workflows.',
+    platformTab1F4Title: 'Self hosted options',
+    platformTab1F4Desc:
+      'Deploy on your infrastructure so health data stays under your control.',
+
+    platformTab2: 'Health Model Training',
+    platformTab2Intro:
+      'Train and evaluate health models on longitudinal wearable signals without rebuilding data pipelines.',
+    platformTab2F1Title: 'Longitudinal signals',
+    platformTab2F1Desc:
+      'Use continuous wearable streams as training inputs for risk, readiness, and outcome models.',
+    platformTab2F2Title: 'Experiment tracking',
+    platformTab2F2Desc:
+      'Compare model versions, features, and cohorts across research and product experiments.',
+    platformTab2F3Title: 'Health-aware evaluation',
+    platformTab2F3Desc:
+      'Measure quality with clinical and wellness metrics before models reach production.',
+    platformTab2F4Title: 'Registry and deploy',
+    platformTab2F4Desc:
+      'Promote approved models into product workflows with clear lineage and access controls.',
+
+    platformTab3: 'MCP for LLM and Agents',
+    platformTab3Intro:
+      'Give agents and LLMs safe, structured access to health data through MCP.',
+    platformTab3F1Title: 'Health MCP tools',
+    platformTab3F1Desc:
+      'Expose wearable and clinical context as tools agents can call without custom glue code.',
+    platformTab3F2Title: 'Any LLM provider',
+    platformTab3F2Desc:
+      'Works with the model and agent stack you already use — no vendor lock-in on the LLM side.',
+    platformTab3F3Title: 'Agent-ready workflows',
+    platformTab3F3Desc:
+      'Power coaching, triage support, research assistants, and ops agents on live health signals.',
+    platformTab3F4Title: 'Safety and control',
+    platformTab3F4Desc:
+      'Keep privacy controls, access management, and self hosting in place for regulated teams.',
 
     useCasesTitle: 'Who we build for',
     segment1Title: 'Health & Life Insurers',
@@ -141,21 +173,53 @@ const siteCopy = {
     heroPoint3Title: 'Facile à implémenter',
     heroPoint3Desc: 'Conçu pour les équipes produit et la recherche.',
 
-    benefitsTitle: 'Intégrez les données wearables plus vite',
-    benefitsSub:
-      'Passez de la signature à la production en environ une semaine, tout en gardant les données sur votre infrastructure.',
-    benefit1Title: 'Des jours, pas des mois',
-    benefit1Desc:
-      'Passez de zéro à des données en production en environ 7 jours. Pas besoin de développement sur mesure pour chaque appareil.',
-    benefit2Title: 'Une API pour tous',
-    benefit2Desc:
-      'Arrêtez de construire une intégration séparée pour chaque appareil. Ajoutez Apple, Fitbit ou Oura depuis votre tableau de bord.',
-    benefit3Title: 'Votre infrastructure',
-    benefit3Desc:
-      'Déployez sur vos serveurs et gardez la propriété de vos données. Pas de frais par utilisateur ni de dépendance forcée.',
-    benefit4Title: 'Prêt pour l’entreprise',
-    benefit4Desc:
-      'Conçu pour les équipes réglementées avec contrôles de confidentialité, gestion des accès et options auto hébergées.',
+    platformTab1: 'Intégration API',
+    platformTab1Intro:
+      'Connectez wearables et apps santé via une seule API pour livrer sans intégrations d’appareils sur mesure.',
+    platformTab1F1Title: 'Une API wearables',
+    platformTab1F1Desc:
+      'Ajoutez Apple, Fitbit, Oura, WHOOP, Garmin et plus encore via un seul parcours d’intégration.',
+    platformTab1F2Title: 'Métriques normalisées',
+    platformTab1F2Desc:
+      'Recevez activité, sommeil, fréquence cardiaque et récupération structurés, prêts pour votre produit.',
+    platformTab1F3Title: 'SDK et webhooks',
+    platformTab1F3Desc:
+      'Interrogez à la demande ou diffusez les mises à jour vers votre app, tableau de bord ou backend.',
+    platformTab1F4Title: 'Options auto hébergées',
+    platformTab1F4Desc:
+      'Déployez sur votre infrastructure pour garder le contrôle des données de santé.',
+
+    platformTab2: 'Entraînement de modèles santé',
+    platformTab2Intro:
+      'Entraînez et évaluez des modèles santé sur des signaux wearables longitudinaux sans reconstruire vos pipelines.',
+    platformTab2F1Title: 'Signaux longitudinaux',
+    platformTab2F1Desc:
+      'Utilisez des flux wearables continus comme entrées pour modèles de risque, disponibilité et résultats.',
+    platformTab2F2Title: 'Suivi d’expériences',
+    platformTab2F2Desc:
+      'Comparez versions de modèles, features et cohortes entre recherche et produit.',
+    platformTab2F3Title: 'Évaluation orientée santé',
+    platformTab2F3Desc:
+      'Mesurez la qualité avec des métriques cliniques et bien-être avant la production.',
+    platformTab2F4Title: 'Registre et déploiement',
+    platformTab2F4Desc:
+      'Promouvez les modèles approuvés dans vos workflows avec lignée claire et contrôles d’accès.',
+
+    platformTab3: 'MCP pour LLM et agents',
+    platformTab3Intro:
+      'Donnez aux agents et LLM un accès sûr et structuré aux données de santé via MCP.',
+    platformTab3F1Title: 'Outils MCP santé',
+    platformTab3F1Desc:
+      'Exposez le contexte wearable et clinique comme outils appelables sans glue code sur mesure.',
+    platformTab3F2Title: 'Tout fournisseur LLM',
+    platformTab3F2Desc:
+      'Compatible avec le modèle et la stack d’agents que vous utilisez déjà — sans lock-in LLM.',
+    platformTab3F3Title: 'Workflows prêts pour agents',
+    platformTab3F3Desc:
+      'Alimentez coaching, support de triage, assistants recherche et agents ops sur des signaux live.',
+    platformTab3F4Title: 'Sécurité et contrôle',
+    platformTab3F4Desc:
+      'Gardez confidentialité, gestion des accès et auto hébergement pour les équipes réglementées.',
 
     useCasesTitle: 'Pour qui nous construisons',
     segment1Title: 'Assureurs santé et vie',
