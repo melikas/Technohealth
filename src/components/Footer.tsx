@@ -31,12 +31,13 @@ export default function Footer() {
       ],
     },
     {
-      title: t.footerCompany,
+      title: t.footerUseCases,
       links: [
-        { label: t.footerAbout, to: '/about' },
-        { label: t.footerServices, to: '/services' },
-        { label: t.footerCaseStudies, to: '/case-studies' },
-        { label: t.footerSafety, to: '/safety-security' },
+        { label: t.footerUseCaseInsurers, to: '/solutions' },
+        { label: t.footerUseCaseDigitalHealth, to: '/solutions' },
+        { label: t.footerUseCaseFitness, to: '/solutions' },
+        { label: t.footerUseCaseResearch, to: '/solutions' },
+        { label: t.footerUseCasePharma, to: '/solutions' },
       ],
     },
     {
@@ -51,10 +52,10 @@ export default function Footer() {
     {
       title: t.footerResources,
       links: [
+        { label: t.footerAbout, to: '/about' },
+        { label: t.footerSafety, to: '/safety-security' },
         { label: t.footerContact, to: '/contact' },
-        { label: t.footerBlog, href: '#' },
-        { label: t.footerWhitePapers, href: '#' },
-        { label: t.footerWebinars, href: '#' },
+        { label: t.footerCaseStudies, to: '/case-studies' },
       ],
     },
   ];
