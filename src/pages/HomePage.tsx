@@ -2,7 +2,6 @@ import Header from '../components/Header';
 import Hero from '../components/Hero';
 import BenefitsPillars from '../components/BenefitsPillars';
 import UseCaseShowcase from '../components/UseCaseShowcase';
-import FAQ from '../components/FAQ';
 import Footer from '../components/Footer';
 
 export default function HomePage() {
@@ -12,7 +11,6 @@ export default function HomePage() {
       <Hero />
       <BenefitsPillars />
       <UseCaseShowcase />
-      <FAQ />
       <Footer />
     </div>
   );
