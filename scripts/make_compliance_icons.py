@@ -1,185 +1,148 @@
-"""Spike-style circular seals for Quebec-relevant TechnoHealth badges."""
+"""Compliance seals using each framework's familiar mark/colors."""
 from PIL import Image, ImageDraw, ImageFont
 import os
-import math
 
 OUT = r"c:\Users\umroot\Documents\Technohealth\public\Images\compliance"
 SIZE = 512
 os.makedirs(OUT, exist_ok=True)
 
+NAVY = (15, 23, 42, 255)
+WHITE = (255, 255, 255, 255)
+QUEBEC_BLUE = (0, 57, 166, 255)  # Quebec flag blue
+CANADA_RED = (212, 20, 36, 255)  # Canada red
+HIPAA_TEAL = (14, 116, 144, 255)
+HOST_SLATE = (30, 41, 59, 255)
 
-def find_font(size, bold=True):
-    paths = [
+
+def font(size, bold=True):
+    for p in (
         r"C:\Windows\Fonts\arialbd.ttf" if bold else r"C:\Windows\Fonts\arial.ttf",
         r"C:\Windows\Fonts\segoeuib.ttf" if bold else r"C:\Windows\Fonts\segoeui.ttf",
-        r"C:\Windows\Fonts\arial.ttf",
-    ]
-    for p in paths:
+    ):
         if os.path.exists(p):
             return ImageFont.truetype(p, size)
     return ImageFont.load_default()
 
 
-def circular_alpha(img):
-    mask = Image.new("L", img.size, 0)
-    ImageDraw.Draw(mask).ellipse((0, 0, img.size[0] - 1, img.size[1] - 1), fill=255)
-    out = Image.new("RGBA", img.size, (0, 0, 0, 0))
-    out.paste(img, (0, 0), mask)
-    return out
+def seal(border):
+    img = Image.new("RGBA", (SIZE, SIZE), (0, 0, 0, 0))
+    d = ImageDraw.Draw(img)
+    d.ellipse((6, 6, SIZE - 7, SIZE - 7), fill=WHITE, outline=border, width=12)
+    d.ellipse((30, 30, SIZE - 31, SIZE - 31), outline=border, width=3)
+    return img, d
 
 
-def draw_arc_text(base, text, cx, cy, radius, font, fill=(0, 0, 0, 255), top=True):
-    widths = []
-    for ch in text:
-        b = ImageDraw.Draw(Image.new("RGBA", (1, 1))).textbbox((0, 0), ch, font=font)
-        widths.append(max(1, b[2] - b[0]) + 1)
-    total = sum(widths)
-    span = total / radius
-    if top:
-        angle = -math.pi / 2 - span / 2
-        direction = 1
-    else:
-        angle = math.pi / 2 + span / 2
-        direction = -1
-    for ch, w in zip(text, widths):
-        a = angle + direction * (w / radius) / 2
-        x = cx + radius * math.cos(a)
-        y = cy + radius * math.sin(a)
-        bb = ImageDraw.Draw(Image.new("RGBA", (1, 1))).textbbox((0, 0), ch, font=font)
-        gw, gh = bb[2] - bb[0] + 6, bb[3] - bb[1] + 6
-        glyph = Image.new("RGBA", (max(gw, 10), max(gh, 10)), (0, 0, 0, 0))
-        ImageDraw.Draw(glyph).text((-bb[0] + 3, -bb[1] + 3), ch, font=font, fill=fill)
-        rot = math.degrees(a) + (90 if top else -90)
-        glyph = glyph.rotate(-rot, expand=True, resample=Image.Resampling.BICUBIC)
-        base.alpha_composite(glyph, (int(x - glyph.width / 2), int(y - glyph.height / 2)))
-        angle += direction * (w / radius)
+def centered(d, text, y, fnt, fill):
+    bb = d.textbbox((0, 0), text, font=fnt)
+    d.text(((SIZE - (bb[2] - bb[0])) // 2, y), text, font=fnt, fill=fill)
 
 
-def double_ring(d, size, outer=7, gap=9, inner=3):
-    m = outer // 2 + 2
-    d.ellipse((m, m, size - 1 - m, size - 1 - m), outline=(0, 0, 0, 255), width=outer)
-    m2 = m + outer + gap
-    d.ellipse((m2, m2, size - 1 - m2, size - 1 - m2), outline=(0, 0, 0, 255), width=inner)
+def fleur_de_lis(d, cx, cy, color, s=1.0):
+    # Classic 3-petal fleur-de-lis silhouette
+    body = [
+        (cx, cy - 50 * s),
+        (cx + 8 * s, cy - 22 * s),
+        (cx + 30 * s, cy - 36 * s),
+        (cx + 18 * s, cy - 8 * s),
+        (cx + 36 * s, cy + 10 * s),
+        (cx + 10 * s, cy + 2 * s),
+        (cx + 12 * s, cy + 28 * s),
+        (cx, cy + 14 * s),
+        (cx - 12 * s, cy + 28 * s),
+        (cx - 10 * s, cy + 2 * s),
+        (cx - 36 * s, cy + 10 * s),
+        (cx - 18 * s, cy - 8 * s),
+        (cx - 30 * s, cy - 36 * s),
+        (cx - 8 * s, cy - 22 * s),
+    ]
+    d.polygon(body, fill=color)
+    # band
+    d.rectangle((cx - 26 * s, cy + 6 * s, cx + 26 * s, cy + 14 * s), fill=color)
+    d.rectangle((cx - 5 * s, cy + 14 * s, cx + 5 * s, cy + 42 * s), fill=color)
+    d.ellipse((cx - 28 * s, cy + 34 * s, cx - 12 * s, cy + 48 * s), fill=color)
+    d.ellipse((cx + 12 * s, cy + 34 * s, cx + 28 * s, cy + 48 * s), fill=color)
 
 
-def center_text(d, size, lines):
-    for text, font, y in lines:
-        bb = d.textbbox((0, 0), text, font=font)
-        d.text(((size - (bb[2] - bb[0])) // 2, y), text, font=font, fill=(0, 0, 0, 255))
+def maple_leaf(d, cx, cy, color, s=1.0):
+    leaf = [
+        (cx, cy - 46 * s),
+        (cx + 8 * s, cy - 24 * s),
+        (cx + 28 * s, cy - 34 * s),
+        (cx + 18 * s, cy - 12 * s),
+        (cx + 42 * s, cy - 8 * s),
+        (cx + 22 * s, cy + 2 * s),
+        (cx + 30 * s, cy + 22 * s),
+        (cx + 10 * s, cy + 10 * s),
+        (cx + 12 * s, cy + 32 * s),
+        (cx, cy + 18 * s),
+        (cx - 12 * s, cy + 32 * s),
+        (cx - 10 * s, cy + 10 * s),
+        (cx - 30 * s, cy + 22 * s),
+        (cx - 22 * s, cy + 2 * s),
+        (cx - 42 * s, cy - 8 * s),
+        (cx - 18 * s, cy - 12 * s),
+        (cx - 28 * s, cy - 34 * s),
+        (cx - 8 * s, cy - 24 * s),
+    ]
+    d.polygon(leaf, fill=color)
+    d.rectangle((cx - 4 * s, cy + 10 * s, cx + 4 * s, cy + 48 * s), fill=color)
+
+
+def hipaa_mark(d, cx, cy, color):
+    # Staff + twin serpents (common HIPAA badge motif)
+    d.line([(cx, cy - 40), (cx, cy + 44)], fill=color, width=6)
+    d.ellipse((cx - 11, cy - 54, cx + 11, cy - 32), outline=color, width=4)
+    for dy in (-8, 14):
+        d.arc((cx - 34, cy + dy - 18, cx + 2, cy + dy + 22), 210, 30, fill=color, width=4)
+        d.arc((cx - 2, cy + dy - 18, cx + 34, cy + dy + 22), 150, 330, fill=color, width=4)
+
+
+def server_mark(d, cx, cy, color):
+    d.rounded_rectangle((cx - 42, cy - 38, cx + 42, cy + 38), radius=10, outline=color, width=5)
+    for y in (cy - 22, cy - 2, cy + 18):
+        d.rounded_rectangle((cx - 30, y, cx + 30, y + 14), radius=4, outline=color, width=3)
+        d.ellipse((cx + 16, y + 3, cx + 26, y + 11), fill=color)
 
 
 def make_law25():
-    size = SIZE
-    img = Image.new("RGBA", (size, size), (0, 0, 0, 0))
-    d = ImageDraw.Draw(img)
-    double_ring(d, size)
-    cx = size // 2
-    # fleur-de-lis simplified / maple-leaf-ish Quebec mark: shield
-    shield = [(cx, 95), (cx + 48, 112), (cx + 48, 168), (cx, 205), (cx - 48, 168), (cx - 48, 112)]
-    d.line(shield + [shield[0]], fill=(0, 0, 0, 255), width=5)
-    d.line([(cx - 18, 150), (cx - 2, 165), (cx + 22, 128)], fill=(0, 0, 0, 255), width=6)
-    center_text(d, size, [
-        ("LAW 25", find_font(52), 220),
-        ("QUEBEC", find_font(28), 285),
-    ])
-    draw_arc_text(img, "PRIVACY READY", cx, cx, 200, find_font(22), top=False)
-    return circular_alpha(img)
+    img, d = seal(QUEBEC_BLUE)
+    fleur_de_lis(d, SIZE // 2, 168, QUEBEC_BLUE, 1.05)
+    centered(d, "LAW 25", 272, font(48), QUEBEC_BLUE)
+    centered(d, "QUEBEC", 334, font(22, False), (0, 57, 166, 200))
+    return img
 
 
 def make_pipeda():
-    size = SIZE
-    img = Image.new("RGBA", (size, size), (0, 0, 0, 0))
-    d = ImageDraw.Draw(img)
-    double_ring(d, size)
-    cx = size // 2
-    # maple leaf simplified as circle + check (Canada federal)
-    d.ellipse((cx - 34, 105, cx + 34, 173), outline=(0, 0, 0, 255), width=5)
-    d.line([(cx - 14, 142), (cx - 2, 154), (cx + 16, 126)], fill=(0, 0, 0, 255), width=6)
-    center_text(d, size, [
-        ("PIPEDA", find_font(54), 200),
-        ("CANADA", find_font(28), 270),
-    ])
-    draw_arc_text(img, "FEDERAL PRIVACY", cx, cx, 200, find_font(20), top=False)
-    return circular_alpha(img)
+    img, d = seal(CANADA_RED)
+    maple_leaf(d, SIZE // 2, 160, CANADA_RED, 1.0)
+    centered(d, "PIPEDA", 272, font(46), CANADA_RED)
+    centered(d, "CANADA", 334, font(22, False), (212, 20, 36, 200))
+    return img
 
 
 def make_hipaa():
-    # Prefer Spike's real HIPAA badge if present, else draw
-    spike = os.path.join(OUT, "_spike", "hipaa.png")
-    if os.path.exists(spike):
-        im = Image.open(spike).convert("RGBA")
-        px = im.load()
-        for y in range(im.height):
-            for x in range(im.width):
-                r, g, b, a = px[x, y]
-                px[x, y] = (0, 0, 0, 0) if a < 20 else (0, 0, 0, a)
-        return circular_alpha(im.resize((SIZE, SIZE), Image.Resampling.LANCZOS))
-
-    size = SIZE
-    img = Image.new("RGBA", (size, size), (0, 0, 0, 0))
-    d = ImageDraw.Draw(img)
-    double_ring(d, size)
-    cx = size // 2
-    d.line((cx, cx - 50, cx, cx + 40), fill=(0, 0, 0, 255), width=5)
-    d.arc((cx - 36, cx - 58, cx - 2, cx - 20), 200, 20, fill=(0, 0, 0, 255), width=4)
-    d.arc((cx + 2, cx - 58, cx + 36, cx - 20), 160, 340, fill=(0, 0, 0, 255), width=4)
-    d.arc((cx - 30, cx - 22, cx + 4, cx + 22), 200, 20, fill=(0, 0, 0, 255), width=3)
-    d.arc((cx - 4, cx - 22, cx + 30, cx + 22), 160, 340, fill=(0, 0, 0, 255), width=3)
-    draw_arc_text(img, "HIPAA", cx, cx, 195, find_font(28), top=True)
-    draw_arc_text(img, "COMPLIANT", cx, cx, 195, find_font(24), top=False)
-    return circular_alpha(img)
+    img, d = seal(HIPAA_TEAL)
+    hipaa_mark(d, SIZE // 2, 162, HIPAA_TEAL)
+    centered(d, "HIPAA", 272, font(48), HIPAA_TEAL)
+    centered(d, "READY", 334, font(22, False), (14, 116, 144, 200))
+    return img
 
 
 def make_self_hosted():
-    size = SIZE
-    img = Image.new("RGBA", (size, size), (0, 0, 0, 0))
-    d = ImageDraw.Draw(img)
-    double_ring(d, size)
-    cx = size // 2
-    d.rounded_rectangle((cx - 46, 108, cx + 46, 182), radius=8, outline=(0, 0, 0, 255), width=5)
-    for y in (124, 146, 168):
-        d.rectangle((cx - 32, y, cx + 32, y + 12), outline=(0, 0, 0, 255), width=3)
-        d.ellipse((cx + 18, y + 2, cx + 28, y + 12), fill=(0, 0, 0, 255))
-    center_text(d, size, [
-        ("SELF", find_font(42), 210),
-        ("HOSTED", find_font(42), 260),
-    ])
-    draw_arc_text(img, "YOUR INFRASTRUCTURE", cx, cx, 198, find_font(18), top=False)
-    return circular_alpha(img)
+    img, d = seal(HOST_SLATE)
+    server_mark(d, SIZE // 2, 160, HOST_SLATE)
+    centered(d, "SELF", 268, font(40), HOST_SLATE)
+    centered(d, "HOSTED", 318, font(40), HOST_SLATE)
+    return img
 
 
 def save(img, name):
     path = os.path.join(OUT, name)
     img.resize((256, 256), Image.Resampling.LANCZOS).save(path, "PNG", optimize=True)
-    print("Wrote", name, os.path.getsize(path))
+    print("Wrote", name)
 
-
-# Re-download Spike HIPAA for authenticity
-import urllib.request
-spike_dir = os.path.join(OUT, "_spike")
-os.makedirs(spike_dir, exist_ok=True)
-hipaa_url = "https://cdn.prod.website-files.com/683d56d98426b36891bcd07e/68483b18288d8ad0854c6b91_cd76ad85c0c6084d24b1779c0396b09b_HIPPA.avif"
-try:
-    req = urllib.request.Request(hipaa_url, headers={"User-Agent": "Mozilla/5.0"})
-    with urllib.request.urlopen(req, timeout=30) as resp:
-        open(os.path.join(spike_dir, "hipaa.avif"), "wb").write(resp.read())
-    Image.open(os.path.join(spike_dir, "hipaa.avif")).convert("RGBA").save(
-        os.path.join(spike_dir, "hipaa.png")
-    )
-except Exception as e:
-    print("Spike HIPAA download skipped:", e)
 
 save(make_law25(), "law25.png")
 save(make_pipeda(), "pipeda.png")
 save(make_hipaa(), "hipaa.png")
 save(make_self_hosted(), "self-hosted.png")
-
-# remove obsolete claimed certs
-for obsolete in ["hitrust.png", "soc2.png", "soc2.svg", "self-hosted.svg"]:
-    p = os.path.join(OUT, obsolete)
-    if os.path.exists(p):
-        os.remove(p)
-        print("Removed", obsolete)
-
-import shutil
-shutil.rmtree(spike_dir, ignore_errors=True)
