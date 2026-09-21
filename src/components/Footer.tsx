@@ -25,7 +25,7 @@ export default function Footer() {
       title: t.footerServicesCol,
       links: [
         { label: t.footerApiDocs, to: '/docs#api' },
-        { label: t.footerResearchDashboard, to: '/dashboard' },
+        { label: t.footerResearchDashboard, to: '/schedule-demo' },
         { label: t.footerMcp, to: '/docs#mcp' },
         { label: t.footerSdk, to: '/docs#sdk-react' },
       ],
