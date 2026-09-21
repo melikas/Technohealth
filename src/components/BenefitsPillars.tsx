@@ -1,11 +1,16 @@
 import { useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { getSiteCopy } from '../config/siteCopy';
+import apiImg from '../assets/platform/api.jpg';
+import trainingImg from '../assets/platform/train2.jpg';
+import mcpImg from '../assets/platform/mcp.jpg';
 
 type PlatformTab = {
   id: string;
   label: string;
   intro: string;
+  image: string;
+  imageAlt: string;
   features: { title: string; desc: string }[];
 };
 
@@ -18,33 +23,36 @@ export default function BenefitsPillars() {
       id: 'api',
       label: t.platformTab1,
       intro: t.platformTab1Intro,
+      image: apiImg,
+      imageAlt: 'Health data API dashboard',
       features: [
         { title: t.platformTab1F1Title, desc: t.platformTab1F1Desc },
         { title: t.platformTab1F2Title, desc: t.platformTab1F2Desc },
         { title: t.platformTab1F3Title, desc: t.platformTab1F3Desc },
-        { title: t.platformTab1F4Title, desc: t.platformTab1F4Desc },
       ],
     },
     {
       id: 'training',
       label: t.platformTab2,
       intro: t.platformTab2Intro,
+      image: trainingImg,
+      imageAlt: 'Health model training charts',
       features: [
         { title: t.platformTab2F1Title, desc: t.platformTab2F1Desc },
         { title: t.platformTab2F2Title, desc: t.platformTab2F2Desc },
         { title: t.platformTab2F3Title, desc: t.platformTab2F3Desc },
-        { title: t.platformTab2F4Title, desc: t.platformTab2F4Desc },
       ],
     },
     {
       id: 'mcp',
       label: t.platformTab3,
       intro: t.platformTab3Intro,
+      image: mcpImg,
+      imageAlt: 'AI agents connected to health data',
       features: [
         { title: t.platformTab3F1Title, desc: t.platformTab3F1Desc },
         { title: t.platformTab3F2Title, desc: t.platformTab3F2Desc },
         { title: t.platformTab3F3Title, desc: t.platformTab3F3Desc },
-        { title: t.platformTab3F4Title, desc: t.platformTab3F4Desc },
       ],
     },
   ];
@@ -57,8 +65,8 @@ export default function BenefitsPillars() {
       className="py-20 md:py-24"
       style={{ backgroundColor: 'var(--color-surface-alt)' }}
     >
-      <div className="max-w-5xl mx-auto px-4 sm:px-6">
-        <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 mb-10">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-3 mb-12">
           {tabs.map((tab) => {
             const isActive = tab.id === activeId;
             return (
@@ -66,7 +74,7 @@ export default function BenefitsPillars() {
                 key={tab.id}
                 type="button"
                 onClick={() => setActiveId(tab.id)}
-                className="relative pb-3 text-sm md:text-base font-medium tracking-wide uppercase transition-colors bg-transparent border-0 cursor-pointer"
+                className="relative pb-3 text-base md:text-lg font-medium tracking-tight transition-colors bg-transparent border-0 cursor-pointer"
                 style={{
                   color: isActive ? 'var(--color-brand-blue)' : 'var(--color-text-secondary)',
                 }}
@@ -85,35 +93,49 @@ export default function BenefitsPillars() {
           })}
         </div>
 
-        <div
-          className="border-t pt-10"
-          style={{ borderColor: 'var(--color-border)' }}
-          key={active.id}
-        >
-          <p
-            className="text-center text-base md:text-lg max-w-2xl mx-auto mb-10 leading-relaxed"
-            style={{ color: 'var(--color-text-secondary)' }}
-          >
-            {active.intro}
-          </p>
+        <div key={active.id} className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-start">
+          <div>
+            <p
+              className="text-base md:text-lg leading-relaxed mb-8"
+              style={{ color: 'var(--color-text-secondary)' }}
+            >
+              {active.intro}
+            </p>
 
-          <div className="grid sm:grid-cols-2 gap-x-10 gap-y-8 max-w-3xl mx-auto">
-            {active.features.map((feature) => (
-              <div key={feature.title} className="text-left">
-                <h3
-                  className="text-base font-semibold tracking-tight mb-2"
-                  style={{ color: 'var(--color-text)' }}
-                >
-                  {feature.title}
-                </h3>
-                <p
-                  className="text-sm leading-relaxed"
-                  style={{ color: 'var(--color-text-secondary)' }}
-                >
-                  {feature.desc}
-                </p>
-              </div>
-            ))}
+            <div className="space-y-7">
+              {active.features.map((feature) => (
+                <div key={feature.title}>
+                  <h3
+                    className="text-lg font-medium tracking-tight mb-2"
+                    style={{ color: 'var(--color-text)' }}
+                  >
+                    {feature.title}
+                  </h3>
+                  <p
+                    className="text-sm md:text-[15px] leading-relaxed"
+                    style={{ color: 'var(--color-text-secondary)' }}
+                  >
+                    {feature.desc}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div
+            className="overflow-hidden border"
+            style={{
+              borderColor: 'var(--color-border)',
+              backgroundColor: 'var(--color-surface)',
+              boxShadow: 'var(--shadow-card)',
+            }}
+          >
+            <img
+              src={active.image}
+              alt={active.imageAlt}
+              className="w-full h-full min-h-[260px] md:min-h-[360px] object-cover"
+              loading="lazy"
+            />
           </div>
         </div>
       </div>

@@ -34,51 +34,42 @@ const siteCopy = {
 
     platformTab1: 'API Integration',
     platformTab1Intro:
-      'Connect wearables and health apps through one API so your product can ship without custom device work.',
-    platformTab1F1Title: 'One wearable API',
+      'Get wearable and device data into your product without building a separate connector for every brand. One integration path, ready for apps, dashboards, and clinical workflows.',
+    platformTab1F1Title: 'Connect once, cover the devices people already wear',
     platformTab1F1Desc:
-      'Add Apple, Fitbit, Oura, WHOOP, Garmin, and more from a single integration path.',
-    platformTab1F2Title: 'Normalized metrics',
+      'Plug into Apple Health, Fitbit, Oura, WHOOP, Garmin, Samsung, and more through a single API. Your team stops maintaining brittle one-off integrations and can add new sources from the same path.',
+    platformTab1F2Title: 'Receive data in a format your product can use immediately',
     platformTab1F2Desc:
-      'Receive structured activity, sleep, heart rate, and recovery data ready for your product.',
-    platformTab1F3Title: 'SDKs and webhooks',
+      'Activity, sleep, heart rate, recovery, and related signals arrive normalized and structured. That means less cleaning on your side and faster work for analytics, UI, and downstream models.',
+    platformTab1F3Title: 'Pull on demand or stream updates into your stack',
     platformTab1F3Desc:
-      'Pull data on demand or stream updates into your app, dashboard, or backend workflows.',
-    platformTab1F4Title: 'Self hosted options',
-    platformTab1F4Desc:
-      'Deploy on your infrastructure so health data stays under your control.',
+      'Use SDKs and webhooks to sync when a user opens your app, or push live updates into backends and monitoring tools. Deploy on your infrastructure when you need ownership and privacy control.',
 
     platformTab2: 'Health Model Training',
     platformTab2Intro:
-      'Train and evaluate health models on longitudinal wearable signals without rebuilding data pipelines.',
-    platformTab2F1Title: 'Longitudinal signals',
+      'Turn continuous wearable signals into models you can train, compare, and promote — without rebuilding a health data pipeline for every experiment.',
+    platformTab2F1Title: 'Train on real longitudinal health signals',
     platformTab2F1Desc:
-      'Use continuous wearable streams as training inputs for risk, readiness, and outcome models.',
-    platformTab2F2Title: 'Experiment tracking',
+      'Use ongoing streams from wearables as inputs for risk, readiness, adherence, and outcome models. You work with the same continuous context patients and users already generate day to day.',
+    platformTab2F2Title: 'Compare experiments before anything reaches production',
     platformTab2F2Desc:
-      'Compare model versions, features, and cohorts across research and product experiments.',
-    platformTab2F3Title: 'Health-aware evaluation',
+      'Track versions, features, cohorts, and results across research and product runs. See what changed, what improved, and what regressed — so promotion decisions are based on evidence, not guesswork.',
+    platformTab2F3Title: 'Evaluate with health-aware quality checks',
     platformTab2F3Desc:
-      'Measure quality with clinical and wellness metrics before models reach production.',
-    platformTab2F4Title: 'Registry and deploy',
-    platformTab2F4Desc:
-      'Promote approved models into product workflows with clear lineage and access controls.',
+      'Measure models against clinical and wellness metrics that matter for your use case. Catch weak performance early, then register and deploy approved models into the workflows your team already runs.',
 
     platformTab3: 'MCP for LLM and Agents',
     platformTab3Intro:
-      'Give agents and LLMs safe, structured access to health data through MCP.',
-    platformTab3F1Title: 'Health MCP tools',
+      'Let agents and LLMs work with health data safely through MCP — structured tools, clear access boundaries, and support for the model stack you already use.',
+    platformTab3F1Title: 'Expose health context as tools agents can call',
     platformTab3F1Desc:
-      'Expose wearable and clinical context as tools agents can call without custom glue code.',
-    platformTab3F2Title: 'Any LLM provider',
+      'Wearable metrics and related clinical context become MCP tools instead of one-off glue code. Agents can request the signals they need for coaching, triage support, research help, or ops workflows.',
+    platformTab3F2Title: 'Use any LLM provider without locking your stack',
     platformTab3F2Desc:
-      'Works with the model and agent stack you already use — no vendor lock-in on the LLM side.',
-    platformTab3F3Title: 'Agent-ready workflows',
+      'Keep the models and agent frameworks you already chose. TechnoHealth sits underneath as a safe health-data layer, so switching providers later does not mean rebuilding device integrations.',
+    platformTab3F3Title: 'Keep privacy and control in regulated environments',
     platformTab3F3Desc:
-      'Power coaching, triage support, research assistants, and ops agents on live health signals.',
-    platformTab3F4Title: 'Safety and control',
-    platformTab3F4Desc:
-      'Keep privacy controls, access management, and self hosting in place for regulated teams.',
+      'Access management, privacy controls, and self-hosted options stay in place while agents run. That lets product and research teams move faster without handing over ownership of sensitive health data.',
 
     useCasesTitle: 'Who we build for',
     segment1Title: 'Health & Life Insurers',
@@ -175,51 +166,42 @@ const siteCopy = {
 
     platformTab1: 'Intégration API',
     platformTab1Intro:
-      'Connectez wearables et apps santé via une seule API pour livrer sans intégrations d’appareils sur mesure.',
-    platformTab1F1Title: 'Une API wearables',
+      'Intégrez les données wearables et appareils dans votre produit sans construire un connecteur séparé pour chaque marque. Un seul parcours d’intégration, prêt pour apps, tableaux de bord et parcours cliniques.',
+    platformTab1F1Title: 'Connectez une fois, couvrez les appareils déjà portés',
     platformTab1F1Desc:
-      'Ajoutez Apple, Fitbit, Oura, WHOOP, Garmin et plus encore via un seul parcours d’intégration.',
-    platformTab1F2Title: 'Métriques normalisées',
+      'Branchez Apple Health, Fitbit, Oura, WHOOP, Garmin, Samsung et plus via une seule API. Votre équipe arrête de maintenir des intégrations fragiles et ajoute de nouvelles sources sur le même parcours.',
+    platformTab1F2Title: 'Recevez des données utilisables tout de suite',
     platformTab1F2Desc:
-      'Recevez activité, sommeil, fréquence cardiaque et récupération structurés, prêts pour votre produit.',
-    platformTab1F3Title: 'SDK et webhooks',
+      'Activité, sommeil, fréquence cardiaque, récupération et signaux associés arrivent normalisés et structurés. Moins de nettoyage de votre côté, plus de vitesse pour l’analytique, l’UI et les modèles en aval.',
+    platformTab1F3Title: 'Interrogez à la demande ou diffusez les mises à jour',
     platformTab1F3Desc:
-      'Interrogez à la demande ou diffusez les mises à jour vers votre app, tableau de bord ou backend.',
-    platformTab1F4Title: 'Options auto hébergées',
-    platformTab1F4Desc:
-      'Déployez sur votre infrastructure pour garder le contrôle des données de santé.',
+      'Utilisez SDK et webhooks pour synchroniser à l’ouverture de l’app, ou pousser des mises à jour live vers backends et outils de suivi. Déployez sur votre infrastructure quand vous avez besoin de contrôle et de confidentialité.',
 
     platformTab2: 'Entraînement de modèles santé',
     platformTab2Intro:
-      'Entraînez et évaluez des modèles santé sur des signaux wearables longitudinaux sans reconstruire vos pipelines.',
-    platformTab2F1Title: 'Signaux longitudinaux',
+      'Transformez des signaux wearables continus en modèles que vous pouvez entraîner, comparer et promouvoir — sans reconstruire un pipeline de données santé pour chaque expérience.',
+    platformTab2F1Title: 'Entraînez sur de vrais signaux longitudinaux',
     platformTab2F1Desc:
-      'Utilisez des flux wearables continus comme entrées pour modèles de risque, disponibilité et résultats.',
-    platformTab2F2Title: 'Suivi d’expériences',
+      'Utilisez les flux wearables comme entrées pour modèles de risque, disponibilité, observance et résultats. Vous travaillez avec le même contexte continu que patients et utilisateurs produisent au quotidien.',
+    platformTab2F2Title: 'Comparez les expériences avant la production',
     platformTab2F2Desc:
-      'Comparez versions de modèles, features et cohortes entre recherche et produit.',
-    platformTab2F3Title: 'Évaluation orientée santé',
+      'Suivez versions, features, cohortes et résultats entre recherche et produit. Voyez ce qui a changé, ce qui s’améliore et ce qui régresse — pour décider sur des preuves, pas au feeling.',
+    platformTab2F3Title: 'Évaluez avec des contrôles orientés santé',
     platformTab2F3Desc:
-      'Mesurez la qualité avec des métriques cliniques et bien-être avant la production.',
-    platformTab2F4Title: 'Registre et déploiement',
-    platformTab2F4Desc:
-      'Promouvez les modèles approuvés dans vos workflows avec lignée claire et contrôles d’accès.',
+      'Mesurez les modèles sur des métriques cliniques et bien-être adaptées à votre cas d’usage. Détectez tôt les faiblesses, puis enregistrez et déployez les modèles approuvés dans vos workflows.',
 
     platformTab3: 'MCP pour LLM et agents',
     platformTab3Intro:
-      'Donnez aux agents et LLM un accès sûr et structuré aux données de santé via MCP.',
-    platformTab3F1Title: 'Outils MCP santé',
+      'Laissez agents et LLM travailler sur les données de santé en sécurité via MCP — outils structurés, accès maîtrisés, et compatibilité avec la stack que vous utilisez déjà.',
+    platformTab3F1Title: 'Exposez le contexte santé comme outils appelables',
     platformTab3F1Desc:
-      'Exposez le contexte wearable et clinique comme outils appelables sans glue code sur mesure.',
-    platformTab3F2Title: 'Tout fournisseur LLM',
+      'Les métriques wearables et le contexte clinique deviennent des outils MCP au lieu de glue code sur mesure. Les agents demandent les signaux utiles au coaching, au triage, à la recherche ou aux opérations.',
+    platformTab3F2Title: 'Gardez n’importe quel fournisseur LLM',
     platformTab3F2Desc:
-      'Compatible avec le modèle et la stack d’agents que vous utilisez déjà — sans lock-in LLM.',
-    platformTab3F3Title: 'Workflows prêts pour agents',
+      'Conservez les modèles et frameworks d’agents déjà choisis. TechnoHealth reste la couche données santé sécurisée en dessous, sans devoir reconstruire les intégrations appareils si vous changez de fournisseur.',
+    platformTab3F3Title: 'Gardez confidentialité et contrôle en environnement réglementé',
     platformTab3F3Desc:
-      'Alimentez coaching, support de triage, assistants recherche et agents ops sur des signaux live.',
-    platformTab3F4Title: 'Sécurité et contrôle',
-    platformTab3F4Desc:
-      'Gardez confidentialité, gestion des accès et auto hébergement pour les équipes réglementées.',
+      'Gestion des accès, contrôles de confidentialité et options auto hébergées restent en place pendant que les agents tournent. Les équipes produit et recherche avancent sans céder la propriété des données sensibles.',
 
     useCasesTitle: 'Pour qui nous construisons',
     segment1Title: 'Assureurs santé et vie',
