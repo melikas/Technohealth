@@ -5,7 +5,7 @@ import { useLanguage } from '../context/LanguageContext';
 import { getSiteCopy } from '../config/siteCopy';
 import apiImg from '../assets/platform/api-integration.png';
 import monitoringImg from '../assets/platform/health-monitoring.png';
-import mcpImg from '../assets/platform/mcp_n3.jpg';
+import mcpImg from '../assets/platform/mcp-icon.png';
 
 type PlatformTab = {
   id: string;
@@ -60,10 +60,10 @@ export default function BenefitsPillars() {
       label: t.platformTab3,
       intro: t.platformTab3Intro,
       image: mcpImg,
-      imageAlt: 'AI agent connected to a health data network',
+      imageAlt: 'Devices connected to an AI brain through MCP',
       icon: Bot,
       accent: 'var(--color-brand-blue-deep)',
-      media: 'cover',
+      media: 'icon',
       features: [
         { title: t.platformTab3F1Title, desc: t.platformTab3F1Desc },
         { title: t.platformTab3F2Title, desc: t.platformTab3F2Desc },
@@ -154,6 +154,11 @@ export default function BenefitsPillars() {
                   active.media === 'icon'
                     ? 'w-full max-w-[420px] h-auto object-contain'
                     : 'w-full h-auto max-h-[420px] object-contain object-top'
+                }
+                style={
+                  active.id === 'mcp'
+                    ? { mixBlendMode: 'lighten' }
+                    : undefined
                 }
                 loading="lazy"
               />
