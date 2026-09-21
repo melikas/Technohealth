@@ -38,6 +38,7 @@ export default function Footer() {
         { label: t.footerUseCaseFitness, to: '/solutions' },
         { label: t.footerUseCaseResearch, to: '/solutions' },
         { label: t.footerUseCasePharma, to: '/solutions' },
+        { label: t.footerUseCaseGamification, to: '/solutions' },
       ],
     },
     {

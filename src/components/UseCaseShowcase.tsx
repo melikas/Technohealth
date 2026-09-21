@@ -1,6 +1,12 @@
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import { getSiteCopy } from '../config/siteCopy';
+import insurersImg from '../assets/segments/insurers-v2.jpg';
+import digitalImg from '../assets/segments/digital-v2.jpg';
+import fitnessImg from '../assets/segments/fitness-v7.jpg';
+import researchImg from '../assets/segments/research-v2.jpg';
+import pharmaImg from '../assets/segments/pharma-v2.jpg';
+import gamificationImg from '../assets/segments/gamification.jpg';
 
 export default function UseCaseShowcase() {
   const { language } = useLanguage();
@@ -10,32 +16,39 @@ export default function UseCaseShowcase() {
     {
       title: t.segment1Title,
       desc: t.segment1Desc,
-      image: '/Images/segments/insurers.jpg',
-      alt: 'Health and life insurance planning',
+      image: insurersImg,
+      alt: 'Health analytics dashboard for insurers',
     },
     {
       title: t.segment2Title,
       desc: t.segment2Desc,
-      image: '/Images/segments/digital.jpg',
-      alt: 'Digital health and remote patient monitoring',
+      image: digitalImg,
+      alt: 'Digital health clinician using a tablet',
     },
     {
       title: t.segment3Title,
       desc: t.segment3Desc,
-      image: '/Images/segments/fitness.jpg',
-      alt: 'Fitness and wellness training',
+      image: fitnessImg,
+      alt: 'Athlete wearing a smartwatch during training',
+      objectPosition: 'center',
     },
     {
       title: t.segment4Title,
       desc: t.segment4Desc,
-      image: '/Images/segments/research.jpg',
+      image: researchImg,
       alt: 'Medical research laboratory',
     },
     {
       title: t.segment5Title,
       desc: t.segment5Desc,
-      image: '/Images/segments/pharma.jpg',
-      alt: 'Pharmaceutical research and medicine',
+      image: pharmaImg,
+      alt: 'Pharma team with tablet and clinical monitor',
+    },
+    {
+      title: t.segment6Title,
+      desc: t.segment6Desc,
+      image: gamificationImg,
+      alt: 'Friends celebrating a fitness challenge with wearables',
     },
   ];
 
@@ -49,8 +62,7 @@ export default function UseCaseShowcase() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-14">
-          <h2 className="g-section-title">{t.useCasesTitle}</h2>
-          <p className="g-section-sub max-w-2xl mx-auto">{t.useCasesSub}</p>
+          <h2 className="g-section-title font-semibold">{t.useCasesTitle}</h2>
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-12 max-w-5xl mx-auto">
@@ -65,6 +77,11 @@ export default function UseCaseShowcase() {
                   src={segment.image}
                   alt={segment.alt}
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                  style={
+                    'objectPosition' in segment && segment.objectPosition
+                      ? { objectPosition: segment.objectPosition }
+                      : undefined
+                  }
                   loading="lazy"
                 />
               </div>
