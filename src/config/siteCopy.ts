@@ -48,39 +48,18 @@ const siteCopy = {
     benefit4Desc:
       'Built for regulated teams with privacy controls, access management, and self hosted options.',
 
-    useCasesTitle: 'Real world results',
-    useCasesSub: 'Hospitals, researchers, and wellness companies use TechnoHealth today',
-    readCaseStudies: 'Read case studies',
-    useCase1Industry: 'Remote Patient Monitoring',
-    useCase1Company: 'Digital Health Platform',
-    useCase1Stat: '+25% Readmission Reduction',
-    useCase1Quote:
-      'TechnoHealth unified our wearable integrations in 4 weeks. We now monitor 10,000+ patients with real-time alerts.',
-    useCase2Industry: 'Clinical Research',
-    useCase2Company: 'Medical Research Institute',
-    useCase2Stat: '5,000+ Study Participants',
-    useCase2Quote:
-      'Finally, continuous objective data from research subjects without custom device integrations.',
-    useCase3Industry: 'Corporate Wellness',
-    useCase3Company: 'Fortune 500 Company',
-    useCase3Stat: '30,000 Employees Tracked',
-    useCase3Quote:
-      'Population-level health insights while keeping data on-premise. Mission-critical for privacy.',
-    useCase4Industry: 'Precision Medicine',
-    useCase4Company: 'Healthcare System',
-    useCase4Stat: '+40% Treatment Success',
-    useCase4Quote:
-      'Correlated wearable data with clinical outcomes. Personalized medicine at scale.',
-    useCase5Industry: 'Digital Therapeutics',
-    useCase5Company: 'MedTech Company',
-    useCase5Stat: '+50% Patient Engagement',
-    useCase5Quote:
-      'Real-time biometric feedback powers our AI-driven health coaching platform.',
-    useCase6Industry: 'Aging Care',
-    useCase6Company: 'Senior Living Network',
-    useCase6Stat: '15,000+ Residents',
-    useCase6Quote:
-      'Proactive health monitoring. Alerts caregivers before clinical events occur.',
+    useCasesTitle: 'Who we build for',
+    useCasesSub: 'Segments that can use TechnoHealth today',
+    segment1Title: 'Health & Life Insurers',
+    segment1Desc: 'Bring wearable signals into prevention, risk, and member programs.',
+    segment2Title: 'Digital Health & Remote Patient Monitoring',
+    segment2Desc: 'Connect patient devices into one clinical data path.',
+    segment3Title: 'Fitness & Wellness',
+    segment3Desc: 'Unify consumer wearables for coaching and engagement products.',
+    segment4Title: 'Research Organizations',
+    segment4Desc: 'Collect continuous study data without custom device work.',
+    segment5Title: 'Pharmaceutical Companies',
+    segment5Desc: 'Support digital endpoints and trial monitoring with wearable APIs.',
 
     faqTitle: 'Frequently asked questions',
     faqSub: 'Short answers to the questions we hear most often',
@@ -176,39 +155,18 @@ const siteCopy = {
     benefit4Desc:
       'Conçu pour les équipes réglementées avec contrôles de confidentialité, gestion des accès et options auto hébergées.',
 
-    useCasesTitle: 'Résultats concrets',
-    useCasesSub: 'Hôpitaux, chercheurs et entreprises de bien être utilisent TechnoHealth aujourd’hui',
-    readCaseStudies: 'Lire les études de cas',
-    useCase1Industry: 'Suivi à distance des patients',
-    useCase1Company: 'Plateforme de santé numérique',
-    useCase1Stat: '+25 % de réduction des réadmissions',
-    useCase1Quote:
-      'TechnoHealth a unifié nos intégrations wearables en 4 semaines. Nous suivons maintenant plus de 10 000 patients avec des alertes en temps réel.',
-    useCase2Industry: 'Recherche clinique',
-    useCase2Company: 'Institut de recherche médicale',
-    useCase2Stat: 'Plus de 5 000 participants',
-    useCase2Quote:
-      'Enfin des données continues et objectives sans intégrations d’appareils sur mesure.',
-    useCase3Industry: 'Bien être en entreprise',
-    useCase3Company: 'Entreprise Fortune 500',
-    useCase3Stat: '30 000 employés suivis',
-    useCase3Quote:
-      'Des insights populationnels tout en gardant les données sur site. Essentiel pour la confidentialité.',
-    useCase4Industry: 'Médecine de précision',
-    useCase4Company: 'Système de santé',
-    useCase4Stat: '+40 % de succès thérapeutique',
-    useCase4Quote:
-      'Corrélation des données wearables avec les résultats cliniques. La médecine personnalisée à l’échelle.',
-    useCase5Industry: 'Thérapeutiques numériques',
-    useCase5Company: 'Entreprise MedTech',
-    useCase5Stat: '+50 % d’engagement patient',
-    useCase5Quote:
-      'Le feedback biométrique en temps réel alimente notre coaching santé par IA.',
-    useCase6Industry: 'Soins aux aînés',
-    useCase6Company: 'Réseau de résidences',
-    useCase6Stat: 'Plus de 15 000 résidents',
-    useCase6Quote:
-      'Surveillance proactive. Alerte les soignants avant les événements cliniques.',
+    useCasesTitle: 'Pour qui nous construisons',
+    useCasesSub: 'Segments qui peuvent utiliser TechnoHealth dès maintenant',
+    segment1Title: 'Assureurs santé et vie',
+    segment1Desc: 'Intégrez les signaux wearables dans la prévention, le risque et les programmes membres.',
+    segment2Title: 'Santé numérique et suivi à distance',
+    segment2Desc: 'Connectez les appareils patients dans un seul parcours de données cliniques.',
+    segment3Title: 'Fitness et bien être',
+    segment3Desc: 'Unifiez les wearables grand public pour le coaching et l’engagement.',
+    segment4Title: 'Organisations de recherche',
+    segment4Desc: 'Collectez des données d’étude continues sans intégrations d’appareils sur mesure.',
+    segment5Title: 'Entreprises pharmaceutiques',
+    segment5Desc: 'Soutenez les critères numériques et le suivi d’essais avec des APIs wearables.',
 
     faqTitle: 'Questions fréquentes',
     faqSub: 'Des réponses courtes aux questions qu’on nous pose le plus',
