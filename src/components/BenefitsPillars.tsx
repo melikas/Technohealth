@@ -121,9 +121,7 @@ export default function BenefitsPillars() {
             className={`lg:col-span-5 flex items-center justify-center ${
               active.media === 'cover'
                 ? 'relative min-h-[240px] md:min-h-[420px]'
-                : active.id === 'mcp'
-                  ? 'bg-black py-4 md:py-6'
-                  : 'bg-white py-4 md:py-6'
+                : 'bg-white py-4 md:py-6'
             }`}
           >
             {active.media === 'cover' ? (
