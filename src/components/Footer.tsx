@@ -2,15 +2,9 @@ import { Github, Linkedin, Twitter } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import { getSiteCopy } from '../config/siteCopy';
+import ComplianceBadges from './ComplianceBadges';
 
 type FooterLink = { label: string; to: string } | { label: string; href: string };
-
-const COMPLIANCE_BADGES = [
-  { label: 'Quebec Law 25', src: '/Images/compliance/law25.png' },
-  { label: 'PIPEDA', src: '/Images/compliance/pipeda.png' },
-  { label: 'HIPAA ready', src: '/Images/compliance/hipaa.png' },
-  { label: 'Self hosted', src: '/Images/compliance/self-hosted.png' },
-];
 
 export default function Footer() {
   const { language } = useLanguage();
@@ -121,28 +115,12 @@ export default function Footer() {
           <div className="flex flex-col items-center gap-4 text-center">
             <div>
               <p
-                className="text-xs font-medium mb-3"
-                style={{ color: 'var(--color-text-secondary)' }}
+                className="text-xs font-medium mb-3 tracking-wide uppercase"
+                style={{ color: 'var(--color-text-tertiary)' }}
               >
                 {t.footerCompliantWith}
               </p>
-              <div className="flex flex-wrap items-center justify-center gap-3">
-                {COMPLIANCE_BADGES.map((badge) => (
-                  <Link
-                    key={badge.label}
-                    to="/safety-security"
-                    className="inline-flex items-center no-underline opacity-75 hover:opacity-100 transition-opacity"
-                    title={badge.label}
-                    aria-label={badge.label}
-                  >
-                    <img
-                      src={badge.src}
-                      alt={badge.label}
-                      className="h-8 w-8 object-contain"
-                    />
-                  </Link>
-                ))}
-              </div>
+              <ComplianceBadges />
             </div>
             <p className="text-sm" style={{ color: 'var(--color-text-secondary)' }}>
               {t.footerRights}
