@@ -283,22 +283,27 @@ export default function BenefitsPillars() {
               </div>
             </div>
           ) : (
-            <div className="grid lg:grid-cols-12">
+            <div className="grid lg:grid-cols-12 gap-8 lg:gap-10 items-center">
               <div
-                className={`lg:col-span-5 relative min-h-[240px] md:min-h-[420px] ${
-                  active.id === 'api' ? 'bg-white' : ''
+                className={`lg:col-span-5 flex items-center justify-center ${
+                  active.id === 'api' ? 'bg-white py-4 md:py-6' : 'relative min-h-[240px] md:min-h-[420px]'
                 }`}
               >
-                <img
-                  src={active.image}
-                  alt={active.imageAlt}
-                  className={`absolute inset-0 w-full h-full ${
-                    active.id === 'api' ? 'object-contain p-2 md:p-4' : 'object-cover'
-                  }`}
-                  loading="lazy"
-                />
-                {active.id !== 'api' && (
+                {active.id === 'api' ? (
+                  <img
+                    src={active.image}
+                    alt={active.imageAlt}
+                    className="w-full max-w-[420px] h-auto object-contain"
+                    loading="lazy"
+                  />
+                ) : (
                   <>
+                    <img
+                      src={active.image}
+                      alt={active.imageAlt}
+                      className="absolute inset-0 w-full h-full object-cover"
+                      loading="lazy"
+                    />
                     <div
                       className="absolute inset-0"
                       style={{
