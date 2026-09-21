@@ -51,7 +51,7 @@ const siteCopy = {
     platformTab2: 'Health Monitoring',
     platformTab2Blurb: 'Devices, training, and results',
     platformTab2Intro:
-      'Monitor connected devices in one dashboard — then train models and compare results the way teams use MLflow.',
+      'Monitor connected devices in one dashboard — then train models and compare experiment results in the same product.',
     platformTab2F1Title: 'See every device in the study',
     platformTab2F1Desc:
       'Filter by date and body position, check connection status, and follow sensors like HR and IMU from one management view.',
@@ -61,10 +61,7 @@ const siteCopy = {
     platformTab2F3Title: 'Compare runs and promote winners',
     platformTab2F3Desc:
       'Track accuracy, F1, and status across runs. Keep the best model, catch regressions, and move approved versions into production.',
-    platformMonitorLabel: 'Health monitoring dashboard',
-    platformMonitorAlt: 'TechnoHealth device management dashboard for PAMAP2 sensors',
-    platformRunsTitle: 'Model training & results',
-    platformRunsSub: 'Experiment runs with metrics — MLflow-style tracking',
+    platformMonitorAlt: 'TechnoHealth device management and experiment results screens',
 
     platformTab3: 'MCP for LLM and Agents',
     platformTab3Blurb: 'Agents on health data',
@@ -191,7 +188,7 @@ const siteCopy = {
     platformTab2: 'Suivi de santé',
     platformTab2Blurb: 'Appareils, entraînement et résultats',
     platformTab2Intro:
-      'Suivez les appareils connectés dans un tableau de bord — puis entraînez des modèles et comparez les résultats à la manière de MLflow.',
+      'Suivez les appareils connectés dans un tableau de bord — puis entraînez des modèles et comparez les résultats d’expérience dans le même produit.',
     platformTab2F1Title: 'Voyez chaque appareil de l’étude',
     platformTab2F1Desc:
       'Filtrez par date et position corporelle, vérifiez la connexion, et suivez des capteurs comme HR et IMU dans une seule vue.',
@@ -201,10 +198,7 @@ const siteCopy = {
     platformTab2F3Title: 'Comparez les runs et promouvez les gagnants',
     platformTab2F3Desc:
       'Suivez accuracy, F1 et statut entre runs. Gardez le meilleur modèle, détectez les régressions, et passez les versions approuvées en production.',
-    platformMonitorLabel: 'Tableau de suivi de santé',
-    platformMonitorAlt: 'Tableau de gestion des appareils TechnoHealth pour les capteurs PAMAP2',
-    platformRunsTitle: 'Entraînement et résultats des modèles',
-    platformRunsSub: 'Runs d’expérience avec métriques — suivi façon MLflow',
+    platformMonitorAlt: 'Écrans TechnoHealth de gestion des appareils et de résultats d’expérience',
 
     platformTab3: 'MCP pour LLM et agents',
     platformTab3Blurb: 'Des agents sur les données santé',

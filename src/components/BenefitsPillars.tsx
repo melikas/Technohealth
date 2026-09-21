@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Cable, BrainCircuit, Bot, Activity, CheckCircle2 } from 'lucide-react';
+import { Cable, BrainCircuit, Bot, CheckCircle2 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { getSiteCopy } from '../config/siteCopy';
 import apiImg from '../assets/platform/wear.jpg';
@@ -19,137 +19,116 @@ type PlatformTab = {
   visual: 'image' | 'monitoring';
 };
 
-function ModelRunsPanel({
-  title,
-  subtitle,
-}: {
-  title: string;
-  subtitle: string;
-}) {
+/** Product-style Study & Analysis screen (pairs with the monitoring dashboard). */
+function StudyAnalysisScreen() {
   const runs = [
-    {
-      name: 'hr_risk_v3',
-      status: 'Finished',
-      accuracy: '0.941',
-      f1: '0.918',
-      duration: '12m',
-      best: true,
-    },
-    {
-      name: 'readiness_lstm',
-      status: 'Finished',
-      accuracy: '0.903',
-      f1: '0.887',
-      duration: '28m',
-      best: false,
-    },
-    {
-      name: 'sleep_quality_xgb',
-      status: 'Running',
-      accuracy: '—',
-      f1: '—',
-      duration: '4m',
-      best: false,
-    },
+    { name: 'hr_risk_v3', status: 'Finished', accuracy: '0.941', f1: '0.918', duration: '12m', best: true },
+    { name: 'readiness_lstm', status: 'Finished', accuracy: '0.903', f1: '0.887', duration: '28m', best: false },
+    { name: 'sleep_quality_xgb', status: 'Running', accuracy: '—', f1: '—', duration: '4m', best: false },
   ];
 
   return (
-    <div
-      className="h-full flex flex-col border-t lg:border-t-0 lg:border-l"
-      style={{
-        borderColor: 'var(--color-border)',
-        backgroundColor: 'var(--color-surface)',
-      }}
-    >
-      <div
-        className="px-4 py-3 flex items-center justify-between border-b"
-        style={{ borderColor: 'var(--color-border)', backgroundColor: '#F8FBFF' }}
-      >
-        <div>
-          <div className="text-sm font-semibold" style={{ color: 'var(--color-text)' }}>
-            {title}
-          </div>
-          <div className="text-xs mt-0.5" style={{ color: 'var(--color-text-tertiary)' }}>
-            {subtitle}
-          </div>
-        </div>
-        <span
-          className="text-[11px] font-medium px-2 py-1"
-          style={{ backgroundColor: 'var(--color-surface-info)', color: 'var(--color-brand-blue)' }}
-        >
-          MLflow-style
-        </span>
-      </div>
-
-      <div className="px-4 py-3 grid grid-cols-3 gap-2 border-b" style={{ borderColor: 'var(--color-border)' }}>
-        {[
-          { label: 'Best accuracy', value: '0.941' },
-          { label: 'Runs', value: '18' },
-          { label: 'Active', value: '1' },
-        ].map((metric) => (
-          <div key={metric.label} className="text-center">
-            <div className="text-base font-semibold" style={{ color: 'var(--color-brand-blue)' }}>
-              {metric.value}
-            </div>
-            <div className="text-[11px]" style={{ color: 'var(--color-text-tertiary)' }}>
-              {metric.label}
-            </div>
+    <div className="h-full flex bg-white text-[12px] md:text-[13px]" style={{ color: 'var(--color-text)' }}>
+      <aside className="hidden sm:flex w-[72px] shrink-0 flex-col gap-1 px-2 py-3" style={{ backgroundColor: '#E8F0FE' }}>
+        <div className="h-7 w-7 mx-auto mb-3 rounded-full" style={{ backgroundColor: 'var(--color-brand-blue)' }} />
+        {['Mgmt', 'Ingest', 'Access', 'Study'].map((item, i) => (
+          <div
+            key={item}
+            className="px-1 py-2 text-center text-[10px] leading-tight rounded"
+            style={{
+              backgroundColor: i === 3 ? '#fff' : 'transparent',
+              color: i === 3 ? 'var(--color-brand-blue)' : 'var(--color-text-secondary)',
+              fontWeight: i === 3 ? 600 : 400,
+            }}
+          >
+            {item}
           </div>
         ))}
-      </div>
+      </aside>
 
-      <div className="overflow-x-auto flex-1">
-        <table className="w-full text-left text-xs md:text-sm">
-          <thead>
-            <tr style={{ color: 'var(--color-text-tertiary)', backgroundColor: 'var(--color-surface-alt)' }}>
-              <th className="px-4 py-2 font-medium">Run</th>
-              <th className="px-3 py-2 font-medium">Status</th>
-              <th className="px-3 py-2 font-medium">Accuracy</th>
-              <th className="px-3 py-2 font-medium">F1</th>
-              <th className="px-3 py-2 font-medium">Time</th>
-            </tr>
-          </thead>
-          <tbody>
-            {runs.map((run) => (
-              <tr
-                key={run.name}
-                className="border-t"
-                style={{
-                  borderColor: 'var(--color-border)',
-                  backgroundColor: run.best ? '#F0F7FF' : 'transparent',
-                }}
-              >
-                <td className="px-4 py-2.5 font-medium" style={{ color: 'var(--color-text)' }}>
-                  <span className="inline-flex items-center gap-1.5">
-                    {run.best && <CheckCircle2 className="w-3.5 h-3.5" style={{ color: 'var(--color-success)' }} />}
-                    {run.name}
-                  </span>
-                </td>
-                <td className="px-3 py-2.5">
-                  <span
-                    className="inline-flex px-2 py-0.5 text-[11px] font-medium"
-                    style={{
-                      backgroundColor:
-                        run.status === 'Running' ? '#FEF7E0' : 'var(--color-surface-success)',
-                      color: run.status === 'Running' ? '#B06000' : 'var(--color-success)',
-                    }}
-                  >
-                    {run.status}
-                  </span>
-                </td>
-                <td className="px-3 py-2.5 tabular-nums" style={{ color: 'var(--color-text)' }}>
-                  {run.accuracy}
-                </td>
-                <td className="px-3 py-2.5 tabular-nums" style={{ color: 'var(--color-text)' }}>
-                  {run.f1}
-                </td>
-                <td className="px-3 py-2.5" style={{ color: 'var(--color-text-secondary)' }}>
-                  {run.duration}
-                </td>
+      <div className="flex-1 min-w-0 flex flex-col">
+        <div
+          className="flex items-center justify-between gap-2 px-3 py-2.5 border-b"
+          style={{ borderColor: 'var(--color-border)' }}
+        >
+          <div className="font-medium truncate">PAMAP2_dataset — Experiments</div>
+          <button
+            type="button"
+            className="shrink-0 px-2.5 py-1 text-[11px] font-medium text-white border-0"
+            style={{ backgroundColor: 'var(--color-brand-blue)' }}
+          >
+            New run
+          </button>
+        </div>
+
+        <div className="grid grid-cols-3 gap-2 px-3 py-3 border-b" style={{ borderColor: 'var(--color-border)' }}>
+          {[
+            { label: 'Best accuracy', value: '0.941' },
+            { label: 'Runs', value: '18' },
+            { label: 'Active', value: '1' },
+          ].map((m) => (
+            <div key={m.label} className="rounded px-2 py-2" style={{ backgroundColor: '#F8FBFF' }}>
+              <div className="text-sm font-semibold" style={{ color: 'var(--color-brand-blue)' }}>
+                {m.value}
+              </div>
+              <div className="text-[10px]" style={{ color: 'var(--color-text-tertiary)' }}>
+                {m.label}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="overflow-x-auto flex-1">
+          <table className="w-full text-left">
+            <thead>
+              <tr style={{ color: 'var(--color-text-tertiary)', backgroundColor: '#F8F9FA' }}>
+                <th className="px-3 py-2 font-medium">Run</th>
+                <th className="px-2 py-2 font-medium">Status</th>
+                <th className="px-2 py-2 font-medium">Acc.</th>
+                <th className="px-2 py-2 font-medium">F1</th>
+                <th className="px-2 py-2 font-medium">Time</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {runs.map((run) => (
+                <tr
+                  key={run.name}
+                  className="border-t"
+                  style={{
+                    borderColor: 'var(--color-border)',
+                    backgroundColor: run.best ? '#F0F7FF' : 'transparent',
+                  }}
+                >
+                  <td className="px-3 py-2 font-medium">
+                    <span className="inline-flex items-center gap-1">
+                      {run.best && (
+                        <CheckCircle2 className="w-3.5 h-3.5" style={{ color: 'var(--color-success)' }} />
+                      )}
+                      {run.name}
+                    </span>
+                  </td>
+                  <td className="px-2 py-2">
+                    <span
+                      className="inline-flex px-1.5 py-0.5 text-[10px] font-medium rounded-sm"
+                      style={{
+                        backgroundColor:
+                          run.status === 'Running' ? '#FEF7E0' : 'var(--color-surface-success)',
+                        color: run.status === 'Running' ? '#B06000' : 'var(--color-success)',
+                      }}
+                    >
+                      {run.status}
+                    </span>
+                  </td>
+                  <td className="px-2 py-2 tabular-nums">{run.accuracy}</td>
+                  <td className="px-2 py-2 tabular-nums">{run.f1}</td>
+                  <td className="px-2 py-2" style={{ color: 'var(--color-text-secondary)' }}>
+                    {run.duration}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
@@ -286,23 +265,18 @@ export default function BenefitsPillars() {
         >
           {active.visual === 'monitoring' ? (
             <div className="grid lg:grid-cols-12">
-              <div className="lg:col-span-7 relative bg-[#F3F6FA]">
-                <div
-                  className="px-4 py-2.5 flex items-center gap-2 border-b text-sm font-medium"
-                  style={{ borderColor: 'var(--color-border)', color: 'var(--color-text)' }}
-                >
-                  <Activity className="w-4 h-4" style={{ color: active.accent }} />
-                  {t.platformMonitorLabel}
+              <div className="lg:col-span-12 grid md:grid-cols-2 bg-[#F3F6FA]">
+                <div className="border-b md:border-b-0 md:border-r" style={{ borderColor: 'var(--color-border)' }}>
+                  <img
+                    src={monitoringImg}
+                    alt={t.platformMonitorAlt}
+                    className="w-full h-full min-h-[240px] max-h-[380px] object-cover object-top"
+                    loading="lazy"
+                  />
                 </div>
-                <img
-                  src={monitoringImg}
-                  alt={t.platformMonitorAlt}
-                  className="w-full h-auto object-contain object-top max-h-[360px] md:max-h-[420px]"
-                  loading="lazy"
-                />
-              </div>
-              <div className="lg:col-span-5 min-h-[280px]">
-                <ModelRunsPanel title={t.platformRunsTitle} subtitle={t.platformRunsSub} />
+                <div className="min-h-[280px] max-h-[380px] overflow-hidden">
+                  <StudyAnalysisScreen />
+                </div>
               </div>
               <div
                 className="lg:col-span-12 p-6 md:p-8 border-t grid md:grid-cols-2 gap-8"
