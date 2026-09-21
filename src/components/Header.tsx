@@ -27,10 +27,10 @@ export default function Header() {
   const isActive = (path: string) => location.pathname === path;
 
   const serviceItems = [
-    { label: t.serviceAiTools, path: '/services' },
-    { label: t.serviceApp, path: '/services' },
-    { label: t.serviceDevices, path: '/data-sources' },
-    { label: t.serviceApis, path: '/docs' },
+    { label: t.footerApiDocs, path: '/docs#api' },
+    { label: t.footerResearchDashboard, path: '/schedule-demo' },
+    { label: t.footerMcp, path: '/docs#mcp' },
+    { label: t.footerSdk, path: '/docs#sdk-react' },
   ];
 
   const navLinks = [
