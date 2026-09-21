@@ -5,7 +5,7 @@ import { useLanguage } from '../context/LanguageContext';
 import { getSiteCopy } from '../config/siteCopy';
 import apiImg from '../assets/platform/api-integration.png';
 import monitoringImg from '../assets/platform/health-monitoring.png';
-import mcpImg from '../assets/platform/mcp-devices-brain.png';
+import mcpImg from '../assets/platform/mcp-icon.png';
 
 type PlatformTab = {
   id: string;
@@ -156,7 +156,9 @@ export default function BenefitsPillars() {
                 alt={active.imageAlt}
                 className={
                   active.media === 'icon'
-                    ? 'w-full max-w-[480px] h-auto object-contain'
+                    ? active.id === 'mcp'
+                      ? 'w-full max-w-[360px] h-auto object-contain'
+                      : 'w-full max-w-[420px] h-auto object-contain'
                     : 'w-full h-auto max-h-[420px] object-contain object-top'
                 }
                 loading="lazy"
