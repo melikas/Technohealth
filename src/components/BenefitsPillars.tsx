@@ -5,7 +5,10 @@ import { useLanguage } from '../context/LanguageContext';
 import { getSiteCopy } from '../config/siteCopy';
 import apiImg from '../assets/platform/api-integration.png';
 import monitoringImg from '../assets/platform/health-monitoring.png';
+import routinesImg from '../assets/platform/routine-anomalies.png';
 import mcpImg from '../assets/platform/mcp-icon.png';
+
+type Shot = { src: string; alt: string; label: string };
 
 type PlatformTab = {
   id: string;
@@ -16,8 +19,9 @@ type PlatformTab = {
   icon: typeof Cable;
   accent: string;
   features: { title: string; desc: string }[];
-  /** How to render the media: icon (contain), shot (dashboard contain), cover (photo) */
   media: 'icon' | 'shot' | 'cover';
+  /** Extra screenshots for Health Monitoring (and similar) */
+  shots?: Shot[];
 };
 
 export default function BenefitsPillars() {
@@ -49,6 +53,18 @@ export default function BenefitsPillars() {
       icon: BrainCircuit,
       accent: 'var(--color-brand-blue-mid)',
       media: 'shot',
+      shots: [
+        {
+          src: monitoringImg,
+          alt: t.platformMonitorAlt,
+          label: t.platformMonitorShotDevices,
+        },
+        {
+          src: routinesImg,
+          alt: t.platformMonitorAltRoutines,
+          label: t.platformMonitorShotRoutines,
+        },
+      ],
       features: [
         { title: t.platformTab2F1Title, desc: t.platformTab2F1Desc },
         { title: t.platformTab2F2Title, desc: t.platformTab2F2Desc },
@@ -73,8 +89,18 @@ export default function BenefitsPillars() {
   ];
 
   const [activeId, setActiveId] = useState(tabs[0].id);
+  const [shotIndex, setShotIndex] = useState(0);
   const active = tabs.find((tab) => tab.id === activeId) ?? tabs[0];
   const ActiveIcon = active.icon;
+  const shots = active.shots;
+  const activeShot = shots?.[shotIndex] ?? shots?.[0];
+  const displaySrc = activeShot?.src ?? active.image;
+  const displayAlt = activeShot?.alt ?? active.imageAlt;
+
+  const selectTab = (id: string) => {
+    setActiveId(id);
+    setShotIndex(0);
+  };
 
   return (
     <section
@@ -92,7 +118,7 @@ export default function BenefitsPillars() {
               <button
                 key={tab.id}
                 type="button"
-                onClick={() => setActiveId(tab.id)}
+                onClick={() => selectTab(tab.id)}
                 className="relative pb-3 text-base md:text-lg font-medium tracking-tight transition-colors bg-transparent border-0 cursor-pointer"
                 style={{
                   color: isActive ? 'var(--color-brand-blue)' : 'var(--color-text-secondary)',
@@ -120,7 +146,7 @@ export default function BenefitsPillars() {
           <div
             className={`${
               active.id === 'mcp' ? 'lg:col-span-6' : 'lg:col-span-5'
-            } flex items-center justify-center ${
+            } flex flex-col items-center justify-center ${
               active.media === 'cover'
                 ? 'relative min-h-[240px] md:min-h-[420px]'
                 : active.id === 'mcp'
@@ -131,8 +157,8 @@ export default function BenefitsPillars() {
             {active.media === 'cover' ? (
               <>
                 <img
-                  src={active.image}
-                  alt={active.imageAlt}
+                  src={displaySrc}
+                  alt={displayAlt}
                   className="absolute inset-0 w-full h-full object-cover"
                   loading="lazy"
                 />
@@ -153,18 +179,44 @@ export default function BenefitsPillars() {
                 </div>
               </>
             ) : (
-              <img
-                src={active.image}
-                alt={active.imageAlt}
-                className={
-                  active.media === 'icon'
-                    ? active.id === 'mcp'
-                      ? 'w-full max-w-[540px] h-auto object-contain scale-105'
-                      : 'w-full max-w-[420px] h-auto object-contain'
-                    : 'w-full h-auto max-h-[420px] object-contain object-top'
-                }
-                loading="lazy"
-              />
+              <>
+                <img
+                  key={displaySrc}
+                  src={displaySrc}
+                  alt={displayAlt}
+                  className={
+                    active.media === 'icon'
+                      ? active.id === 'mcp'
+                        ? 'w-full max-w-[540px] h-auto object-contain scale-105'
+                        : 'w-full max-w-[420px] h-auto object-contain'
+                      : 'w-full h-auto max-h-[440px] object-contain object-top'
+                  }
+                  loading="lazy"
+                />
+                {shots && shots.length > 1 ? (
+                  <div className="flex items-center justify-center gap-2 mt-4">
+                    {shots.map((shot, index) => {
+                      const selected = index === shotIndex;
+                      return (
+                        <button
+                          key={shot.label}
+                          type="button"
+                          onClick={() => setShotIndex(index)}
+                          className="px-3 py-1.5 text-xs font-medium rounded-full border transition-colors cursor-pointer"
+                          style={{
+                            borderColor: selected ? active.accent : 'var(--color-border)',
+                            backgroundColor: selected ? 'var(--color-surface-info)' : 'transparent',
+                            color: selected ? active.accent : 'var(--color-text-secondary)',
+                          }}
+                          aria-pressed={selected}
+                        >
+                          {shot.label}
+                        </button>
+                      );
+                    })}
+                  </div>
+                ) : null}
+              </>
             )}
           </div>
 

@@ -47,17 +47,20 @@ const siteCopy = {
 
     platformTab2: 'Health Monitoring',
     platformTab2Intro:
-      'Monitor connected devices in one dashboard — then train models and compare experiment results in the same product.',
+      'Monitor connected devices, spot daily routines, and catch anomalies — then train models in the same product.',
     platformTab2F1Title: 'See every device in the study',
     platformTab2F1Desc:
       'Filter by date and body position, check connection status, and follow sensors like HR and IMU from one management view.',
-    platformTab2F2Title: 'Train models on those signals',
+    platformTab2F2Title: 'Detect routines and anomalies',
     platformTab2F2Desc:
-      'Turn continuous streams into risk, readiness, and outcome models without rebuilding a separate data pipeline.',
-    platformTab2F3Title: 'Compare runs and promote winners',
+      'Heatmaps show what users usually do across the day. Alerts flag abnormal sleep, missed meals, and unusual night activity.',
+    platformTab2F3Title: 'Train models on those signals',
     platformTab2F3Desc:
-      'Track accuracy, F1, and status across runs. Keep the best model, catch regressions, and move approved versions into production.',
-    platformMonitorAlt: 'TechnoHealth Data Ingestion dashboard with experiment upload and jobs',
+      'Turn continuous streams into risk, readiness, and outcome models — then compare runs and promote winners.',
+    platformMonitorAlt: 'TechnoHealth device management dashboard',
+    platformMonitorAltRoutines: 'TechnoHealth Routine Detection and Anomalies dashboard',
+    platformMonitorShotDevices: 'Devices',
+    platformMonitorShotRoutines: 'Routines',
 
     platformTab3: 'MCP for LLM and Agents',
     platformTab3Intro: 'Give any LLM or agent structured tools for health data — without giving up control.',
@@ -179,17 +182,20 @@ const siteCopy = {
 
     platformTab2: 'Suivi de santé',
     platformTab2Intro:
-      'Suivez les appareils connectés dans un tableau de bord — puis entraînez des modèles et comparez les résultats d’expérience dans le même produit.',
+      'Suivez les appareils connectés, repérez les routines quotidiennes et les anomalies — puis entraînez des modèles dans le même produit.',
     platformTab2F1Title: 'Voyez chaque appareil de l’étude',
     platformTab2F1Desc:
       'Filtrez par date et position corporelle, vérifiez la connexion, et suivez des capteurs comme HR et IMU dans une seule vue.',
-    platformTab2F2Title: 'Entraînez des modèles sur ces signaux',
+    platformTab2F2Title: 'Détectez routines et anomalies',
     platformTab2F2Desc:
-      'Transformez des flux continus en modèles de risque, disponibilité et résultats sans reconstruire un pipeline séparé.',
-    platformTab2F3Title: 'Comparez les runs et promouvez les gagnants',
+      'Les heatmaps montrent l’activité habituelle sur la journée. Les alertes signalent sommeil anormal, repas manqués et activité nocturne inhabituelle.',
+    platformTab2F3Title: 'Entraînez des modèles sur ces signaux',
     platformTab2F3Desc:
-      'Suivez accuracy, F1 et statut entre runs. Gardez le meilleur modèle, détectez les régressions, et passez les versions approuvées en production.',
-    platformMonitorAlt: 'Tableau TechnoHealth Data Ingestion avec upload d’expérience et jobs',
+      'Transformez des flux continus en modèles de risque, disponibilité et résultats — puis comparez les runs et promouvez les gagnants.',
+    platformMonitorAlt: 'Tableau de gestion des appareils TechnoHealth',
+    platformMonitorAltRoutines: 'Tableau Routine Detection and Anomalies de TechnoHealth',
+    platformMonitorShotDevices: 'Appareils',
+    platformMonitorShotRoutines: 'Routines',
 
     platformTab3: 'MCP pour LLM et agents',
     platformTab3Intro: 'Donnez à tout LLM ou agent des outils structurés sur les données santé — sans perdre le contrôle.',
