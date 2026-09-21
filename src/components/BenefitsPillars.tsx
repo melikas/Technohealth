@@ -5,7 +5,7 @@ import { useLanguage } from '../context/LanguageContext';
 import { getSiteCopy } from '../config/siteCopy';
 import apiImg from '../assets/platform/api-integration.png';
 import monitoringImg from '../assets/platform/health-monitoring.png';
-import mcpImg from '../assets/platform/mcp-icon.png';
+import mcpImg from '../assets/platform/mcp-devices-brain.png';
 
 type PlatformTab = {
   id: string;
@@ -119,7 +119,11 @@ export default function BenefitsPillars() {
         >
           <div
             className={`lg:col-span-5 flex items-center justify-center ${
-              active.media === 'cover' ? 'relative min-h-[240px] md:min-h-[420px]' : 'bg-white py-4 md:py-6'
+              active.media === 'cover'
+                ? 'relative min-h-[240px] md:min-h-[420px]'
+                : active.id === 'mcp'
+                  ? 'bg-black py-4 md:py-6'
+                  : 'bg-white py-4 md:py-6'
             }`}
           >
             {active.media === 'cover' ? (
@@ -152,13 +156,8 @@ export default function BenefitsPillars() {
                 alt={active.imageAlt}
                 className={
                   active.media === 'icon'
-                    ? 'w-full max-w-[420px] h-auto object-contain'
+                    ? 'w-full max-w-[480px] h-auto object-contain'
                     : 'w-full h-auto max-h-[420px] object-contain object-top'
-                }
-                style={
-                  active.id === 'mcp'
-                    ? { mixBlendMode: 'lighten' }
-                    : undefined
                 }
                 loading="lazy"
               />
