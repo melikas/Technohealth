@@ -52,12 +52,8 @@ export default function GetStartedPage() {
         website: '',
         message: '',
       });
-    } catch (err) {
-      setError(
-        err instanceof Error
-          ? err.message
-          : 'Something went wrong. Please try again in a moment.'
-      );
+    } catch {
+      setError('We could not send your request. Please try again in a moment.');
     } finally {
       setSubmitting(false);
     }

@@ -1,15 +1,15 @@
 /**
- * Sends lead forms to your inbox (no backend).
+ * Lead form delivery.
  *
- * Primary: Web3Forms (set VITE_WEB3FORMS_KEY in .env / Vercel)
- * Fallback: FormSubmit → melikamirzaseyedi@gmail.com
- *
- * FormSubmit requires a one-time "Activate Form" click in Gmail
- * (check Spam). Until then submissions look OK in the browser but
- * no email is delivered — we now surface that error clearly.
+ * 1) Web3Forms if VITE_WEB3FORMS_KEY is set (recommended — automatic email)
+ * 2) FormSubmit to VITE_LEAD_INBOX / melikamirzaseyedi@gmail.com
+ * 3) mailto fallback to the same inbox (never show setup errors to visitors)
  */
 
 const DEFAULT_INBOX = 'melikamirzaseyedi@gmail.com';
+
+const CUSTOMER_ERROR =
+  'We could not send your request automatically. Please try again, or email us and we will follow up.';
 
 export function getLeadInbox(): string {
   return (
@@ -29,6 +29,11 @@ export type LeadPayload = {
   meta?: Record<string, string>;
 };
 
+export type LeadSubmitResult = {
+  /** api = emailed automatically; mailto = visitor must hit Send in their mail app */
+  via: 'api' | 'mailto';
+};
+
 export class LeadSubmitError extends Error {
   constructor(
     message: string,
@@ -39,13 +44,56 @@ export class LeadSubmitError extends Error {
   }
 }
 
-export async function submitLead(payload: LeadPayload): Promise<void> {
+export function buildMailtoUrl(payload: LeadPayload): string {
+  const metaLines = payload.meta
+    ? Object.entries(payload.meta)
+        .filter(([, v]) => v)
+        .map(([k, v]) => `${k}: ${v}`)
+        .join('\n')
+    : '';
+
+  const body = [
+    `Name: ${payload.name}`,
+    `Email: ${payload.email}`,
+    '',
+    payload.message,
+    metaLines ? `\n${metaLines}` : '',
+  ]
+    .filter((line) => line !== undefined)
+    .join('\n');
+
+  const params = new URLSearchParams({
+    subject: payload.subject,
+    body,
+  });
+
+  return `mailto:${getLeadInbox()}?${params.toString()}`;
+}
+
+export async function submitLead(payload: LeadPayload): Promise<LeadSubmitResult> {
   const web3Key = getWeb3FormsKey();
+
   if (web3Key) {
-    await submitViaWeb3Forms(web3Key, payload);
-    return;
+    try {
+      await submitViaWeb3Forms(web3Key, payload);
+      return { via: 'api' };
+    } catch {
+      // fall through to FormSubmit / mailto
+    }
   }
-  await submitViaFormSubmit(payload);
+
+  try {
+    await submitViaFormSubmit(payload);
+    return { via: 'api' };
+  } catch (err) {
+    // FormSubmit often needs a one-time Activate click by the inbox owner.
+    // Never surface that to customers — fall back to mailto → real Gmail inbox.
+    if (typeof window !== 'undefined') {
+      window.location.href = buildMailtoUrl(payload);
+      return { via: 'mailto' };
+    }
+    throw new LeadSubmitError(CUSTOMER_ERROR, 'unknown');
+  }
 }
 
 async function submitViaWeb3Forms(accessKey: string, payload: LeadPayload): Promise<void> {
@@ -80,10 +128,7 @@ async function submitViaWeb3Forms(accessKey: string, payload: LeadPayload): Prom
   } | null;
 
   if (!res.ok || !data?.success) {
-    throw new LeadSubmitError(
-      data?.message || `Web3Forms failed (${res.status})`,
-      'network'
-    );
+    throw new LeadSubmitError(data?.message || `Web3Forms failed (${res.status})`, 'network');
   }
 }
 
@@ -118,7 +163,7 @@ async function submitViaFormSubmit(payload: LeadPayload): Promise<void> {
       body: JSON.stringify(body),
     });
   } catch {
-    throw new LeadSubmitError('Network error while sending your request.', 'network');
+    throw new LeadSubmitError(CUSTOMER_ERROR, 'network');
   }
 
   const data = (await res.json().catch(() => null)) as {
@@ -132,12 +177,10 @@ async function submitViaFormSubmit(payload: LeadPayload): Promise<void> {
     String(data?.success).toLowerCase() === 'true';
 
   if (!res.ok || !ok) {
-    const msg = data?.message || `Lead submit failed (${res.status})`;
+    const msg = data?.message || '';
     const needsActivation = /activat/i.test(msg);
     throw new LeadSubmitError(
-      needsActivation
-        ? 'Form delivery is not activated yet. Open Gmail for melikamirzaseyedi@gmail.com, find the FormSubmit “Activate Form” email (check Spam), click Activate, then try again.'
-        : msg,
+      CUSTOMER_ERROR,
       needsActivation ? 'activation' : 'unknown'
     );
   }

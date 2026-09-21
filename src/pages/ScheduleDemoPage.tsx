@@ -54,6 +54,7 @@ export default function ScheduleDemoPage() {
   const [time, setTime] = useState('');
   const [note, setNote] = useState('');
   const [sent, setSent] = useState(false);
+  const [sentViaMailto, setSentViaMailto] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
 
@@ -77,7 +78,7 @@ export default function ScheduleDemoPage() {
     setError('');
 
     try {
-      await submitLead({
+      const result = await submitLead({
         name,
         email,
         subject: 'Demo request — TechnoHealth',
@@ -96,13 +97,10 @@ export default function ScheduleDemoPage() {
           source: 'schedule-demo',
         },
       });
+      setSentViaMailto(result.via === 'mailto');
       setSent(true);
-    } catch (err) {
-      setError(
-        err instanceof Error
-          ? err.message
-          : 'Something went wrong. Please try again in a moment.'
-      );
+    } catch {
+      setError('We could not send your request. Please try again in a moment.');
     } finally {
       setSubmitting(false);
     }
@@ -176,18 +174,25 @@ export default function ScheduleDemoPage() {
                   <div className="p-6 md:p-8 bg-white">
                     {sent ? (
                       <div className="flex flex-col items-center justify-center text-center min-h-[360px] gap-3">
-                        <CheckCircle className="w-10 h-10 text-[#34A853]" strokeWidth={1.75} />
-                        <p className="text-[17px] font-medium text-[#111]">Request received</p>
-                        <p className="text-[14px] text-[#666] max-w-xs">
-                          Thanks — we got your preferred time and will confirm with a calendar invite soon.
-                        </p>
-                        <button
-                          type="button"
-                          onClick={() => setSent(false)}
-                          className="mt-2 text-sm text-[#555] underline bg-transparent border-0 cursor-pointer"
-                        >
-                          Request another time
-                        </button>
+                      <CheckCircle className="w-10 h-10 text-[#34A853]" strokeWidth={1.75} />
+                      <p className="text-[17px] font-medium text-[#111]">
+                        {sentViaMailto ? 'Almost done' : 'Request received'}
+                      </p>
+                      <p className="text-[14px] text-[#666] max-w-xs">
+                        {sentViaMailto
+                          ? 'Your email app should open with the request. Hit Send and we will confirm your demo time.'
+                          : 'Thanks — we got your preferred time and will confirm with a calendar invite soon.'}
+                      </p>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setSent(false);
+                          setSentViaMailto(false);
+                        }}
+                        className="mt-2 text-sm text-[#555] underline bg-transparent border-0 cursor-pointer"
+                      >
+                        Request another time
+                      </button>
                       </div>
                     ) : (
                       <form onSubmit={handleSubmit} className="space-y-4 max-w-md">

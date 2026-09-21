@@ -22,6 +22,7 @@ export default function ContactPage() {
     message: '',
   });
   const [submitted, setSubmitted] = useState(false);
+  const [sentViaMailto, setSentViaMailto] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
 
@@ -43,7 +44,7 @@ export default function ContactPage() {
     const topic = SUBJECT_LABEL[formData.subject] || 'Message';
 
     try {
-      await submitLead({
+      const result = await submitLead({
         name: formData.name,
         email: formData.email,
         subject: `[TechnoHealth Contact] ${topic}`,
@@ -54,13 +55,10 @@ export default function ContactPage() {
           source: 'contact',
         },
       });
+      setSentViaMailto(result.via === 'mailto');
       setSubmitted(true);
-    } catch (err) {
-      setError(
-        err instanceof Error
-          ? err.message
-          : 'Something went wrong. Please try again in a moment.'
-      );
+    } catch {
+      setError('We could not send your message. Please try again in a moment.');
     } finally {
       setSubmitting(false);
     }
@@ -102,14 +100,19 @@ export default function ContactPage() {
             {submitted ? (
               <div className="text-center py-10">
                 <CheckCircle className="w-10 h-10 text-[#1E8E3E] mx-auto mb-3" strokeWidth={1.75} />
-                <h3 className="text-lg font-medium text-[#111] mb-2">Message received</h3>
+                <h3 className="text-lg font-medium text-[#111] mb-2">
+                  {sentViaMailto ? 'Almost done' : 'Message received'}
+                </h3>
                 <p className="text-sm text-[#666] max-w-sm mx-auto mb-4">
-                  Thanks — we got your message and will reply soon.
+                  {sentViaMailto
+                    ? 'Your email app should open with the message. Hit Send and we will reply soon.'
+                    : 'Thanks — we got your message and will reply soon.'}
                 </p>
                 <button
                   type="button"
                   onClick={() => {
                     setSubmitted(false);
+                    setSentViaMailto(false);
                     setError('');
                     setFormData({
                       name: '',

@@ -21,6 +21,7 @@ export default function RequestDemoModal() {
   const [form, setForm] = useState<FormState>(initialForm);
   const [submitting, setSubmitting] = useState(false);
   const [sent, setSent] = useState(false);
+  const [sentViaMailto, setSentViaMailto] = useState(false);
   const [error, setError] = useState('');
 
   useEffect(() => {
@@ -28,6 +29,7 @@ export default function RequestDemoModal() {
       setOpen(true);
       setForm(initialForm);
       setSent(false);
+      setSentViaMailto(false);
       setError('');
       setSubmitting(false);
     };
@@ -65,16 +67,17 @@ export default function RequestDemoModal() {
     setError('');
 
     try {
-      await submitLead({
+      const result = await submitLead({
         name: form.name,
         email: form.email,
         subject: 'Demo request — TechnoHealth',
         message: form.needs,
         meta: { source: 'request-demo-modal' },
       });
+      setSentViaMailto(result.via === 'mailto');
       setSent(true);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Something went wrong. Please try again.');
+    } catch {
+      setError('We could not send your request. Please try again.');
     } finally {
       setSubmitting(false);
     }
@@ -134,10 +137,12 @@ export default function RequestDemoModal() {
         {sent ? (
           <div className="p-8 text-center space-y-2">
             <p className="text-base font-medium" style={{ color: 'var(--color-text)' }}>
-              Request received
+              {sentViaMailto ? 'Almost done' : 'Request received'}
             </p>
             <p className="text-sm" style={{ color: 'var(--color-text-secondary)' }}>
-              Thanks — we will email you shortly to schedule the demo.
+              {sentViaMailto
+                ? 'Your email app should open with the request. Hit Send and we will follow up.'
+                : 'Thanks — we will email you shortly to schedule the demo.'}
             </p>
             <button type="button" onClick={() => setOpen(false)} className="g-btn-primary w-full mt-4">
               Close
