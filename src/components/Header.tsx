@@ -49,7 +49,7 @@ export default function Header() {
       aria-label={t.switchLanguage}
       title={t.switchLanguage}
     >
-      {language}
+      {language === 'en' ? 'FR' : 'EN'}
     </button>
   );
 
