@@ -62,7 +62,9 @@ export default function UseCaseShowcase() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-14">
-          <h2 className="g-section-title font-semibold">{t.useCasesTitle}</h2>
+          <h2 className="g-wordmark text-3xl md:text-4xl font-medium tracking-tight">
+            {t.useCasesTitle}
+          </h2>
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-12 max-w-5xl mx-auto">
