@@ -84,9 +84,9 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 sm:gap-12 mb-12 text-center sm:text-left max-w-3xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 sm:gap-12 mb-12 text-center max-w-3xl mx-auto">
           {columns.map((col) => (
-            <div key={col.title} className="flex flex-col items-center sm:items-start">
+            <div key={col.title} className="flex flex-col items-center">
               <h4 className="text-sm font-medium mb-4" style={{ color: 'var(--color-text)' }}>
                 {col.title}
               </h4>
