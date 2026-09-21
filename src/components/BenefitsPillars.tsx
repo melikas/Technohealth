@@ -286,7 +286,7 @@ export default function BenefitsPillars() {
             <div className="grid lg:grid-cols-12 gap-8 lg:gap-10 items-center">
               <div
                 className={`lg:col-span-5 flex items-center justify-center ${
-                  active.id === 'api' ? 'bg-white py-4 md:py-6' : 'relative min-h-[240px] md:min-h-[420px]'
+                  active.id === 'api' ? 'bg-black py-4 md:py-6' : 'relative min-h-[240px] md:min-h-[420px]'
                 }`}
               >
                 {active.id === 'api' ? (
