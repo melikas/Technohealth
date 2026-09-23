@@ -85,16 +85,6 @@ export default function TermsOfUsePage() {
             <p className="mt-5 text-[15px] leading-relaxed" style={{ color: 'var(--color-text-secondary)' }}>
               {t.intro}
             </p>
-            <p
-              className="mt-4 text-sm leading-relaxed rounded-lg border px-4 py-3"
-              style={{
-                borderColor: 'var(--color-border)',
-                backgroundColor: 'var(--color-surface-alt)',
-                color: 'var(--color-text-secondary)',
-              }}
-            >
-              {t.disclaimer}
-            </p>
           </div>
 
           <div className="grid lg:grid-cols-[220px_1fr] gap-10 lg:gap-14 items-start">

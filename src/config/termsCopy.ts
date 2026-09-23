@@ -15,7 +15,6 @@ type TermsCopy = {
   effectiveDate: string;
   updatedDate: string;
   intro: string;
-  disclaimer: string;
   relatedPrivacy: string;
   relatedPrivacyCta: string;
   sections: TermsSection[];
@@ -30,8 +29,6 @@ const en: TermsCopy = {
   updatedDate: 'September 23, 2026',
   intro:
     'These Terms of Use govern access to and use of the TechnoHealth website and software platform. Please read them carefully. By accessing or using TechnoHealth, you agree to these Terms and acknowledge our Privacy Policy.',
-  disclaimer:
-    'This document is a working Terms of Use draft for TechnoHealth. It is not a substitute for advice from a Québec lawyer. Placeholders in [brackets] must be completed before relying on this document in production.',
   relatedPrivacy: 'How we collect and handle personal information is described in our Privacy Policy.',
   relatedPrivacyCta: 'Read the Privacy Policy',
   sections: [
@@ -163,8 +160,6 @@ const fr: TermsCopy = {
   updatedDate: '23 septembre 2026',
   intro:
     'Les présentes Conditions d’utilisation régissent l’accès et l’utilisation du site et de la plateforme logicielle TechnoHealth. Veuillez les lire attentivement. En accédant à TechnoHealth ou en l’utilisant, vous acceptez ces Conditions et reconnaissez notre Politique de confidentialité.',
-  disclaimer:
-    'Ce document est un brouillon de Conditions d’utilisation pour TechnoHealth. Il ne remplace pas les conseils d’un avocat du Québec. Les mentions entre [crochets] doivent être complétées avant toute utilisation en production.',
   relatedPrivacy:
     'La collecte et le traitement des renseignements personnels sont décrits dans notre Politique de confidentialité.',
   relatedPrivacyCta: 'Lire la Politique de confidentialité',
