@@ -3,10 +3,8 @@ import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import {
-  AiReadyVisual,
   HeroFlowVisual,
   MessyUsableVisual,
-  PipelineVisual,
   ProvenanceVisual,
   RoutineVisual,
   SignalOrSensorVisual,
@@ -204,48 +202,9 @@ export default function AboutPage() {
             provenance, handle missingness, align data over time, prepare it for analysis, and make
             sense of longitudinal changes.
           </p>
-          <p className="text-[15px] leading-relaxed max-w-2xl mb-10" style={{ color: 'var(--color-text-secondary)' }}>
+          <p className="text-[15px] leading-relaxed max-w-2xl" style={{ color: 'var(--color-text-secondary)' }}>
             TechnoHealth brings those steps into the same workspace.
           </p>
-          <PipelineVisual />
-          <div className="mt-10">
-            <AiReadyVisual />
-          </div>
-        </div>
-      </section>
-
-      {/* Current stage */}
-      <section className="relative py-20 md:py-28 px-5 overflow-hidden">
-        <img
-          src="/Images/about/pilot-research.jpg"
-          alt="Research and health team collaboration"
-          className="absolute inset-0 w-full h-full object-cover"
-          loading="lazy"
-        />
-        <div className="absolute inset-0" style={{ backgroundColor: 'rgba(13,71,161,0.88)' }} />
-        <div className="relative z-10 max-w-3xl mx-auto text-center text-white">
-          <p className="text-xs font-semibold uppercase tracking-[0.14em] mb-3 text-white/70">
-            Current stage
-          </p>
-          <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight leading-snug mb-5">
-            The core prototype is working. Now we&apos;re testing it in the real world.
-          </h2>
-          <p className="text-base leading-relaxed text-white/90 mb-4">
-            TechnoHealth can already ingest and structure multimodal longitudinal sensor data and
-            provide an environment to explore and analyze it.
-          </p>
-          <p className="text-base leading-relaxed text-white/90 mb-8">
-            We are currently looking for pilot partners with existing wearable-data workflows to test
-            the platform on real data, measure where it saves time, and identify which routine and
-            data-quality insights create the most value.
-          </p>
-          <Link
-            to="/schedule-demo"
-            className="inline-flex items-center justify-center px-6 py-2.5 text-sm font-medium rounded-full no-underline transition-colors"
-            style={{ backgroundColor: '#FFFFFF', color: 'var(--color-brand-blue-deep)' }}
-          >
-            Explore a pilot with us
-          </Link>
         </div>
       </section>
 
