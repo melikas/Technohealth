@@ -193,3 +193,27 @@
     -webkit-text-fill-color: transparent;
   }
 }
+
+/* About page flow animation */
+@keyframes aboutFlowIn {
+  from { opacity: 0; transform: translateX(-10px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes aboutFlowOut {
+  from { opacity: 0; transform: translateX(10px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes aboutFlowPulse {
+  0% { left: 0; opacity: 0; }
+  20% { opacity: 1; }
+  100% { left: 70%; opacity: 0; }
+}
+.about-flow-in {
+  animation: aboutFlowIn 0.6s ease-out both;
+}
+.about-flow-out {
+  animation: aboutFlowOut 0.6s ease-out both;
+}
+.about-flow-pulse {
+  animation: aboutFlowPulse 2.4s ease-in-out infinite;
+}
