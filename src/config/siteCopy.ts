@@ -47,16 +47,16 @@ const siteCopy = {
 
     platformTab2: 'Health Monitoring',
     platformTab2Intro:
-      'Monitor connected devices, spot daily routines, and catch anomalies — then train models in the same product.',
-    platformTab2F1Title: 'See every device in the study',
+      'Monitor your devices, understand daily routines, and catch meaningful changes — then use the same data to build and test models.',
+    platformTab2F1Title: 'Keep every device and data stream in view',
     platformTab2F1Desc:
-      'Filter by date and body position, check connection status, and follow sensors like HR and IMU from one management view.',
-    platformTab2F2Title: 'Detect routines and anomalies',
+      'See which devices are connected, where they’re being used, and whether data is coming in as expected. Filter by date, participant, or sensor and follow signals like heart rate and motion from one place.',
+    platformTab2F2Title: 'Understand what’s normal — and what changed',
     platformTab2F2Desc:
-      'Heatmaps show what users usually do across the day. Alerts flag abnormal sleep, missed meals, and unusual night activity.',
-    platformTab2F3Title: 'Train models on those signals',
+      'See daily routines and recurring patterns across sleep, activity, meals, movement, and other behaviors. Spot unusual changes without manually digging through days of raw data.',
+    platformTab2F3Title: 'Build models directly from the same data',
     platformTab2F3Desc:
-      'Turn continuous streams into risk, readiness, and outcome models — then compare runs and promote winners.',
+      'Use those continuous signals to train and compare models for risk, readiness, outcomes, or other use cases — without moving the data into a separate workflow first.',
     platformMonitorAlt: 'TechnoHealth device management dashboard',
     platformMonitorAltRoutines: 'TechnoHealth Routine Detection and Anomalies dashboard',
     platformMonitorShotDevices: 'Devices',
