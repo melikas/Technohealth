@@ -15,6 +15,8 @@ import ContactPage from './pages/ContactPage';
 import CaseStudiesPage from './pages/CaseStudiesPage';
 import ScheduleDemoPage from './pages/ScheduleDemoPage';
 import DataSourcesPage from './pages/DataSourcesPage';
+import TermsOfUsePage from './pages/TermsOfUsePage';
+import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 
 // Scroll to top on route change
 function ScrollToTop() {
@@ -50,6 +52,8 @@ function App() {
         <Route path="/compliance" element={<Navigate to="/safety-security" replace />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/case-studies" element={<CaseStudiesPage />} />
+        <Route path="/terms" element={<TermsOfUsePage />} />
+        <Route path="/privacy" element={<PrivacyPolicyPage />} />
       </Routes>
     </Router>
   );

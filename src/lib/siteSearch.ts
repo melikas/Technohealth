@@ -98,6 +98,20 @@ const PAGE_RESULTS: SiteSearchResult[] = [
     to: '/about',
     keywords: ['about', 'company', 'team'],
   },
+  {
+    id: 'terms',
+    label: 'Terms of Use',
+    description: 'Legal terms for using TechnoHealth',
+    to: '/terms',
+    keywords: ['terms', 'legal', 'conditions', 'utilisation'],
+  },
+  {
+    id: 'privacy',
+    label: 'Privacy Policy',
+    description: 'How TechnoHealth handles personal information',
+    to: '/privacy',
+    keywords: ['privacy', 'confidentialité', 'law 25', 'pipeda'],
+  },
 ];
 
 const DEVICE_RESULTS: SiteSearchResult[] = DEVICE_NAMES.map((name) => ({

@@ -40,8 +40,8 @@ export default function Footer() {
       links: [
         { label: t.footerContact, to: '/contact' },
         { label: t.footerAbout, to: '/about' },
-        { label: t.footerTerms, href: '#' },
-        { label: t.footerPrivacy, href: '#' },
+        { label: t.footerTerms, to: '/terms' },
+        { label: t.footerPrivacy, to: '/privacy' },
         { label: t.footerBookDemo, to: '/schedule-demo' },
       ],
     },
