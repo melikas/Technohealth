@@ -64,15 +64,15 @@ const siteCopy = {
 
     platformTab3: 'MCP for LLM and Agents',
     platformTab3Intro: 'Give any LLM or agent structured tools for health data — without giving up control.',
-    platformTab3F1Title: 'Health data as agent tools',
+    platformTab3F1Title: 'Give your AI access to the health data it actually needs',
     platformTab3F1Desc:
-      'Expose wearable and clinical context through MCP so agents can ask for what they need — coaching, triage, research, ops.',
-    platformTab3F2Title: 'Bring your own model',
+      'Connect wearable and clinical data through MCP so your agents can pull the right context for coaching, triage, research, or operations—without hard-coding a separate data flow for every use case.',
+    platformTab3F2Title: 'Use the models you already trust',
     platformTab3F2Desc:
-      'Keep OpenAI, Anthropic, open-source, or whatever you already run. We sit under the agent, not instead of it.',
-    platformTab3F3Title: 'Safe for regulated teams',
+      'Keep using OpenAI, Anthropic, open-source models, or your existing AI stack. TechnoHealth sits underneath and prepares the health data, so you don’t have to replace your current tools.',
+    platformTab3F3Title: 'Keep control of sensitive health data',
     platformTab3F3Desc:
-      'Access controls, privacy rules, and self-hosting stay on — so agents move fast without owning your patient data.',
+      'Set who can access what, apply privacy rules, and choose where the data is hosted. Your AI can work with the information it needs without giving up control of patient or user data.',
 
     useCasesTitle: 'Who we build for',
     segment1Title: 'Health & Life Insurers',
@@ -199,15 +199,15 @@ const siteCopy = {
 
     platformTab3: 'MCP pour LLM et agents',
     platformTab3Intro: 'Donnez à tout LLM ou agent des outils structurés sur les données santé — sans perdre le contrôle.',
-    platformTab3F1Title: 'La santé comme outils d’agent',
+    platformTab3F1Title: 'Donnez à votre IA l’accès aux données de santé dont elle a vraiment besoin',
     platformTab3F1Desc:
-      'Exposez le contexte wearable et clinique via MCP pour que les agents demandent ce dont ils ont besoin — coaching, triage, recherche, ops.',
-    platformTab3F2Title: 'Apportez votre propre modèle',
+      'Connectez les données wearables et cliniques via MCP pour que vos agents récupèrent le bon contexte — coaching, triage, recherche ou opérations — sans coder un flux de données séparé pour chaque cas d’usage.',
+    platformTab3F2Title: 'Utilisez les modèles en lesquels vous avez déjà confiance',
     platformTab3F2Desc:
-      'Gardez OpenAI, Anthropic, open source, ou ce que vous tournez déjà. Nous sommes sous l’agent, pas à sa place.',
-    platformTab3F3Title: 'Sûr pour les équipes réglementées',
+      'Continuez avec OpenAI, Anthropic, des modèles open source ou votre stack IA actuelle. TechnoHealth se place en dessous et prépare les données de santé, sans remplacer vos outils.',
+    platformTab3F3Title: 'Gardez le contrôle des données de santé sensibles',
     platformTab3F3Desc:
-      'Contrôles d’accès, règles de confidentialité et auto-hébergement restent en place — les agents avancent sans posséder vos données patients.',
+      'Définissez qui accède à quoi, appliquez des règles de confidentialité et choisissez où les données sont hébergées. Votre IA travaille avec l’information nécessaire sans céder le contrôle des données patients ou utilisateurs.',
 
     useCasesTitle: 'Pour qui nous construisons',
     segment1Title: 'Assureurs santé et vie',
