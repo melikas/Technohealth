@@ -66,17 +66,31 @@ export default function SegmentPage() {
             <Link to="/schedule-demo" className="g-btn-primary no-underline text-center min-w-[180px]">
               {segment.primaryCta}
             </Link>
-            <a
-              href={secondaryHref}
-              className="inline-flex items-center justify-center min-w-[180px] px-6 py-2.5 text-sm font-medium rounded-full border no-underline transition-colors"
-              style={{
-                color: '#FFFFFF',
-                borderColor: 'rgba(255,255,255,0.45)',
-                backgroundColor: 'rgba(255,255,255,0.12)',
-              }}
-            >
-              {segment.secondaryCta}
-            </a>
+            {secondaryHref.startsWith('/') ? (
+              <Link
+                to={secondaryHref}
+                className="inline-flex items-center justify-center min-w-[180px] px-6 py-2.5 text-sm font-medium rounded-full border no-underline transition-colors"
+                style={{
+                  color: '#FFFFFF',
+                  borderColor: 'rgba(255,255,255,0.45)',
+                  backgroundColor: 'rgba(255,255,255,0.12)',
+                }}
+              >
+                {segment.secondaryCta}
+              </Link>
+            ) : (
+              <a
+                href={secondaryHref}
+                className="inline-flex items-center justify-center min-w-[180px] px-6 py-2.5 text-sm font-medium rounded-full border no-underline transition-colors"
+                style={{
+                  color: '#FFFFFF',
+                  borderColor: 'rgba(255,255,255,0.45)',
+                  backgroundColor: 'rgba(255,255,255,0.12)',
+                }}
+              >
+                {segment.secondaryCta}
+              </a>
+            )}
           </div>
         </div>
       </section>
@@ -159,7 +173,7 @@ export default function SegmentPage() {
           <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight max-w-3xl mb-10" style={{ color: 'var(--color-text)' }}>
             {segment.solutionHeadline}
           </h2>
-          <div className="grid md:grid-cols-3 gap-6 mb-12">
+          <div className={`grid md:grid-cols-3 gap-6${segment.visual ? ' mb-12' : ''}`}>
             {segment.solutionBlocks.map((block) => (
               <div key={block.title}>
                 <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--color-brand-blue)' }}>
@@ -172,14 +186,16 @@ export default function SegmentPage() {
             ))}
           </div>
 
-          <div id="workflow" className="scroll-mt-24">
-            <SegmentMainVisual id={segment.visual} />
-            {segment.visualCaption && (
-              <p className="mt-3 text-xs text-center" style={{ color: 'var(--color-text-tertiary)' }}>
-                {segment.visualCaption}
-              </p>
-            )}
-          </div>
+          {segment.visual && (
+            <div id="workflow" className="scroll-mt-24">
+              <SegmentMainVisual id={segment.visual} />
+              {segment.visualCaption && (
+                <p className="mt-3 text-xs text-center" style={{ color: 'var(--color-text-tertiary)' }}>
+                  {segment.visualCaption}
+                </p>
+              )}
+            </div>
+          )}
         </div>
       </section>
 

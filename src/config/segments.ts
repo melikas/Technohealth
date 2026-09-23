@@ -26,7 +26,7 @@ export type SegmentContent = {
   solutionEyebrow: string;
   solutionHeadline: string;
   solutionBlocks: { title: string; desc: string }[];
-  visual: SegmentVisualId;
+  visual?: SegmentVisualId;
   visualCaption?: string;
   valueHeadline: string;
   values: string[];
@@ -178,8 +178,8 @@ export const segments: Record<SegmentSlug, SegmentContent> = {
     heroSub:
       'Combine training, recovery, sleep and activity data across devices without forcing your performance team to manage separate systems.',
     primaryCta: 'Pilot with one team',
-    secondaryCta: 'See the team view',
-    secondaryHref: '#workflow',
+    secondaryCta: 'Contact us',
+    secondaryHref: '/contact',
     painEyebrow: 'The problem',
     painHeadline: 'Your athletes train as one team. Their data lives in five different places.',
     painBody: [
@@ -197,8 +197,6 @@ export const segments: Record<SegmentSlug, SegmentContent> = {
       { title: 'Know what is normal', desc: 'Compare each athlete to their own baseline — not a generic average.' },
       { title: 'Flag change early', desc: 'See sleep drops, activity shifts, and resting HR changes together.' },
     ],
-    visual: 'team-grid',
-    visualCaption: 'Team grid: recovery, sleep, routine change, and data quality at a glance.',
     valueHeadline: 'Performance decisions with less dashboard hopping.',
     values: [
       'One view across mixed athlete devices',
