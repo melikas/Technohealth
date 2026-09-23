@@ -58,7 +58,14 @@ export default function Hero() {
           </h1>
 
           <p
-            className="text-base md:text-lg mt-5 max-w-2xl leading-relaxed"
+            className="text-xl sm:text-2xl md:text-[28px] font-medium tracking-tight leading-snug mt-5 max-w-3xl"
+            style={{ color: 'var(--color-text)' }}
+          >
+            {t.heroHeadline}
+          </p>
+
+          <p
+            className="text-base md:text-lg mt-4 max-w-2xl leading-relaxed"
             style={{ color: 'var(--color-text-secondary)' }}
           >
             {t.heroTagline}

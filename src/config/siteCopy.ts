@@ -15,8 +15,8 @@ const siteCopy = {
     menu: 'Menu',
     switchLanguage: 'Switch language',
 
-    heroTagline:
-      'One infrastructure for wearable health data. Connect any device, standardize the complexity, and build trusted health products faster.',
+    heroHeadline: 'Wearable Data Integration and Analytics, Built for Health Teams',
+    heroTagline: 'Connect your data sources, keep everything organized.',
     heroSearchPlaceholder: 'Search devices, APIs, docs…',
     heroSearchAria: 'Search TechnoHealth',
     metric1Title: 'One API',
@@ -150,8 +150,8 @@ const siteCopy = {
     menu: 'Menu',
     switchLanguage: 'Changer de langue',
 
-    heroTagline:
-      'Une infrastructure pour les données de santé des objets connectés. Connectez n’importe quel appareil, standardisez la complexité et construisez plus vite des produits de santé fiables.',
+    heroHeadline: 'Intégration et analytique des données wearables, conçues pour les équipes santé',
+    heroTagline: 'Connectez vos sources de données, gardez tout organisé.',
     heroSearchPlaceholder: 'Rechercher appareils, APIs, docs…',
     heroSearchAria: 'Rechercher TechnoHealth',
     metric1Title: 'Une API',
