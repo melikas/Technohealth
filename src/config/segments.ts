@@ -122,8 +122,8 @@ export const segments: Record<SegmentSlug, SegmentContent> = {
     heroSub:
       'TechnoHealth connects patient-generated data, tracks its quality and provenance, and prepares it for monitoring, analytics, and AI.',
     primaryCta: 'Test with one patient workflow',
-    secondaryCta: 'See how data flows',
-    secondaryHref: '#data-flow',
+    secondaryCta: 'Contact us',
+    secondaryHref: '/contact',
     painEyebrow: 'The problem',
     painHeadline: 'You already have a platform. You need reliable patient-generated data inside it.',
     painBody: [
@@ -141,8 +141,6 @@ export const segments: Record<SegmentSlug, SegmentContent> = {
       { title: 'Trust the signal', desc: 'Know when the patient changed — and when the data changed.' },
       { title: 'Ship context', desc: 'Give care teams routine and quality context around vitals and trends.' },
     ],
-    visual: 'patient-signal',
-    visualCaption: 'Behavioral change vs. data-quality issue — checked against coverage and sync.',
     valueHeadline: 'Less integration work. Better context. Cleaner data for clinical products.',
     values: [
       'Fewer wearable APIs for your team to maintain',
