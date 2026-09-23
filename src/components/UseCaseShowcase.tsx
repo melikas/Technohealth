@@ -14,16 +14,32 @@ export default function UseCaseShowcase() {
 
   const segments = [
     {
-      title: t.segment1Title,
-      desc: t.segment1Desc,
-      image: insurersImg,
-      alt: 'Health analytics dashboard for insurers',
-    },
-    {
       title: t.segment2Title,
       desc: t.segment2Desc,
       image: digitalImg,
       alt: 'Digital health clinician using a tablet',
+      to: '/solutions/digital-health',
+    },
+    {
+      title: t.segment4Title,
+      desc: t.segment4Desc,
+      image: researchImg,
+      alt: 'Medical research laboratory',
+      to: '/solutions/research',
+    },
+    {
+      title: t.segment7Title,
+      desc: t.segment7Desc,
+      image: digitalImg,
+      alt: 'Longitudinal wearable health view',
+      to: '/solutions/longevity',
+    },
+    {
+      title: t.segment5Title,
+      desc: t.segment5Desc,
+      image: pharmaImg,
+      alt: 'Pharma team with tablet and clinical monitor',
+      to: '/solutions/pharma',
     },
     {
       title: t.segment3Title,
@@ -31,24 +47,21 @@ export default function UseCaseShowcase() {
       image: fitnessImg,
       alt: 'Athlete wearing a smartwatch during training',
       objectPosition: 'center',
+      to: '/solutions/sports',
     },
     {
-      title: t.segment4Title,
-      desc: t.segment4Desc,
-      image: researchImg,
-      alt: 'Medical research laboratory',
-    },
-    {
-      title: t.segment5Title,
-      desc: t.segment5Desc,
-      image: pharmaImg,
-      alt: 'Pharma team with tablet and clinical monitor',
+      title: t.segment1Title,
+      desc: t.segment1Desc,
+      image: insurersImg,
+      alt: 'Health and life insurance member programs',
+      to: '/solutions/insurers',
     },
     {
       title: t.segment6Title,
       desc: t.segment6Desc,
       image: gamificationImg,
       alt: 'Friends celebrating a fitness challenge with wearables',
+      to: '/solutions/gamification',
     },
   ];
 
@@ -70,8 +83,8 @@ export default function UseCaseShowcase() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-12 max-w-5xl mx-auto">
           {segments.map((segment) => (
             <Link
-              key={segment.title}
-              to="/schedule-demo"
+              key={segment.to}
+              to={segment.to}
               className="group block text-left no-underline"
             >
               <div className="overflow-hidden mb-4 aspect-[4/3]">

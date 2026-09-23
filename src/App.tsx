@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'r
 import { useEffect } from 'react';
 import HomePage from './pages/HomePage';
 import SolutionsPage from './pages/SolutionsPage';
+import SegmentPage from './pages/SegmentPage';
 import ProcessPage from './pages/ProcessPage';
 import AboutPage from './pages/AboutPage';
 import DemoPage from './pages/DemoPage';
@@ -39,6 +40,7 @@ function App() {
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/services" element={<ServicesPage />} />
         <Route path="/solutions" element={<SolutionsPage />} />
+        <Route path="/solutions/:slug" element={<SegmentPage />} />
         <Route path="/implementation" element={<ProcessPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/demo" element={<DemoPage />} />
