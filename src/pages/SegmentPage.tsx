@@ -2,11 +2,7 @@ import { useEffect } from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import {
-  SegmentHeroFlow,
-  SegmentMainVisual,
-  SegmentWorkflowVisual,
-} from '../components/SegmentVisuals';
+import { SegmentMainVisual } from '../components/SegmentVisuals';
 import { getSegment, type SegmentSlug } from '../config/segments';
 
 const HERO_IMAGES: Record<SegmentSlug, string> = {
@@ -17,16 +13,6 @@ const HERO_IMAGES: Record<SegmentSlug, string> = {
   pharma: '/Images/segments/pharma-v2.jpg',
   gamification: '/Images/segments/gamification.jpg',
   longevity: '/Images/segments/digital-v2.jpg',
-};
-
-const FLOW_DESTINATION: Record<SegmentSlug, string> = {
-  insurers: 'Prevention & wellness programs',
-  'digital-health': 'Your clinical platform',
-  sports: 'Performance team',
-  research: 'Dataset / analysis / AI',
-  pharma: 'Endpoint analysis',
-  gamification: 'Leaderboard / rewards',
-  longevity: 'Longitudinal care view',
 };
 
 export default function SegmentPage() {
@@ -47,6 +33,8 @@ export default function SegmentPage() {
   }
 
   const typedSlug = slug as SegmentSlug;
+  const secondaryHref =
+    segment.secondaryHref === '#data-flow' ? '#workflow' : segment.secondaryHref;
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: 'var(--color-surface)' }}>
@@ -79,7 +67,7 @@ export default function SegmentPage() {
               {segment.primaryCta}
             </Link>
             <a
-              href={segment.secondaryHref}
+              href={secondaryHref}
               className="inline-flex items-center justify-center min-w-[180px] px-6 py-2.5 text-sm font-medium rounded-full border no-underline transition-colors"
               style={{
                 color: '#FFFFFF',
@@ -90,21 +78,6 @@ export default function SegmentPage() {
               {segment.secondaryCta}
             </a>
           </div>
-        </div>
-      </section>
-
-      {/* Workflow animation under hero */}
-      <section className="py-10 md:py-12 px-5" style={{ backgroundColor: 'var(--color-surface)' }}>
-        <div className="max-w-5xl mx-auto space-y-6">
-          <SegmentHeroFlow
-            sources={segment.sources ?? ['Wearables', 'Phone']}
-            destination={FLOW_DESTINATION[typedSlug]}
-          />
-          <SegmentWorkflowVisual
-            before={segment.flowBefore}
-            after={segment.flowAfter}
-            label={segment.workflowLabel}
-          />
         </div>
       </section>
 
