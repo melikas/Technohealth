@@ -7,7 +7,7 @@ import {
   SegmentMainVisual,
   SegmentWorkflowVisual,
 } from '../components/SegmentVisuals';
-import { getSegment, segmentList, type SegmentSlug } from '../config/segments';
+import { getSegment, type SegmentSlug } from '../config/segments';
 
 const HERO_IMAGES: Record<SegmentSlug, string> = {
   insurers: '/Images/segments/insurers-v2.jpg',
@@ -253,29 +253,6 @@ export default function SegmentPage() {
                 </li>
               ))}
             </ul>
-          </div>
-        </div>
-      </section>
-
-      {/* Other segments */}
-      <section className="py-12 px-5 border-t" style={{ borderColor: 'var(--color-border)' }}>
-        <div className="max-w-5xl mx-auto">
-          <p className="text-sm font-medium mb-4" style={{ color: 'var(--color-text-secondary)' }}>
-            Other customer segments
-          </p>
-          <div className="flex flex-wrap gap-3">
-            {segmentList
-              .filter((s) => s.slug !== segment.slug)
-              .map((s) => (
-                <Link
-                  key={s.slug}
-                  to={`/solutions/${s.slug}`}
-                  className="text-sm no-underline hover:underline"
-                  style={{ color: 'var(--color-brand-blue)' }}
-                >
-                  {s.name}
-                </Link>
-              ))}
           </div>
         </div>
       </section>
