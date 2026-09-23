@@ -257,31 +257,6 @@ export default function SegmentPage() {
         </div>
       </section>
 
-      {/* Pilot CTA */}
-      <section className="py-16 md:py-20 px-5">
-        <div
-          className="max-w-5xl mx-auto rounded-2xl px-6 py-10 sm:px-10 sm:py-12 text-center"
-          style={{
-            background:
-              'linear-gradient(135deg, var(--color-brand-blue-deep) 0%, var(--color-brand-blue) 100%)',
-          }}
-        >
-          <h2 className="text-2xl sm:text-3xl font-semibold text-white tracking-tight mb-4">
-            {segment.pilotHeadline}
-          </h2>
-          <p className="text-base text-white/90 max-w-2xl mx-auto leading-relaxed mb-8">
-            {segment.pilotBody}
-          </p>
-          <Link
-            to="/schedule-demo"
-            className="inline-flex items-center justify-center min-w-[200px] px-6 py-3 text-sm font-semibold rounded-full no-underline transition-colors"
-            style={{ backgroundColor: '#fff', color: 'var(--color-brand-blue-deep)' }}
-          >
-            {segment.pilotCta}
-          </Link>
-        </div>
-      </section>
-
       {/* Other segments */}
       <section className="py-12 px-5 border-t" style={{ borderColor: 'var(--color-border)' }}>
         <div className="max-w-5xl mx-auto">
