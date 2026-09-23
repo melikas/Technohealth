@@ -33,16 +33,16 @@ const siteCopy = {
     heroPoint3Desc: 'SDKs and webhooks your product team can own.',
 
     platformTab1: 'API Integration',
-    platformTab1Intro: 'Stop rebuilding device integrations. Ship health data through one API.',
-    platformTab1F1Title: 'All the wearables, one connection',
+    platformTab1Intro: 'Stop rebuilding integrations. Bring health data into your product through one connection.',
+    platformTab1F1Title: 'One connection for all your data sources',
     platformTab1F1Desc:
-      'Apple, Fitbit, Oura, WHOOP, Garmin, Samsung, and more — add them once, keep them maintained for you.',
-    platformTab1F2Title: 'Clean metrics, ready to use',
+      'Connect wearable and mobile health data through a single integration, instead of building and maintaining a separate pipeline for every source.',
+    platformTab1F2Title: 'Data that’s ready to use',
     platformTab1F2Desc:
-      'Sleep, steps, heart rate, and recovery arrive structured. Your product team spends time on features, not parsers.',
-    platformTab1F3Title: 'Sync your way',
+      'Receive sleep, activity, heart rate, recovery, and other health signals in a consistent structure, so your team can focus on the product instead of cleaning and reshaping data.',
+    platformTab1F3Title: 'Fit it into your existing stack',
     platformTab1F3Desc:
-      'Pull with SDKs or push with webhooks. Self-host when you need the data to stay on your servers.',
+      'Pull data when you need it or receive updates automatically. Keep the workflow flexible, and choose where the data lives when tighter control is required.',
     platformApiDocsCta: 'See API Documentation',
 
     platformTab2: 'Health Monitoring',
@@ -168,30 +168,30 @@ const siteCopy = {
     heroPoint3Desc: 'SDK et webhooks que votre équipe produit maîtrise.',
 
     platformTab1: 'Intégration API',
-    platformTab1Intro: 'Arrêtez de reconstruire les intégrations appareils. Livrez les données santé via une seule API.',
-    platformTab1F1Title: 'Tous les wearables, une connexion',
+    platformTab1Intro: 'Arrêtez de reconstruire les intégrations. Apportez les données de santé dans votre produit via une seule connexion.',
+    platformTab1F1Title: 'Une connexion pour toutes vos sources de données',
     platformTab1F1Desc:
-      'Apple, Fitbit, Oura, WHOOP, Garmin, Samsung et plus — ajoutez-les une fois, on s’occupe de la maintenance.',
-    platformTab1F2Title: 'Des métriques propres, prêtes à l’emploi',
+      'Connectez les données de santé wearables et mobiles via une seule intégration, au lieu de construire et maintenir un pipeline séparé pour chaque source.',
+    platformTab1F2Title: 'Des données prêtes à l’emploi',
     platformTab1F2Desc:
-      'Sommeil, pas, fréquence cardiaque et récupération arrivent structurés. Votre équipe produit travaille sur les features, pas sur des parsers.',
-    platformTab1F3Title: 'Synchronisez comme vous voulez',
+      'Recevez sommeil, activité, fréquence cardiaque, récupération et d’autres signaux de santé dans une structure cohérente, pour que votre équipe se concentre sur le produit plutôt que sur le nettoyage et le remodelage des données.',
+    platformTab1F3Title: 'Intégrez-le à votre stack existante',
     platformTab1F3Desc:
-      'Tirez avec les SDK ou poussez avec des webhooks. Auto-hébergez quand les données doivent rester chez vous.',
+      'Tirez les données quand vous en avez besoin ou recevez les mises à jour automatiquement. Gardez le flux flexible, et choisissez où vivent les données quand un contrôle plus strict est requis.',
     platformApiDocsCta: 'Voir la documentation API',
 
     platformTab2: 'Suivi de santé',
     platformTab2Intro:
-      'Suivez les appareils connectés, repérez les routines quotidiennes et les anomalies — puis entraînez des modèles dans le même produit.',
-    platformTab2F1Title: 'Voyez chaque appareil de l’étude',
+      'Surveillez vos appareils, comprenez les routines quotidiennes et repérez les changements importants — puis utilisez les mêmes données pour construire et tester des modèles.',
+    platformTab2F1Title: 'Gardez chaque appareil et chaque flux de données sous les yeux',
     platformTab2F1Desc:
-      'Filtrez par date et position corporelle, vérifiez la connexion, et suivez des capteurs comme HR et IMU dans une seule vue.',
-    platformTab2F2Title: 'Détectez routines et anomalies',
+      'Voyez quels appareils sont connectés, où ils sont utilisés, et si les données arrivent comme prévu. Filtrez par date, participant ou capteur et suivez des signaux comme la fréquence cardiaque et le mouvement depuis un seul endroit.',
+    platformTab2F2Title: 'Comprenez ce qui est normal — et ce qui a changé',
     platformTab2F2Desc:
-      'Les heatmaps montrent l’activité habituelle sur la journée. Les alertes signalent sommeil anormal, repas manqués et activité nocturne inhabituelle.',
-    platformTab2F3Title: 'Entraînez des modèles sur ces signaux',
+      'Voyez les routines quotidiennes et les motifs récurrents sur le sommeil, l’activité, les repas, le mouvement et d’autres comportements. Repérez les changements inhabituels sans fouiller manuellement des jours de données brutes.',
+    platformTab2F3Title: 'Construisez des modèles directement à partir des mêmes données',
     platformTab2F3Desc:
-      'Transformez des flux continus en modèles de risque, disponibilité et résultats — puis comparez les runs et promouvez les gagnants.',
+      'Utilisez ces signaux continus pour entraîner et comparer des modèles de risque, de disponibilité, de résultats ou d’autres cas d’usage — sans déplacer d’abord les données dans un autre flux.',
     platformMonitorAlt: 'Tableau de gestion des appareils TechnoHealth',
     platformMonitorAltRoutines: 'Tableau Routine Detection and Anomalies de TechnoHealth',
     platformMonitorShotDevices: 'Appareils',
