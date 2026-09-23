@@ -53,7 +53,9 @@ function App() {
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/case-studies" element={<CaseStudiesPage />} />
         <Route path="/terms" element={<TermsOfUsePage />} />
+        <Route path="/terms-of-use" element={<Navigate to="/terms" replace />} />
         <Route path="/privacy" element={<PrivacyPolicyPage />} />
+        <Route path="/privacy-policy" element={<Navigate to="/privacy" replace />} />
       </Routes>
     </Router>
   );

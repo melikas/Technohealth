@@ -17,6 +17,9 @@ export default function AuthPage() {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
+  const [acceptedTerms, setAcceptedTerms] = useState(false);
+
+  const TERMS_VERSION = '2026-09-23';
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -35,6 +38,12 @@ export default function AuthPage() {
 
     if (isSignUp) {
       // SIGN UP Logic
+      if (!acceptedTerms) {
+        setError('Please agree to the Terms of Use and acknowledge the Privacy Policy.');
+        setLoading(false);
+        return;
+      }
+
       if (!confirmPassword) {
         setError('Please confirm your password');
         setLoading(false);
@@ -64,6 +73,14 @@ export default function AuthPage() {
       mockDatabase[email] = password;
       localStorage.setItem('userEmail', email);
       localStorage.setItem('isLoggedIn', 'true');
+      localStorage.setItem(
+        'termsAcceptance',
+        JSON.stringify({
+          version: TERMS_VERSION,
+          email,
+          acceptedAt: new Date().toISOString(),
+        })
+      );
       setSuccess('Account created successfully! Redirecting...');
       
       setTimeout(() => {
@@ -200,6 +217,30 @@ export default function AuthPage() {
                 </div>
               )}
 
+              {isSignUp && (
+                <label className="flex items-start gap-3 text-xs text-slate-600 leading-relaxed cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={acceptedTerms}
+                    onChange={(e) => setAcceptedTerms(e.target.checked)}
+                    className="mt-0.5 shrink-0"
+                    disabled={loading}
+                    required
+                  />
+                  <span>
+                    I have read and agree to the{' '}
+                    <Link to="/terms" className="text-cyan-700 font-semibold hover:underline">
+                      Terms of Use
+                    </Link>{' '}
+                    and acknowledge the{' '}
+                    <Link to="/privacy" className="text-cyan-700 font-semibold hover:underline">
+                      Privacy Policy
+                    </Link>
+                    .
+                  </span>
+                </label>
+              )}
+
               {/* Submit Button */}
               <button
                 type="submit"
@@ -220,6 +261,7 @@ export default function AuthPage() {
                     setError('');
                     setSuccess('');
                     setConfirmPassword('');
+                    setAcceptedTerms(false);
                   }}
                   className="text-cyan-600 font-semibold hover:text-cyan-700 transition-colors"
                   disabled={loading}
@@ -241,7 +283,15 @@ export default function AuthPage() {
             {/* Footer */}
             <div className="mt-8 pt-6 border-t border-slate-200">
               <p className="text-xs text-slate-500 text-center">
-                By continuing, you agree to our Terms of Service and Privacy Policy
+                By continuing, you agree to our{' '}
+                <Link to="/terms" className="text-cyan-700 hover:underline">
+                  Terms of Use
+                </Link>{' '}
+                and{' '}
+                <Link to="/privacy" className="text-cyan-700 hover:underline">
+                  Privacy Policy
+                </Link>
+                .
               </p>
             </div>
           </div>
