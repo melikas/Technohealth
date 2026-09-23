@@ -73,10 +73,10 @@ export default function Hero() {
               {t.bookDemo}
             </Link>
             <Link
-              to="/schedule-demo"
+              to="/contact"
               className="g-btn-secondary no-underline min-w-[140px]"
             >
-              {t.scheduleDemo}
+              {t.navContact}
             </Link>
           </div>
         </div>
