@@ -27,12 +27,11 @@ export default function Footer() {
     {
       title: t.footerUseCases,
       links: [
-        { label: t.footerUseCaseDigitalHealth, to: '/solutions/digital-health' },
-        { label: t.footerUseCaseResearch, to: '/solutions/research' },
-        { label: t.footerUseCaseLongevity, to: '/solutions/longevity' },
-        { label: t.footerUseCasePharma, to: '/solutions/pharma' },
-        { label: t.footerUseCaseFitness, to: '/solutions/sports' },
         { label: t.footerUseCaseInsurers, to: '/solutions/insurers' },
+        { label: t.footerUseCaseDigitalHealth, to: '/solutions/digital-health' },
+        { label: t.footerUseCaseFitness, to: '/solutions/sports' },
+        { label: t.footerUseCaseResearch, to: '/solutions/research' },
+        { label: t.footerUseCasePharma, to: '/solutions/pharma' },
         { label: t.footerUseCaseGamification, to: '/solutions/gamification' },
       ],
     },

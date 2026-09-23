@@ -11,17 +11,15 @@ const IMAGES: Record<string, string> = {
   research: '/Images/segments/research-v2.jpg',
   pharma: '/Images/segments/pharma-v2.jpg',
   gamification: '/Images/segments/gamification.jpg',
-  longevity: '/Images/segments/digital-v2.jpg',
 };
 
-/** Tier order for listing: Tier 1 first */
+/** Original six customer segments */
 const DISPLAY_ORDER = [
-  'digital-health',
-  'research',
-  'longevity',
-  'pharma',
-  'sports',
   'insurers',
+  'digital-health',
+  'sports',
+  'research',
+  'pharma',
   'gamification',
 ] as const;
 

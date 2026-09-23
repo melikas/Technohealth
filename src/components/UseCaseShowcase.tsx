@@ -14,32 +14,18 @@ export default function UseCaseShowcase() {
 
   const segments = [
     {
+      title: t.segment1Title,
+      desc: t.segment1Desc,
+      image: insurersImg,
+      alt: 'Health and life insurance member programs',
+      to: '/solutions/insurers',
+    },
+    {
       title: t.segment2Title,
       desc: t.segment2Desc,
       image: digitalImg,
       alt: 'Digital health clinician using a tablet',
       to: '/solutions/digital-health',
-    },
-    {
-      title: t.segment4Title,
-      desc: t.segment4Desc,
-      image: researchImg,
-      alt: 'Medical research laboratory',
-      to: '/solutions/research',
-    },
-    {
-      title: t.segment7Title,
-      desc: t.segment7Desc,
-      image: digitalImg,
-      alt: 'Longitudinal wearable health view',
-      to: '/solutions/longevity',
-    },
-    {
-      title: t.segment5Title,
-      desc: t.segment5Desc,
-      image: pharmaImg,
-      alt: 'Pharma team with tablet and clinical monitor',
-      to: '/solutions/pharma',
     },
     {
       title: t.segment3Title,
@@ -50,11 +36,18 @@ export default function UseCaseShowcase() {
       to: '/solutions/sports',
     },
     {
-      title: t.segment1Title,
-      desc: t.segment1Desc,
-      image: insurersImg,
-      alt: 'Health and life insurance member programs',
-      to: '/solutions/insurers',
+      title: t.segment4Title,
+      desc: t.segment4Desc,
+      image: researchImg,
+      alt: 'Medical research laboratory',
+      to: '/solutions/research',
+    },
+    {
+      title: t.segment5Title,
+      desc: t.segment5Desc,
+      image: pharmaImg,
+      alt: 'Pharma team with tablet and clinical monitor',
+      to: '/solutions/pharma',
     },
     {
       title: t.segment6Title,

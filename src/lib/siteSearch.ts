@@ -120,13 +120,6 @@ const PAGE_RESULTS: SiteSearchResult[] = [
     keywords: ['research', 'study', 'dataset', 'missingness'],
   },
   {
-    id: 'seg-longevity',
-    label: 'Longevity & Preventive Care',
-    description: 'See the person between visits',
-    to: '/solutions/longevity',
-    keywords: ['longevity', 'prevention', 'preventive', 'clinic'],
-  },
-  {
     id: 'seg-pharma',
     label: 'Pharmaceutical Companies',
     description: 'Traceable wearable trial data',
