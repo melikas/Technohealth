@@ -284,11 +284,11 @@ export default function AuthPage() {
             <div className="mt-8 pt-6 border-t border-slate-200">
               <p className="text-xs text-slate-500 text-center">
                 By continuing, you agree to our{' '}
-                <Link to="/terms" className="text-cyan-700 hover:underline">
+                <Link to="/terms" className="text-[#0A6480] hover:underline">
                   Terms of Use
                 </Link>{' '}
                 and{' '}
-                <Link to="/privacy" className="text-cyan-700 hover:underline">
+                <Link to="/privacy" className="text-[#0A6480] hover:underline">
                   Privacy Policy
                 </Link>
                 .
