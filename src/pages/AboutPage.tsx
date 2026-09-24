@@ -33,7 +33,7 @@ export default function AboutPage() {
           className="absolute inset-0"
           style={{
             background:
-              'linear-gradient(to top, rgba(0,82,116,0.92) 0%, rgba(0,82,116,0.72) 42%, rgba(91,154,173,0.35) 100%)',
+              'linear-gradient(to top, rgba(1,79,107,0.92) 0%, rgba(1,79,107,0.72) 42%, rgba(11,155,194,0.35) 100%)',
           }}
         />
         <div className="relative z-10 w-full max-w-5xl mx-auto px-5 sm:px-8 pb-16 md:pb-20 pt-28">

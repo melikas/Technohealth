@@ -241,7 +241,7 @@ export default function DataSourcesPage() {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Search devices…"
-                className="w-full pl-9 pr-3 py-2 text-sm rounded-full border border-[#ddd] outline-none focus:border-[#5B9AAD]"
+                className="w-full pl-9 pr-3 py-2 text-sm rounded-full border border-[#ddd] outline-none focus:border-[#0B9BC2]"
               />
             </div>
           </div>
@@ -293,7 +293,7 @@ export default function DataSourcesPage() {
             </p>
             <Link
               to="/schedule-demo"
-              className="inline-flex px-6 py-2.5 rounded-full bg-[#5B9AAD] text-white text-sm font-medium no-underline hover:bg-[#4A8799]"
+              className="inline-flex px-6 py-2.5 rounded-full bg-[#0B9BC2] text-white text-sm font-medium no-underline hover:bg-[#0989AB]"
             >
               Book a demo
             </Link>
@@ -339,7 +339,7 @@ export default function DataSourcesPage() {
               {selected.data.map((item) => (
                 <li
                   key={item}
-                  className="text-sm text-[#333] flex items-center gap-2 before:content-[''] before:w-1.5 before:h-1.5 before:rounded-full before:bg-[#5B9AAD] before:shrink-0"
+                  className="text-sm text-[#333] flex items-center gap-2 before:content-[''] before:w-1.5 before:h-1.5 before:rounded-full before:bg-[#0B9BC2] before:shrink-0"
                 >
                   {item}
                 </li>
