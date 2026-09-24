@@ -47,7 +47,7 @@ export default function SegmentPage() {
           className="absolute inset-0"
           style={{
             background:
-              'linear-gradient(to top, rgba(13,71,161,0.94) 0%, rgba(13,71,161,0.78) 45%, rgba(26,115,232,0.4) 100%)',
+              'linear-gradient(to top, rgba(0,82,116,0.94) 0%, rgba(0,82,116,0.78) 45%, rgba(91,154,173,0.4) 100%)',
           }}
         />
         <div className="relative z-10 w-full max-w-5xl mx-auto px-5 sm:px-8 pb-14 md:pb-20 pt-24">

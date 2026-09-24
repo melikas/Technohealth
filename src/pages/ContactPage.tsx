@@ -65,7 +65,7 @@ export default function ContactPage() {
   };
 
   const field =
-    'w-full px-4 py-3 text-sm rounded-lg border border-[#dadce0] bg-white text-[#202124] outline-none focus:border-[#1A73E8] focus:shadow-[0_0_0_2px_rgba(26,115,232,0.15)]';
+    'w-full px-4 py-3 text-sm rounded-lg border border-[#dadce0] bg-white text-[#202124] outline-none focus:border-[#5B9AAD] focus:shadow-[0_0_0_2px_rgba(91,154,173,0.18)]';
 
   return (
     <div className="min-h-screen bg-white">
@@ -85,8 +85,8 @@ export default function ContactPage() {
       <section className="py-12 md:py-16 px-4">
         <div className="max-w-xl mx-auto">
           <div className="flex items-start gap-3 mb-8 p-4 rounded-xl border border-[#e6e6e6] bg-[#fafafa]">
-            <div className="w-10 h-10 rounded-full bg-[#e8f0fe] flex items-center justify-center shrink-0">
-              <MapPin className="w-5 h-5 text-[#1A73E8]" strokeWidth={1.75} />
+            <div className="w-10 h-10 rounded-full bg-[#E1F5FA] flex items-center justify-center shrink-0">
+              <MapPin className="w-5 h-5 text-[#5B9AAD]" strokeWidth={1.75} />
             </div>
             <div>
               <p className="text-sm font-medium text-[#111]">Headquarters</p>
@@ -122,7 +122,7 @@ export default function ContactPage() {
                       message: '',
                     });
                   }}
-                  className="text-sm text-[#1A73E8] bg-transparent border-0 cursor-pointer hover:underline"
+                  className="text-sm text-[#5B9AAD] bg-transparent border-0 cursor-pointer hover:underline"
                 >
                   Send another message
                 </button>
@@ -211,7 +211,7 @@ export default function ContactPage() {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="w-full py-3 rounded-full bg-[#1A73E8] text-white text-sm font-medium border-0 cursor-pointer hover:bg-[#1765CC] flex items-center justify-center gap-2 disabled:opacity-50"
+                  className="w-full py-3 rounded-full bg-[#5B9AAD] text-white text-sm font-medium border-0 cursor-pointer hover:bg-[#4A8799] flex items-center justify-center gap-2 disabled:opacity-50"
                 >
                   <Send className="w-4 h-4" strokeWidth={2} />
                   {submitting ? 'Sending…' : 'Send message'}
@@ -222,7 +222,7 @@ export default function ContactPage() {
 
           <p className="text-center text-sm text-[#888] mt-8">
             Prefer a call?{' '}
-            <Link to="/schedule-demo" className="text-[#1A73E8] hover:underline no-underline">
+            <Link to="/schedule-demo" className="text-[#5B9AAD] hover:underline no-underline">
               Book a demo
             </Link>
           </p>

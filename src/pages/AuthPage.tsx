@@ -167,7 +167,7 @@ export default function AuthPage() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="you@example.com"
-                    className="w-full pl-12 pr-4 py-2.5 rounded-lg border border-slate-300 focus:border-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/20 transition-all text-sm"
+                    className="w-full pl-12 pr-4 py-2.5 rounded-lg border border-slate-300 focus:border-[#5B9AAD] focus:outline-none focus:ring-2 focus:ring-[#5B9AAD]/20 transition-all text-sm"
                     required
                     disabled={loading}
                   />
@@ -186,7 +186,7 @@ export default function AuthPage() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••"
-                    className="w-full pl-12 pr-4 py-2.5 rounded-lg border border-slate-300 focus:border-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/20 transition-all text-sm"
+                    className="w-full pl-12 pr-4 py-2.5 rounded-lg border border-slate-300 focus:border-[#5B9AAD] focus:outline-none focus:ring-2 focus:ring-[#5B9AAD]/20 transition-all text-sm"
                     required
                     disabled={loading}
                   />
@@ -209,7 +209,7 @@ export default function AuthPage() {
                       value={confirmPassword}
                       onChange={(e) => setConfirmPassword(e.target.value)}
                       placeholder="••••••••"
-                      className="w-full pl-12 pr-4 py-2.5 rounded-lg border border-slate-300 focus:border-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/20 transition-all text-sm"
+                      className="w-full pl-12 pr-4 py-2.5 rounded-lg border border-slate-300 focus:border-[#5B9AAD] focus:outline-none focus:ring-2 focus:ring-[#5B9AAD]/20 transition-all text-sm"
                       required={isSignUp}
                       disabled={loading}
                     />
@@ -229,11 +229,11 @@ export default function AuthPage() {
                   />
                   <span>
                     I have read and agree to the{' '}
-                    <Link to="/terms" className="text-cyan-700 font-semibold hover:underline">
+                    <Link to="/terms" className="text-[#0A6480] font-semibold hover:underline">
                       Terms of Use
                     </Link>{' '}
                     and acknowledge the{' '}
-                    <Link to="/privacy" className="text-cyan-700 font-semibold hover:underline">
+                    <Link to="/privacy" className="text-[#0A6480] font-semibold hover:underline">
                       Privacy Policy
                     </Link>
                     .
@@ -245,7 +245,7 @@ export default function AuthPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-2.5 bg-gradient-to-r from-cyan-600 to-blue-600 text-white font-bold rounded-lg hover:shadow-lg hover:shadow-cyan-500/30 transition-all mt-6 text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full py-2.5 bg-[#5B9AAD] hover:bg-[#4A8799] text-white font-bold rounded-lg hover:shadow-lg hover:shadow-[#5B9AAD]/30 transition-all mt-6 text-sm disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {loading ? 'Processing...' : (isSignUp ? 'Create Account' : 'Sign In')}
               </button>
@@ -263,7 +263,7 @@ export default function AuthPage() {
                     setConfirmPassword('');
                     setAcceptedTerms(false);
                   }}
-                  className="text-cyan-600 font-semibold hover:text-cyan-700 transition-colors"
+                  className="text-[#5B9AAD] font-semibold hover:text-[#0A6480] transition-colors"
                   disabled={loading}
                 >
                   {isSignUp ? 'Sign In' : 'Sign Up'}

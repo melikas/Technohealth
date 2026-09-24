@@ -8,7 +8,7 @@ function Panel({ children, className = '' }: { children: ReactNode; className?: 
       style={{
         borderColor: 'var(--color-border)',
         background:
-          'linear-gradient(145deg, #E8F0FE 0%, #FFFFFF 48%, #F8F9FA 100%)',
+          'linear-gradient(145deg, #E1F5FA 0%, #FFFFFF 48%, #F8F9FA 100%)',
       }}
     >
       {children}
@@ -345,7 +345,7 @@ export function SegmentHeroFlow({ sources, destination }: { sources: string[]; d
       className="rounded-2xl border px-4 py-6 sm:px-6"
       style={{
         borderColor: 'var(--color-border)',
-        background: 'linear-gradient(135deg, #E8F0FE 0%, #FFFFFF 50%, #F8F9FA 100%)',
+        background: 'linear-gradient(135deg, #E1F5FA 0%, #FFFFFF 50%, #F8F9FA 100%)',
       }}
     >
       <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 flex-wrap">

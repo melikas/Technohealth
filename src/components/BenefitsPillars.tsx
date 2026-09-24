@@ -86,7 +86,7 @@ export default function BenefitsPillars() {
       className="relative overflow-hidden py-20 md:py-28"
       style={{
         background:
-          'radial-gradient(ellipse 80% 60% at 50% 0%, #E8F0FE 0%, var(--color-surface) 55%)',
+          'radial-gradient(ellipse 80% 60% at 50% 0%, #E1F5FA 0%, var(--color-surface) 55%)',
       }}
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
@@ -144,7 +144,7 @@ export default function BenefitsPillars() {
                 <div
                   className="absolute inset-0"
                   style={{
-                    background: 'linear-gradient(to top, rgba(13,71,161,0.35) 0%, transparent 45%)',
+                    background: 'linear-gradient(to top, rgba(0,82,116,0.35) 0%, transparent 45%)',
                   }}
                 />
                 <div className="absolute bottom-4 left-4 right-4 flex items-center gap-2">

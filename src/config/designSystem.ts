@@ -4,14 +4,14 @@
 export const designSystem = {
   colors: {
     primary: {
-      blue: '#1e40af', // Primary blue for headers/buttons
-      darkBlue: '#1e3a8a',
-      lightBlue: '#3b82f6',
+      blue: '#5B9AAD',
+      darkBlue: '#005274',
+      lightBlue: '#81AFBC',
     },
     accent: {
-      green: '#16a34a', // Green accents for highlights/icons
-      teal: '#14b8a6', // CTA accent
-      orange: '#f97316', // Alternative CTA accent
+      green: '#16a34a',
+      teal: '#81AFBC',
+      orange: '#f97316',
     },
     neutral: {
       white: '#ffffff',

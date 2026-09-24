@@ -2,50 +2,50 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Google design tokens — all colors in #RRGGBB */
+/* TechnoHealth design tokens — clinical teal from product login */
 :root {
-  /* Brand blues (spectrum — not Google multicolor) */
-  --color-brand-blue-deep: #0D47A1;
-  --color-brand-blue-dark: #1557B0;
-  --color-brand-blue: #1A73E8;
-  --color-brand-blue-mid: #4285F4;
-  --color-brand-blue-light: #5B9BFF;
-  --color-brand-blue-soft: #8AB4F8;
+  /* Brand teal (from product UI) */
+  --color-brand-blue-deep: #005274;
+  --color-brand-blue-dark: #0A6480;
+  --color-brand-blue: #5B9AAD;
+  --color-brand-blue-mid: #81AFBC;
+  --color-brand-blue-light: #A3C5D0;
+  --color-brand-blue-soft: #C5DCE4;
   --gradient-brand-wordmark: linear-gradient(
     100deg,
-    #0D47A1 0%,
-    #1557B0 28%,
-    #1A73E8 55%,
-    #4285F4 78%,
-    #5B9BFF 100%
+    #005274 0%,
+    #0A6480 28%,
+    #5B9AAD 55%,
+    #81AFBC 78%,
+    #A3C5D0 100%
   );
 
   /* Actions / links */
-  --color-primary: #1A73E8;
-  --color-primary-hover: #1765CC;
-  --color-primary-pressed: #1557B0;
-  --color-link: #1A0DAB;
-  --color-link-visited: #681DA8;
+  --color-primary: #5B9AAD;
+  --color-primary-hover: #4A8799;
+  --color-primary-pressed: #0A6480;
+  --color-link: #0A6480;
+  --color-link-visited: #005274;
 
   /* Surfaces */
   --color-surface: #FFFFFF;
-  --color-surface-alt: #F8F9FA;
-  --color-surface-footer: #F2F2F2;
-  --color-surface-chip: #F1F3F4;
+  --color-surface-alt: #F3FAFC;
+  --color-surface-footer: #EAF4F7;
+  --color-surface-chip: #E8F2F5;
   --color-surface-success: #E6F4EA;
-  --color-surface-info: #E8F0FE;
+  --color-surface-info: #E1F5FA;
   --color-success: #1E8E3E;
 
   /* Text */
-  --color-text: #202124;
-  --color-text-secondary: #5F6368;
-  --color-text-tertiary: #80868B;
+  --color-text: #1A2B33;
+  --color-text-secondary: #5A6B73;
+  --color-text-tertiary: #7A8B93;
   --color-text-on-primary: #FFFFFF;
 
   /* Borders & focus */
-  --color-border: #DADCE0;
-  --color-border-strong: #BDC1C6;
-  --color-focus-ring: #1A73E8;
+  --color-border: #D0DCE1;
+  --color-border-strong: #B0C0C7;
+  --color-focus-ring: #5B9AAD;
 
   /* Shadows (Google search / card style) */
   --shadow-search: 0 1px 6px rgba(32, 33, 36, 0.28);
