@@ -18,8 +18,8 @@ export default function AboutPage() {
       <section className="relative min-h-[88vh] flex items-end overflow-hidden pt-16">
         <img
           src="/Images/about/hero-digital-health.jpg"
-          alt="Clinician reviewing health data on a tablet with a patient"
-          className="absolute inset-0 w-full h-full object-cover"
+          alt="Smartwatch health metrics beside a digital health analytics dashboard"
+          className="absolute inset-0 w-full h-full object-cover object-center"
         />
         <div
           className="absolute inset-0"
