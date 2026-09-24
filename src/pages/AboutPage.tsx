@@ -33,7 +33,7 @@ export default function AboutPage() {
             TechnoHealth
           </p>
           <h1 className="text-3xl sm:text-4xl md:text-[44px] font-semibold tracking-tight leading-[1.15] text-white max-w-3xl mb-8">
-            Your wearable data is connected. But can you actually trust and use it?
+            Your Unified Layer for Wearable Data, Analytics, and AI.
           </h1>
           <div className="flex flex-col sm:flex-row gap-3">
             <Link to="/schedule-demo" className="g-btn-primary no-underline text-center min-w-[160px]">
