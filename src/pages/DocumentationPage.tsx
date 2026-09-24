@@ -123,7 +123,7 @@ export default function DocumentationPage() {
 
       <div className="pt-16 border-b border-[#eee]" style={{ backgroundColor: 'var(--color-surface-alt)' }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10 md:py-12">
-          <p className="text-sm font-medium text-[#0B9BC2] mb-2">Documentation</p>
+          <p className="text-sm font-medium text-[#087A9C] mb-2">Documentation</p>
           <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight text-[#111] mb-3">
             TechnoHealth Docs
           </h1>
@@ -149,7 +149,7 @@ export default function DocumentationPage() {
                   onClick={() => goTo(item.id)}
                   className={`w-full text-left px-3 py-2 rounded-lg text-sm border-0 cursor-pointer transition-colors flex items-center justify-between gap-2 ${
                     active === item.id
-                      ? 'bg-[#DFF6FC] text-[#0B9BC2] font-medium'
+                      ? 'bg-[#D5F0F8] text-[#087A9C] font-medium'
                       : 'bg-transparent text-[#444] hover:bg-[#f5f5f5]'
                   }`}
                 >
@@ -166,7 +166,7 @@ export default function DocumentationPage() {
             <div className="mt-8 px-3">
               <Link
                 to="/schedule-demo"
-                className="inline-flex items-center gap-1 text-sm text-[#0B9BC2] no-underline hover:underline"
+                className="inline-flex items-center gap-1 text-sm text-[#087A9C] no-underline hover:underline"
               >
                 Book a demo
                 <ChevronRight className="w-4 h-4" strokeWidth={2} />
@@ -201,7 +201,7 @@ export default function DocumentationPage() {
                 <button
                   type="button"
                   onClick={() => goTo('api')}
-                  className="text-left p-4 rounded-xl border border-[#e6e6e6] hover:border-[#0B9BC2] bg-white cursor-pointer transition-colors"
+                  className="text-left p-4 rounded-xl border border-[#e6e6e6] hover:border-[#087A9C] bg-white cursor-pointer transition-colors"
                 >
                   <p className="font-semibold text-[#111] mb-1">API Documentation</p>
                   <p className="text-sm text-[#666]">
@@ -211,7 +211,7 @@ export default function DocumentationPage() {
                 <button
                   type="button"
                   onClick={() => goTo('sdk-react')}
-                  className="text-left p-4 rounded-xl border border-[#e6e6e6] hover:border-[#0B9BC2] bg-white cursor-pointer transition-colors"
+                  className="text-left p-4 rounded-xl border border-[#e6e6e6] hover:border-[#087A9C] bg-white cursor-pointer transition-colors"
                 >
                   <p className="font-semibold text-[#111] mb-1">SDK Documentation for React</p>
                   <p className="text-sm text-[#666]">
@@ -222,7 +222,7 @@ export default function DocumentationPage() {
 
               <p className="text-sm text-[#666]">
                 See which providers we support on the{' '}
-                <Link to="/data-sources" className="text-[#0B9BC2] hover:underline">
+                <Link to="/data-sources" className="text-[#087A9C] hover:underline">
                   Data Sources
                 </Link>{' '}
                 page.
@@ -307,7 +307,7 @@ export default function DocumentationPage() {
                       ['GET', '/providers', 'List available data sources'],
                     ].map(([method, path, desc]) => (
                       <tr key={path} className="border-t border-[#eee]">
-                        <td className="px-4 py-3 font-mono text-[#0B9BC2]">{method}</td>
+                        <td className="px-4 py-3 font-mono text-[#087A9C]">{method}</td>
                         <td className="px-4 py-3 font-mono text-[13px]">{path}</td>
                         <td className="px-4 py-3 text-[#555]">{desc}</td>
                       </tr>
@@ -405,10 +405,10 @@ export function ConnectFitbit({ userId }: { userId: string }) {
                 onCopy={copyToClipboard}
               />
 
-              <div className="mt-8 rounded-xl border border-[#DFF6FC] bg-[#f8fbff] p-5">
+              <div className="mt-8 rounded-xl border border-[#D5F0F8] bg-[#f8fbff] p-5">
                 <p className="text-sm text-[#555]">
                   Need help adding this to your product?{' '}
-                  <Link to="/schedule-demo" className="text-[#0B9BC2] font-medium hover:underline">
+                  <Link to="/schedule-demo" className="text-[#087A9C] font-medium hover:underline">
                     Book a demo with Support Team
                   </Link>
                   .
@@ -446,19 +446,19 @@ export function ConnectFitbit({ userId }: { userId: string }) {
               <h3 className="text-lg font-semibold text-[#111] mb-3">Things you will be able to ask later</h3>
               <ul className="space-y-3 text-[15px] text-[#555] mb-8">
                 <li className="flex gap-2">
-                  <span className="text-[#0B9BC2] shrink-0">�</span>
+                  <span className="text-[#087A9C] shrink-0">�</span>
                   <span>How has my sleep changed this month compared to last month?</span>
                 </li>
                 <li className="flex gap-2">
-                  <span className="text-[#0B9BC2] shrink-0">�</span>
+                  <span className="text-[#087A9C] shrink-0">�</span>
                   <span>Does weekday activity look different from weekends?</span>
                 </li>
                 <li className="flex gap-2">
-                  <span className="text-[#0B9BC2] shrink-0">�</span>
+                  <span className="text-[#087A9C] shrink-0">�</span>
                   <span>Is there a link between sleep quality and next day activity?</span>
                 </li>
                 <li className="flex gap-2">
-                  <span className="text-[#0B9BC2] shrink-0">�</span>
+                  <span className="text-[#087A9C] shrink-0">�</span>
                   <span>Make a short weekly summary I can share with a clinician or product team.</span>
                 </li>
               </ul>

@@ -4,13 +4,13 @@
 export const designSystem = {
   colors: {
     primary: {
-      blue: '#0B9BC2',
-      darkBlue: '#014F6B',
-      lightBlue: '#22B4D6',
+      blue: '#087A9C',
+      darkBlue: '#013A52',
+      lightBlue: '#0B9BC2',
     },
     accent: {
       green: '#16a34a',
-      teal: '#0B9BC2',
+      teal: '#087A9C',
       orange: '#f97316',
     },
     neutral: {

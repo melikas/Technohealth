@@ -2,50 +2,50 @@
 @tailwind components;
 @tailwind utilities;
 
-/* TechnoHealth design tokens — vivid clinical teal */
+/* TechnoHealth design tokens — richer clinical teal */
 :root {
   /* Brand teal */
-  --color-brand-blue-deep: #014F6B;
-  --color-brand-blue-dark: #036987;
-  --color-brand-blue: #0B9BC2;
-  --color-brand-blue-mid: #22B4D6;
-  --color-brand-blue-light: #4DC9E3;
-  --color-brand-blue-soft: #A8E4F2;
+  --color-brand-blue-deep: #013A52;
+  --color-brand-blue-dark: #055A73;
+  --color-brand-blue: #087A9C;
+  --color-brand-blue-mid: #0B9BC2;
+  --color-brand-blue-light: #22B4D6;
+  --color-brand-blue-soft: #7DD4EB;
   --gradient-brand-wordmark: linear-gradient(
     100deg,
-    #014F6B 0%,
-    #036987 28%,
-    #0B9BC2 55%,
-    #22B4D6 78%,
-    #4DC9E3 100%
+    #013A52 0%,
+    #055A73 28%,
+    #087A9C 55%,
+    #0B9BC2 78%,
+    #22B4D6 100%
   );
 
   /* Actions / links */
-  --color-primary: #0B9BC2;
-  --color-primary-hover: #0989AB;
-  --color-primary-pressed: #036987;
-  --color-link: #036987;
-  --color-link-visited: #014F6B;
+  --color-primary: #087A9C;
+  --color-primary-hover: #066580;
+  --color-primary-pressed: #055A73;
+  --color-link: #055A73;
+  --color-link-visited: #013A52;
 
   /* Surfaces */
   --color-surface: #FFFFFF;
-  --color-surface-alt: #F2FBFD;
-  --color-surface-footer: #E6F6FA;
-  --color-surface-chip: #DFF4FA;
+  --color-surface-alt: #F0F8FB;
+  --color-surface-footer: #E2F1F6;
+  --color-surface-chip: #D5EDF5;
   --color-surface-success: #E6F4EA;
-  --color-surface-info: #DFF6FC;
+  --color-surface-info: #D5F0F8;
   --color-success: #1E8E3E;
 
   /* Text */
-  --color-text: #132A33;
-  --color-text-secondary: #4A6570;
-  --color-text-tertiary: #6B8490;
+  --color-text: #12252E;
+  --color-text-secondary: #3F5863;
+  --color-text-tertiary: #5F7682;
   --color-text-on-primary: #FFFFFF;
 
   /* Borders & focus */
-  --color-border: #C9DEE6;
-  --color-border-strong: #9CBCC8;
-  --color-focus-ring: #0B9BC2;
+  --color-border: #C2D6DE;
+  --color-border-strong: #8FAEBA;
+  --color-focus-ring: #087A9C;
 
   /* Shadows (Google search / card style) */
   --shadow-search: 0 1px 6px rgba(32, 33, 36, 0.28);

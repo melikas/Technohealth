@@ -11,7 +11,7 @@ export function HeroFlowVisual() {
       style={{
         borderColor: 'var(--color-border)',
         background:
-          'linear-gradient(135deg, #DFF6FC 0%, #FFFFFF 45%, #F8F9FA 100%)',
+          'linear-gradient(135deg, #D5F0F8 0%, #FFFFFF 45%, #F8F9FA 100%)',
       }}
     >
       <div className="flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-4">
@@ -87,8 +87,8 @@ export function MessyUsableVisual() {
             <span className="text-[10px]">missing · mixed source</span>
           </div>
           <div className="flex gap-1 items-center flex-wrap">
-            <span className="h-2 w-12 rounded-sm bg-[#22B4D6] opacity-50" />
-            <span className="h-2 w-7 rounded-sm bg-[#22B4D6]" />
+            <span className="h-2 w-12 rounded-sm bg-[#0B9BC2] opacity-50" />
+            <span className="h-2 w-7 rounded-sm bg-[#0B9BC2]" />
             <span className="text-[10px]">08:42 vs 09:05</span>
           </div>
           <p className="pt-2 text-xs leading-relaxed" style={{ fontFamily: 'var(--font-sans)' }}>
@@ -105,7 +105,7 @@ export function MessyUsableVisual() {
           {['Sleep', 'HR', 'Steps', 'Recovery'].map((label, i) => (
             <div key={label} className="flex items-center gap-3">
               <span className="w-16 text-xs font-medium" style={{ color: 'var(--color-text)' }}>{label}</span>
-              <div className="flex-1 h-2.5 rounded-full overflow-hidden" style={{ backgroundColor: 'rgba(11,155,194,0.12)' }}>
+              <div className="flex-1 h-2.5 rounded-full overflow-hidden" style={{ backgroundColor: 'rgba(8,122,156,0.12)' }}>
                 <div
                   className="h-full rounded-full"
                   style={{
@@ -180,9 +180,9 @@ export function ProvenanceVisual() {
 export function RoutineVisual() {
   const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
   const bands = [
-    { name: 'Sleep', color: '#014F6B', pattern: [0.7, 0.72, 0.68, 0.5, 0.45, 0.75, 0.78] },
-    { name: 'Activity', color: '#0B9BC2', pattern: [0.55, 0.6, 0.58, 0.35, 0.3, 0.65, 0.5] },
-    { name: 'Mobility', color: '#22B4D6', pattern: [0.4, 0.42, 0.45, 0.25, 0.22, 0.5, 0.48] },
+    { name: 'Sleep', color: '#013A52', pattern: [0.7, 0.72, 0.68, 0.5, 0.45, 0.75, 0.78] },
+    { name: 'Activity', color: '#087A9C', pattern: [0.55, 0.6, 0.58, 0.35, 0.3, 0.65, 0.5] },
+    { name: 'Mobility', color: '#0B9BC2', pattern: [0.4, 0.42, 0.45, 0.25, 0.22, 0.5, 0.48] },
     { name: 'Screen', color: '#8AB4F8', pattern: [0.35, 0.3, 0.32, 0.55, 0.6, 0.4, 0.38] },
   ];
 
@@ -236,7 +236,7 @@ export function SignalOrSensorVisual() {
         <svg viewBox="0 0 200 80" className="w-full h-20" aria-hidden>
           <polyline
             fill="none"
-            stroke="#0B9BC2"
+            stroke="#087A9C"
             strokeWidth="2.5"
             points="0,20 40,22 80,28 120,40 160,55 200,68"
           />
@@ -246,10 +246,10 @@ export function SignalOrSensorVisual() {
         <p className="text-sm font-semibold mb-1" style={{ color: 'var(--color-text)' }}>Sensor / sync problem</p>
         <p className="text-xs mb-4" style={{ color: 'var(--color-text-secondary)' }}>Gap from device disconnect — not a true drop</p>
         <svg viewBox="0 0 200 80" className="w-full h-20" aria-hidden>
-          <polyline fill="none" stroke="#0B9BC2" strokeWidth="2.5" points="0,35 50,32 90,38" />
+          <polyline fill="none" stroke="#087A9C" strokeWidth="2.5" points="0,35 50,32 90,38" />
           <line x1="90" y1="20" x2="90" y2="70" stroke="#EA4335" strokeWidth="1.5" strokeDasharray="4 3" />
           <line x1="140" y1="20" x2="140" y2="70" stroke="#EA4335" strokeWidth="1.5" strokeDasharray="4 3" />
-          <polyline fill="none" stroke="#0B9BC2" strokeWidth="2.5" points="140,36 170,34 200,38" />
+          <polyline fill="none" stroke="#087A9C" strokeWidth="2.5" points="140,36 170,34 200,38" />
           <text x="100" y="16" fill="#C5221F" fontSize="9">disconnect</text>
         </svg>
       </div>
