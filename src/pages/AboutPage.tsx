@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -46,13 +45,6 @@ const audiences = [
 ];
 
 export default function AboutPage() {
-  useEffect(() => {
-    document.title = 'About | TechnoHealth';
-    return () => {
-      document.title = 'TechnoHealth. Wearable health data infrastructure';
-    };
-  }, []);
-
   return (
     <div className="min-h-screen" style={{ backgroundColor: 'var(--color-surface)' }}>
       <Header />

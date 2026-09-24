@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -17,15 +16,6 @@ const HERO_IMAGES: Record<SegmentSlug, string> = {
 export default function SegmentPage() {
   const { slug } = useParams<{ slug: string }>();
   const segment = slug ? getSegment(slug) : undefined;
-
-  useEffect(() => {
-    if (segment) {
-      document.title = `${segment.name} | TechnoHealth`;
-    }
-    return () => {
-      document.title = 'TechnoHealth. Wearable health data infrastructure';
-    };
-  }, [segment]);
 
   if (!segment || !slug) {
     return <Navigate to="/solutions" replace />;

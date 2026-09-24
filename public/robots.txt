@@ -1,0 +1,9 @@
+# https://www.technohealth.ca/robots.txt
+User-agent: *
+Allow: /
+
+# App / private areas
+Disallow: /auth
+Disallow: /dashboard
+
+Sitemap: https://www.technohealth.ca/sitemap.xml

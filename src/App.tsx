@@ -18,6 +18,7 @@ import ScheduleDemoPage from './pages/ScheduleDemoPage';
 import DataSourcesPage from './pages/DataSourcesPage';
 import TermsOfUsePage from './pages/TermsOfUsePage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
+import RouteSeo from './components/RouteSeo';
 
 // Scroll to top on route change
 function ScrollToTop() {
@@ -34,6 +35,7 @@ function App() {
   return (
     <Router>
       <ScrollToTop />
+      <RouteSeo />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/auth" element={<AuthPage />} />

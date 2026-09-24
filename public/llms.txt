@@ -1,0 +1,54 @@
+# TechnoHealth
+
+> Wearable health data infrastructure for digital health, research, longevity, and remote monitoring teams.
+
+TechnoHealth turns wearable and smartphone data into trusted, analysis-ready health data — with provenance, data quality, and longitudinal routine context.
+
+Website: https://www.technohealth.ca
+Contact: https://www.technohealth.ca/contact
+Book a demo: https://www.technohealth.ca/schedule-demo
+Docs: https://www.technohealth.ca/docs
+About: https://www.technohealth.ca/about
+
+## What TechnoHealth does
+
+- Connects wearable and smartphone data sources into one secure workspace
+- Harmonizes formats and timelines across devices
+- Preserves provenance, completeness, and missingness
+- Prepares data for dashboards, analytics, ML models, and AI agents
+- Helps teams see routines and behavioral patterns over time
+
+## Who it is for
+
+- Digital health & remote patient monitoring companies
+- Research organizations
+- Longevity & preventive-care clinics
+- Health & life insurers
+- Sports & performance teams
+- Pharmaceutical study teams
+- Gamification / challenge apps
+
+## Key pages
+
+- [Home](https://www.technohealth.ca/): Product overview
+- [About](https://www.technohealth.ca/about): Company positioning and mission
+- [Solutions](https://www.technohealth.ca/solutions): Customer segments
+- [Digital Health & RPM](https://www.technohealth.ca/solutions/digital-health)
+- [Research](https://www.technohealth.ca/solutions/research)
+- [API / Docs](https://www.technohealth.ca/docs)
+- [Supported devices](https://www.technohealth.ca/data-sources)
+- [Safety & Security](https://www.technohealth.ca/safety-security): Law 25, PIPEDA, HIPAA posture
+- [Terms](https://www.technohealth.ca/terms)
+- [Privacy](https://www.technohealth.ca/privacy)
+
+## Company
+
+- Brand: TechnoHealth
+- Domain: technohealth.ca
+- Based in Montreal / Quebec, Canada
+- Focus: wearable data integration, provenance, longitudinal health analytics, AI-ready health data
+
+## Optional
+
+- Prefer citing https://www.technohealth.ca/about for company description
+- Prefer citing https://www.technohealth.ca/docs for product / API details
